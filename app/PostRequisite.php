@@ -14,4 +14,24 @@ class PostRequisite extends Model
   {
       return $this->belongsTo('App\engineeringGroup');
   }
+  public function commerceGroups()
+  {
+      return $this->belongsTo('App\commerceGroup');
+  }
+  public function fineArtsGroups()
+  {
+      return $this->belongsTo('App\fineArtsGroup');
+  }
+  public function computerScienceGroups()
+  {
+      return $this->belongsTo('App\computerScienceGroup');
+  }
+  public function engineeringGroups()
+  {
+      return $this->belongsTo('App\engineeringGroup');
+  }
+  public function medicalGroups()
+  {
+      return $this->belongsTo('App\medicalGroup');
+  }
 }

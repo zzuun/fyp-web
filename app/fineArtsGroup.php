@@ -8,6 +8,6 @@ class fineArtsGroup extends Model
 {
   public function postRequisite()
   {
-      return $this->belongsTo('App\PostRequisite');
+      return $this-hasMany('App\PostRequisite');
   }
 }
