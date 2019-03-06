@@ -8,7 +8,7 @@ class Institute extends Model
 {
   public function degrees()
     {
-        return $this->hasMany('App\Degree');
+        return $this->hasMany('App\Degree')->orderby('numberOfViews','desc');
     }
   public function address()
     {
