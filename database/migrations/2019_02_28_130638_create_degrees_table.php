@@ -16,13 +16,9 @@ class CreateDegreesTable extends Migration
         Schema::create('degrees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('merit');
-            $table->boolean('shiftMorning');
-            $table->boolean('shiftAfternoon');
-            $table->bigInteger('fees');
-            $table->bigInteger('numberOfViews');
-            $table->integer('post_requisites_id');
-            $table->integer('institute_id');
+            $table->integer('post_requisite_id');
+
+
             $table->timestamps();
         });
     }

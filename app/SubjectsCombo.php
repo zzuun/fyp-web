@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubjectsCombo extends Model
 {
-  public function degree()
+  public function degree_infos()
   {
-      return $this->belongsTo('App\degree');
+      return $this->belongsTo('App\DegreeInfo');
   }
 }

@@ -6,20 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Degree extends Model
 {
+  public function degree_infos()
+  {
+      return $this->hasMany('App\DegreeInfo');
+  }
   public function preRequisites()
   {
       return $this->hasMany('App\PreRequisite');
-  }
-  public function postRequisites()
-  {
-      return $this->hasMany('App\PostRequisite');
-  }
-  public function subjectsCombos()
-  {
-      return $this->hasMany('App\subjectsCombo');
-  }
-  public function institute()
-  {
-      return $this->belongsTo('App\Institute');
   }
 }

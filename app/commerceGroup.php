@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class commerceGroup extends Model
 {
-  public function postRequisite()
+  public function degrees()
   {
-      return $this->hasMany('App\PostRequisite');
+      return $this->hasManyThrough('App\Degree', 'App\PostRequisite');
   }
 }

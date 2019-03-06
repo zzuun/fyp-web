@@ -15,12 +15,11 @@ class CreatePostRequisiteTable extends Migration
     {
       Schema::create('post_requisites', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->integer('engineering_groups_id');
-          $table->integer('medical_groups_id');
-          $table->integer('fine_arts_groups_id');
-          $table->integer('commerce_groups_id');
-          $table->integer('computer_science_groups_id');
-          $table->integer('degree_id');
+          $table->integer('engineering_group_id');
+          $table->integer('medical_group_id');
+          $table->integer('fine_arts_group_id');
+          $table->integer('commerce_group_id');
+          $table->integer('computer_science_group_id');
           $table->timestamps();
       });
     }

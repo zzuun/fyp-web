@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Institute extends Model
 {
-  public function degrees()
+  public function degree_infos()
     {
-        return $this->hasMany('App\Degree');
+        return $this->hasMany('App\DegreeInfo');
     }
   public function address()
     {

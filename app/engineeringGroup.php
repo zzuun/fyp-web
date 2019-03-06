@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class engineeringGroup extends Model
 {
-  public function postRequisites()
+  public function degrees()
   {
-      return $this->hasMany('App\PostRequisite');
+      return $this->hasManyThrough(
+        Degree::class,
+        PostRequisite::class,
+        'engineering_group_id',
+        'post_requisite_id',
+        'id',
+        'id'
+      );
   }
 }
