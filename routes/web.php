@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Input;
+
+Route::get('/',function(){
+    return view('search');
+
 });
+
+Route::get('/search',function(){
+    return view('searchFilters');
+});
+Route::post('/search','SearchController@filter');
+Route::get('/ajaxGetCities','SearchController@getCities');
