@@ -225,8 +225,10 @@
                               </h6>
                               <div id="collapseFive" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                        <input type="range" min="10000" max="100000" value="500" class="slider fees-range common-selector" id="fees-range">
-                                        <p>Fee Range: <span id="demo1"></span></p>
+                                        <input type="range" min="10000" max="100000" step="1000" value="10000" class="slider fees-range common-selector" id="fees-min-range">
+                                        <p>Min Range: <span id="min"></span></p>
+                                        <input type="range" min="10000" max="100000" step="1000" value="100000" class="slider fees-range common-selector" id="fees-max-range">
+                                        <p>Max Range: <span id="max"></span></p>
                                     </div>
                               </div>
                           </div>
@@ -242,8 +244,10 @@
                               </h6>
                               <div id="collapseSix" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                      <input type="range" min="330" max="1100" value="10" class="slider" id="myRange1">
-                                      <p>Select Marks: <span id="demo2"></span></p>
+                                      <input type="range" min="330" max="1100" step="10" value="330" class="slider common-selector" id="marks-min-range">
+                                      <p>Minimum Marks: <span id="marks-min"></span></p>
+                                      <input type="range" min="330" max="1100" step="10" value="1100" class="slider common-selector" id="marks-max-range">
+                                      <p>Maximum Marks: <span id="marks-max"></span></p>
                                     </div>
                               </div>
                           </div>
@@ -301,154 +305,19 @@
 
     <!-- ##### Hero Area End ##### -->
     <!-- ##### Popular Courses Start ##### -->
-    <div class="popular-courses-area" style="padding-left:5%" >
+      <div class="popular-courses-area" style="padding-left:5%" >
 
 
-        <div class="container" style="padding:0 4% 0 1%;">
-
-
-                <div class="col-12">
-                    <div class="section-heading">
-                        <h3>Best Institues For You</h3>
-                    </div>
-                </div>
-
-                <!-- Single Popular Course -->
-
-
-                <!-- Single Popular Course -->
-                <div class="col-12">
-                  <div class="boxstyle2" onclick="location.href='nust degree.html';" style="cursor: pointer;">
-                    <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms">
-
-                        <!-- Course Content -->
-                        <div class="course-content">
-                           <a href="#">
-                            <h4>Bachelors in CS</h4>
-
-                            <div class="meta d-flex align-items-center">
-                                <a href="nust.html">NUST</a>
-                                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                <a href="nust degree.html">CS</a>
-                            </div>
-                            <ul>
-                            <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>  052-4422365</span>
-                          </ul>
-
-
-                              <ul>
-                            <span><i class="fa fa-location-arrow" aria-hidden="true" style="color: #e3d21b;"></i>  Islamabad</span>
-                              </ul>
-
-
-
-                              <ul>
-                            <span><i class="fa fa-won" aria-hidden="true" style="color: #e3d21b;"></i>  HEC Recognized</span>
-                              </ul>
-
-
-                              <ul>
-                            <span><i class="fa fa-users" aria-hidden="true" style="color: #e3d21b;"></i>  Government Sector</span>
-                              </ul>
-
-                            </a>
-                        </div>
-                        <!-- Seat Rating Fee -->
-                        <div class="seat-rating-fee d-flex justify-content-between">
-                            <div class="seat-rating h-100 d-flex align-items-center">
-                                <div class="seat">
-                                  <a onclick="location.href='#';">
-                                    <i aria-hidden="true" ></i> Add To Wishlist <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                  </a>
-                                </div>
-                                <div class="rating">
-                                  <a  href="wishlist.html">
-                                    <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                  </a>
-                                </div>
-                            </div>
-                            <div class="course-fee2 h-100">
-                                <a href="index.html">
-                                      <i class="fa fa-location-arrow" aria-hidden="true"><abbr title="12 kms away from your location">12kms</abbr></i>
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Single Popular Course -->
-                <div class="col-12" >
-                  <div class="boxstyle2" onclick="location.href='pu.html';" style="cursor: pointer;">
-                    <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms">
-
-                        <!-- Course Content -->
-                        <div class="course-content">
-                            <h4>Bachelors in CS</h4>
-                            <a href="#"></a>
-                            <div class="meta d-flex align-items-center">
-                                <a href="#">PUCIT</a>
-                                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                <a href="#">CS</a>
-                            </div>
-                            <!-- <div class="course-curriculum">
-                            <div class="cl2"> -->
-                              <ul>
-                              <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>  042-37223322</span>
-                            </ul>
-
-
-                                <ul>
-                              <span><i class="fa fa-location-arrow" aria-hidden="true" style="color: #e3d21b;"></i>  Lahore</span>
-                                </ul>
-
-
-
-                                <ul>
-                              <span><i class="fa fa-won" aria-hidden="true" style="color: #e3d21b;"></i>  HEC Recognized</span>
-                                </ul>
-
-
-                                <ul>
-                              <span><i class="fa fa-users" aria-hidden="true" style="color: #e3d21b;"></i>  Government Sector</span>
-                                </ul>
-
-                              <!-- </div>
-                            </div> -->
-
-                        </div>
-                        <!-- Seat Rating Fee -->
-                        <div class="seat-rating-fee d-flex justify-content-between">
-                            <div class="seat-rating h-100 d-flex align-items-center">
-                                <div class="seat">
-                                  <a onclick="location.href='#';">
-                                    <i aria-hidden="true" ></i> Add To Wishlist <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                  </a>
-                                </div>
-                                <div class="rating">
-                                  <a  href="wishlist.html">
-                                    <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                  </a>
-                                </div>
-                            </div>
-                            <div class="course-fee2 h-100">
-                                <a  href="pu.html">
-                                      <i class="fa fa-location-arrow" aria-hidden="true"><abbr title="4 kms away from your location">4kms</abbr></i>
-                                  </a>
-                            </div>
-                        </div>
-
-                      </div>
-                  </div>
-                </div>
-
-
-
-
-        </div>
-    </div>
-    </div>
+          <div class="container" id="degreeResultsArea" style="padding:0 4% 0 1%;">
+            <!--<div class="col-12">
+              <div class="section-heading">
+                  <h3>Best Institues For You</h3>
+              </div>
+            </div>-->
+          </div>
       </div>
+    </div>
+    </div>
     </div>
 
     <!-- ##### Popular Courses End ##### -->
@@ -514,15 +383,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $(document).ready(function()
       {
 
-        var slider = document.getElementById("fees-range");
-        var output1 = document.getElementById("demo1");
-        output1.innerHTML = slider.value;
+        var minslider = document.getElementById("fees-min-range");
+        var maxslider = document.getElementById("fees-max-range");
+        //var output1 = document.getElementById("min");
+        //var output2 = document.getElementbyId("max");
+        document.getElementById("min").innerHTML = minslider.value;
+        document.getElementById("max").innerHTML = maxslider.value;
 
-        slider.oninput = function() {
-          output1.innerHTML = this.value;
+        minslider.oninput = function() {
+          document.getElementById("min").innerHTML = this.value;
+        }
+        maxslider.oninput = function() {
+          document.getElementById("max").innerHTML = this.value;
         }
       });
-     </script>-
+     </script>
+
+  <script>
+      $(document).ready(function()
+      {
+
+        var minslider = document.getElementById("marks-min-range");
+        var maxslider = document.getElementById("marks-max-range");
+        document.getElementById("marks-min").innerHTML = minslider.value;
+        document.getElementById("marks-max").innerHTML = maxslider.value;
+
+        minslider.oninput = function() {
+          document.getElementById("marks-min").innerHTML = this.value;
+        }
+        maxslider.oninput = function() {
+          document.getElementById("marks-max").innerHTML = this.value;
+        }
+      });
+    </script>-
 
         <!--<script>
           $('#city-selector').on('change',function(){
@@ -553,14 +446,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var affiliation = get_filter('affiliation'); 
             var hostel = get_filter('hostel');
             var transport = get_filter('transport');
-            var fees = $('#fees-range').val();
+            var minfees = $('#fees-min-range').val();
+            var maxfees = $('#fees-max-range').val();
+            var minmarks = $('#marks-min-range').val();
+            var maxmarks= $('#marks-max-range').val();
                 $.ajax({
                     url:"/search",
                     method:"POST",
-                    dataType:"json",
-                    data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, fees:fees, _token: "{{csrf_token()}}"},
+                    data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees, _token: "{{csrf_token()}}"},
                     success:function(data){
-                        $('.div1').html()
+                  
+                       $('#degreeResultsArea').html(data);
+                       // $('#degreeResultsArea').load(data);
                     }
                 });
             }
