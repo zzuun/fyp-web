@@ -21,5 +21,6 @@ Route::get('/',function(){
 Route::get('/search',function(){
     return view('searchFilters');
 });
+// Route::get('/contact','pageController@contact')->name('page.contact');
 Route::post('/search','SearchController@filter');
 Route::get('/ajaxGetCities','SearchController@getCities');
