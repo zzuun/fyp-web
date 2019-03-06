@@ -154,11 +154,10 @@
                               </a></h6>
                               <div id="collapseTwo" class="accordion-content collapse">
                                 @php
-                                  $areas= App\Address::where('city','Lahore')->pluck('subarea');                                  
+                                  $areas= App\Address::where('city','Lahore')->pluck('subarea');
                                 @endphp
 
                                 @foreach($areas as $area)
-
                                   <label  style="word-wrap:break-word">
                                     <input class="common-selector area" type="checkbox" value="{{$area}}"/>{{$area}}
                                   </label><br>
@@ -200,17 +199,17 @@
                               <div id="collapseFour" class="accordion-content collapse">
                                 @php
                                     $affiliations= App\Institute::distinct()->pluck('affiliation');
-                          
+
                                 @endphp
                                 @foreach($affiliations as $affiliation)
                                   <label  style="word-wrap:break-word">
-                                    
+
                                       <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation}}" />{{$affiliation}}
                                   </label>
                                   <br>
                                 @endforeach
 
-                          
+
                               </div>
                           </div>
 
@@ -503,7 +502,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="customjs/active.js"></script>
 
-   
+
 
     <script> $(".seat").on("click", function(){
       $(this).css("background", "red");
@@ -522,11 +521,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           output1.innerHTML = this.value;
         }
       });
+      $(document).ready(function()
+      {
+
+        var slider = document.getElementById("myRange1");
+        var output1 = document.getElementById("demo2");
+        output1.innerHTML = slider.value;
+
+        slider.oninput = function() {
+          output1.innerHTML = this.value;
+        }
+      });
      </script>-
 
         <!--<script>
           $('#city-selector').on('change',function(){
-            var cityName=$('#city-selector').val();              
+            var cityName=$('#city-selector').val();
             $.ajax({
                       url:"/ajaxGetCities",
                       method:"GET",
@@ -550,7 +560,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           {
             var area = get_filter('area');
             var sector = get_filter('sector');
-            var affiliation = get_filter('affiliation'); 
+            var affiliation = get_filter('affiliation');
             var hostel = get_filter('hostel');
             var transport = get_filter('transport');
             var fees = $('#fees-range').val();
@@ -595,7 +605,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
              });
              */
 
-          
+
         });
     </script>
 
