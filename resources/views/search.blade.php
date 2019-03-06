@@ -503,43 +503,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="customjs/active.js"></script>
 
-    <!--<script>
-      var slider = document.getElementById("myRange");
-      var output = document.getElementById("demo");
-      output.innerHTML = slider.value;
+   
 
-      slider.oninput = function() {
-        output.innerHTML = this.value;
-      }
+    <script> $(".seat").on("click", function(){
+      $(this).css("background", "red");
+    });
     </script>
 
-       <script> $(".seat").on("click", function() {
-        $(this).css("background", "red");
-        });
-      </script>
-      -->
+  <script>
+      $(document).ready(function()
+      {
 
-
-<!--      <script>
-      $('.single-accordion2').hide();
-        $('#checkidcity').on('select',
-          function() {
-            $('.single-accordion2').toggle(200);
-          }
-        );
-      </script>
-      -->
-   <!--   <script>
-      $('.singe-accordion4').hide();
-        $('.single-accordion3').on('click',
-          function() {
-            $('.single-accordion4').toggle(200);
-          }
-        );
-      </script>
-      -->
-
-      <!--<script>
         var slider = document.getElementById("fees-range");
         var output1 = document.getElementById("demo1");
         output1.innerHTML = slider.value;
@@ -547,7 +521,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         slider.oninput = function() {
           output1.innerHTML = this.value;
         }
-     </script>-->
+      });
+     </script>-
 
         <!--<script>
           $('#city-selector').on('change',function(){
@@ -571,14 +546,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         {
 
           filter_data();
-
-          var slider = document.getElementById("fees-range");
-          var output1 = document.getElementById("demo1");
-          output1.innerHTML = slider.value;
-
-          slider.oninput = function() {
-            output1.innerHTML = this.value;
-          }
           function filter_data()
           {
             var area = get_filter('area');
@@ -586,14 +553,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var affiliation = get_filter('affiliation'); 
             var hostel = get_filter('hostel');
             var transport = get_filter('transport');
-            var fees = get_filter('fees-range');
+            var fees = $('#fees-range').val();
                 $.ajax({
                     url:"/search",
                     method:"POST",
                     dataType:"json",
                     data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, fees:fees, _token: "{{csrf_token()}}"},
                     success:function(data){
-                        console.log(data);
+                        $('.div1').html()
                     }
                 });
             }

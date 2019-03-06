@@ -62,7 +62,7 @@ class SearchController extends Controller
        {
            $minRange=10000;
            $maxRange= $_POST["fees"];
-           $institutes->join('degrees','institutes.id','=','degrees.institute_id')->whereRaw("degrees.fees in between($minRange,$maxRange)");
+           $institutes->join('degrees','institutes.id','=','degrees.institute_id')->whereBetween("degrees.fees",[$minRange,$maxRange]);
 
        }
       
