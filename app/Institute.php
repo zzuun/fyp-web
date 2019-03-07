@@ -14,7 +14,7 @@ class Institute extends Model
     {
         return $this->hasOne('App\Address');
     }
-  protected $casts = [
-        'important_dates' => 'array'
-    ];
+  // protected $casts = [
+  //       'important_dates' => 'array'
+  //   ];
 }

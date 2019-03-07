@@ -22,8 +22,8 @@ class CreateInstitutesTable extends Migration
             $table->string('affiliation');
             $table->string('principal_name');
             $table->boolean('coEducation');
-            //$table->json('important_dates');
-            $table->integer('addresses_id');
+            $table->boolean('scholarship');
+            $table->string('important_dates');
             $table->timestamps();
         });
     }

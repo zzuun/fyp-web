@@ -20,19 +20,18 @@ class SearchController extends Controller
 
        $degrees=$degrees->newQuery();
        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
-       ->join('addresses','institutes.id','=','addresses.instiute_id')
-       ->select('degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city');
-
+       ->join('addresses','institutes.id','=','addresses.institute_id')
+       ->select('degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber');
        if(isset($_POST["area"]))
        {
           $area_filter = implode("','",$_POST["area"]);
           $degrees->whereRaw("addresses.subarea in ('".$area_filter."')");
        }
-       
+
        if(isset($_POST["sector"]))
        {
            $sector_filter = implode("','",$_POST["sector"]);
-           $degrees->whereRaw("institutes.sector in ('".$sector_filter."')"); 
+           $degrees->whereRaw("institutes.sector in ('".$sector_filter."')");
 
        }
 
@@ -49,14 +48,14 @@ class SearchController extends Controller
            $value=(int)$value;
            $degrees->where("institutes.hostel",$value);
 
-           
+
        }
        if(isset($_POST["transport"]))
        {
            $value=$_POST["transport"];
            $value=(int)$value;
            $degrees->where("institutes.transportation",$value);
- 
+
        }
 
        if(isset($_POST["minfees"]) | isset($_POST["maxfees"]))
@@ -64,18 +63,18 @@ class SearchController extends Controller
            $minRange=(int) $_POST["minfees"];
            $maxRange= (int) $_POST['maxfees'];
            $degrees->whereBetween("degrees.fees",[$minRange,$maxRange]);
-       } 
+       }
        if(isset($_POST["minmarks"]) | isset($_POST["maxmarks"]))
        {
            $minRange=(int) $_POST["minmarks"];
            $maxRange= (int) $_POST['maxmarks'];
-           $degrees->whereBetween("degrees.merit",[$minRange,$maxRange]);
+           $degrees->whereBetween("degrees.lastMerit",[33,$maxRange]);
 
-       } 
-       
-       $results = $degrees->get();
-    
-       $htmlOutput='';  
+       }
+
+       $results = $degrees->orderby('numberOfViews','desc')->get();
+
+       $htmlOutput='';
        if($results->count()>0)
        {
            foreach($results as $result)
@@ -94,10 +93,10 @@ class SearchController extends Controller
                                     <div class="meta d-flex align-items-center">
                                         <a href="nust.html">'.$result->name.'</a>
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                        <a href="nust degree.html">CS</a>
+                                        <a href="nust degree.html">'.$result->degreeName.'</a>
                                     </div>
                                     <ul>
-                                    <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>  052-4422365</span>
+                                    <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>'.$result->phoneNumber.'</span>
                                     </ul>
 
 
@@ -151,50 +150,25 @@ class SearchController extends Controller
         return ($htmlOutput);
 
     }
-       
-     
-    
+
+
+
 
     public function getCities(){
 
         if(isset($_GET["city"]))
         {
-
             $cityName=$_GET["city"];
-            /*$lahoreAreas=['islampura','johar town','township','mughalpura'];
-            $karachiAreas=['clifton','sadar'];
-            $output='';
-            if($cityName == 'lahore')
-            {
-                foreach($lahoreAreas as $area)
-                {
-                   $output.='<label  style="word-wrap:break-word">'.'<input id="area"  type="checkbox" value='.$area.' />'.$area.'</label></br>';
-
-                }
-
-            }
-            if($cityName == 'karachi')
-            {
-                foreach($karachiAreas as $area)
-                {
-                   $output.='<label  style="word-wrap:break-word">'.'<input id="area"  type="checkbox" value='.$area.' />'.$area.'</label></br>';
-
-                }
-
-            }*/
-
             $areas = Address::where('city',$cityName)->pluck('subarea');
             $output='';
 
             foreach($areas as $area)
             {
                 $output.='<label  style="word-wrap:break-word">'.'<input id="area"  type="checkbox" value='.$area.' />'.$area.'</label></br>';
-   
+
             }
-            
+
             return ($output);
         }
     }
 }
-
-

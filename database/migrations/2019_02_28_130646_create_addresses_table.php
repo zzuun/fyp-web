@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('phone_number');
             $table->string('website');
             $table->string('location');
+            $table->string('email');
             $table->integer('institute_id');
             $table->timestamps();
         });

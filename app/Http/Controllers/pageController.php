@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class pageController extends Controller
 {
-  public function contact()
+  public function degree()
     {
-      return view('contact');
+      return view('degree');
     }
 }

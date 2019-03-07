@@ -262,7 +262,7 @@
                               </h6>
                               <div id="collapseSeven" class="accordion-content collapse">
                                 <label  style="word-wrap:break-word">
-                                    <input  class="common-selector transport" type="checkbox" value="1" />Transportation
+                                    <input id="transport" class="common-selector transport" type="checkbox" value="1" />Transportation
                                  </label>
 
                                   <label  style="word-wrap:break-word">
@@ -414,34 +414,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           document.getElementById("marks-max").innerHTML = this.value;
         }
       });
-<<<<<<< resources/views/search.blade.php
     </script>-
-=======
-      $(document).ready(function()
-      {
-
-        var slider = document.getElementById("marks-min-range");
-        var output1 = document.getElementById("marks-min");
-        output1.innerHTML = slider.value;
-
-        slider.oninput = function() {
-          output1.innerHTML = this.value;
-        }
-      });
-      $(document).ready(function()
-      {
-
-        var slider = document.getElementById("marks-max-range");
-        var output1 = document.getElementById("marks-max");
-        output1.innerHTML = slider.value;
-
-        slider.oninput = function() {
-          output1.innerHTML = this.value;
-        }
-      });
-     </script>-
->>>>>>> resources/views/search.blade.php
-
         <!--<script>
           $('#city-selector').on('change',function(){
             var cityName=$('#city-selector').val();
@@ -480,7 +453,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                     method:"POST",
                     data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees, _token: "{{csrf_token()}}"},
                     success:function(data){
-                  
+
                        $('#degreeResultsArea').html(data);
                        // $('#degreeResultsArea').load(data);
                     }
