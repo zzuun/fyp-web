@@ -91,9 +91,9 @@ class SearchController extends Controller
                                     <h4>'.$result->degreeName.'</h4>
 
                                     <div class="meta d-flex align-items-center">
-                                        <a href="nust.html">'.$result->name.'</a>
+                                        <a href="/institute?instituteID='.$result->instituteID.'"">'.$result->name.'</a>
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                        <a href="nust degree.html">'.$result->degreeName.'</a>
+                                        <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'"">'.$result->degreeName.'</a>
                                     </div>
                                     <ul>
                                     <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>'.$result->phoneNumber.'</span>

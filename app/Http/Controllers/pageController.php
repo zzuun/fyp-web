@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Institute;
 
 class pageController extends Controller
 {
@@ -19,5 +20,15 @@ class pageController extends Controller
       ,'degrees.shiftAfternoon','addresses.website','institutes.principal_name','addresses.phone_number')
       ->get();
       return view('degree')->withDetails($result);
+    }
+    public function institute(Request $request)
+    {
+      $result = DB::table('institutes')
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->where('institutes.id',$request->instituteID)
+      ->select('institutes.name', 'addresses.website','institutes.id',
+      'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city')
+      ->get();
+      return view('institute')->withDetails($result);
     }
 }

@@ -23,5 +23,6 @@ Route::get('/search',function(){
 });
 
 Route::get('/degree','pageController@degree')->name('page.degree');
+Route::get('/institute','pageController@institute')->name('page.institute');
 Route::post('/search','SearchController@filter');
 Route::get('/ajaxGetCities','SearchController@getCities');

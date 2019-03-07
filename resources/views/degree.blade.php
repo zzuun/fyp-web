@@ -108,11 +108,11 @@
                 <i class="fa fa-star-o" aria-hidden="true"></i>
             </div>
             <h3>{{$details[0]->degreeName}}</h3>
-            <div class="meta d-flex align-items-center justify-content-center">
+            <!-- <div class="meta d-flex align-items-center justify-content-center">
               <div class="globalonly">
-                <a href="{{$details[0]->website}}" class="fa fa-globe"></a>
+                <a href="https://{{$details[0]->website}}" class="fa fa-globe"></a>
               </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -255,7 +255,7 @@
 
                                           <div class="total-ratings text-center d-flex align-items-center justify-content-center">
                                               <div class="ratings-text">
-                                                <img src="img/bg-img/t1.png" alt="">
+                                                <img src="img/bg-img/mastergee.png" alt="">
 
                                               </div>
                                           </div>
@@ -424,7 +424,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="course-sidebar">
                         <!-- Buy Course -->
-                        <a href="{{$details[0]->website}}" class="btn clever-btn mb-30 w-100">Visit Institute Website</a>
+                        <a href="/institute?instituteID={{$details[0]->instituteid}}" class="btn clever-btn mb-30 w-100">Visit Institute Profile</a>
 
                         <!-- Widget -->
                         <div class="sidebar-widget">
