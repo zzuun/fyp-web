@@ -9,13 +9,13 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>BS CS | NUST</title>
+    <title>{{$details[0]->degreeName}}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="nust degree.css">
+    <link rel="stylesheet" href="degree.css">
 
 </head>
 
@@ -107,10 +107,10 @@
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star-o" aria-hidden="true"></i>
             </div>
-            <h3>Department of CS</h3>
+            <h3>{{$details[0]->degreeName}}</h3>
             <div class="meta d-flex align-items-center justify-content-center">
               <div class="globalonly">
-                <a href="http://www.nust.edu.pk" class="fa fa-globe"></a>
+                <a href="{{$details[0]->website}}" class="fa fa-globe"></a>
               </div>
             </div>
 
@@ -148,15 +148,15 @@
                                                 <ul>
                                                   <li>
                                                     <span><i class="fa fa-calculator" aria-hidden="true"></i> Merit </span>
-                                                    <span>82.28%</span>
+                                                    <span>{{$details[0]->lastMerit}}%</span>
                                                   </li>
                                                   <li>
                                                       <span><i class="fa fa-user" aria-hidden="true"></i> Available Seats </span>
-                                                      <span>120</span>
+                                                      <span>{{$details[0]->noOfSeats}}</span>
                                                   </li>
                                                   <li>
                                                       <span><i class="fa fa-phone" aria-hidden="true"></i> Contact </span>
-                                                      <span>055-2588521</span>
+                                                      <span>{{$details[0]->phone_number}}</span>
                                                   </li>
                                                   <li>
                                                       <span><i class="fa fa-th-list" aria-hidden="true"></i> Admission Criteria </span>
@@ -176,12 +176,18 @@
 
                                                       <li>
                                                         <span><i class="fa fa-money" aria-hidden="true"></i> Fees </span>
-                                                        <span>Rs. 90,000</span>
+                                                        <span>Rs. {{$details[0]->fees}}</span>
                                                       </li>
 
                                                       <li>
                                                         <span><i class="fa fa-graduation-cap" aria-hidden="true"></i> Scholarships </span>
-                                                        <span><div class="text-success">Available</div></span>
+                                                        <?php if ($details[0]->scholarship == 1) {
+                                                          echo  "<span><div class=".'text-success'.">Available</div></span>";
+                                                        }
+                                                        else {
+                                                          echo  "<span><div class=".'text-danger'.">Not Available</div></span>";
+                                                        } ?>
+
                                                       </li>
                                                     </ul>
                                               </li>
@@ -256,31 +262,12 @@
 
                                           <div class="rating-viewer">
                                               <!-- Rating -->
-                                              <h4>Arsalan Jamal Khan</h4>
-                                              <h6>Prinicipal NUST</h6>
-                                              <li>MS Computer Software</li>
-                                              <li>Dick Rider
+                                              <h4>{{$details[0]->principal_name}}</h4>
+                                              <h6>Prinicipal {{$details[0]->instituteName}}</h6>
                                               </li>
                                               </div>
                                             </div>
-                                      <div class="clever-ratings d-flex align-items-center mb-30">
 
-                                          <div class="total-ratings text-center d-flex align-items-center justify-content-center">
-                                              <div class="ratings-text">
-                                                <img src="img/bg-img/t2.png" alt="">
-
-                                              </div>
-                                          </div>
-
-                                          <div class="rating-viewer">
-                                              <!-- Rating -->
-                                              <h4>Arsalan Jamal Khan</h4>
-                                              <h6>Prinicipal NUST</h6>
-                                              <li>MS Computer Software</li>
-                                              <li>Dick Rider
-                                              </li>
-                                              </div>
-                                            </div>
                                   </div>
                                 </div>
 
@@ -437,7 +424,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="course-sidebar">
                         <!-- Buy Course -->
-                        <a href="http://www.nust.edu.pk" class="btn clever-btn mb-30 w-100">Visit NUST Website</a>
+                        <a href="{{$details[0]->website}}" class="btn clever-btn mb-30 w-100">Visit Institute Website</a>
 
                         <!-- Widget -->
                         <div class="sidebar-widget">
@@ -445,23 +432,34 @@
                             <ul class="features-list">
                                 <li>
                                     <h6><i class="fa fa-clock-o" aria-hidden="true"></i> Duration</h6>
-                                    <h6>4 Years</h6>
+                                    <h6>{{$details[0]->duration}} Years</h6>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <h6><i class="fa fa-bell" aria-hidden="true"></i> Semesters</h6>
                                     <h6>8</h6>
-                                </li>
-                                <li>
+                                </li> -->
+                                <!-- <li>
                                     <h6><i class="fa fa-hourglass" aria-hidden="true"></i> Credit Hours</h6>
                                     <h6>132</h6>
-                                </li>
+                                </li> -->
                                 <li>
                                     <h6><i class="fa fa-sun-o" aria-hidden="true"></i> Morning Classes</h6>
-                                    <h6 style="color:green;">Yes</h6>
+                                    <?php if ($details[0]->shiftMorning == 1) {
+                                      echo "<h6 style=".'color:green;'.">Yes</h6>";
+                                    }
+                                    else {
+                                      echo "<h6 style=".'color:red;'.">No</h6>";
+                                    }?>
+
                                 </li>
                                 <li>
                                     <h6><i class="fa fa-moon-o" aria-hidden="true"></i> Afternoon Classes</h6>
-                                    <h6 style="color:red;">No</h6>
+                                    <?php if ($details[0]->shiftAfternoon == 1) {
+                                      echo "<h6 style=".'color:green;'.">Yes</h6>";
+                                    }
+                                    else {
+                                      echo "<h6 style=".'color:red;'.">No</h6>";
+                                    }?>
                                 </li>
                             </ul>
                         </div>
@@ -475,41 +473,23 @@
                         <!-- Widget -->
                         <div class="sidebar-widget">
                             <h4>You may like</h4>
+                            @php
+                              $result =  DB::table('degrees')
+                              ->join('institutes','institutes.id','degrees.institute_id')
+                              ->where('institutes.id',$details[0]->instituteid)
+                              ->where('degrees.name','!=',$details[0]->degreeName)
+                              ->select('degrees.name as degreeName','institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid')
+                              ->orderby('numberOfViews','desc')->limit(3)->get();
+                            @endphp
 
-                            <!-- Single Courses -->
-                            <div class="single--courses d-flex align-items-center">
-                                <!-- <div class="thumb">
-                                    <img src="img/bg-img/yml.jpg" alt="">
-                                </div> -->
-                                <div class="content">
-                                    <h5>BS IT</h5>
-                                    <h6>NUST</h6>
-                                </div>
-                            </div>
-
-                            <!-- Single Courses -->
-                            <div class="single--courses d-flex align-items-center">
-                                <!-- <div class="thumb">
-                                    <img src="img/bg-img/yml2.jpg" alt="">
-                                </div> -->
-                                <div class="content">
-                                    <h5>Electrical Engineering</h5>
-                                    <h6>NUST</h6>
-                                </div>
-                            </div>
-
-                            <!-- Single Courses -->
-                            <div class="single--courses d-flex align-items-center">
-                                <!-- <div class="thumb">
-                                    <img src="img/bg-img/yml3.jpg" alt="">
-                                </div> -->
-                                <div class="content">
-
-                                    <h5>Mechanical Engineering</h5>
-                                    <h6>NUST</h6>
+                            <?php foreach ($result as $r): ?>
+                              <div class="single--courses d-flex align-items-center">
+                                  <div class="content">
+                                      <h5><a href="/degree?degreeid={{$r->degreeid}}&instituteid={{$r->instituteid}}">{{$r->degreeName}}</h5>
+                                      <h6>{{$r->instituteName}}</h6>
                                   </div>
-                            </div>
-
+                              </div>
+                            <?php endforeach; ?>
                       </div>
                     </div>
                 </div>
@@ -558,15 +538,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="customjs/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="customjs/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="customjs/active.js"></script>
     <script>
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */

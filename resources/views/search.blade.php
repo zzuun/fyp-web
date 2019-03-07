@@ -160,7 +160,7 @@
                                 @foreach($areas as $area)
                                   <label  style="word-wrap:break-word">
                                     <input class="common-selector area" type="checkbox" value="{{$area}}"/>{{$area}}
-                                  </label><br>
+                                  </label>
                                 @endforeach
 
 
@@ -206,7 +206,6 @@
 
                                       <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation}}" />{{$affiliation}}
                                   </label>
-                                  <br>
                                 @endforeach
 
 
@@ -414,6 +413,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           document.getElementById("marks-max").innerHTML = this.value;
         }
       });
+      function myFunction(x)
+          {
+            x.classList.toggle("fa-thumbs-down");
+          }
     </script>-
         <!--<script>
           $('#city-selector').on('change',function(){

@@ -2447,9 +2447,9 @@ textarea:focus {
             text-align: center;
             float:none;
           }
-        
+
       }
-        
+
         .side2nav {
         height: 100%;
         width: 200px;
@@ -2484,19 +2484,30 @@ textarea:focus {
         }
 
 
-    label,  input  [type="checkbox"]
-{
-    vertical-align:middle;
-    cursor: pointer;
-    display: inline-block;
+        label,  input  [type="checkbox"]
+ {
+     vertical-align:middle;
+     cursor: pointer;
+     display: inline-block;
 
-    padding-left: 3%;
-    width: 31%;
-    /*margin-left: 40px;
-    margin-right: 3px;
-    margin-top: auto;
-*/
-}
+     /*padding-left: 3%;
+     width: 31%;
+
+     width: calc(100%/3.3)
+     margin-left: 40px;
+     margin-right: 3px;
+     margin-top: auto;
+ */
+ margin-bottom: 10px;
+ cursor: pointer;
+ padding-top: 3px;
+ padding-left:6%;
+ width:41%;
+ white-space: nowrap;
+ overflow: hidden!important;
+ text-overflow: ellipsis;
+
+ }
 
 .slidecontainer {
   width: 90%;

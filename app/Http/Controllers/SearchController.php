@@ -21,7 +21,7 @@ class SearchController extends Controller
        $degrees=$degrees->newQuery();
        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
-       ->select('degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber');
+       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber');
        if(isset($_POST["area"]))
        {
           $area_filter = implode("','",$_POST["area"]);
@@ -82,12 +82,12 @@ class SearchController extends Controller
 
                 $htmlOutput.=
                 '<div class="col-12">
-                    <div class="boxstyle2" onclick="" style="cursor: pointer;">
+                    <div class="boxstyle2" style="cursor: pointer;">
                         <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms">
 
                             <!-- Course Content -->
-                            <div class="course-content">
-                                <a href="#">
+                            <div class="course-content" onclick="location.href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'"">
+                                <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">
                                     <h4>'.$result->degreeName.'</h4>
 
                                     <div class="meta d-flex align-items-center">
@@ -121,9 +121,9 @@ class SearchController extends Controller
                             <div class="seat-rating-fee d-flex justify-content-between">
                                 <div class="seat-rating h-100 d-flex align-items-center">
                                     <div class="seat">
-                                        <a onclick="">
-                                            <i aria-hidden="true" ></i> Add To Wishlist <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        </a>
+                                    <a >
+                                      <i onclick="myFunction(this);" class="fa fa-thumbs-up" style="font-size:23px;padding-top: 8px;"></i>
+                                    </a>
                                     </div>
                                     <div class="rating">
                                         <a  href="wishlist.html">
