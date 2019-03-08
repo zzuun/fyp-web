@@ -55,23 +55,23 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="">Home</a></li>
+                                        <li><a href="">Courses</a></li>
+                                        <li><a href="">Single Courses</a></li>
+                                        <li><a href="">Instructors</a></li>
+                                        <li><a href="">Blog</a></li>
+                                        <li><a href="">Single Blog</a></li>
+                                        <li><a href="">Regular Page</a></li>
+                                        <li><a href="">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="">Courses</a></li>
+                                <li><a href="">Instructors</a></li>
+                                <li><a href="">Blog</a></li>
+                                <li><a href="">Contact</a></li>
                             </ul>
 
                             <!-- Search Button -->
@@ -79,7 +79,7 @@
                             <!-- Register / Login -->
                             <div class="register-login-area">
                                 <a href="#" class="btn">Register</a>
-                                <a href="index-login.html" class="btn active">Login</a>
+                                <a href="" class="btn active">Login</a>
                             </div>
 
                         </div>

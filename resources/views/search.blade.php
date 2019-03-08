@@ -56,29 +56,29 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="">Home</a></li>
+                                        <li><a href="">Courses</a></li>
+                                        <li><a href="">Single Courses</a></li>
+                                        <li><a href="">Instructors</a></li>
+                                        <li><a href="">Blog</a></li>
+                                        <li><a href="">Single Blog</a></li>
+                                        <li><a href="">Regular Page</a></li>
+                                        <li><a href="">Contact</a></li>
                                     </ul>
                                 </li>
                               </ul>
                               <div class="classynav2">
                                 <ul>
-                                <li><a href="courses.html" position="relative">Wishlist<span class="badge">3</span></a></li>
+                                <li><a href="" position="relative">Wishlist<span class="badge">3</span></a></li>
                               </ul>
                             </div>
                             <div class="classynav3">
                               <ul>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="">Instructors</a></li>
+                                <li><a href="">Contact</a></li>
                               </ul>
                             </div>
 
@@ -271,7 +271,7 @@
                           </div>
 
                           <!-- Degree Group -->
-                          <div class="panel single-accordion8">
+                          <!-- <div class="panel single-accordion8">
                               <h6>
                                   <a role="button" aria-expanded="true" aria-controls="collapseEight" class="collapsed"
                                   data-parent="#accordion" data-toggle="collapse" href="#collapseEight">Search By Degree Group
@@ -293,7 +293,7 @@
                                   </label>
 
                               </div>
-                          </div>
+                          </div> -->
 
                       </div>
 

@@ -31,4 +31,8 @@ class pageController extends Controller
       ->get();
       return view('institute')->withDetails($result);
     }
+    public function compare()
+    {
+      return view('comparison');
+    }
 }
