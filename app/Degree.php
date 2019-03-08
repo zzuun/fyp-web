@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Dataviewer;
 
 class Degree extends Model
 {
+
   public function preRequisites()
   {
       return $this->hasMany('App\PreRequisite');
@@ -22,4 +24,6 @@ class Degree extends Model
   {
       return $this->belongsTo('App\Institute');
   }
+
+  
 }
