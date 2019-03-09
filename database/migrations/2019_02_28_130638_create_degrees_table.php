@@ -16,7 +16,11 @@ class CreateDegreesTable extends Migration
         Schema::create('degrees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('merit');
+            $table->integer('duration');
+            $table->string('system');
+            $table->integer('noOfSeats');
+            $table->integer('creditHours');
+            $table->integer('lastMerit');
             $table->boolean('shiftMorning');
             $table->boolean('shiftAfternoon');
             $table->bigInteger('fees');

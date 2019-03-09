@@ -13,7 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('degreesByViews','MainController@degreesByViews');
 Route::get('getPostRequisites','MainController@getPostRequisites');
+Route::get('/degree','MainController@getDegree');
+Route::get('/institute','MainController@getInstitute');
+Route::get('/instituteSearch','MainController@getInstitueByName');
+Route::post('/filter','MainController@filterSearch');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
