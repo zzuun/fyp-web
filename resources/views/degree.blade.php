@@ -176,7 +176,7 @@
 
                                                       <li>
                                                         <span><i class="fa fa-money" aria-hidden="true"></i> Fees </span>
-                                                        <span>Rs. {{$details[0]->fees}}</span>
+                                                        <span id=fees>RS.{{$details[0]->fees}}</span>
                                                       </li>
 
                                                       <li>
@@ -215,17 +215,17 @@
                                                                     <div id="collapseOne" class="accordion-content collapse">
                                                                       <p>
                                                                       <label  style="word-wrap:break-word">
-                                                                          <input id="checkid"  type="checkbox" value="test" />USD $
+                                                                          <input id="dollar"  type="checkbox" value="test" />USD $
                                                                        </label>
                                                                      </p>
                                                                        <p>
                                                                         <label  style="word-wrap:break-word">
-                                                                          <input id="checkid"  type="checkbox" value="test" />Saudi Riyal ﷼
+                                                                          <input id="riyal"  type="checkbox" value="test" />Saudi Riyal ﷼
                                                                        </label>
                                                                      </p>
                                                                        <p>
                                                                        <label  style="word-wrap:break-word">
-                                                                         <input id="checkid"  type="checkbox" value="test" />UK £
+                                                                         <input id="pound"  type="checkbox" value="test" />UK £
                                                                       </label>
                                                                     </p>
                                                                     </div>
@@ -553,6 +553,40 @@ toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
+
+$("#dollar").on("click", function(){
+   if($(this).is(":not(:checked)")){
+     <?php
+     $res = currency($details[0]->fees,'PKR','PKR') ?>
+     document.getElementById("fees").innerHTML="{{$res}}";
+   }
+  else {
+    <?php $res = currency($details[0]->fees,'PKR','USD') ?>
+    document.getElementById("fees").innerHTML="{{$res}}";
+  }
+});
+$("#riyal").on("click", function(){
+   if($(this).is(":not(:checked)")){
+     <?php
+     $res = currency($details[0]->fees,'PKR','PKR') ?>
+     document.getElementById("fees").innerHTML="{{$res}}";
+   }
+  else {
+    <?php $res = currency($details[0]->fees,'PKR','SAR') ?>
+    document.getElementById("fees").innerHTML="{{$res}}";
+  }
+});
+$("#pound").on("click", function(){
+   if($(this).is(":not(:checked)")){
+     <?php
+     $res = currency($details[0]->fees,'PKR','PKR') ?>
+     document.getElementById("fees").innerHTML="{{$res}}";
+   }
+  else {
+    <?php $res = currency($details[0]->fees,'PKR','GBP') ?>
+    document.getElementById("fees").innerHTML="{{$res}}";
+  }
+});
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
