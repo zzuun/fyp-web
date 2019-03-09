@@ -1,5 +1,5 @@
 <?php
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$url = parse_url("mysql://bc3350e752f89e:b9b8403f@us-cdbr-iron-east-03.cleardb.net/heroku_fce5fffde9c3fdd?reconnect=true");
 
 $host = $url["host"];
 $username = $url["user"];
@@ -51,7 +51,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => $database,
             'username' => $username,
-            'password' => $password,
+            'password' => '20c6a3f12ceb840',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
