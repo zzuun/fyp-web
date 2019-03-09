@@ -16,7 +16,6 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="degree.css">
-
 </head>
 
 <body>
@@ -176,7 +175,7 @@
 
                                                       <li>
                                                         <span><i class="fa fa-money" aria-hidden="true"></i> Fees </span>
-                                                        <span id=fees>RS.{{$details[0]->fees}}</span>
+                                                        <span id=fees>{{currency($details[0]->fees,'PKR','PKR')}}</span>
                                                       </li>
 
                                                       <li>

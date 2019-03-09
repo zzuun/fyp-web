@@ -146,9 +146,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab--3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="true">Reviews</a>
                                 </li>
-                                <!-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" id="tab--4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="true">Location</a>
-                                </li> -->
+                                </li>
                                 <!-- <li class="nav-item">
                                     <a class="nav-link" id="tab--5" data-toggle="tab" href="#tab5" role="tab" aria-controls="tab5" aria-selected="true">Fees</a>
                                 </li> -->
@@ -273,7 +273,6 @@
 
 
                                     <div class="clever-curriculum">
-
 
                                       <div class="clever-faqs mb-30">
                                           <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
@@ -648,7 +647,9 @@
                                             <!-- <h4>Members</h4>
                                            -->
                                             <div class="map-area">
-                                                <div id="googleMap"></div>
+                                                <div id="googleMap">
+                                                    {!! $map['html'] !!}
+                                                </div>
                                               </div>
 
                                         </div>
@@ -911,7 +912,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="customjs/active.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
-    <script src="js/google-map/map-active.js"></script>
+    <script src="customjs/google-map/map-active.js"></script>
 </body>
 
 </html>

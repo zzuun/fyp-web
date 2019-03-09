@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Institute;
+use GMaps;
 
 class pageController extends Controller
 {
@@ -29,7 +30,15 @@ class pageController extends Controller
       ->select('institutes.name', 'addresses.website','institutes.id',
       'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city')
       ->get();
-      return view('institute')->withDetails($result);
+
+      $config = array();
+      $config['map_height'] = "500px";
+      $config['center'] = 'Clifton, Karachi';
+      $config['scrollwheel'] = false;
+      GMaps::initialize($config);
+      $map = GMaps::create_map();
+
+      return view('institute')->with('details',$result)->with('map',$map);
     }
     public function compare()
     {
