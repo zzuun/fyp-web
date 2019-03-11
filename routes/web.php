@@ -18,10 +18,6 @@ Route::get('/',function(){
 
 });
 
-Route::get('/search',function(){
-    return view('searchFilters');
-});
-
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/compare','pageController@compare')->name('page.compare');

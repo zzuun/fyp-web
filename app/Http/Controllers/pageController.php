@@ -20,6 +20,7 @@ class pageController extends Controller
       ,'degrees.fees','degrees.duration','degrees.creditHours','degrees.shiftMorning','institutes.scholarship'
       ,'degrees.shiftAfternoon','addresses.website','institutes.principal_name','addresses.phone_number')
       ->get();
+      $inc = DB::table('degrees')->where('degrees.id',$request->degreeid)->increment('numberOfViews');
       return view('degree')->withDetails($result);
     }
     public function institute(Request $request)

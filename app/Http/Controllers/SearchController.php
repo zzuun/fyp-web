@@ -8,13 +8,6 @@ use App\Address;
 use App\Degree;
 class SearchController extends Controller
 {
-    public function getInstitutes(){
-
-        $institutes= Institute::all();
-        return view('searchFilters')->withDetails($institutes);
-
-    }
-
     public function filter(Degree $degrees )
     {
 
@@ -48,7 +41,7 @@ class SearchController extends Controller
           // $group_filter = implode("','",$_POST["group"]);
           for ($i=0; $i < sizeof($_POST["group"]) ; $i++) {
               // ->where('institutes.name','LIKE','%'.$key.'%')
-            $degrees->orwhere('degrees.name', 'like','%'.$_POST["group"][$i].'%');
+            $degrees->orwhere('degrees.name', 'like',$_POST["group"][$i].'%');
           }
        }
 
@@ -82,7 +75,7 @@ class SearchController extends Controller
 
        }
 
-       $results = $degrees->paginate(4);
+       $results = $degrees->get();
 
        $htmlOutput='';
        if($results->count()>0)
@@ -151,12 +144,12 @@ class SearchController extends Controller
 
             $htmlOutput.="<h1>No Instiututes Found</h1>";
         }
-        if ($results->hasMorePages()) {
-          $htmlOutput.=
-          '<div class="pagination-center">'.
-             $results->links()
-          .'</div>';
-     }
+     //    if ($results->hasMorePages()) {
+     //      $htmlOutput.=
+     //      '<div class="pagination-center">'.
+     //         $results->links()
+     //      .'</div>';
+     // }
         return ($htmlOutput);
 
     }
