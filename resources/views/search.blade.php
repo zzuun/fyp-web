@@ -225,7 +225,7 @@
                                     <div class="slidecontainer">
                                         <input type="range" min="10000" max="100000" step="1000" value="10000" class="slider fees-range common-selector" id="fees-min-range">
                                         <p>Min Range: <span id="min"></span></p>
-                                        <input type="range" min="10000" max="100000" step="1000" value="100000" class="slider fees-range common-selector" id="fees-max-range">
+                                        <input type="range" min="10000" max="200000" step="1000" value="200000" class="slider fees-range common-selector" id="fees-max-range">
                                         <p>Max Range: <span id="max"></span></p>
                                     </div>
                               </div>
@@ -373,6 +373,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
+
 
 
 

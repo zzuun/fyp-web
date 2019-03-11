@@ -38,9 +38,7 @@ class SearchController extends Controller
 
        if(isset($_POST["group"]))
        {
-          // $group_filter = implode("','",$_POST["group"]);
           for ($i=0; $i < sizeof($_POST["group"]) ; $i++) {
-              // ->where('institutes.name','LIKE','%'.$key.'%')
             $degrees->orwhere('degrees.name', 'like',$_POST["group"][$i].'%');
           }
        }
@@ -86,17 +84,15 @@ class SearchController extends Controller
                 $htmlOutput.=
                 '<div class="col-12">
                     <div class="boxstyle2" style="cursor: pointer;">
-                        <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms">
+                        <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms" >
 
                             <!-- Course Content -->
-                            <div class="course-content" onclick="location.href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'"">
+                            <div class="course-content">
                                 <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">
                                     <h4>'.$result->degreeName.'</h4>
 
                                     <div class="meta d-flex align-items-center">
                                         <a href="/institute?instituteID='.$result->instituteID.'"">'.$result->name.'</a>
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                        <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'"">'.$result->degreeName.'</a>
                                     </div>
                                     <ul>
                                     <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>'.$result->phoneNumber.'</span>

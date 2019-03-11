@@ -97,7 +97,9 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="/degree?instituteid={{$details[0]->id}}&degreeid={{$degree[0]->id}}">{{$degree[0]->name}}</a></li>
+                <?php if (isset($degree)): ?>
+                    <li class="breadcrumb-item"><a href="/degree?instituteid={{$details[0]->id}}&degreeid={{$degree[0]->id}}">{{$degree[0]->name}}</a></li>
+                <?php endif; ?>
                 <li class="breadcrumb-item active" aria-current="page">{{$details[0]->name}}</li>
             </ol>
         </nav>

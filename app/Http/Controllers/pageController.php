@@ -25,7 +25,13 @@ class pageController extends Controller
     }
     public function institute(Request $request)
     {
-      $degree = DB::table('degrees')->where('degrees.id',$request->degreeid)->select('degrees.name','degrees.id')->get();
+      $degree;
+      if (isset($request->degreeid)) {
+        $degree = DB::table('degrees')->where('degrees.id',$request->degreeid)->select('degrees.name','degrees.id')->get();
+      }
+      else {
+        $degree = null;
+      }
       $result = DB::table('institutes')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$request->instituteID)
