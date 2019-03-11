@@ -235,8 +235,8 @@ function success(position) {
          console.log('Error:', status);
      } else {
          console.log(response);
-         // $("#distance").text(response.rows[0].elements[0].distance.text).show();
-         // $("#duration").text(response.rows[0].elements[0].duration.text).show();
+         $("#distance").text(response.rows[0].elements[0].distance.text).show();
+         $("#duration").text(response.rows[0].elements[0].duration.text).show();
      }
  });
 }
@@ -253,6 +253,7 @@ var infowindow = new google.maps.InfoWindow({
         });
 var marker = new google.maps.Marker({
     position: latlng,
+    icon: 'img/core-img/marker.png',
     animation: google.maps.Animation.DROP,
     title: instituteName
 });

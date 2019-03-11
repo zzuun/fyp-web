@@ -42,6 +42,15 @@ class SearchController extends Controller
 
        }
 
+       if(isset($_POST["group"]))
+       {
+          // $group_filter = implode("','",$_POST["group"]);
+          for ($i=0; $i < sizeof($_POST["group"]) ; $i++) {
+              // ->where('institutes.name','LIKE','%'.$key.'%')
+            $degrees->orwhere('degrees.name', 'like','%'.$_POST["group"][$i].'%');
+          }
+       }
+
       if(isset($_POST["hostel"]))
        {
            $value=$_POST["hostel"];

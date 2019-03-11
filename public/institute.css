@@ -1815,35 +1815,35 @@ textarea:focus {
       line-height: 1.9; }
       .clever-members .about-members p:last-child {
         margin-bottom: 0; }
-  .clever-members .all-instructors {
-    padding: 40px 40px 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
-    @media only screen and (max-width: 767px) {
-      .clever-members .all-instructors {
-        padding: 30px 30px 0; } }
-    .clever-members .all-instructors h4 {
-      margin-bottom: 25px;
-      display: block; }
-    .clever-members .all-instructors .single-instructor {
-      position: relative;
-      z-index: 1;
-      background-color: #f7f7f7;
-      border-radius: 6px; }
-      .clever-members .all-instructors .single-instructor .instructor-thumb {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 80px;
-        flex: 0 0 80px;
-        width: 80px;
-        max-width: 80px;
-        height: 80px; }
-      .clever-members .all-instructors .single-instructor .instructor-info {
-        padding-left: 25px; }
-        .clever-members .all-instructors .single-instructor .instructor-info h5 {
-          font-size: 18px;
-          margin-bottom: 5px; }
-          @media only screen and (max-width: 767px) {
-            .clever-members .all-instructors .single-instructor .instructor-info h5 {
-              font-size: 14px; } }
+        .clever-members .about-members .curriculum-list li {
+              display: block;
+              margin-bottom: 10px;
+              font-family: "Raleway", sans-serif;
+              font-size: 14px;
+              font-weight: 400;
+              color: rgba(0, 0, 0, 0.5); }
+              .clever-members .about-members .curriculum-list li:last-child {
+                margin-bottom: 0; }
+              .clever-members .about-members .curriculum-list li i {
+                color: #3762f0;
+                margin-right: 5px;
+                display: inline-block; }
+              .clever-members .about-members .curriculum-list li ul {
+                display: block;
+                margin-top: 10px;
+                padding-left: 25px; }
+                .clever-members .about-members .curriculum-list li ul li {
+                  margin-bottom: 0;
+                  display: -webkit-box;
+                  display: -ms-flexbox;
+                  display: flex;
+                  -webkit-box-pack: justify;
+                  -ms-flex-pack: justify;
+                  justify-content: space-between;
+                  padding: 10px 0;
+                  border-bottom: 1px solid #ebebeb; }
+                  .clever-members .about-members .curriculum-list li ul li span span {
+                    text-decoration: underline; }
         .clever-members .all-instructors .single-instructor .instructor-info span {
           font-weight: 400;
           color: rgba(0, 0, 0, 0.4);

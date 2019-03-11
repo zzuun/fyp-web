@@ -271,7 +271,7 @@
                           </div>
 
                           <!-- Degree Group -->
-                          <!-- <div class="panel single-accordion8">
+                          <div class="panel single-accordion8">
                               <h6>
                                   <a role="button" aria-expanded="true" aria-controls="collapseEight" class="collapsed"
                                   data-parent="#accordion" data-toggle="collapse" href="#collapseEight">Search By Degree Group
@@ -281,19 +281,23 @@
                               </h6>
                               <div id="collapseEight" class="accordion-content collapse">
                                 <label  style="word-wrap:break-word">
-                                    <input id="checkid"  type="checkbox" value="test" />Arts Group
+                                    <input class="common-selector group"  type="checkbox" value="FSC" />FSC
                                  </label>
 
                                   <label  style="word-wrap:break-word">
-                                    <input id="checkid"  type="checkbox" value="test" />Science Group
+                                    <input class="common-selector group"  type="checkbox" value="ICS" />ICS
                                  </label>
 
                                  <label  style="word-wrap:break-word">
-                                     <input id="checkid"  type="checkbox" value="test" />Computer Science Group
+                                     <input class="common-selector group"  type="checkbox" value="FA" />FA
                                   </label>
 
+                                  <label  style="word-wrap:break-word">
+                                      <input class="common-selector group"  type="checkbox" value="ICOM" />ICOM
+                                   </label>
+
                               </div>
-                          </div> -->
+                          </div>
 
                       </div>
 
@@ -451,10 +455,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var maxfees = $('#fees-max-range').val();
             var minmarks = $('#marks-min-range').val();
             var maxmarks= $('#marks-max-range').val();
+            var group = get_filter('group');
                 $.ajax({
                     url:"/search",
                     method:"POST",
-                    data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees, _token: "{{csrf_token()}}"},
+                    data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
                        $('#degreeResultsArea').html(data);

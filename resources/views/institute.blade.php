@@ -656,6 +656,19 @@
                                         <div class="about-members mb-30">
                                           <h4> Location </h4>
                                           <p>{{$details[0]->location}}</p>
+                                          <div class="curriculum-list">
+                                            <ul>
+                                              <li>
+                                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> Estimated Time: </span>
+                                                <span><b id="duration"></b></span>
+                                              </li>
+
+                                                <li>
+                                                  <span><i class="fa fa-map-pin"  aria-hidden="true"></i> Distance From Current Location: </span>
+                                                  <span><b id="distance"></b></span>
+                                                </li>
+                                              </ul>
+                                              </div>
                                       </div>
 
 
