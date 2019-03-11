@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Input;
 
 Route::get('/',function(){
     return view('search');
-
-});
+})->name('page.main');
 
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');

@@ -25,6 +25,7 @@ class pageController extends Controller
     }
     public function institute(Request $request)
     {
+      $degree = DB::table('degrees')->where('degrees.id',$request->degreeid)->select('degrees.name','degrees.id')->get();
       $result = DB::table('institutes')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$request->instituteID)
@@ -32,7 +33,7 @@ class pageController extends Controller
       'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city',
       'addresses.lat','addresses.lng')
       ->get();
-      return view('institute')->with('details',$result);
+      return view('institute')->with('details',$result)->with('degree',$degree);
     }
 
     public function compare()

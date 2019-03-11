@@ -91,7 +91,15 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-
+    <div class="breadcumb-area">
+        <!-- Breadcumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
+            </ol>
+        </nav>
+    </div>
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Single Course Intro Start ##### -->
@@ -423,7 +431,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="course-sidebar">
                         <!-- Buy Course -->
-                        <a href="/institute?instituteID={{$details[0]->instituteid}}" class="btn clever-btn mb-30 w-100">Visit Institute Profile</a>
+                        <a href="/institute?instituteID={{$details[0]->instituteid}}&degreeid={{$details[0]->degreeid}}" class="btn clever-btn mb-30 w-100">Visit Institute Profile</a>
 
                         <!-- Widget -->
                         <div class="sidebar-widget">
