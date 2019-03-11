@@ -21,7 +21,8 @@ class SearchController extends Controller
        $degrees=$degrees->newQuery();
        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
-       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber');
+       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
+       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber')->orderby('numberOfViews','desc');
        if(isset($_POST["area"]))
        {
           $area_filter = implode("','",$_POST["area"]);
@@ -81,7 +82,7 @@ class SearchController extends Controller
 
        }
 
-       $results = $degrees->orderby('numberOfViews','desc')->get();
+       $results = $degrees->paginate(4);
 
        $htmlOutput='';
        if($results->count()>0)
@@ -145,12 +146,17 @@ class SearchController extends Controller
                     </div>
                 </div>';
            }
-        }
+         }
         else{
 
             $htmlOutput.="<h1>No Instiututes Found</h1>";
         }
-
+        if ($results->hasMorePages()) {
+          $htmlOutput.=
+          '<div class="pagination-center">'.
+             $results->links()
+          .'</div>';
+     }
         return ($htmlOutput);
 
     }

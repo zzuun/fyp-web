@@ -268,6 +268,7 @@ function toggleBounce() {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
+marker.setAnimation(google.maps.Animation.BOUNCE);
 
 // To add the marker to the map, call setMap();
 marker.setMap(map);
