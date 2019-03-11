@@ -16,7 +16,6 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="institute.css">
-      {!! $map['js'] !!}
 
 </head>
 
@@ -649,7 +648,7 @@
                                            -->
                                             <div class="map-area">
                                                 <div id="googleMap">
-                                                    {!! $map['html'] !!}
+                                                  {{ $details[0]->lat }}
                                                 </div>
                                               </div>
 
@@ -901,6 +900,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!-- ##### Footer Area End ##### -->
 
+    <script>
+        var lat = {!! $details[0]->lat !!};
+        var lng = {!! $details[0]->lng !!};
+    </script>
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
@@ -912,8 +915,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso    "></script> -->
-    <!-- <script src="customjs/google-map/map-active.js"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso    "></script>
+    <script src="customjs/google-map/map-active.js"></script>
 </body>
 
 </html>

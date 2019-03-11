@@ -28,11 +28,10 @@ class pageController extends Controller
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$request->instituteID)
       ->select('institutes.name', 'addresses.website','institutes.id',
-      'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city')
+      'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city',
+      'addresses.lat','addresses.lng')
       ->get();
-
-
-      return view('institute')->with('details',$result)->with('map',$map);
+      return view('institute')->with('details',$result);
     }
     public function compare()
     {
