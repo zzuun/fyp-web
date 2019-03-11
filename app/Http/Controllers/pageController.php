@@ -31,12 +31,6 @@ class pageController extends Controller
       'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city')
       ->get();
 
-      $config = array();
-      $config['map_height'] = "500px";
-      $config['center'] = 'Clifton, Karachi';
-      $config['scrollwheel'] = false;
-      GMaps::initialize($config);
-      $map = GMaps::create_map();
 
       return view('institute')->with('details',$result)->with('map',$map);
     }

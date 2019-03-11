@@ -475,8 +475,8 @@
                             @php
                               $result =  DB::table('degrees')
                               ->join('institutes','institutes.id','degrees.institute_id')
-                              ->where('institutes.id',$details[0]->instituteid)
-                              ->where('degrees.name','!=',$details[0]->degreeName)
+                              ->where('institutes.id','!=',$details[0]->instituteid)
+                              ->where('degrees.name',$details[0]->degreeName)
                               ->select('degrees.name as degreeName','institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid')
                               ->orderby('numberOfViews','desc')->limit(3)->get();
                             @endphp
