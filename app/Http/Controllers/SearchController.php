@@ -131,11 +131,6 @@ class SearchController extends Controller
                                         </a>
                                     </div>
                                 </div>
-                                <div class="course-fee2 h-100">
-                                    <a href="index.html">
-                                        <i class="fa fa-location-arrow" aria-hidden="true"><abbr title="12 kms away from your location">12kms</abbr></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 var map;
+var dis;
 var latlng = new google.maps.LatLng(lat, lng);
 var stylez = [
     {
@@ -177,7 +178,7 @@ var stylez = [
     }
 ];
 var mapOptions = {
-    zoom: 14,
+    zoom: 16,
     center: latlng,
     scrollwheel: false,
     scaleControl: false,
@@ -187,22 +188,88 @@ var mapOptions = {
     }
 };
 map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-var geocoder_map = new google.maps.Geocoder();
-var address = 'New York, USA';
-geocoder_map.geocode({
-    'address': address
-}, function (results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            icon: 'img/core-img/pin.png',
-            position: map.getCenter()
+// var geocoder_map = new google.maps.Geocoder();
+// var address = 'New York, USA';
+// geocoder_map.geocode({
+//     'address': address
+// }, function (results, status) {
+//     if (status == google.maps.GeocoderStatus.OK) {
+//         map.setCenter(results[0].geometry.location);
+//         var marker = new google.maps.Marker({
+//             map: map,
+//             icon: 'img/core-img/pin.png',
+//             position: map.getCenter()
+//         });
+//     } else {
+//         alert("Geocode was not successful for the following reason: " + status);
+//     }
+// });
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success,fail);
+  }else {
+    alert("Browser not supported");
+  }
+}
+
+function success(position) {
+  var currentLat = position.coords.latitude;
+  var currentLng = position.coords.longitude;
+  // console.log(currentLat);
+  // console.log(currentLng);
+  var from = new google.maps.LatLng(currentLat, currentLng);
+  // var distance = google.maps.geometry.spherical.computeDistanceBetween(latlng, from);
+  //               alert(distance/1000);//In metres
+  var distanceService = new google.maps.DistanceMatrixService();
+  distanceService.getDistanceMatrix({
+     origins: [from],
+     destinations: [latlng],
+     travelMode: google.maps.TravelMode.DRIVING,
+     unitSystem: google.maps.UnitSystem.METRIC,
+     durationInTraffic: true,
+     avoidHighways: false,
+     avoidTolls: false
+ },
+ function (response, status) {
+     if (status !== google.maps.DistanceMatrixStatus.OK) {
+         console.log('Error:', status);
+     } else {
+         console.log(response);
+         // $("#distance").text(response.rows[0].elements[0].distance.text).show();
+         // $("#duration").text(response.rows[0].elements[0].duration.text).show();
+     }
+ });
+}
+
+function fail() {
+  alert("Error While Fetching your location");
+}
+
+getCurrentLocation();
+
+
+var infowindow = new google.maps.InfoWindow({
+          content: instituteName
         });
-    } else {
-        alert("Geocode was not successful for the following reason: " + status);
-    }
+var marker = new google.maps.Marker({
+    position: latlng,
+    animation: google.maps.Animation.DROP,
+    title: instituteName
 });
+marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+marker.addListener('click', toggleBounce);
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+// To add the marker to the map, call setMap();
+marker.setMap(map);
 var mapType = new google.maps.StyledMapType(stylez, {
     name: "Grayscale"
 });

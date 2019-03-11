@@ -648,7 +648,6 @@
                                            -->
                                             <div class="map-area">
                                                 <div id="googleMap">
-                                                  {{ $details[0]->lat }}
                                                 </div>
                                               </div>
 
@@ -656,9 +655,8 @@
 
                                         <div class="about-members mb-30">
                                           <h4> Location </h4>
-                                          <p>National University of Sciences and Technology. NUST Campus, H-12, Islamabad, Pakistan.</p>
+                                          <p>{{$details[0]->location}}</p>
                                       </div>
-
 
 
                                     </div>
@@ -901,6 +899,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### Footer Area End ##### -->
 
     <script>
+        var instituteName = "{!! $details[0]->name !!}";
         var lat = {!! $details[0]->lat !!};
         var lng = {!! $details[0]->lng !!};
     </script>
@@ -915,7 +914,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso    "></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso&libraries=geometry"></script>
     <script src="customjs/google-map/map-active.js"></script>
 </body>
 
