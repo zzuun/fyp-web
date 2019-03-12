@@ -154,12 +154,12 @@
                               </a></h6>
                               <div id="collapseTwo" class="accordion-content collapse">
                                 @php
-                                  $areas= App\Address::where('city','Lahore')->pluck('subarea');
+                                  $areas= App\Address::select('subarea')->distinct()->get();
                                 @endphp
 
                                 @foreach($areas as $area)
                                   <label  style="word-wrap:break-word">
-                                    <input class="common-selector area" type="checkbox" value="{{$area}}"/>{{$area}}
+                                    <input class="common-selector area" type="checkbox" value="{{$area->subarea}}"/>{{$area->subarea}}
                                   </label>
                                 @endforeach
 
@@ -176,14 +176,16 @@
                                   <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
                                   </a>
                               </h6>
-                              <div id="collapseThree" class="accordion-content collapse">
-                                <label  style="word-wrap:break-word">
-                                    <input class="common-selector sector" type="checkbox" value="government" />Government
-                                 </label>
+                              @php
+                                $sector= App\Institute::select('sector')->distinct()->get();
+                              @endphp
 
-                                  <label  style="word-wrap:break-word">
-                                    <input class="common-selector sector" type="checkbox" value="private" />Private
-                                 </label>
+                              <div id="collapseThree" class="accordion-content collapse">
+                              @foreach($sector as $s)
+                                <label  style="word-wrap:break-word">
+                                  <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/>{{$s->sector}}
+                                </label>
+                              @endforeach
                               </div>
                           </div>
 

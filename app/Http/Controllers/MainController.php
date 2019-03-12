@@ -85,6 +85,12 @@ class MainController extends Controller
       if ($request->input('coEducation')) {
         $degree->where("institutes.coEducation",(int)$request->input('coEducation'));
       }
+      if($request->input('group'))
+      {
+         for ($i=0; $i < sizeof($request->input('group')) ; $i++) {
+           $degree->orwhere('degrees.name', 'like',$request->input('group')[$i].'%');
+         }
+      }
       if ($request->input('transportation')) {
         $degree->where("institutes.transportation",(int)$request->input('transportation'));
       }
