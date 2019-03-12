@@ -568,8 +568,8 @@ $("#dollar").on("click", function(){
      document.getElementById("fees").innerHTML="{{$res}}";
    }
   else {
-    <?php $res = currency($details[0]->fees,'PKR','USD') ?>
-    document.getElementById("fees").innerHTML="{{$res}}";
+    <?php $res = currency($details[0]->fees,'PKR','USD',false) ?>
+    document.getElementById("fees").innerHTML="~ ${{(int)$res}}";
   }
 });
 $("#riyal").on("click", function(){
@@ -579,8 +579,8 @@ $("#riyal").on("click", function(){
      document.getElementById("fees").innerHTML="{{$res}}";
    }
   else {
-    <?php $res = currency($details[0]->fees,'PKR','SAR') ?>
-    document.getElementById("fees").innerHTML="{{$res}}";
+    <?php $res = currency($details[0]->fees,'PKR','SAR',false) ?>
+    document.getElementById("fees").innerHTML="~ {{(int)$res}} ﷼";
   }
 });
 $("#pound").on("click", function(){
@@ -590,8 +590,8 @@ $("#pound").on("click", function(){
      document.getElementById("fees").innerHTML="{{$res}}";
    }
   else {
-    <?php $res = currency($details[0]->fees,'PKR','GBP') ?>
-    document.getElementById("fees").innerHTML="{{$res}}";
+    <?php $res = currency($details[0]->fees,'PKR','GBP',false) ?>
+    document.getElementById("fees").innerHTML="~ {{(int)$res}} £";
   }
 });
 

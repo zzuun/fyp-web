@@ -668,6 +668,9 @@
                                                   <span><i class="fa fa-map-pin"  aria-hidden="true"></i> Distance From Current Location: </span>
                                                   <span><b id="distance"></b></span>
                                                 </li>
+                                                <li>
+                                                <input type="button" onclick="getDirections()" value="Get Directions">
+                                                </li>
                                               </ul>
                                               </div>
                                       </div>

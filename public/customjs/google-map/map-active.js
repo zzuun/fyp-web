@@ -1,5 +1,8 @@
 var map;
 var dis;
+var currentLat;
+var currentLng;
+var from;
 var latlng = new google.maps.LatLng(lat, lng);
 var stylez = [
     {
@@ -181,29 +184,14 @@ var mapOptions = {
     zoom: 16,
     center: latlng,
     scrollwheel: false,
-    scaleControl: false,
-    disableDefaultUI: true,
+    scaleControl: true,
+    disableDefaultUI: false,
+    streetViewControl: false,
     mapTypeControlOptions: {
-        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'gMap']
+        mapTypeIds: ['gMap',google.maps.MapTypeId.ROADMAP]
     }
 };
 map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-// var geocoder_map = new google.maps.Geocoder();
-// var address = 'New York, USA';
-// geocoder_map.geocode({
-//     'address': address
-// }, function (results, status) {
-//     if (status == google.maps.GeocoderStatus.OK) {
-//         map.setCenter(results[0].geometry.location);
-//         var marker = new google.maps.Marker({
-//             map: map,
-//             icon: 'img/core-img/pin.png',
-//             position: map.getCenter()
-//         });
-//     } else {
-//         alert("Geocode was not successful for the following reason: " + status);
-//     }
-// });
 function getCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success,fail);
@@ -211,15 +199,36 @@ function getCurrentLocation() {
     alert("Browser not supported");
   }
 }
+function getDirections() {
+  toggleBounce();
+  var directionsService = new google.maps.DirectionsService();
+  var directionsDisplay = new google.maps.DirectionsRenderer();
+  from = new google.maps.LatLng(currentLat, currentLng);
+  directionsDisplay.setMap(map);
+  directionsDisplay.setOptions( { suppressMarkers: true } );
+  var request = {
+    origin: from,
+    destination: latlng,
+    travelMode: google.maps.TravelMode.DRIVING,
+    unitSystem: google.maps.UnitSystem.METRIC,
+    durationInTraffic: true,
+    avoidHighways: false,
+    avoidTolls: false
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      createMarker(from,'img/core-img/pin.png');
+      directionsDisplay.setDirections(result);
+    }
+  });
+}
 
 function success(position) {
-  var currentLat = position.coords.latitude;
-  var currentLng = position.coords.longitude;
-  // console.log(currentLat);
-  // console.log(currentLng);
-  var from = new google.maps.LatLng(currentLat, currentLng);
-  // var distance = google.maps.geometry.spherical.computeDistanceBetween(latlng, from);
-  //               alert(distance/1000);//In metres
+  //get current location of user
+  currentLat = position.coords.latitude;
+  currentLng = position.coords.longitude;
+  from = new google.maps.LatLng(currentLat, currentLng);
+  //calculating the distance from user's location to institute
   var distanceService = new google.maps.DistanceMatrixService();
   distanceService.getDistanceMatrix({
      origins: [from],
@@ -234,7 +243,6 @@ function success(position) {
      if (status !== google.maps.DistanceMatrixStatus.OK) {
          console.log('Error:', status);
      } else {
-         console.log(response);
          $("#distance").text(response.rows[0].elements[0].distance.text).show();
          $("#duration").text(response.rows[0].elements[0].duration.text).show();
      }
@@ -247,13 +255,32 @@ function fail() {
 
 getCurrentLocation();
 
+function createMarker(coords,img) {
+  var pic = {
+    url: img, // url
+    scaledSize: new google.maps.Size(20, 20), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(10, 10) // anchor
+  };
+  var marker = new google.maps.Marker({
+      position: coords,
+      icon: pic,
+      map:map
+  });
+}
+var iconx = {
+    url: "img/core-img/marker.png", // url
+    scaledSize: new google.maps.Size(100, 100), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(50, 90) // anchor
+};
 
 var infowindow = new google.maps.InfoWindow({
           content: instituteName
         });
 var marker = new google.maps.Marker({
     position: latlng,
-    icon: 'img/core-img/marker.png',
+    icon: iconx,
     animation: google.maps.Animation.DROP,
     title: instituteName
 });
