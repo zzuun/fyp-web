@@ -246,7 +246,7 @@
                                     <div class="slidecontainer">
                                       <input type="range" min="330" max="1100" step="10" value="330" class="slider common-selector" id="marks-min-range">
                                       <p>Minimum Marks: <span id="marks-min"></span></p>
-                                      <input type="range" min="330" max="1100" step="10" value="1100" class="slider common-selector" id="marks-max-range">
+                                      <input type="range" min="33" max="100" step="1" value="100" class="slider common-selector" id="marks-max-range">
                                       <p>Maximum Marks: <span id="marks-max"></span></p>
                                     </div>
                               </div>

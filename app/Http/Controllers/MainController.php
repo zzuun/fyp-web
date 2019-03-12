@@ -76,7 +76,7 @@ class MainController extends Controller
       $degree->join('institutes','institutes.id','degrees.institute_id')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews',
-      'institutes.name as instituteName','addresses.location','addresses.city','addresses.subarea','institutes.id as intituteID')
+      'institutes.name as instituteName','addresses.location','addresses.city','addresses.subarea','institutes.id as instituteID')
       ->orderby('numberOfViews','desc');
       if ($request->input('key')) {
         $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
