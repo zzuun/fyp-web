@@ -267,6 +267,10 @@
                                   <label  style="word-wrap:break-word">
                                     <input id="hostel" class="common-selector hostel" type="checkbox" value="1" />Hostel
                                  </label>
+
+                                 <label  style="word-wrap:break-word">
+                                   <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" />Co-Education
+                                </label>
                               </div>
                           </div>
 
@@ -451,6 +455,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var sector = get_filter('sector');
             var affiliation = get_filter('affiliation');
             var hostel = get_filter('hostel');
+            var coedu = get_filter('coEducation');
             var transport = get_filter('transport');
             var minfees = $('#fees-min-range').val();
             var maxfees = $('#fees-max-range').val();
@@ -460,7 +465,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 $.ajax({
                     url:"/search",
                     method:"POST",
-                    data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
+                    data:{coEducation:coedu,area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
                        $('#degreeResultsArea').html(data);

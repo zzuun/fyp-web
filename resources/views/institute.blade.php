@@ -494,7 +494,7 @@
                                           $result = DB::table('degrees')
                                           ->join('institutes','institutes.id','degrees.institute_id')
                                           ->where('institutes.id',$details[0]->id)
-                                          ->select('degrees.name as degreeName')
+                                          ->select('degrees.name as degreeName','degrees.id', 'institutes.id as instituteID')
                                           ->get();
                                         @endphp
                                         <!-- Curriculum Level -->
@@ -504,7 +504,7 @@
                                                 <ul class="curriculum-list">
                                                   <ul>
                                                     <li>
-                                                      <span><i class="fa fa-dot-circle-o" aria-hidden="true"></i>{{$r->degreeName}}</span>
+                                                      <span><i class="fa fa-dot-circle-o" aria-hidden="true"></i><a href="/degree?degreeid={{$r->id}}&instituteid={{$r->instituteID}}">{{$r->degreeName}}</a></span>
                                                         <span></span>
                                                     </li>
                                                 </ul>

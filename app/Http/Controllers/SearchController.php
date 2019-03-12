@@ -48,15 +48,20 @@ class SearchController extends Controller
            $value=$_POST["hostel"];
            $value=(int)$value;
            $degrees->where("institutes.hostel",$value);
-
-
        }
+
        if(isset($_POST["transport"]))
        {
            $value=$_POST["transport"];
            $value=(int)$value;
            $degrees->where("institutes.transportation",$value);
+       }
 
+       if(isset($_POST["coEducation"]))
+       {
+           $value=$_POST["coEducation"];
+           $value=(int)$value;
+           $degrees->where("institutes.coEducation",$value);
        }
 
        if(isset($_POST["minfees"]) | isset($_POST["maxfees"]))
