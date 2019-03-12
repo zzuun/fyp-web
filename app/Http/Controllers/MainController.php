@@ -45,6 +45,7 @@ class MainController extends Controller
       'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
+      $inc = DB::table('degrees')->where('degrees.id',$degreeId)->increment('numberOfViews');
       return Response::json(array('data' => $result));
     }
     public function getInstitute(Request $request)
@@ -75,7 +76,8 @@ class MainController extends Controller
       $degree->join('institutes','institutes.id','degrees.institute_id')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews',
-      'institutes.name as instituteName','addresses.location','addresses.city','addresses.subarea');
+      'institutes.name as instituteName','addresses.location','addresses.city','addresses.subarea','institutes.id as intituteID')
+      ->orderby('numberOfViews','desc');
       if ($request->input('key')) {
         $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
       }
@@ -87,7 +89,8 @@ class MainController extends Controller
       }
       if($request->input('group'))
       {
-         for ($i=0; $i < sizeof($request->input('group')) ; $i++) {
+         $degree->where('degrees.name', 'like',$request->input('group')[0].'%');
+         for ($i=1; $i < sizeof($request->input('group')) ; $i++) {
            $degree->orwhere('degrees.name', 'like',$request->input('group')[$i].'%');
          }
       }
@@ -113,12 +116,13 @@ class MainController extends Controller
           $maxMarks = (int) $request->input('maxMarks');
           $degree->whereBetween("degrees.lastMerit",[33,$maxMarks]);
       }
-      if ($request->input('maxFees')) {
+      if ($request->input('maxFees') | $request->input('minFees')) {
           $maxfees = (int) $request->input('maxFees');
-          $degree->whereBetween("degrees.fees",[10000,$maxfees]);
+          $minfees = (int) $request->input('minFees');
+          $degree->whereBetween("degrees.fees",[$minfees,$maxfees]);
       }
 
-      return Response::json(array('data' => $degree->orderby('numberOfViews','desc')->get()));
+      return Response::json(array('data' => $degree->get()));
       // return  response()->json($degree->orderby('numberOfViews','desc')->get());
     }
 }

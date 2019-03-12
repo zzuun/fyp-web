@@ -200,13 +200,13 @@
                               </h6>
                               <div id="collapseFour" class="accordion-content collapse">
                                 @php
-                                    $affiliations= App\Institute::distinct()->pluck('affiliation');
+                                    $affiliations= App\Institute::select('affiliation')->distinct()->get();
 
                                 @endphp
                                 @foreach($affiliations as $affiliation)
                                   <label  style="word-wrap:break-word">
 
-                                      <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation}}" />{{$affiliation}}
+                                      <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation->affiliation}}" />{{$affiliation->affiliation}}
                                   </label>
                                 @endforeach
 

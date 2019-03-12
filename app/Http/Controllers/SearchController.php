@@ -38,7 +38,8 @@ class SearchController extends Controller
 
        if(isset($_POST["group"]))
        {
-          for ($i=0; $i < sizeof($_POST["group"]) ; $i++) {
+         $degrees->where('degrees.name', 'like',$_POST["group"][0].'%');
+          for ($i=1; $i < sizeof($_POST["group"]) ; $i++) {
             $degrees->orwhere('degrees.name', 'like',$_POST["group"][$i].'%');
           }
        }
@@ -74,7 +75,7 @@ class SearchController extends Controller
        {
            $minRange=(int) $_POST["minmarks"];
            $maxRange= (int) $_POST['maxmarks'];
-           $degrees->whereBetween("degrees.lastMerit",[33,$maxRange]);
+           $degrees->whereBetween("degrees.lastMerit",[0,$maxRange]);
 
        }
 
@@ -85,7 +86,6 @@ class SearchController extends Controller
        {
            foreach($results as $result)
            {
-
                 $htmlOutput.=
                 '<div class="col-12">
                     <div class="boxstyle2" style="cursor: pointer;">
