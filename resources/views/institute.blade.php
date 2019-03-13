@@ -279,7 +279,7 @@
                                           <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
 
                                               <!-- Single Accordian Area -->
-                                              <div class="panel single-accordion">
+                                              <!-- <div class="panel single-accordion">
                                                   <h6><a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion"
                                                     href="#collapseOne">Find by Location
                                                   <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -337,10 +337,10 @@
                                                                       </label>
 
                                                   </div>
-                                              </div>
+                                              </div> -->
 
                                               <!-- Single Accordian Area -->
-                                              <div class="panel single-accordion">
+                                              <!-- <div class="panel single-accordion">
                                                   <h6>
                                                       <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">Sort by Fees
                                                       <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -353,10 +353,10 @@
                                                           <p>Fee Range: <span id="demo"></span></p>
                                                         </div>
                                                   </div>
-                                              </div>
+                                              </div> -->
 
                                               <!-- Single Accordian Area -->
-                                              <div class="panel single-accordion">
+                                              <!-- <div class="panel single-accordion">
                                                   <h6>
                                                       <a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Sort by Govt/Private
                                                       <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -372,10 +372,10 @@
                                                         <input id="checkid"  type="checkbox" value="test" />Private
                                                      </label>
                                                   </div>
-                                              </div>
+                                              </div> -->
 
                                               <!-- Single Accordian Area -->
-                                              <div class="panel single-accordion">
+                                              <!-- <div class="panel single-accordion">
                                                   <h6>
                                                       <a role="button" aria-expanded="true" aria-controls="collapseFour" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseFour">Sort by Affiliation
                                                       <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -399,7 +399,7 @@
                                                          <input id="checkid"  type="checkbox" value="test" />HEC
                                                       </label>
                                                   </div>
-                                              </div>
+                                              </div> -->
                                           </div>
 
                                       </div>
