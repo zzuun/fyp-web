@@ -99,6 +99,12 @@ class SearchController extends Controller
                                 <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">
                                     <h4>'.$result->degreeName.'</h4>
 
+                              <div class="total-ratings d-flex float-right" align="right">
+                                <div class="ratings-text">
+                                  <img src="img/bg-img/t1.png" alt="">
+                                </div>
+                              </div>
+
                                     <div class="meta d-flex align-items-center">
                                         <a href="/institute?instituteID='.$result->instituteID.'"">'.$result->name.'</a>
                                     </div>
@@ -146,7 +152,8 @@ class SearchController extends Controller
          }
         else{
 
-            $htmlOutput.="<h1>No Instiututes Found</h1>";
+            // $htmlOutput.="<h1>No Instiututes Found</h1>";
+            $htmlOutput.='<img src="img/bg-img/noresult.png" alt="No Institute Found">';
         }
      //    if ($results->hasMorePages()) {
      //      $htmlOutput.=

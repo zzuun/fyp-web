@@ -46,4 +46,9 @@ class pageController extends Controller
     {
       return view('comparison');
     }
+
+    public function home()
+    {
+      return view('home');
+    }
 }

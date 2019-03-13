@@ -56,11 +56,11 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="">Home</a></li>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="">Home</a></li>
-                                        <li><a href="">Courses</a></li>
+                                        <li><a href="{{route('page.home')}}">Home</a></li>
+                                        <li><a href="{{route('page.compare')}}">Compare</a></li>
                                         <li><a href="">Single Courses</a></li>
                                         <li><a href="">Instructors</a></li>
                                         <li><a href="">Blog</a></li>

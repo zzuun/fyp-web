@@ -54,11 +54,11 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="">Home</a></li>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="">Home</a></li>
-                                        <li><a href="">Courses</a></li>
+                                        <li><a href="{{route('page.home')}}">Home</a></li>
+                                        <li><a href="{{route('page.home')}}">Compare</a></li>
                                         <li><a href="">Single Courses</a></li>
                                         <li><a href="">Instructors</a></li>
                                         <li><a href="">Blog</a></li>
@@ -95,7 +95,8 @@
         <!-- Breadcumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Intermediate</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
             </ol>
         </nav>
