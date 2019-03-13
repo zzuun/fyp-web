@@ -126,7 +126,7 @@
                         <div class="clever-main-menu">
                           <!-- Search Button -->
                           <div class="search-area">
-                              <form action="#" method="post">
+                              <form action="#" method="">
                                   <input type="search" name="search" id="search" placeholder="Search">
                                   <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                               </form>
@@ -449,10 +449,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    <script>
         $(document).ready(function()
         {
-
+          $('#search').keypress(function(){
+            filter_data();
+          });
           filter_data();
           function filter_data()
           {
+            // console.log(document.getElementById('search').value);
+            var search = document.getElementById('search').value;
             var area = get_filter('area');
             var sector = get_filter('sector');
             var affiliation = get_filter('affiliation');
@@ -467,7 +471,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 $.ajax({
                     url:"/search",
                     method:"POST",
-                    data:{coEducation:coedu,area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
+                    data:{search: search, coEducation:coedu,area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
                        $('#degreeResultsArea').html(data);
@@ -475,7 +479,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                     }
                 });
             }
-
             function get_filter(class_name)
             {
                 var filter = [];

@@ -16,6 +16,9 @@ class SearchController extends Controller
        ->join('addresses','institutes.id','=','addresses.institute_id')
        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
        'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber')->orderby('numberOfViews','desc');
+       if (isset($_POST["search"])) {
+         $degrees->where('degrees.name','LIKE','%'.$_POST["search"].'%');
+       }
        if(isset($_POST["area"]))
        {
           $area_filter = implode("','",$_POST["area"]);
