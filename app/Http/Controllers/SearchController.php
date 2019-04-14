@@ -15,139 +15,90 @@ class SearchController extends Controller
 
     }
 
-    public function filter(Degree $degrees )
+    public function filter(Request $request,Degree $degrees)
     {
 
-       $degrees=$degrees->newQuery();
-       $degrees->join('institutes','degrees.institute_id','=','institutes.id')
-       ->join('addresses','institutes.id','=','addresses.institute_id')
-       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber');
-       if(isset($_POST["area"]))
+    //    $degrees = $degrees->newQuery();
+    //    $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+    //    ->join('addresses','institutes.id','=','addresses.institute_id')
+    //    ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber');
+
+    $degrees = $degrees->newQuery();
+    $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+    ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation');
+
+       if(isset($_GET["area"]))
        {
-          $area_filter = implode("','",$_POST["area"]);
+          $area_filter = implode("','",$_GET["area"]);
           $degrees->whereRaw("addresses.subarea in ('".$area_filter."')");
        }
 
-       if(isset($_POST["sector"]))
+       if(isset($_GET["sector"]))
        {
-           $sector_filter = implode("','",$_POST["sector"]);
+           $sector_filter = implode("','",$_GET["sector"]);
            $degrees->whereRaw("institutes.sector in ('".$sector_filter."')");
 
        }
 
-       if(isset($_POST["affiliation"]))
+       if(isset($_GET["affiliation"]))
        {
-           $affiliation_filter = implode("','",$_POST["affiliation"]);
+           $affiliation_filter = implode("','",$_GET["affiliation"]);
            $degrees->whereRaw("institutes.affiliation in ('".$affiliation_filter."')");
 
        }
 
-      if(isset($_POST["hostel"]))
+      if(isset($_GET["hostel"]))
        {
-           $value=$_POST["hostel"];
+           $value=$_GET["hostel"];
            $value=(int)$value;
            $degrees->where("institutes.hostel",$value);
 
 
        }
-       if(isset($_POST["transport"]))
+       if(isset($_GET["transport"]))
        {
-           $value=$_POST["transport"];
+           $value=$_GET["transport"];
            $value=(int)$value;
            $degrees->where("institutes.transportation",$value);
 
        }
 
-       if(isset($_POST["minfees"]) | isset($_POST["maxfees"]))
+       if(isset($_GET["minfees"]) | isset($_GET["maxfees"]))
        {
-           $minRange=(int) $_POST["minfees"];
-           $maxRange= (int) $_POST['maxfees'];
+           $minRange=(int) $_GET["minfees"];
+           $maxRange= (int) $_GET['maxfees'];
            $degrees->whereBetween("degrees.fees",[$minRange,$maxRange]);
        }
-       if(isset($_POST["minmarks"]) | isset($_POST["maxmarks"]))
+       if(isset($_GET["minmarks"]) | isset($_GET["maxmarks"]))
        {
-           $minRange=(int) $_POST["minmarks"];
-           $maxRange= (int) $_POST['maxmarks'];
+           $minRange=(int) $_GET["minmarks"];
+           $maxRange= (int) $_GET['maxmarks'];
            $degrees->whereBetween("degrees.lastMerit",[33,$maxRange]);
 
        }
-
-       $results = $degrees->orderby('numberOfViews','desc')->get();
-
-       $htmlOutput='';
-       if($results->count()>0)
-       {
-           foreach($results as $result)
-           {
-
-                $htmlOutput.=
-                '<div class="col-12">
-                    <div class="boxstyle2" style="cursor: pointer;">
-                        <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms">
-
-                            <!-- Course Content -->
-                            <div class="course-content" onclick="location.href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'"">
-                                <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">
-                                    <h4>'.$result->degreeName.'</h4>
-
-                                    <div class="meta d-flex align-items-center">
-                                        <a href="/institute?instituteID='.$result->instituteID.'"">'.$result->name.'</a>
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                        <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'"">'.$result->degreeName.'</a>
-                                    </div>
-                                    <ul>
-                                    <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>'.$result->phoneNumber.'</span>
-                                    </ul>
-
-
-                                    <ul>
-                                    <span><i class="fa fa-location-arrow" aria-hidden="true" style="color: #e3d21b;"></i>'.$result->city.'</span>
-                                    </ul>
-
-
-
-                                    <ul>
-                                    <span><i class="fa fa-won" aria-hidden="true" style="color: #e3d21b;"></i>'.$result->affiliation.'</span>
-                                    </ul>
-
-
-                                    <ul>
-                                    <span><i class="fa fa-users" aria-hidden="true" style="color: #e3d21b;"></i>'.$result->sector.'</span>
-                                    </ul>
-
-                                </a>
-                            </div>
-                            <!-- Seat Rating Fee -->
-                            <div class="seat-rating-fee d-flex justify-content-between">
-                                <div class="seat-rating h-100 d-flex align-items-center">
-                                    <div class="seat">
-                                    <a >
-                                      <i onclick="myFunction(this);" class="fa fa-thumbs-up" style="font-size:23px;padding-top: 8px;"></i>
-                                    </a>
-                                    </div>
-                                    <div class="rating">
-                                        <a  href="wishlist.html">
-                                            <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="course-fee2 h-100">
-                                    <a href="index.html">
-                                        <i class="fa fa-location-arrow" aria-hidden="true"><abbr title="12 kms away from your location">12kms</abbr></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>';
-           }
-        }
-        else{
-
-            $htmlOutput.="<h1>No Instiututes Found</h1>";
+       $results = $degrees->paginate(2);
+       if($request->ajax())
+        {
+            return view('partialViews.searchResults',compact('results'))->render();
         }
 
-        return ($htmlOutput);
+        return view('search',compact('results'));
+
+    // $results=Degree::join('institutes','degrees.institute_id','=','institutes.id')
+    // ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation')
+    // ->where('institutes.sector','=','private')->paginate(5);
+
+    }
+
+    public function search(Degree $degrees)
+    {
+        $degrees=$degrees->newQuery();
+        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName','institutes.name','institutes.sector','institutes.affiliation');
+
+        $results=$degrees->paginate(2);
+
+        return view('search',compact('results'));
 
     }
 

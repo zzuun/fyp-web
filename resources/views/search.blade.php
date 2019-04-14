@@ -306,12 +306,19 @@
       <div class="popular-courses-area" style="padding-left:5%" >
 
 
-          <div class="container" id="degreeResultsArea" style="padding:0 4% 0 1%;">
-            <!--<div class="col-12">
+          <div class="container" style="padding:0 4% 0 1%;">
+            <div class="col-12">
               <div class="section-heading">
                   <h3>Best Institues For You</h3>
               </div>
-            </div>-->
+              <div class="container">
+
+                <section class="results">
+                  @include('partialViews.searchResults');
+                </section>
+
+              </div>
+            </div>
           </div>
       </div>
     </div>
@@ -436,65 +443,67 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </script> -->
 
    <script>
-        $(document).ready(function()
+      $(document).ready(function()
+      {
+
+
+        filter_data();
+        function filter_data()
         {
+          var area = get_filter('area');
+          var sector = get_filter('sector');
+          var affiliation = get_filter('affiliation');
+          var hostel = get_filter('hostel');
+          var transport = get_filter('transport');
+          var minfees = $('#fees-min-range').val();
+          var maxfees = $('#fees-max-range').val();
+          var minmarks = $('#marks-min-range').val();
+          var maxmarks= $('#marks-max-range').val();
+              $.ajax({
+                  url:"/apply",
+                  method:"GET",
+                  data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,maxfees:maxfees,minmarks:minmarks,maxmarks:maxmarks, _token: "{{csrf_token()}}"},
+                  success:function(data){
 
-          filter_data();
-          function filter_data()
+                    $('.results').html(data);
+                    
+                  }
+              });
+          }
+
+          function get_filter(class_name)
           {
-            var area = get_filter('area');
-            var sector = get_filter('sector');
-            var affiliation = get_filter('affiliation');
-            var hostel = get_filter('hostel');
-            var transport = get_filter('transport');
-            var minfees = $('#fees-min-range').val();
-            var maxfees = $('#fees-max-range').val();
-            var minmarks = $('#marks-min-range').val();
-            var maxmarks= $('#marks-max-range').val();
-                $.ajax({
-                    url:"/search",
-                    method:"POST",
-                    data:{area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees, _token: "{{csrf_token()}}"},
-                    success:function(data){
+              var filter = [];
+              $('.'+class_name+':checked').each(function(){
+                  filter.push($(this).val());
+              });
+              return filter;
+          }
 
-                       $('#degreeResultsArea').html(data);
-                       // $('#degreeResultsArea').load(data);
-                    }
-                });
-            }
+        $(document).on('click', '.pagination a', function(event)
+        {
+          event.preventDefault(); 
+          var page = $(this).attr('href').split('page=')[1];
+          fetch_data(page);
+          
+        });
 
-            function get_filter(class_name)
-            {
-                var filter = [];
-                $('.'+class_name+':checked').each(function(){
-                    filter.push($(this).val());
-                });
-                return filter;
-            }
+        function fetch_data(page)
+          {
+          $.ajax({
+              url:"/apply?page="+page,
+              success:function(data)
+              {
+                $('.results').html(data);
+              }
+          });
+          }
 
             $('.common-selector').click(function(){
                 filter_data();
             });
 
-
-           /* $('#price_range').slider({
-                range:true,
-                 min:10000,
-                max:100000,
-                values:[1000, 65000],
-                step:1000,
-                stop:function(event, ui)
-                {
-                    $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
-                    $('#hidden_minimum_price').val(ui.values[0]);
-                    $('#hidden_maximum_price').val(ui.values[1]);
-                    //filter_data();
-                }
-             });
-             */
-
-
-        });
+      });
     </script>
 
 </body>

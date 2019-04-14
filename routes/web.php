@@ -13,14 +13,8 @@
 
 use Illuminate\Support\Facades\Input;
 
-Route::get('/',function(){
-    return view('search');
-
-});
-
-Route::get('/search',function(){
-    return view('searchFilters');
-});
+Route::get('/search','SearchController@search');
+Route::get('/apply','SearchController@filter');
 
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
