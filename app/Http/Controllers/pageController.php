@@ -51,4 +51,9 @@ class pageController extends Controller
     {
       return view('home');
     }
+
+    public function timer()
+    {
+      return view('timer');
+    }
 }

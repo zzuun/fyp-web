@@ -55,31 +55,31 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="">Home</a></li>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="">Home</a></li>
-                                        <li><a href="">Courses</a></li>
-                                        <li><a href="">Single Courses</a></li>
-                                        <li><a href="">Instructors</a></li>
-                                        <li><a href="">Blog</a></li>
-                                        <li><a href="">Single Blog</a></li>
-                                        <li><a href="">Regular Page</a></li>
-                                        <li><a href="">Contact</a></li>
+                                        <li><a href="{{route('page.home')}}">Home</a></li>
+                                        <li><a href="{{route('page.timer')}}">Courses</a></li>
+                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
+                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
+                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
+                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
+                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
+                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="">Courses</a></li>
-                                <li><a href="">Instructors</a></li>
-                                <li><a href="">Blog</a></li>
-                                <li><a href="">Contact</a></li>
+                                <li><a href="{{route('page.timer')}}">Courses</a></li>
+                                <li><a href="{{route('page.timer')}}">Instructors</a></li>
+                                <li><a href="{{route('page.timer')}}">Blog</a></li>
+                                <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>
 
                             <!-- Search Button -->
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
-                                <a href="" class="btn active">Login</a>
+                                <a href="{{route('page.timer')}}" class="btn">Register</a>
+                                <a href="{{route('page.timer')}}" class="btn active">Login</a>
                             </div>
 
                         </div>
@@ -149,7 +149,7 @@
                                     <a class="nav-link" id="tab--3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="true">Reviews</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab--4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="true">Location</a>
+                                    <a class="nav-link" id="tab--4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="true">Location / Directions</a>
                                 </li>
                                 <!-- <li class="nav-item">
                                     <a class="nav-link" id="tab--5" data-toggle="tab" href="#tab5" role="tab" aria-controls="tab5" aria-selected="true">Fees</a>
@@ -670,7 +670,7 @@
                                                   <span><b id="distance"></b></span>
                                                 </li>
                                                 <li>
-                                                <input type="button" onclick="getDirections()" value="Get Directions">
+                                                <input class="clever-btn" type="button" onclick="getDirections()" value="Get Directions">
                                                 </li>
                                               </ul>
                                               </div>

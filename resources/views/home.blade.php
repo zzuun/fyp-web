@@ -67,23 +67,23 @@
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="comparisonc.html">Compare</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                          <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{{route('page.home')}}">Home</a></li>
+                                        <li><a href="{{route('page.compare')}}">Compare</a></li>
+                                        <li><a href="{{route('page.timer')}}">Wishlist</a></li>
+                                          <li><a href="{{route('page.timer')}}">Contact</a></li>
 
                                     </ul>
                                 </li>
                                 <li><a href="{{route('page.compare')}}">Compare</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('page.timer')}}">Wishlist</a></li>
+                                <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
+                                <a href="{{route('page.timer')}}" class="btn">Register</a>
 
-                                <a  href="onlyloginpage.html"class="btn">Login</a>
+                                <a  href="{{route('page.timer')}}"class="btn">Login</a>
                               </div>
                         </div>
                         <!-- Nav End -->

@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>{{$details[0]->degreeName}}</title>
+    <title>{{$details[0]->instituteName}}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -58,27 +58,27 @@
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.home')}}">Compare</a></li>
-                                        <li><a href="">Single Courses</a></li>
-                                        <li><a href="">Instructors</a></li>
-                                        <li><a href="">Blog</a></li>
-                                        <li><a href="">Single Blog</a></li>
-                                        <li><a href="">Regular Page</a></li>
-                                        <li><a href="">Contact</a></li>
+                                        <li><a href="{{route('page.compare')}}">Compare</a></li>
+                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
+                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
+                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
+                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
+                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
+                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="">Courses</a></li>
-                                <li><a href="">Instructors</a></li>
-                                <li><a href="">Blog</a></li>
-                                <li><a href="">Contact</a></li>
+                                <li><a href="{{route('page.timer')}}">Courses</a></li>
+                                <li><a href="{{route('page.timer')}}">Instructors</a></li>
+                                <li><a href="{{route('page.timer')}}">Blog</a></li>
+                                <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>
 
                             <!-- Search Button -->
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
-                                <a href="" class="btn active">Login</a>
+                                <a href="{{route('page.timer')}}" class="btn">Register</a>
+                                <a href="{{route('page.timer')}}" class="btn active">Login</a>
                             </div>
 
                         </div>
@@ -97,6 +97,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Intermediate</a></li>
+                <li class="breadcrumb-item"><a href="/institute?instituteID={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
             </ol>
         </nav>
@@ -168,7 +169,7 @@
                                                   </li>
                                                   <li>
                                                       <span><i class="fa fa-th-list" aria-hidden="true"></i> Admission Criteria </span>
-                                                      <span>Intermediate Degree</span>
+                                                      <span>Matriculation Degree</span>
                                                   </li>
                                                 </ul>
                                           </li>
@@ -223,17 +224,22 @@
                                                                     <div id="collapseOne" class="accordion-content collapse">
                                                                       <p>
                                                                       <label  style="word-wrap:break-word">
-                                                                          <input id="dollar"  type="checkbox" value="test" />USD $
+                                                                        <input id="rupee"  name="curr" type="radio" checked value="test" />PKR ₨
+                                                                     </label>
+                                                                   </p>
+                                                                      <p>
+                                                                      <label  style="word-wrap:break-word">
+                                                                          <input id="dollar" name="curr" type="radio" value="test" />USD $
                                                                        </label>
                                                                      </p>
                                                                        <p>
                                                                         <label  style="word-wrap:break-word">
-                                                                          <input id="riyal"  type="checkbox" value="test" />Saudi Riyal ﷼
+                                                                          <input id="riyal"  name="curr" type="radio" value="test" />Saudi Riyal ﷼
                                                                        </label>
                                                                      </p>
                                                                        <p>
                                                                        <label  style="word-wrap:break-word">
-                                                                         <input id="pound"  type="checkbox" value="test" />UK £
+                                                                         <input id="pound"  name="curr" type="radio" value="test" />UK £
                                                                       </label>
                                                                     </p>
                                                                     </div>
@@ -432,7 +438,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="course-sidebar">
                         <!-- Buy Course -->
-                        <a href="/institute?instituteID={{$details[0]->instituteid}}&degreeid={{$details[0]->degreeid}}" class="btn clever-btn mb-30 w-100">Visit Institute Profile</a>
+                        <a href="/institute?instituteID={{$details[0]->instituteid}}" class="btn clever-btn mb-30 w-100">Visit Institute Profile</a>
 
                         <!-- Widget -->
                         <div class="sidebar-widget">
@@ -562,6 +568,17 @@ function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
+$("#rupee").on("click", function(){
+   if($(this).is(":not(:checked)")){
+     <?php
+     $res = currency($details[0]->fees,'PKR','PKR') ?>
+     document.getElementById("fees").innerHTML="~ {{$res}}";
+   }
+  else {
+    <?php $res = currency($details[0]->fees,'PKR','PKR') ?>
+    document.getElementById("fees").innerHTML="~ {{$res}}";
+  }
+});
 $("#dollar").on("click", function(){
    if($(this).is(":not(:checked)")){
      <?php

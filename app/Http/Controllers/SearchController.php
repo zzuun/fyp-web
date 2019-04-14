@@ -68,17 +68,36 @@ class SearchController extends Controller
            $degrees->where("institutes.coEducation",$value);
        }
 
-       if(isset($_POST["minfees"]) | isset($_POST["maxfees"]))
+       if(isset($_POST["shiftMorning"]))
        {
-           $minRange=(int) $_POST["minfees"];
-           $maxRange= (int) $_POST['maxfees'];
-           $degrees->whereBetween("degrees.fees",[$minRange,$maxRange]);
+           $value=$_POST["shiftMorning"];
+           $value=(int)$value;
+           $degrees->where("degrees.shiftMorning",$value);
        }
-       if(isset($_POST["minmarks"]) | isset($_POST["maxmarks"]))
+
+       if(isset($_POST["shiftAfternoon"]))
        {
-           $minRange=(int) $_POST["minmarks"];
+           $value=$_POST["shiftAfternoon"];
+           $value=(int)$value;
+           $degrees->where("degrees.shiftAfternoon",$value);
+       }
+
+       if(isset($_POST["scholarship"]))
+       {
+           $value=$_POST["scholarship"];
+           $value=(int)$value;
+           $degrees->where("institutes.scholarship",$value);
+       }
+
+       if(isset($_POST["maxfees"]))
+       {
+           $maxRange= (int) $_POST['maxfees'];
+           $degrees->whereBetween("degrees.fees",[10000,$maxRange]);
+       }
+       if(isset($_POST["maxmarks"]))
+       {
            $maxRange= (int) $_POST['maxmarks'];
-           $degrees->whereBetween("degrees.lastMerit",[0,$maxRange]);
+           $degrees->whereBetween("degrees.lastMerit",[33,$maxRange]);
 
        }
 
@@ -96,17 +115,16 @@ class SearchController extends Controller
 
                             <!-- Course Content -->
                             <div class="course-content">
-                                <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">
-                                    <h4>'.$result->degreeName.'</h4>
+                                <a href="/institute?instituteID='.$result->instituteID.'"">
+                                    <h5>'.$result->name.'</h5>
 
                               <div class="total-ratings d-flex float-right" align="right">
                                 <div class="ratings-text">
                                   <img src="img/bg-img/t1.png" alt="">
                                 </div>
                               </div>
-
                                     <div class="meta d-flex align-items-center">
-                                        <a href="/institute?instituteID='.$result->instituteID.'"">'.$result->name.'</a>
+                                        <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">'.$result->degreeName.'</a>
                                     </div>
                                     <ul>
                                     <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>'.$result->phoneNumber.'</span>

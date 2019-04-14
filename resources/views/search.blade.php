@@ -38,7 +38,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="{{route('page.home')}}"><img src="img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -61,18 +61,18 @@
                                     <ul class="dropdown">
                                         <li><a href="{{route('page.home')}}">Home</a></li>
                                         <li><a href="{{route('page.compare')}}">Compare</a></li>
-                                        <li><a href="">Single Courses</a></li>
-                                        <li><a href="">Instructors</a></li>
-                                        <li><a href="">Blog</a></li>
-                                        <li><a href="">Single Blog</a></li>
-                                        <li><a href="">Regular Page</a></li>
-                                        <li><a href="">Contact</a></li>
+                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
+                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
+                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
+                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
+                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
+                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
                                     </ul>
                                 </li>
                               </ul>
                               <div class="classynav2">
                                 <ul>
-                                <li><a href="" position="relative">Wishlist<span class="badge">3</span></a></li>
+                                <li><a href="{{route('page.timer')}}" position="relative">Wishlist<span class="badge">3</span></a></li>
                               </ul>
                             </div>
                             <div class="classynav3">
@@ -85,9 +85,9 @@
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
+                                <a href="{{route('page.timer')}}" class="btn">Register</a>
 
-                                <a  href="onlyloginpage.html"class="btn">Login</a>
+                                <a  href="{{route('page.timer')}}"class="btn">Login</a>
                               </div>
                         </div>
                         <!-- Nav End -->
@@ -127,7 +127,7 @@
                           <!-- Search Button -->
                           <div class="search-area">
                               <form action="#" method="">
-                                  <input type="search" name="search" id="search" placeholder="Search">
+                                  <input type="search" name="search" id="search" placeholder="Keyword">
                                   <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                               </form>
                           </div>
@@ -145,6 +145,131 @@
                   <div class="clever-faqs">
                       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
 
+                        <!-- Degree Group -->
+                        <div class="panel single-accordion8">
+                            <h6>
+                                <a role="button" aria-expanded="true" aria-controls="collapseEight" class="collapsed"
+                                data-parent="#accordion" data-toggle="collapse" href="#collapseEight">Search By Degree Group
+                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                </a>
+                            </h6>
+                            <div id="collapseEight" class="accordion-content collapse">
+
+                              <?php $c_fsc = App\Degree::where('name','LIKE','%FSC%')->count() ?>
+
+                              <label  style="word-wrap:break-word">
+                                  <input class="common-selector group"  type="checkbox" value="FSC" /> FSC ({{$c_fsc}})
+                               </label>
+
+                                 <?php $c_ics = App\Degree::where('name','LIKE','%ICS%')->count() ?>
+
+                                <label  style="word-wrap:break-word">
+                                  <input class="common-selector group"  type="checkbox" value="ICS" /> ICS  ({{$c_ics}})
+                               </label>
+
+                                 <?php $c_fa = App\Degree::where('name','LIKE','%FA%')->count() ?>
+
+                               <label  style="word-wrap:break-word">
+                                   <input class="common-selector group"  type="checkbox" value="FA" /> FA ({{$c_fa}})
+                                </label>
+
+                                  <?php $c_icom = App\Degree::where('name','LIKE','%ICOM%')->count() ?>
+
+                                <label  style="word-wrap:break-word">
+                                    <input class="common-selector group"  type="checkbox" value="ICOM" /> ICOM  ({{$c_icom}})
+                                 </label>
+
+                                 <?php $c_acca = App\Degree::where('name','LIKE','%ACCA%')->count() ?>
+
+                               <label  style="word-wrap:break-word">
+                                   <input class="common-selector group"  type="checkbox" value="ACCA" /> ACCA  ({{$c_acca}})
+                                </label>
+
+                                <?php $c_alevel = App\Degree::where('name','LIKE','%level%')->count() ?>
+
+                              <label  style="word-wrap:break-word">
+                                  <input class="common-selector group"  type="checkbox" value="A Level" /> A Level  ({{$c_alevel}})
+                               </label>
+
+                               <?php $c_he = App\Degree::where('name','LIKE','%HOME%')->count() ?>
+
+                             <label  style="word-wrap:break-word">
+                                 <input class="common-selector group"  type="checkbox" value="Home Economics" /> Home Economics  ({{$c_he}})
+                              </label>
+
+                              <?php $c_gs = App\Degree::where('name','LIKE','General%')->count() ?>
+
+                            <label  style="word-wrap:break-word">
+                                <input class="common-selector group"  type="checkbox" value="General Science" /> General Science  ({{$c_gs}})
+                             </label>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Affiliation -->
+                        <div class="panel single-accordion4">
+                            <h6>
+                                <a role="button" aria-expanded="true" aria-controls="collapseFour" class="collapsed"
+                                data-parent="#accordion" data-toggle="collapse" href="#collapseFour">Search By Affiliation
+                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                </a>
+                            </h6>
+                            <div id="collapseFour" class="accordion-content collapse">
+                              @php
+                                  $affiliations= App\Institute::select('affiliation')->distinct()->get();
+
+                              @endphp
+                              @foreach($affiliations as $affiliation)
+                                <?php
+                                  $c_aff = App\Institute::where('affiliation',$affiliation->affiliation)->count();
+                                 ?>
+                                <label  style="word-wrap:break-word">
+
+                                    <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation->affiliation}}" /> {{$affiliation->affiliation}}  ({{$c_aff}})
+                                </label>
+                              @endforeach
+
+
+                            </div>
+                        </div>
+
+                        <!-- Facilities -->
+                        <div class="panel single-accordion7">
+                            <h6>
+                                <a role="button" aria-expanded="true" aria-controls="collapseSeven" class="collapsed"
+                                data-parent="#accordion" data-toggle="collapse" href="#collapseSeven">Search By Facilities
+                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                </a>
+                            </h6>
+                            <div id="collapseSeven" class="accordion-content collapse">
+
+                              <!-- count for hosel -->
+                              <?php $c_trans = App\Institute::where('transportation',1)->count() ?>
+
+                              <label  style="word-wrap:break-word">
+                                  <input id="transport" class="common-selector transport" type="checkbox" value="1" /> Transportation ({{$c_trans}})
+                               </label>
+
+                               <!-- count for hosel -->
+                               <?php $c_hostel = App\Institute::where('hostel',1)->count() ?>
+
+                                <label  style="word-wrap:break-word">
+                                  <input id="hostel" class="common-selector hostel" type="checkbox" value="1" /> Hostel ({{$c_hostel}})
+                               </label>
+
+                              <!-- count of scholarship -->
+                              <?php $c_sch = App\Institute::where('scholarship',1)->count() ?>
+
+                              <label  style="word-wrap:break-word">
+                                <input id="scholarship" class="common-selector scholarship" type="checkbox" value="1" /> Scholarship  ({{$c_sch}})
+                             </label>
+                            </div>
+                        </div>
+
                           <!--Areas -->
                           <div class="panel single-accordion2">
                               <h6><a role="button2" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-toggle="collapse" data-parent="#accordion"
@@ -158,8 +283,11 @@
                                 @endphp
 
                                 @foreach($areas as $area)
+
+                                <?php $c_area = App\Address::where('subarea',$area->subarea)->distinct()->count(); ?>
+
                                   <label  style="word-wrap:break-word">
-                                    <input class="common-selector area" type="checkbox" value="{{$area->subarea}}"/>{{$area->subarea}}
+                                    <input class="common-selector area" type="checkbox" value="{{$area->subarea}}"/> {{$area->subarea}} ({{$c_area}})
                                   </label>
                                 @endforeach
 
@@ -182,37 +310,19 @@
 
                               <div id="collapseThree" class="accordion-content collapse">
                               @foreach($sector as $s)
+
+                              <?php
+                                $c_sect = App\Institute::where('sector',$s->sector)->count();
+                               ?>
+
                                 <label  style="word-wrap:break-word">
-                                  <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/>{{$s->sector}}
+                                  <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/> {{$s->sector}} ({{$c_sect}})
                                 </label>
                               @endforeach
                               </div>
                           </div>
 
-                          <!-- Affiliation -->
-                          <div class="panel single-accordion4">
-                              <h6>
-                                  <a role="button" aria-expanded="true" aria-controls="collapseFour" class="collapsed"
-                                  data-parent="#accordion" data-toggle="collapse" href="#collapseFour">Search By Affiliation
-                                  <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                  <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                  </a>
-                              </h6>
-                              <div id="collapseFour" class="accordion-content collapse">
-                                @php
-                                    $affiliations= App\Institute::select('affiliation')->distinct()->get();
 
-                                @endphp
-                                @foreach($affiliations as $affiliation)
-                                  <label  style="word-wrap:break-word">
-
-                                      <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation->affiliation}}" />{{$affiliation->affiliation}}
-                                  </label>
-                                @endforeach
-
-
-                              </div>
-                          </div>
 
                           <!-- Fees -->
                           <div class="panel single-accordion5">
@@ -225,10 +335,8 @@
                               </h6>
                               <div id="collapseFive" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                        <input type="range" min="10000" max="100000" step="1000" value="10000" class="slider fees-range common-selector" id="fees-min-range">
-                                        <p>Min Range: <span id="min"></span></p>
                                         <input type="range" min="10000" max="200000" step="1000" value="200000" class="slider fees-range common-selector" id="fees-max-range">
-                                        <p>Max Range: <span id="max"></span></p>
+                                        <p>Max Range: <span id="max"></span>  (<span id="feecount"></span>)</p>
                                     </div>
                               </div>
                           </div>
@@ -244,67 +352,39 @@
                               </h6>
                               <div id="collapseSix" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                      <input type="range" min="330" max="1100" step="10" value="330" class="slider common-selector" id="marks-min-range">
-                                      <p>Minimum Marks: <span id="marks-min"></span></p>
                                       <input type="range" min="33" max="100" step="1" value="100" class="slider common-selector" id="marks-max-range">
-                                      <p>Maximum Marks: <span id="marks-max"></span></p>
+                                      <p>Maximum Marks: <span id="marks-max"></span>  (<span id="markscount"></span>)</p>
                                     </div>
                               </div>
                           </div>
 
-                          <!-- Facilities -->
-                          <div class="panel single-accordion7">
-                              <h6>
-                                  <a role="button" aria-expanded="true" aria-controls="collapseSeven" class="collapsed"
-                                  data-parent="#accordion" data-toggle="collapse" href="#collapseSeven">Search By Facilities
-                                  <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                  <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                  </a>
-                              </h6>
-                              <div id="collapseSeven" class="accordion-content collapse">
-                                <label  style="word-wrap:break-word">
-                                    <input id="transport" class="common-selector transport" type="checkbox" value="1" />Transportation
-                                 </label>
+                          <!-- other filters -->
 
-                                  <label  style="word-wrap:break-word">
-                                    <input id="hostel" class="common-selector hostel" type="checkbox" value="1" />Hostel
-                                 </label>
+                         <div class="panel single-accordion9">
+                             <h6>
+                                 <a role="button" aria-expanded="true" aria-controls="collapseSeven" class="collapsed"
+                                 data-parent="#accordion" data-toggle="collapse" href="#collapseNine"> Other
+                                 <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                 <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                 </a>
+                             </h6>
+                             <div id="collapseNine" class="accordion-content collapse">
+                                <?php $c_coEd = App\Institute::where('coEducation',1)->count() ?>
+                               <label  style="word-wrap:break-word">
+                                 <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" /> Co-Education ({{$c_coEd}})
+                              </label>
 
-                                 <label  style="word-wrap:break-word">
-                                   <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" />Co-Education
-                                </label>
-                              </div>
-                          </div>
+                              <?php $c_sM = App\Degree::where('shiftMorning',1)->count() ?>
+                             <label  style="word-wrap:break-word">
+                               <input id="shiftMorning" class="common-selector shiftMorning" type="checkbox" value="1" /> Morning Shift ({{$c_sM}})
+                            </label>
 
-                          <!-- Degree Group -->
-                          <div class="panel single-accordion8">
-                              <h6>
-                                  <a role="button" aria-expanded="true" aria-controls="collapseEight" class="collapsed"
-                                  data-parent="#accordion" data-toggle="collapse" href="#collapseEight">Search By Degree Group
-                                  <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                  <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                  </a>
-                              </h6>
-                              <div id="collapseEight" class="accordion-content collapse">
-                                <label  style="word-wrap:break-word">
-                                    <input class="common-selector group"  type="checkbox" value="FSC" />FSC
-                                 </label>
-
-                                  <label  style="word-wrap:break-word">
-                                    <input class="common-selector group"  type="checkbox" value="ICS" />ICS
-                                 </label>
-
-                                 <label  style="word-wrap:break-word">
-                                     <input class="common-selector group"  type="checkbox" value="FA" />FA
-                                  </label>
-
-                                  <label  style="word-wrap:break-word">
-                                      <input class="common-selector group"  type="checkbox" value="ICOM" />ICOM
-                                   </label>
-
-                              </div>
-                          </div>
-
+                            <?php $c_sA = App\Degree::where('shiftAfternoon',1)->count() ?>
+                           <label  style="word-wrap:break-word">
+                             <input id="shiftAfternoon" class="common-selector shiftAfternoon" type="checkbox" value="1" /> Afternoon Shift ({{$c_sA}})
+                          </label>
+                             </div>
+                         </div>
                       </div>
 
                   </div>
@@ -340,7 +420,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="{{route('page.timer')}}"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -391,17 +471,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script>
       $(document).ready(function()
       {
-
-        var minslider = document.getElementById("fees-min-range");
         var maxslider = document.getElementById("fees-max-range");
-        //var output1 = document.getElementById("min");
-        //var output2 = document.getElementbyId("max");
-        document.getElementById("min").innerHTML = minslider.value;
         document.getElementById("max").innerHTML = maxslider.value;
-
-        minslider.oninput = function() {
-          document.getElementById("min").innerHTML = this.value;
-        }
         maxslider.oninput = function() {
           document.getElementById("max").innerHTML = this.value;
         }
@@ -411,15 +482,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script>
       $(document).ready(function()
       {
-
-        var minslider = document.getElementById("marks-min-range");
         var maxslider = document.getElementById("marks-max-range");
-        document.getElementById("marks-min").innerHTML = minslider.value;
         document.getElementById("marks-max").innerHTML = maxslider.value;
-
-        minslider.oninput = function() {
-          document.getElementById("marks-min").innerHTML = this.value;
-        }
         maxslider.oninput = function() {
           document.getElementById("marks-max").innerHTML = this.value;
         }
@@ -445,6 +509,45 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                   });
           })
         </script> -->
+  <script>
+  $(document).ready(function(){
+    getcount();
+    function getcount(){
+      var maxfees = $('#fees-max-range').val();
+      $.ajax({
+        url:"/getFeeCount",
+        method:"post",
+        data:{fees:maxfees, _token: "{{csrf_token()}}"},
+        success:function(data){
+          $('#feecount').html(data);
+        }
+      });
+    }
+    $('#fees-max-range').change(function(){
+      getcount();
+    });
+  });
+  </script>
+
+  <script>
+  $(document).ready(function(){
+    getMarksCount();
+    function getMarksCount() {
+      var maxMarks = $('#marks-max-range').val();
+      $.ajax({
+        url:"/getMarksCount",
+        method:"post",
+        data:{marks:maxMarks, _token: "{{csrf_token()}}"},
+        success:function(data){
+          $('#markscount').html(data);
+        }
+      });
+    }
+    $('#marks-max-range').change(function(){
+      getMarksCount();
+    });
+  });
+  </script>
 
    <script>
         $(document).ready(function()
@@ -461,17 +564,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var sector = get_filter('sector');
             var affiliation = get_filter('affiliation');
             var hostel = get_filter('hostel');
-            var coedu = get_filter('coEducation');
+            var scholarship = get_filter('scholarship');
             var transport = get_filter('transport');
-            var minfees = $('#fees-min-range').val();
+            var coEd = get_filter('coEducation');
+            var sM = get_filter('shiftMorning');
+            var sA = get_filter('shiftAfternoon');
             var maxfees = $('#fees-max-range').val();
-            var minmarks = $('#marks-min-range').val();
             var maxmarks= $('#marks-max-range').val();
             var group = get_filter('group');
                 $.ajax({
                     url:"/search",
                     method:"POST",
-                    data:{search: search, coEducation:coedu,area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, minfees:minfees, minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
+                    data:{ shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
                        $('#degreeResultsArea').html(data);

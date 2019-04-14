@@ -15,7 +15,7 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="comparison.css">
+    <link rel="stylesheet" href="timer.css">
 
 </head>
 
@@ -75,13 +75,7 @@
                                 <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>
 
-                            <!-- Search Button -->
-                            <div class="search-area">
-                                <form action="#" method="">
-                                    <input type="search" name="search" id="search" placeholder="Search">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
+
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
@@ -99,96 +93,30 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Blog Area Start ##### -->
-    <section class="blog-area section-padding-100">
+    <section class="blog-area blog-page section-padding-100">
 
 
         <div class="container-fluid">
 
             <div class="row">
                 <!-- Single Blog Area -->
-                <div class="col-12 col-lg-12">
-                    <div class="single-blog-area wow fadeInUp" data-wow-delay="250ms">
-
-                        <!-- Blog Content -->
-
-                          <table>
-                            <tr>
-                              <th style="width:80%">Features</th>
-                              <th><span id="myid">PUCIT</span></th>
-                              <th><span id="myid">PUCAD</span></th>
-                              <th><span id="myid">UCP</span></th>
-                            </tr>
-                            <tr>
-                              <td>Fees</td>
-                              <td>Rs. 40,000/-</td>
-                              <td>Rs. 18,000/-</td>
-                              <td>Rs. 1,24,000/-</td>
-                            </tr>
-                            <tr>
-                              <td>Merit</td>
-                              <td>69.78</td>
-                              <td>72.25</td>
-                              <td>78.36</td>
-                            </tr>
-                            <tr>
-                              <td>Location</td>
-                              <td>Lahore</td>
-                              <td>Lahore</td>
-                              <td>Lahore</td>
-                            </tr>
-                            <tr>
-                              <td>Ranking</td>
-                              <td>2nd, in CS</td>
-                              <td>2nd, in Arts</td>
-                              <td>21st, in Medical</td>
-                            </tr>
-                            <tr>
-                              <td>Seats</td>
-                              <td>600</td>
-                              <td>32</td>
-                              <td>380</td>
-                            </tr>
-                            <tr>
-                              <td>Hostels</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                              <td>Transportation</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-remove"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                              <td>Co Education</td>
-                              <td><i class="fa fa-remove"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                              <td>Sector</td>
-                              <td>Government</td>
-                              <td>Government</td>
-                              <td>Government</td>
-                            </tr>
-                            <tr>
-                              <td>Affiliation</td>
-                              <td>HEC</td>
-                              <td>HEC</td>
-                              <td>HEC</td>
-                            </tr>
-                            <tr>
-                              <td>M/A Shifts</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-remove"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            </table>
-
+                <div class="col-12">
+                    <div class="single-blog-area mb-100 wow fadeInUp" data-wow-delay="450ms">
+                      <h2 align="center">Coming Soon!</h2>
+                      <h1 id=demo align="center">Loading</h1>
+                      <h2 align="center">Apri 22, 2019!</h2>
                     </div>
                 </div>
 
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="load-more text-center mt-100 wow fadeInUp" data-wow-delay="1000ms">
+                        <a href="#" class="btn clever-btn btn-2">Load More</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- ##### Blog Area End ##### -->
@@ -243,13 +171,35 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="customjs/active.js"></script>
     <script>
-      function openNav() {
-          document.getElementById("myNav").style.height = "100%";}
+// Set the date we're counting down to
+var countDownDate = new Date("April 22, 2019 15:30:00").getTime();
 
-    /* Close */
-        function closeNav() {
-          document.getElementById("myNav").style.height = "0%";}
-    </script>
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is over, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
 
 </body>
 
