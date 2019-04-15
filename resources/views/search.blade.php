@@ -396,12 +396,17 @@
       <div class="popular-courses-area" style="padding-left:5%" >
 
 
-          <div class="container" id="degreeResultsArea" style="padding:0 4% 0 1%;">
-            <!--<div class="col-12">
-              <div class="section-heading">
-                  <h3>Best Institues For You</h3>
-              </div>
-            </div>-->
+         <div class="container" style="padding:0 4% 0 1%;">
+            <!-- <div class="col-12">
+            </div> -->
+            <div class="container">
+
+               <section class="results">
+                 @include('partialViews.searchResults');
+               </section>
+
+             </div>
+           </div>
           </div>
       </div>
     </div>
@@ -430,24 +435,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
 
-        <!-- Bottom Footer Area -->
-        <div class="bottom-footer-area d-flex justify-content-between align-items-center">
-            <!-- Contact Info -->
-            <div class="contact-info">
-                <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                <a href="#"><span>Email:</span> info@clever.com</a>
-            </div>
-            <!-- Follow Us -->
-            <div class="follow-us">
-                <span>Follow us</span>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-        </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
-
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
@@ -459,7 +448,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
-
 
 
 
@@ -573,12 +561,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var maxmarks= $('#marks-max-range').val();
             var group = get_filter('group');
                 $.ajax({
-                    url:"/search",
-                    method:"POST",
+                    url:"/apply",
+                    method:"GET",
                     data:{ shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
-                       $('#degreeResultsArea').html(data);
+                       $('.results').html(data);
                        // $('#degreeResultsArea').load(data);
                     }
                 });
@@ -592,28 +580,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 return filter;
             }
 
+            $(document).on('click', '.pagination a', function(event)
+            {
+              event.preventDefault();
+              var page = $(this).attr('href').split('page=')[1];
+              fetch_data(page);
+
+            });
+
+          function fetch_data(page)
+            {
+            $.ajax({
+                url:"/apply?page="+page,
+                success:function(data)
+                {
+                  $('.results').html(data);
+                }
+            });
+            }
+
+
             $('.common-selector').click(function(){
                 filter_data();
             });
-
-
-           /* $('#price_range').slider({
-                range:true,
-                 min:10000,
-                max:100000,
-                values:[1000, 65000],
-                step:1000,
-                stop:function(event, ui)
-                {
-                    $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
-                    $('#hidden_minimum_price').val(ui.values[0]);
-                    $('#hidden_maximum_price').val(ui.values[1]);
-                    //filter_data();
-                }
-             });
-             */
-
-
         });
     </script>
 

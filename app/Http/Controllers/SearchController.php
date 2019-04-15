@@ -8,183 +8,121 @@ use App\Address;
 use App\Degree;
 class SearchController extends Controller
 {
-    public function filter(Degree $degrees )
+    public function filter(Request $request, Degree $degrees )
     {
 
        $degrees=$degrees->newQuery();
        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
-       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber')->orderby('numberOfViews','desc');
-       if (isset($_POST["search"])) {
-         $degrees->where('degrees.name','LIKE','%'.$_POST["search"].'%');
+       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
+       if (isset($_GET["search"])) {
+         $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
        }
-       if(isset($_POST["area"]))
+       if(isset($_GET["area"]))
        {
-          $area_filter = implode("','",$_POST["area"]);
+          $area_filter = implode("','",$_GET["area"]);
           $degrees->whereRaw("addresses.subarea in ('".$area_filter."')");
        }
 
-       if(isset($_POST["sector"]))
+       if(isset($_GET["sector"]))
        {
-           $sector_filter = implode("','",$_POST["sector"]);
+           $sector_filter = implode("','",$_GET["sector"]);
            $degrees->whereRaw("institutes.sector in ('".$sector_filter."')");
 
        }
 
-       if(isset($_POST["affiliation"]))
+       if(isset($_GET["affiliation"]))
        {
-           $affiliation_filter = implode("','",$_POST["affiliation"]);
+           $affiliation_filter = implode("','",$_GET["affiliation"]);
            $degrees->whereRaw("institutes.affiliation in ('".$affiliation_filter."')");
 
        }
 
-       if(isset($_POST["group"]))
+       if(isset($_GET["group"]))
        {
-         $degrees->where('degrees.name', 'like',$_POST["group"][0].'%');
-          for ($i=1; $i < sizeof($_POST["group"]) ; $i++) {
-            $degrees->orwhere('degrees.name', 'like',$_POST["group"][$i].'%');
+         $degrees->where('degrees.name', 'like',$_GET["group"][0].'%');
+          for ($i=1; $i < sizeof($_GET["group"]) ; $i++) {
+            $degrees->orwhere('degrees.name', 'like',$_GET["group"][$i].'%');
           }
        }
 
-      if(isset($_POST["hostel"]))
+      if(isset($_GET["hostel"]))
        {
-           $value=$_POST["hostel"];
+           $value=$_GET["hostel"];
            $value=(int)$value;
            $degrees->where("institutes.hostel",$value);
        }
 
-       if(isset($_POST["transport"]))
+       if(isset($_GET["transport"]))
        {
-           $value=$_POST["transport"];
+           $value=$_GET["transport"];
            $value=(int)$value;
            $degrees->where("institutes.transportation",$value);
        }
 
-       if(isset($_POST["coEducation"]))
+       if(isset($_GET["coEducation"]))
        {
-           $value=$_POST["coEducation"];
+           $value=$_GET["coEducation"];
            $value=(int)$value;
            $degrees->where("institutes.coEducation",$value);
        }
 
-       if(isset($_POST["shiftMorning"]))
+       if(isset($_GET["shiftMorning"]))
        {
-           $value=$_POST["shiftMorning"];
+           $value=$_GET["shiftMorning"];
            $value=(int)$value;
            $degrees->where("degrees.shiftMorning",$value);
        }
 
-       if(isset($_POST["shiftAfternoon"]))
+       if(isset($_GET["shiftAfternoon"]))
        {
-           $value=$_POST["shiftAfternoon"];
+           $value=$_GET["shiftAfternoon"];
            $value=(int)$value;
            $degrees->where("degrees.shiftAfternoon",$value);
        }
 
-       if(isset($_POST["scholarship"]))
+       if(isset($_GET["scholarship"]))
        {
-           $value=$_POST["scholarship"];
+           $value=$_GET["scholarship"];
            $value=(int)$value;
            $degrees->where("institutes.scholarship",$value);
        }
 
-       if(isset($_POST["maxfees"]))
+       if(isset($_GET["maxfees"]))
        {
-           $maxRange= (int) $_POST['maxfees'];
+           $maxRange= (int) $_GET['maxfees'];
            $degrees->whereBetween("degrees.fees",[10000,$maxRange]);
        }
-       if(isset($_POST["maxmarks"]))
+       if(isset($_GET["maxmarks"]))
        {
-           $maxRange= (int) $_POST['maxmarks'];
+           $maxRange= (int) $_GET['maxmarks'];
            $degrees->whereBetween("degrees.lastMerit",[33,$maxRange]);
 
        }
 
-       $results = $degrees->get();
+       $results = $degrees->paginate(5);
 
-       $htmlOutput='';
-       if($results->count()>0)
-       {
-           foreach($results as $result)
-           {
-                $htmlOutput.=
-                '<div class="col-12">
-                    <div class="boxstyle2" style="cursor: pointer;">
-                        <div class="single-popular-course mb-50 wow fadeInUp" data-wow-delay="750ms" >
+       if ($request->ajax()) {
+         return view('partialViews.searchResults',compact('results'))->render();
+       }
 
-                            <!-- Course Content -->
-                            <div class="course-content">
-                                <a href="/institute?instituteID='.$result->instituteID.'"">
-                                    <h5>'.$result->name.'</h5>
-
-                              <div class="total-ratings d-flex float-right" align="right">
-                                <div class="ratings-text">
-                                  <img src="img/bg-img/t1.png" alt="">
-                                </div>
-                              </div>
-                                    <div class="meta d-flex align-items-center">
-                                        <a href="/degree?degreeid='.$result->degreeID.'&instituteid='.$result->instituteID.'">'.$result->degreeName.'</a>
-                                    </div>
-                                    <ul>
-                                    <span><i class="fa fa-phone"  aria-hidden="true" style="color: #e3d21b;"></i>'.$result->phoneNumber.'</span>
-                                    </ul>
-
-
-                                    <ul>
-                                    <span><i class="fa fa-location-arrow" aria-hidden="true" style="color: #e3d21b;"></i>'.$result->city.'</span>
-                                    </ul>
-
-
-
-                                    <ul>
-                                    <span><i class="fa fa-won" aria-hidden="true" style="color: #e3d21b;"></i>'.$result->affiliation.'</span>
-                                    </ul>
-
-
-                                    <ul>
-                                    <span><i class="fa fa-users" aria-hidden="true" style="color: #e3d21b;"></i>'.$result->sector.'</span>
-                                    </ul>
-
-                                </a>
-                            </div>
-                            <!-- Seat Rating Fee -->
-                            <div class="seat-rating-fee d-flex justify-content-between">
-                                <div class="seat-rating h-100 d-flex align-items-center">
-                                    <div class="seat">
-                                    <a >
-                                      <i onclick="myFunction(this);" class="fa fa-thumbs-up" style="font-size:23px;padding-top: 8px;"></i>
-                                    </a>
-                                    </div>
-                                    <div class="rating">
-                                        <a  href="wishlist.html">
-                                            <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>';
-           }
-         }
-        else{
-
-            // $htmlOutput.="<h1>No Instiututes Found</h1>";
-            $htmlOutput.='<img src="img/bg-img/noresult.png" alt="No Institute Found">';
-        }
-     //    if ($results->hasMorePages()) {
-     //      $htmlOutput.=
-     //      '<div class="pagination-center">'.
-     //         $results->links()
-     //      .'</div>';
-     // }
-        return ($htmlOutput);
-
+       return view('search',compact('results'));
     }
 
 
+    public function search(Degree $degrees)
+    {
+        $degrees=$degrees->newQuery();
+        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+        ->join('addresses','institutes.id','=','addresses.institute_id')
+        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
+        'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber')->orderby('numberOfViews','desc');
 
+        $results=$degrees->paginate(5);
+
+        return view('search',compact('results'));
+      }
 
     public function getCities(){
 
