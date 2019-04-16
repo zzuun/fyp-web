@@ -25,8 +25,9 @@ class CreateDegreesTable extends Migration
             $table->boolean('shiftAfternoon');
             $table->bigInteger('fees');
             $table->bigInteger('numberOfViews');
-            $table->integer('post_requisites_id');
+            $table->integer('post_requisites_id')->nullable();
             $table->integer('institute_id');
+            $table->integer('department_id')->nullable();
             $table->timestamps();
         });
     }

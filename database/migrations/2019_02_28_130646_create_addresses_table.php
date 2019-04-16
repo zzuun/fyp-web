@@ -18,7 +18,8 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->float('lat',10,7);
             $table->float('lng',10,7);
-            $table->string('subarea');
+            $table->integer('subarea_id');
+            $table->integer('town_id');
             $table->string('phone_number');
             $table->string('website');
             $table->string('location');

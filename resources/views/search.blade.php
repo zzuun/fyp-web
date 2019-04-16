@@ -270,28 +270,41 @@
                             </div>
                         </div>
 
-                          <!--Areas -->
+                          <!--Town -->
                           <div class="panel single-accordion2">
                               <h6><a role="button2" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-toggle="collapse" data-parent="#accordion"
-                                href="#collapseTwo">Search by Area
+                                href="#collapseTwo">Search by Town
                               <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
                               <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
                               </a></h6>
                               <div id="collapseTwo" class="accordion-content collapse">
                                 @php
-                                  $areas= App\Address::select('subarea')->distinct()->get();
+                                  $areas= App\Town::select('name','id')->distinct()->get();
                                 @endphp
 
                                 @foreach($areas as $area)
 
-                                <?php $c_area = App\Address::where('subarea',$area->subarea)->distinct()->count(); ?>
+                                <?php $c_area = App\Town::where('name',$area->name)->count();
+                                      $c_area--;
+                                 ?>
 
                                   <label  style="word-wrap:break-word">
-                                    <input class="common-selector area" type="checkbox" value="{{$area->subarea}}"/> {{$area->subarea}} ({{$c_area}})
+                                    <input class="common-selector town" id="show" type="checkbox" value="{{$area->name}}"/> {{$area->name}} ({{$c_area}})
                                   </label>
                                 @endforeach
 
 
+                              </div>
+                          </div>
+
+                          <!-- Subarea -->
+                          <div class="panel single-accordion10" id="hide">
+                              <h6><a role="button2" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-toggle="collapse" data-parent="#accordion"
+                                href="#collapseTen">Search by Subarea
+                              <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                              <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                              </a></h6>
+                              <div id="collapseTen" class="accordion-content collapse">
                               </div>
                           </div>
 
@@ -537,6 +550,35 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   });
   </script>
 
+<script>
+  $(document).ready(function(){
+    $('#hide').hide();
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.town').click(function(){
+      if($('#hide').is(":hidden")){
+        $('#hide').show();
+      }
+      var filter = [];
+      $('.'+'town'+':checked').each(function(){
+          filter.push($(this).val());
+      });
+      $.ajax({
+        url:'/getSubareas',
+        method:'GET',
+        data:{town:filter, _token: "{{csrf_token()}}"},
+        success:function(data){
+            $('#collapseTen').html(data)
+          }
+      });
+    });
+  });
+</script>
+
+
    <script>
         $(document).ready(function()
         {
@@ -546,9 +588,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           filter_data();
           function filter_data()
           {
-            // console.log(document.getElementById('search').value);
             var search = document.getElementById('search').value;
-            var area = get_filter('area');
+            var town = get_filter('town');
+            var subarea = get_filter('subarea');
             var sector = get_filter('sector');
             var affiliation = get_filter('affiliation');
             var hostel = get_filter('hostel');
@@ -560,10 +602,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var maxfees = $('#fees-max-range').val();
             var maxmarks= $('#marks-max-range').val();
             var group = get_filter('group');
+            console.log(subarea);
                 $.ajax({
                     url:"/apply",
                     method:"GET",
-                    data:{ shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, area:area, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
+                    data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
                        $('.results').html(data);
@@ -599,6 +642,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             }
 
+            $(document).on('click','.subarea',function(){
+              console.log('clicked');
+                filter_data();
+              });
 
             $('.common-selector').click(function(){
                 filter_data();

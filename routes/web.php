@@ -1,5 +1,6 @@
 <?php
 
+use App\Town;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,3 +36,26 @@ Route::post('/getMarksCount',function(){
   }
 });
 Route::get('/ajaxGetCities','SearchController@getCities');
+Route::get('/getSubareas',function(Request $request, Town $towns){
+  $towns = $towns->newQuery();
+  $towns->join('subareas','towns.id','subareas.town_id')->select('subareas.name');
+  $output = '';
+  $counts = array();
+  if(isset($_GET["town"]))
+  {
+     $area_filter = $_GET["town"];
+     $towns->wherein("towns.name",$area_filter);
+     $result = $towns->get();
+     $i = 0;
+     foreach ($area_filter as $a) {
+       $temp = DB::table('towns')->join('subareas','towns.id','subareas.town_id')->where('towns.name',$a)->count();
+       $temp--;
+       $counts[$i++]=$temp;
+     }
+     $i = 0;
+     foreach ($result as $r) {
+       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value='.$r->name.'>'.$r->name.'  ('.$counts[$i++].')</label>';
+     }
+  }
+  return $output;
+});

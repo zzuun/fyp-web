@@ -10,6 +10,10 @@ class Institute extends Model
     {
         return $this->hasMany('App\Degree')->orderby('numberOfViews','desc');
     }
+  public function departments()
+    {
+        return $this->hasMany('App\Department');
+    }
   public function address()
     {
         return $this->hasOne('App\Address');

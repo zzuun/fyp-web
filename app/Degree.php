@@ -24,6 +24,8 @@ class Degree extends Model
   {
       return $this->belongsTo('App\Institute');
   }
-
-  
+  public function department()
+  {
+      return $this->belongsTo('App\Department');
+  }
 }

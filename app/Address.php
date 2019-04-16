@@ -10,4 +10,12 @@ class Address extends Model
   {
       return $this->belongsTo('App\Institute');
   }
+  public function subarea()
+  {
+      return $this->hasOne('App\Subarea');
+  }
+  public function town()
+  {
+      return $this->hasOne('App\Town');
+  }
 }
