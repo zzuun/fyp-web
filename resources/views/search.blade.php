@@ -122,16 +122,6 @@
                 <div class="col-12">
                     <!-- Hero Content -->
                     <div class="hero-content text-center">
-
-                        <div class="clever-main-menu">
-                          <!-- Search Button -->
-                          <div class="search-area">
-                              <form action="#" method="">
-                                  <input type="search" name="search" id="search" placeholder="Keyword">
-                                  <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                              </form>
-                          </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -144,6 +134,16 @@
                 <div class="col-md-4 col-lg-4" style="padding-bottom:2%";>
                   <div class="clever-faqs">
                       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
+
+                        <div class="clever-main-menu">
+                          <!-- Search Button -->
+                          <div class="search-area">
+                              <form action="#" method="">
+                                  <input type="search" name="search" id="search" placeholder="Keyword">
+                                  <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                              </form>
+                          </div>
+                        </div>
 
                         <!-- Degree Group -->
                         <div class="panel single-accordion8">
@@ -493,23 +493,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           {
             x.classList.toggle("fa-thumbs-down");
           }
-    </script>-
-        <!--<script>
-          $('#city-selector').on('change',function(){
-            var cityName=$('#city-selector').val();
-            $.ajax({
-                      url:"/ajaxGetCities",
-                      method:"GET",
-                      data:{city:cityName, _token: "{{csrf_token()}}"},
-                      success:function(data){
-                        console.log(data);
-                        $('#collapseTwo').html(data);
-
-
-                      }
-                  });
-          })
-        </script> -->
+    </script>
   <script>
   $(document).ready(function(){
     getcount();
@@ -582,9 +566,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    <script>
         $(document).ready(function()
         {
-          $('#search').keypress(function(){
-            filter_data();
-          });
           filter_data();
           function filter_data()
           {
@@ -602,7 +583,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var maxfees = $('#fees-max-range').val();
             var maxmarks= $('#marks-max-range').val();
             var group = get_filter('group');
-            console.log(subarea);
                 $.ajax({
                     url:"/apply",
                     method:"GET",
@@ -642,8 +622,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             }
 
+            $(document).on('keyup','#search',function(){
+                filter_data();
+              });
+
             $(document).on('click','.subarea',function(){
-              console.log('clicked');
                 filter_data();
               });
 

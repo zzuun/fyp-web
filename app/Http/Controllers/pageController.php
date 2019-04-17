@@ -56,4 +56,14 @@ class pageController extends Controller
     {
       return view('timer');
     }
+
+    public function login()
+    {
+      return view('login');
+    }
+
+    public function register()
+    {
+      return view('register');
+    }
 }
