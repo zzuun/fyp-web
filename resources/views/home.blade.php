@@ -81,9 +81,11 @@
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="{{route('page.timer')}}" class="btn">Register</a>
+                              @if(auth()->check())
+                                <a href="{{route('page.timer')}}" class="btn">Hi {{auth()->user()->name}}</a>
 
-                                <a  href="{{route('page.timer')}}"class="btn">Login</a>
+                                <a  href="{{route('page.timer')}}"class="btn">Logout</a>
+                                @endif
                               </div>
                         </div>
                         <!-- Nav End -->

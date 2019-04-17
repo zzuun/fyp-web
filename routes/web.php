@@ -20,10 +20,10 @@ Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/compare','pageController@compare')->name('page.compare');
 Route::get('/home','pageController@home')->name('page.home');
-// Route::get('/login','pageController@login')->name('page.login');
-// Route::get('/register','pageController@register')->name('page.register');
-// Route::post('/register','RegisterationController@register');
-// Route::post('/login','RegisterationController@login');
+Route::get('/login','pageController@login')->name('page.login');
+Route::get('/register','pageController@register')->name('page.register');
+Route::post('/register','RegisterationController@register');
+Route::post('/login','RegisterationController@login');
 Route::get('/comingSoon','pageController@timer')->name('page.timer');
 Route::get('/ajaxGetCities','SearchController@getCities');
 
@@ -64,7 +64,3 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
   }
   return $output;
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
