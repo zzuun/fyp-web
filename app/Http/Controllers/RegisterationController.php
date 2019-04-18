@@ -10,32 +10,41 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class RegisterationController extends Controller
 {
-    public function register(Request $request)
+    public function register()
     {
-      $input = $request->all();
-      $input['password'] = bcrypt($input['password']);
-      $user = User::create([
-        'name' => $input['name'],
-        'email' => $input['email'],
-        'password' => $input['password']
-      ]);
-      $user->save();
-      auth()->login($user);
-      return redirect('home');
+      return view('register');
     }
 
-    public function login(Request $request)
+    public function store(Request $request)
     {
-      $credentials = $request->only('email','password');
-      if (Auth::attempt($credentials, $request->has('remember'))) {
-          // $remember = $request->get('remember');
-          // if (!empty($remember)) {
-          // Auth::login();
-          // }
-            return redirect('home');
+      $input  =  $request->all();
+      $rule = array(
+        'name'=>'required',
+        'email'=>'required|email',
+        'password'=>'required|confirmed|between:8,30',
+      );
+      $validator = Validator::make($input,$rule);
+      if ($validator->fails()) {
+        return back()->withErrors($validator);
+      }
+      else {
+        $check = User::where('email',$input['email'])->first();
+        if(isset($check)){
+          return back()->withErrors([
+            'email'=>'This Email is Already Registered!'
+          ]);
         }
-      if (Auth::viaRemember()) {
-        return redirect('home');
+        else {
+          $input['password'] = bcrypt($input['password']);
+          $user = User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => $input['password']
+          ]);
+          $user->save();
+          auth()->login($user);
+          return redirect('home');
+        }
       }
     }
 }

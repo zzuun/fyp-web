@@ -16,8 +16,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"/>
+    <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
 </head>
 
 <body>
@@ -80,8 +79,15 @@
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
-                                <a href="onlyloginpage.html" class="btn">Login</a>
+                              @if(auth()->check())
+                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
+
+                                <a  href="{{route('page.logout')}}"class="btn">Logout</a>
+                                @else
+                                <a href="{{route('page.register')}}" class="btn">Register</a>
+
+                                <a  href="{{route('login')}}"class="btn">Login</a>
+                                @endif
                             </div>
 
                         </div>
@@ -110,26 +116,38 @@
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                      @if ($errors->has('name'))
+                                          <div class="alert alert-danger" role="alert">{{$errors->first('name')}}</div>
+                                      @endif
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                      @if ($errors->has('email'))
+                                          <div class="alert alert-danger" role="alert">{{$errors->first('email')}}</div>
+                                      @endif
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter Password Again" require>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter Password Again">
-                                        </div>
-                                    </div>
-                                    <div class="col-12" id="alert">
-
+                                      @if ($errors->has('password'))
+                                          <div class="alert alert-danger" role="alert">{{$errors->first('password')}}</div>
+                                      @endif
                                     </div>
                                       <div class="col-12">
 
@@ -186,23 +204,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
-    <script>
-      $(document).ready(function(){
-        $('#cpassword').keyup(function() {
-          checkPasswordMatch();
-        });
-
-        function checkPasswordMatch() {
-          var password = $("#password").val();
-          var confirmPassword = $("#cpassword").val();
-
-          if (password != confirmPassword)
-              $("#alert").html("<div class='alert alert-danger' role='alert'> Password doesn't match!  </div>");
-          else
-              $("#alert").html("");
-      }
-      });
-    </script>
 </body>
 
 </html>

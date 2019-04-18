@@ -16,6 +16,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="login.css">
+      <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
 
 </head>
 
@@ -79,8 +80,15 @@
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
-                                <a href="onlyloginpage.html" class="btn">Login</a>
+                              @if(auth()->check())
+                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
+
+                                <a  href="{{route('page.logout')}}"class="btn">Logout</a>
+                                @else
+                                <a href="{{route('page.register')}}" class="btn">Register</a>
+
+                                <a  href="{{route('login')}}"class="btn">Login</a>
+                                @endif
                             </div>
 
                         </div>
@@ -109,13 +117,18 @@
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                                         </div>
+                                    </div>
+                                    <div class="col-12">
+                                      @if ($errors->has('message'))
+                                          <div class="alert alert-danger" role="alert">{{$errors->first('message')}}</div>
+                                      @endif
                                     </div>
                                     <div class="col-12">
                                     <div class="checkbox">

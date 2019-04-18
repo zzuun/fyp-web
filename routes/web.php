@@ -19,14 +19,24 @@ Route::get('/apply','SearchController@filter');
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/compare','pageController@compare')->name('page.compare');
-Route::get('/home','pageController@home')->name('page.home');
-Route::get('/login','pageController@login')->name('page.login');
-Route::get('/register','pageController@register')->name('page.register');
-Route::post('/register','RegisterationController@register');
-Route::post('/login','RegisterationController@login');
+
+//middleware AccessControl
+Route::group(['middleware' => ['AccessControl','auth']],function(){
+  Route::get('/home','pageController@home')->name('page.home');
+});
+
+//login
+Route::get('/login','SessionController@login')->name('login');
+Route::post('/login','SessionController@store');
+Route::get('/logout','SessionController@destroy')->name('page.logout');
+
+//register
+Route::get('/register','RegisterationController@register')->name('page.register');
+Route::post('/register','RegisterationController@store');
+
+
 Route::get('/comingSoon','pageController@timer')->name('page.timer');
 Route::get('/ajaxGetCities','SearchController@getCities');
-
 Route::post('/getFeeCount',function(){
    if(isset($_POST["fees"])){
       $maxRange= (int) $_POST['fees'];
