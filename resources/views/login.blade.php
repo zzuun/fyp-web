@@ -83,9 +83,9 @@
                               @if(auth()->check())
                                 <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                                <a  href="{{route('page.logout')}}"class="btn">Logout</a>
+                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
                                 @else
-                                <a href="{{route('page.register')}}" class="btn">Register</a>
+                                <a href="{{route('register')}}" class="btn">Register</a>
 
                                 <a  href="{{route('login')}}"class="btn">Login</a>
                                 @endif
@@ -139,6 +139,13 @@
 
                                         <button class="btn btn-success w-50">Log In</button>
 
+                                  </div>
+                                  <div class="col-12">
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
                                   </div>
                                 </div>
                             </form>

@@ -110,7 +110,7 @@
                     <div class="col-12 ">
                         <div class="forms">
                             <h4 style="text-align:center;">Register Yourself</h4>
-                            <form action="/register" method="post" id="registerForm" class="form-horizontal">
+                            <form action="{{ route('register') }}" method="post" id="registerForm" class="form-horizontal">
                                {{ csrf_field() }}
                                 <div class="row">
 

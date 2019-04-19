@@ -21,18 +21,19 @@ Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/compare','pageController@compare')->name('page.compare');
 
 //middleware AccessControl
-Route::group(['middleware' => ['AccessControl','auth']],function(){
+Route::group(['middleware' => ['AccessControl']],function(){
   Route::get('/home','pageController@home')->name('page.home');
+  Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 });
 
 //login
-Route::get('/login','SessionController@login')->name('login');
-Route::post('/login','SessionController@store');
-Route::get('/logout','SessionController@destroy')->name('page.logout');
-
-//register
-Route::get('/register','RegisterationController@register')->name('page.register');
-Route::post('/register','RegisterationController@store');
+// Route::get('/login','SessionController@login')->name('login');
+// Route::post('/login','SessionController@store');
+Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
+//
+// //register
+// Route::get('/register','RegisterationController@register')->name('register');
+// Route::post('/register','RegisterationController@store');
 
 
 Route::get('/comingSoon','pageController@timer')->name('page.timer');
@@ -73,4 +74,19 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
      }
   }
   return $output;
+});
+
+Auth::routes();
+
+
+//admin routes
+Route::prefix('admin')->group(function(){
+  Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+  Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+  Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+  //password reset
+  Route::post('/password/email','Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+  Route::get('/password/reset','Auth\AdminForgotPasswordController@showLinkRequesForm')->name('admin.password.request');
+  Route::post('/password/reset','Auth\AdminResetPasswordController@reset');
+  Route::get('/password/reset/{token}','Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 });

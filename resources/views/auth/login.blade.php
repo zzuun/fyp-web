@@ -16,7 +16,8 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
+      <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
+
 </head>
 
 <body>
@@ -82,6 +83,9 @@
                               @if(auth()->check())
                                 <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
+                                <!-- <form action="{{route.logout}}" method="post">
+                                  <input class="btn" type="submit" name="submit" value="Logout">
+                                </form> -->
                                 <a  href="{{route('user.logout')}}"class="btn">Logout</a>
                                 @else
                                 <a href="{{route('register')}}" class="btn">Register</a>
@@ -109,24 +113,19 @@
                 <div class="row  align-items-center">
                     <div class="col-12 ">
                         <div class="forms">
-                            <h4 style="text-align:center;">Register Yourself</h4>
-                            <form action="/register" method="post" id="registerForm" class="form-horizontal">
+                            <h4 style="text-align:center;">Education For Free</h4>
+                            <form action="{{route('login')}}" method="post">
                                {{ csrf_field() }}
                                 <div class="row">
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                      @if ($errors->has('name'))
-                                          <div class="alert alert-danger" role="alert">{{$errors->first('name')}}</div>
-                                      @endif
-                                    </div>
-                                    <div class="col-12">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -135,24 +134,21 @@
                                       @endif
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
-                                        </div>
+                                    <div class="checkbox">
+                                      <label><input type="checkbox" name="remember" value="1" checked> Remember me</label>
                                     </div>
+                                  </div>
                                     <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter Password Again" require>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                      @if ($errors->has('password'))
-                                          <div class="alert alert-danger" role="alert">{{$errors->first('password')}}</div>
-                                      @endif
-                                    </div>
-                                      <div class="col-12">
 
-                                        <button class="btn btn-success w-50">Register</button>
+                                        <button class="btn btn-success w-50">Log In</button>
 
+                                  </div>
+                                  <div class="col-12">
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
                                   </div>
                                 </div>
                             </form>
@@ -160,14 +156,21 @@
                     </div>
                 </div>
             </div>
+          <!--  <div>
+              <span class="txt1 p-b-17">
+							Or
+						</span>
+            <br>
+						<a href="#" class="txt2">
+							<h4>Sign Up<h4>
+						</a>
+          </div>-->
         </div>
 
         <!-- Register Now Countdown -->
 
     </section>
     <!-- ##### Register Now End ##### -->
-
-    <!-- ##### Upcoming Events Start ##### -->
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
@@ -201,9 +204,6 @@
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
-
 </body>
 
 </html>

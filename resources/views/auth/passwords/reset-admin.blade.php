@@ -12,11 +12,12 @@
     <title>Clever - Education &amp; Courses Template | Home</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="../../../img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
+    <link rel="stylesheet" href="../../../login.css">
+      <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
+
 </head>
 
 <body>
@@ -38,7 +39,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="index.html"><img src="../../../img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -102,28 +103,19 @@
     <!-- ##### Hero Area Start ##### -->
 
     <!-- ##### Register Now Start ##### -->
-    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center" style="background-image: url(img/core-img/texture.png);">
+    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center" style="background-image: url(../../../img/core-img/texture.png);">
         <!-- Register Contact Form -->
         <div class="register-contact-form mb-100 wow fadeInUp" align="center"; data-wow-delay="250ms" >
             <div class="container-fluid">
                 <div class="row  align-items-center">
                     <div class="col-12 ">
                         <div class="forms">
-                            <h4 style="text-align:center;">Register Yourself</h4>
-                            <form action="/register" method="post" id="registerForm" class="form-horizontal">
+                            <h4 style="text-align:center;">Admin Reset Password</h4>
+                            <form action="{{ route('admin.password.request') }}" method="post">
                                {{ csrf_field() }}
                                 <div class="row">
+                                  <input type="hidden" name="token" value="{{ $token }}">
 
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                      @if ($errors->has('name'))
-                                          <div class="alert alert-danger" role="alert">{{$errors->first('name')}}</div>
-                                      @endif
-                                    </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
@@ -136,12 +128,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter Password Again" require>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="New Password" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -149,9 +136,14 @@
                                           <div class="alert alert-danger" role="alert">{{$errors->first('password')}}</div>
                                       @endif
                                     </div>
-                                      <div class="col-12">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter Password Again" require>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
 
-                                        <button class="btn btn-success w-50">Register</button>
+                                        <button class="btn btn-success w-50">Reset Password</button>
 
                                   </div>
                                 </div>
@@ -160,14 +152,21 @@
                     </div>
                 </div>
             </div>
+          <!--  <div>
+              <span class="txt1 p-b-17">
+							Or
+						</span>
+            <br>
+						<a href="#" class="txt2">
+							<h4>Sign Up<h4>
+						</a>
+          </div>-->
         </div>
 
         <!-- Register Now Countdown -->
 
     </section>
     <!-- ##### Register Now End ##### -->
-
-    <!-- ##### Upcoming Events Start ##### -->
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
@@ -178,7 +177,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="../../../img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -192,18 +191,15 @@
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../../../customjs/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="customjs/bootstrap/popper.min.js"></script>
+    <script src="../../../customjs/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="customjs/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../customjs/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="customjs/plugins/plugins.js"></script>
+    <script src="../../../customjs/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="customjs/active.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
-
+    <script src="../../../customjs/active.js"></script>
 </body>
 
 </html>
