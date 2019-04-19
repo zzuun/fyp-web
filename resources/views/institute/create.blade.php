@@ -15,7 +15,7 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="../login.css">
+    <link rel="stylesheet" href="../../login.css">
       <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
 
 </head>
@@ -39,7 +39,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="../img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="index.html"><img src="../../img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -57,8 +57,8 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                                {{-- <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="index.html">Home</a></li>
                                         <li><a href="courses.html">Courses</a></li>
@@ -69,11 +69,11 @@
                                         <li><a href="regular-page.html">Regular Page</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                </li>
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                </li> --}}
+                                <li><a href="courses.html">Institutes</a></li>
+                                <li><a href="instructors.html">Departments</a></li>
+                                <li><a href="blog.html">Degrees</a></li>
+                                {{-- <li><a href="contact.html">Contact</a></li> --}}
                             </ul>
 
                             <!-- Search Button -->
@@ -84,10 +84,6 @@
                                 <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
                                 <a  href="{{route('admin.logout')}}"class="btn">Logout</a>
-                                <!-- @else
-                                <a href="{{route('register')}}" class="btn">Register</a>
-
-                                <a  href="{{route('login')}}"class="btn">Login</a> -->
                                 @endif
                             </div>
 
@@ -101,71 +97,33 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Hero Area Start ##### -->
-
-    <!-- ##### Register Now Start ##### -->
-    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center" style="background-image: url(../img/core-img/texture.png);">
-        <!-- Register Contact Form -->
-        <div class="register-contact-form mb-100 wow fadeInUp" align="center"; data-wow-delay="250ms" >
-            <div class="container-fluid">
-                <div class="row  align-items-center">
-                    <div class="col-12 ">
-                        <div class="forms">
-                            <h4 style="text-align:center;">Hello Admin</h4>
-                            <!-- <form action="/login" method="post">
-                               {{ csrf_field() }}
-                                <div class="row">
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                      @if ($errors->has('message'))
-                                          <div class="alert alert-danger" role="alert">{{$errors->first('message')}}</div>
-                                      @endif
-                                    </div>
-                                    <div class="col-12">
-                                    <div class="checkbox">
-                                      <label><input type="checkbox" name="remember" value="1" checked> Remember me</label>
-                                    </div>
-                                  </div>
-                                    <div class="col-12">
-
-                                        <button class="btn btn-success w-50">Log In</button>
-
-                                  </div>
-                                  <div class="col-12">
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @endif
-                                  </div>
-                                </div>
-                            </form> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-          <!--  <div>
-              <span class="txt1 p-b-17">
-							Or
-						</span>
-            <br>
-						<a href="#" class="txt2">
-							<h4>Sign Up<h4>
-						</a>
-          </div>-->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>New Institute</h3>
+          </div>
         </div>
 
-        <!-- Register Now Countdown -->
+        <form action="{{route('institute.store')}}" method="post">
+            <div class="row">
+              <div class="col-md-12">
+                <strong>Name:</strong>
+                <input type="text" name="name" placeholder="Name" class="form-control">
+              </div>
+              <div class="col-md-12">
+                <strong>Name:</strong>
+                <input type="text" name="name" placeholder="Name" class="form-control">
+              </div>
+              <div class="col-md-12">
+                <a href="{{route('institute.index')}}" class="btn btn-sm btn-success">Back</a>
+                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+              </div>
 
+            </div>
+        </form>
+
+      </div>
     </section>
     <!-- ##### Register Now End ##### -->
 
@@ -178,7 +136,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="../img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="../../img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -192,15 +150,15 @@
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="../customjs/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../../customjs/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="../customjs/bootstrap/popper.min.js"></script>
+    <script src="../../customjs/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="../customjs/bootstrap/bootstrap.min.js"></script>
+    <script src="../../customjs/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="../customjs/plugins/plugins.js"></script>
+    <script src="../../customjs/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="../customjs/active.js"></script>
+    <script src="../../customjs/active.js"></script>
 </body>
 
 </html>

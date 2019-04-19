@@ -89,4 +89,7 @@ Route::prefix('admin')->group(function(){
   Route::get('/password/reset','Auth\AdminForgotPasswordController@showLinkRequesForm')->name('admin.password.request');
   Route::post('/password/reset','Auth\AdminResetPasswordController@reset');
   Route::get('/password/reset/{token}','Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+
+  //institutes
+  Route::resource('/institute','InstituteController');
 });
