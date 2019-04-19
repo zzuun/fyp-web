@@ -128,11 +128,11 @@
               <td>{{$d->address->location}}</td>
               <td>
                 <form action="{{route('institute.destroy', $d->id)}}" method="post">
-                  <a class="btn btn-sm btn-success" href="{{route('institute.show',$d->id)}}">Show</a>
-                  <a class="btn btn-sm btn-warning" href="{{route('institute.edit',$d->id)}}">Edit</a>
+                  <a class="btn btn-sm btn-outline-success" href="{{route('institute.show',$d->id)}}">Show</a>
+                  <a class="btn btn-sm btn-outline-warning" href="{{route('institute.edit',$d->id)}}">Edit</a>
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
               </td>
             </tr>
