@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+  protected $fillable = [
+      'location', 'city', 'email', 'website', 'lat', 'lng', 'phone_number', 'town_id', 'subarea_id', 'institute_id'
+  ];
   public function institute()
   {
       return $this->belongsTo('App\Institute');

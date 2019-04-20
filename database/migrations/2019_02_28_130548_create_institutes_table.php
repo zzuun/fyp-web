@@ -17,7 +17,7 @@ class CreateInstitutesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->boolean('transportation');
-            $table->boolean('instituteType');
+            $table->string('instituteType');
             $table->boolean('hostel');
             $table->string('sector');
             $table->string('affiliation');
