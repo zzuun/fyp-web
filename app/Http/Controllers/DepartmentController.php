@@ -53,4 +53,32 @@ class DepartmentController extends Controller
     $data = Department::with('faculty')->where('id',$id)->first();
     return view('department.details', compact('data'));
   }
+
+  public function edit($id)
+  {
+    $data = Department::find($id);
+    return view('department.edit', compact('data'));
+  }
+
+  public function update(Request $request, $id)
+  {
+    $dept = Department::find($id);
+    $dept->name = $request->get('name');
+    $dept->departmentType = $request->get('departmentType');
+    $dept->institute_id = $request->get('institute_id');
+    $dept->save();
+    return redirect()->route('department.index')
+                      ->with('success','Department Updated Successfully!');
+  }
+
+  public function destroy($id)
+  {
+    $d = Department::with('faculty')->where('id',$id)->first();
+    foreach ($d->faculty as $f) {
+      $f->delete();
+    }
+    $d->delete();
+    return redirect()->route('department.index')
+                      ->with('success','Department Deleted Successfully!');
+  }
 }
