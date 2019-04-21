@@ -63,14 +63,13 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
      $towns->wherein("towns.name",$area_filter);
      $result = $towns->get();
      $i = 0;
-     foreach ($area_filter as $a) {
-       $temp = DB::table('towns')->join('subareas','towns.id','subareas.town_id')->where('towns.name',$a)->count();
-       $temp--;
+     foreach ($result as $a) {
+       $temp = DB::table('addresses')->join('subareas','subareas.id','addresses.subarea_id')->where('subareas.name',$a->name)->count();
        $counts[$i++]=$temp;
      }
      $i = 0;
      foreach ($result as $r) {
-       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value='.$r->name.'>'.$r->name.'  ('.$counts[$i++].')</label>';
+       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value='.$r->name.'> '.$r->name.'  ('.$counts[$i++].')</label>';
      }
   }
   return $output;
@@ -93,8 +92,14 @@ Route::prefix('admin')->group(function(){
 
   //subareas
   Route::get('/getSubareas','AdminController@subarea');
+  Route::get('/getLatLng','AdminController@latlng');
 
+  //faculty
+  Route::DELETE('/faculty/{faculty}','FacultyController@destroy')->name('faculty.destroy');
+  Route::get('/faculty/{faculty}/edit','FacultyController@edit')->name('faculty.edit');
 
   //institutes
   Route::resource('/institute','InstituteController');
+  Route::resource('/department','DepartmentController');
+  Route::resource('/degree','DegreeController');
 });

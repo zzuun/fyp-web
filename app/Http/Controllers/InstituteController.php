@@ -27,24 +27,6 @@ class InstituteController extends Controller
 
     public function store(Request $request)
     {
-      // $request->validate([
-      //   'name' => 'required|string',
-      //   'transportation' => 'required|boolean',
-      //   'instituteType' => 'required',
-      //   'hostel' => 'required|boolean',
-      //   'sector' => 'required|boolean',
-      //   'affiliation' => 'required|string',
-      //   'principal_name' => 'required|string',
-      //   'coEducation' => 'required|boolean',
-      //   'scholarship' => 'required|boolean',
-      //   'location' => 'required|string',
-      //   'town_id' => 'required',
-      //   'subarea_id' => 'required',
-      //   'email' => 'required|email',
-      //   'website' => 'required',
-      //   'city' => 'required',
-      //   'phone_number' => 'required',
-      // ]);
       $data = $request->all();
       $i = Institute::create([
           'name' => $data['name'],
@@ -65,8 +47,8 @@ class InstituteController extends Controller
         'subarea_id' => $data['subarea_id'],
         'city' => $data['city'],
         'email' => $data['email'],
-        'lat' => 31.4,
-        'lng' => 76.4,
+        'lat' => $data['lat'],
+        'lng' => $data['lng'],
         'website' => $data['website'],
         'institute_id' => $i->id,
         'phone_number' => $data['phone_number'],
@@ -74,5 +56,58 @@ class InstituteController extends Controller
       $a->save();
       return redirect()->route('institute.index')
                       ->with('success','New Institute Created Successfully');
+    }
+
+    public function show($id)
+    {
+      $data = Institute::with('address','degrees','departments')->where('id',$id)->first();
+      return view('institute.details', compact('data'));
+    }
+
+    public function edit($id)
+    {
+      $data = Institute::with('address')->where('id',$id)->first();
+      return view('institute.edit', compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+      $institute = Institute::with('address')->where('id',$id)->first();
+      $institute->name = $request->get('name');
+      $institute->sector = $request->get('sector');
+      $institute->transportation = $request->get('transportation');
+      $institute->coEducation = $request->get('coEducation');
+      $institute->scholarship = $request->get('scholarship');
+      $institute->hostel = $request->get('hostel');
+      $institute->affiliation = $request->get('affiliation');
+      $institute->instituteType = $request->get('instituteType');
+      $institute->important_dates = $request->get('important_dates');
+      $institute->principal_name = $request->get('principal_name');
+      $institute->save();
+      $address = $institute->address;
+      $institute->address->location = $request->get('location');
+      $institute->address->lat = $request->get('lat');
+      $institute->address->lng = $request->get('lng');
+      $institute->address->website = $request->get('website');
+      $institute->address->Email = $request->get('email');
+      $institute->address->phone_number = $request->get('phone_number');
+      $institute->address->town_id = $request->get('town_id');
+      $institute->address->subarea_id = $request->get('subarea_id');
+      $institute->address->city = $request->get('city');
+      $institute->address->save();
+      return redirect()->route('institute.index')
+                        ->with('success','Institute Successfully Updated!');
+    }
+
+    public function destroy($id)
+    {
+      $institute = $institute = Institute::with('address','departments','degrees')->where('id',$id)->first();
+      $institute->address->delete();
+      $institute->departments->delete();
+      $institute->degrees->delete();
+      $institute->address->delete();
+      $institute->delete();
+      return redirect()->route('institute.index')
+                        ->with('success','Institute Successfully Deleted!');
     }
 }

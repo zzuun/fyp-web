@@ -57,10 +57,10 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{route('page.home')}}">Home</a></li>
-                                <li><a href="{{route('institute.index')}}">Institutes</a></li>
-                                <li><a href="{{route('department.index')}}">Departments</a></li>
-                                <li><a href="{{route('degree.index')}}">Degrees</a></li>
+                              <li><a href="{{route('page.home')}}">Home</a></li>
+                              <li><a href="{{route('institute.index')}}">Institutes</a></li>
+                              <li><a href="{{route('department.index')}}">Departments</a></li>
+                              <li><a href="{{route('degree.index')}}">Degrees</a></li>
                             </ul>
 
                             <!-- Search Button -->
@@ -84,71 +84,51 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Hero Area Start ##### -->
-
-    <!-- ##### Register Now Start ##### -->
-    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center" style="background-image: url(../img/core-img/texture.png);">
-        <!-- Register Contact Form -->
-        <div class="register-contact-form mb-100 wow fadeInUp" align="center"; data-wow-delay="250ms" >
-            <div class="container-fluid">
-                <div class="row  align-items-center">
-                    <div class="col-12 ">
-                        <div class="forms">
-                            <h4 style="text-align:center;">Hello Admin</h4>
-                            <!-- <form action="/login" method="post">
-                               {{ csrf_field() }}
-                                <div class="row">
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                      @if ($errors->has('message'))
-                                          <div class="alert alert-danger" role="alert">{{$errors->first('message')}}</div>
-                                      @endif
-                                    </div>
-                                    <div class="col-12">
-                                    <div class="checkbox">
-                                      <label><input type="checkbox" name="remember" value="1" checked> Remember me</label>
-                                    </div>
-                                  </div>
-                                    <div class="col-12">
-
-                                        <button class="btn btn-success w-50">Log In</button>
-
-                                  </div>
-                                  <div class="col-12">
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @endif
-                                  </div>
-                                </div>
-                            </form> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-          <!--  <div>
-              <span class="txt1 p-b-17">
-							Or
-						</span>
-            <br>
-						<a href="#" class="txt2">
-							<h4>Sign Up<h4>
-						</a>
-          </div>-->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h3>List Of Departments</h3>
+          </div>
+          <div class="col-sm-2">
+            <a class="btn btn-sm btn-success" href="{{route('department.create')}}">Create New Department</a>
+          </div>
         </div>
+        @if($message = Session::get('success'))
+          <div class="alert alert-success">
+            <p>{{$message}}</p>
+          </div>
+        @endif
 
-        <!-- Register Now Countdown -->
+        <table class="table table-hover table-sm">
+          <tr>
+            <th width="50px"><b>No.</b></th>
+            <th width="50px"><b>Name</b></th>
+            <th width="50px"><b>Department Type</b></th>
+            <th width="50px"><b>Action</b></th>
+          </tr>
 
+          <?php foreach ($data as $d): ?>
+            <tr>
+              <td><b>{{++$i}}</b></td>
+              <td>{{$d->name}}</td>
+              <td>{{$d->departmentType}}</td>
+              <td>
+                <form action="{{route('department.destroy', $d->id)}}" method="post">
+                  <a class="btn btn-sm btn-outline-success" href="{{route('department.show',$d->id)}}">Show</a>
+                  <a class="btn btn-sm btn-outline-warning" href="{{route('department.edit',$d->id)}}">Edit</a>
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+
+        </table>
+        {!!$data->links()!!}
+        </div>
+      </div>
     </section>
     <!-- ##### Register Now End ##### -->
 

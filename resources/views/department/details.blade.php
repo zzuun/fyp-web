@@ -85,7 +85,81 @@
 
     <!-- ##### Hero Area Start ##### -->
     <section>
-      <form action="{{route('institute.store')}}" method="post">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>Department Details</h3>
+          </div>
+          <br>
+            <div class="col-2">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Details</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Faculy</a>
+              </div>
+            </div>
+            <div class="col-10">
+              <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                  <div class="container">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <strong>Name: </strong>{{$data->name}}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <strong>Department Type: </strong>{{$data->departmentType}}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        @php
+                          $i = App\Institute::find($data->institute_id);
+                        @endphp
+                        <div class="form-group">
+                            <strong>Institute: </strong>{{$i->name}}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                  <div class="container">
+                    <table class="table table-hover table-sm">
+                      <tr>
+                        <th width="50px"><b>No.</b></th>
+                        <th width="50px"><b>Name</b></th>
+                        <th width="50px"><b>Designation</b></th>
+                        <th width="50px">Action</th>
+                      </tr>
+                      @php
+                        $i=0;
+                      @endphp
+                      <?php foreach ($data->faculty as $f): ?>
+                        <tr>
+                          <td><b>{{++$i}}</b></td>
+                          <td>{{$f->name}}</td>
+                          <td>{{$f->designation}}</td>
+                          <td>
+                            <form action="{{route('faculty.destroy', $f->id)}}" method="post">
+                              <a class="btn btn-sm btn-outline-warning" href="{{route('faculty.edit',$f->id)}}">Edit</a>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <a class="btn btn-sm btn-success" href="{{route('department.index')}}">Back</a>
+          </div>
+          <br>
+      </div>
+      {{-- <form action="{{route('institute.store')}}" method="post">
         {{ csrf_field() }}
       <div class="container">
         <div class="form-row">
@@ -100,7 +174,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="principal_name"><strong>Principal Name</strong></label>
-                <input type="text" class="form-control" id="principal_name" name="principal_name" placeholder="Principal/Dean Name" required>
+                <input type="text" class="form-control" id="principal_name" name="principal_name" placeholder="Principal/Vice Chancellor Name" required>
               </div>
             </div>
             <div class="form-row">
@@ -199,16 +273,6 @@
                 <input type="text" class="form-control" id="location" name="location" placeholder="1234 Main St" required>
               </div>
               <div class="form-group col-md-2">
-                <label for="latitude"><strong>latitude</strong></label>
-                <input type="text" class="form-control" id="lat" name="lat" value="" readonly>
-              </div>
-              <div class="form-group col-md-2">
-                <label for="longitude"><strong>longitude</strong></label>
-                <input type="text" class="form-control" id="lng" name="lng" value="" readonly>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-2">
                 @php
                   $towns = App\Town::select('name','id')->get();
                 @endphp
@@ -221,40 +285,43 @@
                 </select>
               </div>
               <div class="form-group col-md-2">
+                @php
+
+                @endphp
                 <label for="subarea"><strong>Subarea</strong></label>
                 <select id="subarea" name="subarea_id" class="form-control" required>
                   <option selected>Choose...</option>
                 </select>
               </div>
-              <div class="form-group col-md-8">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
                 <label for="email"><strong>Email</strong></label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
               </div>
-
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="website"><strong>Website</strong></label>
                 <input type="text" class="form-control" id="website" name="website" placeholder="https://example.edu/" required>
               </div>
-              <div class="form-group col-md-4">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
                 <label for="city"><strong>City</strong></label>
                 <select id="city" name="city" class="form-control" required>
                   <option selected>Choose...</option>
                   <option value="Lahore">Lahore</option>
                 </select>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="phone_number"><strong>Phone Number</strong></label>
                 <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="0423-1234567" required>
               </div>
             </div>
-            <a class="btn btn-sm btn-success" href="{{route('institute.index')}}">Back</a>
-            <button type="submit" class="btn btn-sm btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Create</button>
           </div>
         </form>
         <br>
-      </div>
+      </div> --}}
     </section>
     <!-- ##### Register Now End ##### -->
 
@@ -301,19 +368,6 @@
             data: {town_id:town_id,_token: "{{csrf_token()}}"},
             success:function(data){
               $('#subarea').html(data);
-            }
-          });
-        });
-        $('#location').on('change',function(){
-          var address = $(this).val();
-          $.ajax({
-            url: '/admin/getLatLng',
-            type: 'GET',
-            data: {address: address, _token: "{{csrf_token()}}"},
-            success:function(data){
-              console.log(data);
-              $('#lat').val(data[0]);
-              $('#lng').val(data[1]);
             }
           });
         });

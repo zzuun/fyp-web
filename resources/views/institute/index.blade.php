@@ -57,23 +57,10 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{route('page.home')}}">Home</a></li>
-                                {{-- <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </li> --}}
-                                <li><a href="courses.html">Institutes</a></li>
-                                <li><a href="instructors.html">Departments</a></li>
-                                <li><a href="blog.html">Degrees</a></li>
-                                {{-- <li><a href="contact.html">Contact</a></li> --}}
+                              <li><a href="{{route('page.home')}}">Home</a></li>
+                              <li><a href="{{route('institute.index')}}">Institutes</a></li>
+                              <li><a href="{{route('department.index')}}">Departments</a></li>
+                              <li><a href="{{route('degree.index')}}">Degrees</a></li>
                             </ul>
 
                             <!-- Search Button -->
@@ -132,7 +119,7 @@
                   <a class="btn btn-sm btn-outline-warning" href="{{route('institute.edit',$d->id)}}">Edit</a>
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                  <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
               </td>
             </tr>

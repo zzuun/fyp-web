@@ -290,8 +290,7 @@
 
                                 @foreach($areas as $area)
 
-                                <?php $c_area = App\Town::where('name',$area->name)->count();
-                                      $c_area--;
+                                <?php $c_area = DB::table('addresses')->join('towns','towns.id','addresses.town_id')->where('towns.name',$area->name)->count();
                                  ?>
 
                                   <label  style="word-wrap:break-word">

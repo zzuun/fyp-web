@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
+  protected $fillable = [
+      'name', 'departmentType', 'institute_id',
+  ];
   public function institute()
   {
       return $this->belongsTo('App\Institute');
   }
   public function faculty()
   {
-      return $this->hasOne('App\Faculty');
+      return $this->hasMany('App\Faculty');
   }
   public function degrees()
   {

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Town;
 use Illuminate\Http\Request;
+use GuzzleHttp;
+
+// \Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class AdminController extends Controller
 {
@@ -28,13 +32,40 @@ class AdminController extends Controller
 
     public function subarea(Request $request)
     {
-      $output = '<option selected>Choose...</option>';
+      $output = '<option>Choose...</option>';
       if (isset($_GET["town_id"])) {
         $subareas = Town::with('subareas')->where('id',$_GET["town_id"])->first();
-        foreach ($subareas->subareas as $s) {
-          $output.='<option value='.$s->id.'>'.$s->name.'</option>';
+        if(isset($_GET["id"])){
+          $id = $_GET["id"];
+          foreach ($subareas->subareas as $s) {
+            if ($id == $s->id) {
+              $output.='<option selected value='.$s->id.'>'.$s->name.'</option>';
+            }
+            else {
+              $output.='<option value='.$s->id.'>'.$s->name.'</option>';
+            }
+          }
+        }
+        else {
+          foreach ($subareas->subareas as $s) {
+            $output.='<option value='.$s->id.'>'.$s->name.'</option>';
+          }
         }
       }
       return $output;
+    }
+
+    public function latlng(Request $request)
+    {
+      $output = array();
+      if(isset($_GET["address"])){
+        $address = $_GET["address"];
+        $client = new Client();
+        $result = (string)  $client->post("https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso")->getBody();
+        $json = json_decode($result);
+        $output[0] = $json->results[0]->geometry->location->lat;
+        $output[1] = $json->results[0]->geometry->location->lng;
+        return $output;
+      }
     }
 }
