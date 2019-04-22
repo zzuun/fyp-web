@@ -20,6 +20,8 @@ Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/compare','pageController@compare')->name('page.compare');
 
+Route::get('/university','pageController@university');
+
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){
   Route::get('/home','pageController@home')->name('page.home');

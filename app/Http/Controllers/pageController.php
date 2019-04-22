@@ -56,4 +56,9 @@ class pageController extends Controller
     {
       return view('timer');
     }
+
+    public function university()
+    {
+      return view('universityhomepage');
+    }
 }

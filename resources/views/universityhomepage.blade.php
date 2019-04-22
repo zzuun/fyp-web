@@ -787,7 +787,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     $("#myInput").on("keyup", function () {
     var search = this.value;
     $("#myUL, .curriculum-level").show().filter(function () {
-      return $("li", this).text().indexOf(search) < 0;
+      return $("li", this).text().toLowerCase().indexOf(search) < 0;
     }).hide();
     });
 </script>
