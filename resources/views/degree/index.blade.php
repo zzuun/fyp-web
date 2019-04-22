@@ -88,10 +88,10 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10">
-            <h3>List Of Institutes</h3>
+            <h3>List Of Degrees</h3>
           </div>
           <div class="col-sm-2">
-            <a class="btn btn-sm btn-success" href="{{route('institute.create')}}">Create New Institute</a>
+            <a class="btn btn-sm btn-success" href="{{route('degree.create')}}">Create New Degree</a>
           </div>
         </div>
         @if($message = Session::get('success'))
@@ -104,20 +104,24 @@
           <tr>
             <th width="50px"><b>No.</b></th>
             <th width="50px"><b>Name</b></th>
-            <th width="50px"><b>Location</b></th>
+            <th width="50px"><b>Institute</b></th>
             <th width="50px"><b>Action</b></th>
           </tr>
-
+          @php
+            $i=0;
+          @endphp
           <?php foreach ($data as $d): ?>
+            @php
+                $name = App\Institute::find($d->institute_id);
+            @endphp
             <tr>
               <td><b>{{++$i}}</b></td>
               <td>{{$d->name}}</td>
-              <td>{{$d->address->location}}</td>
+              <td>{{$name->name}}</td>
               <td>
-                <form action="{{route('institute.destroy', $d->id)}}" method="post">
-                  <a class="btn btn-sm btn-outline-success" href="{{route('institute.show',$d->id)}}">Show</a>
-                  <a class="btn btn-sm btn-outline-warning" href="{{route('institute.edit',$d->id)}}">Edit</a>
-                  <a class="btn btn-sm btn-outline-info" href="{{route('department.create')}}">Add Department</a>
+                <form action="{{route('degree.destroy', $d->id)}}" method="post">
+                  <a class="btn btn-sm btn-outline-success" href="{{route('degree.show',$d->id)}}">Show</a>
+                  <a class="btn btn-sm btn-outline-warning" href="{{route('degree.edit',$d->id)}}">Edit</a>
                   @csrf
                   @method('DELETE')
                   <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>

@@ -85,73 +85,107 @@
 
     <!-- ##### Hero Area Start ##### -->
     <section>
-      <form action="{{route('department.store')}}" method="post">
+      <form action="{{route('degree.store')}}" method="post">
         {{ csrf_field() }}
-      <div class="container add">
+      <div class="container">
         <div class="form-row">
           <div class="col-lg-12">
-            <h3>Department</h3>
+            <h3>Degree</h3>
           </div>
         </div>
             <div class="form-row">
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-6">
                 <label for="name"><strong>Name</strong></label>
-                <input type="text" class="form-control" id="name" name="deptName" placeholder="Name" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
               </div>
               <div class="form-group col-md-2">
-                <label for="departmentType"><strong>Department Type</strong></label>
-                <select id="departmentType" name="departmentType" class="form-control" required>
+                <label for="duration"><strong>Duration (Years)</strong></label>
+                <input step="any" type="number" class="form-control" id="duration" name="duration" placeholder="(e.g) 2" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="system"><strong>System</strong></label>
+                <select id="system" name="system" class="form-control" required>
                   <option selected>Choose...</option>
-                  <option value="Medicine">Medicine</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="CS & IT">CS & IT</option>
-                  <option value="Business">Business</option>
-                  <option value="Arts & Design">Arts & Design</option>
-                  <option value="Agriculture">Agriculture</option>
+                  <option value="Semester">Semester</option>
+                  <option value="Annual">Annual</option>
                 </select>
               </div>
-              <div class="form-group col-md-5">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="noOfSeats"><strong>Number Of Seats</strong></label>
+                <input type="number" class="form-control" id="duration" name="noOfSeats" placeholder="(e.g.) 200" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="creditHours"><strong>Credit Hours</strong></label>
+                <input type="number" class="form-control" id="creditHours" name="creditHours" placeholder="(e.g.) 20" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="lastMerit"><strong>Last Merit</strong></label>
+                <input step="any" type="number" class="form-control" id="lastMerit" name="lastMerit" placeholder="(e.g.) 79s" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+              </div>
+              <div class="form-group col-md-3">
+                <div class="form-radio">
+                  <label for="shiftMorning"><strong>Morning Shift</strong></label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shiftMorning" id="inlineRadio1" value="1" required>
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shiftMorning" id="inlineRadio2" value="0" required>
+                    <label class="form-check-label" for="inlineRadio2">No</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div class="form-radio">
+                  <label for="shiftAfternoon"><strong>Afternoon Shift</strong></label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shiftAfternoon" id="inlineRadio1" value="1" required>
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shiftAfternoon" id="inlineRadio2" value="0" required>
+                    <label class="form-check-label" for="inlineRadio2">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="fees"><strong>Fees (Per Year)</strong></label>
+                <input type="number" class="form-control" id="fees" name="fees" placeholder="12345" required>
+              </div>
+              <div class="form-group col-md-3">
                 @php
-                  $inst = App\Institute::where('instituteType','University')->select('name','id')->get();
+                  $i = App\Institute::select('name','id')->get();
                 @endphp
                 <label for="institute_id"><strong>Institute</strong></label>
                 <select id="institute_id" name="institute_id" class="form-control" required>
-                  <option selected>Choose a Institute For Department</option>
-                  @foreach ($inst as $i)
-                      <option value="{{$i->id}}">{{$i->name}}</option>
+                  <option selected>Choose...</option>
+                  @foreach ($i as $in)
+                    <option value="{{$in->id}}">{{$in->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                @php
+                  $towns = App\Department::select('name','id')->get();
+                @endphp
+                <label for="department_id"><strong>Department</strong></label>
+                <select id="department_id" name="department_id" class="form-control" required>
+                  <option selected>Choose...</option>
+                  @foreach ($towns as $town)
+                    <option value="{{$town->id}}">{{$town->name}}</option>
                   @endforeach
                 </select>
               </div>
             </div>
-
-            <hr>
-
-            <div class="form-row">
-              <div class="col-lg-12">
-                <h5>Faculty</h5>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="name"><strong>Name</strong></label>
-                <input type="text" class="form-control" id="name" name="name[]" placeholder="Name" required>
-              </div>
-              <div class="form-group col-md-5">
-                <label for="designation"><strong>Designation</strong></label>
-                <select id="designation" name="designation[]" class="form-control" required>
-                  <option selected>Choose...</option>
-                  <option value="HOD">HOD</option>
-                  <option value="Incharge/Principal">Incharge/Principal</option>
-                  <option value="Assistant Professor">Assistant Professor</option>
-                  <option value="Lecturer">Lecturer</option>
-                </select>
-              </div>
-              <div class="form-group col-md-1">
-                  <label style="visibility: hidden;" for="addRow"><strong>Add Row</strong></label>
-                <a style="width:100%;" class="btn btn-outline-success addRow" href="#">+</a>
-              </div>
-            </div>
-          </div>
-          <div class="container">
-            <a class="btn btn-sm btn-success" href="{{route('department.index')}}">Back</a>
+            <a class="btn btn-sm btn-success" href="{{route('degree.index')}}">Back</a>
             <button type="submit" class="btn btn-sm btn-primary">Create</button>
           </div>
         </form>
@@ -206,34 +240,6 @@
             }
           });
         });
-
-        $('.addRow').on('click',function(){
-          var add = '<div class="form-row">'+
-          '<div class="form-group col-md-6">'+
-            '<label for="name"><strong>Name</strong></label>'+
-            '<input type="text" class="form-control" id="name" name="name[]" placeholder="Name" required>'+
-          '</div>'+
-          '<div class="form-group col-md-5">'+
-            '<label for="designation"><strong>Designation</strong></label>'+
-            '<select id="designation" name="designation[]" class="form-control" required>'+
-              '<option selected>Choose...</option>'+
-              '<option value="Incharge/Principal">Incharge/Principal</option>'+
-              '<option value="Assistant Professor">Assistant Professor</option>'+
-              '<option value="Lecturer">Lecturer</option>'+
-            '</select>'+
-          '</div>'+
-          '<div class="form-group col-md-1">'+
-              '<label style="visibility: hidden;" for="addRow"><strong>Add Row</strong></label>'+
-            '<a style="width:100%;" class="btn btn-outline-danger remove" href="#">-</a>'+
-          '</div>'+
-          '</div>';
-          $('.add').append(add);
-        });
-
-        $('.add').on('click','.remove',function() {
-          $(this).parent().parent().remove();
-        });
-
         $('#location').on('change',function(){
           var address = $(this).val();
           $.ajax({

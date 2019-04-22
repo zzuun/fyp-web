@@ -87,7 +87,7 @@
     <section>
       <form action="{{route('institute.store')}}" method="post">
         {{ csrf_field() }}
-      <div class="container">
+      <div class="container main">
         <div class="form-row">
           <div class="col-lg-12">
             <h3>Institute</h3>
@@ -125,7 +125,7 @@
                 <select id="affiliation" name="affiliation" class="form-control" required>
                   <option selected>Choose...</option>
                   <option value="HEC">HEC</option>
-                  <option value="Fedral Board">Fedral Board</option>
+                  <option value="A/O Level">A/O Level</option>
                   <option value="BISE">BISE</option>
                 </select>
               </div>
@@ -194,8 +194,11 @@
             <hr>
 
             <div class="form-row">
+              <div class="col-lg-12">
+                <h5>Address</h5>
+              </div>
               <div class="form-group col-md-8">
-                <label for="location"><strong>Address</strong></label>
+                <label for="location"><strong>Location</strong></label>
                 <input type="text" class="form-control" id="location" name="location" placeholder="1234 Main St" required>
               </div>
               <div class="form-group col-md-2">
@@ -249,6 +252,8 @@
                 <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="0423-1234567" required>
               </div>
             </div>
+          </div>
+          <div class="container">
             <a class="btn btn-sm btn-success" href="{{route('institute.index')}}">Back</a>
             <button type="submit" class="btn btn-sm btn-primary">Create</button>
           </div>
@@ -304,6 +309,34 @@
             }
           });
         });
+
+        $('.addRow').on('click',function(){
+          var add = '<div class="form-row">'+
+          '<div class="form-group col-md-6">'+
+            '<label for="name"><strong>Name</strong></label>'+
+            '<input type="text" class="form-control" id="name" name="name[]" placeholder="Name" required>'+
+          '</div>'+
+          '<div class="form-group col-md-5">'+
+            '<label for="designation"><strong>Designation</strong></label>'+
+            '<select id="designation" name="designation[]" class="form-control" required>'+
+              '<option selected>Choose...</option>'+
+              '<option value="Incharge/Principal">Incharge/Principal</option>'+
+              '<option value="Assistant Professor">Assistant Professor</option>'+
+              '<option value="Lecturer">Lecturer</option>'+
+            '</select>'+
+          '</div>'+
+          '<div class="form-group col-md-1">'+
+              '<label style="visibility: hidden;" for="addRow"><strong>Add Row</strong></label>'+
+            '<a style="width:100%;" class="btn btn-outline-danger remove" href="#">-</a>'+
+          '</div>'+
+          '</div>';
+          $('.main').append(add);
+        });
+
+        $('.main').on('click','.remove',function() {
+          $(this).parent().parent().remove();
+        });
+
         $('#location').on('change',function(){
           var address = $(this).val();
           $.ajax({

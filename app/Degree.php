@@ -7,7 +7,13 @@ use App\Dataviewer;
 
 class Degree extends Model
 {
-
+  protected $fillable = [
+      'name', 'shiftMorning', 'shiftAfternoon', 'noOfSeats', 'duration', 'lastMerit', 'fees', 'institute_id', 'department_id', 'system', 'creditHours', 'shiftAfternoon', 'numberOfViews'
+  ];
+  public function degreeGroup()
+  {
+    return $this->hasOne('App\degreeGroups');
+  }
   public function preRequisites()
   {
       return $this->hasMany('App\PreRequisite');
