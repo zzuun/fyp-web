@@ -1,8 +1,6 @@
 <div class="col-12">
         @if(count($results) > 0)
-        <div class="col-12">
           <p>About {{$results->total()}} results.</p>
-        </div>
 
         <!-- <div class="col-12">
           <h5>Showing Records:{{count($results)}}</h5>

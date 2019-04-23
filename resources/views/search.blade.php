@@ -18,6 +18,8 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="searchfilters.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+
 
 </head>
 
@@ -351,12 +353,12 @@
                                   <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
                                   </a>
                               </h6>
-                              <div id="collapseFive" class="accordion-content collapse">
-                                    <div class="slidecontainer">
-                                        <input type="range" min="10000" max="200000" step="1000" value="200000" class="slider fees-range common-selector" id="fees-max-range">
-                                        <p>Max Range: <span id="max"></span>  (<span id="feecount"></span>)</p>
-                                    </div>
-                              </div>
+                                <div id="collapseFive" class="accordion-content collapse">
+                                  <div style="padding:30px";>
+                                    <input type="text" class="js-range-slider" name="fees_range" value="">
+                                    <p>(<span id="feecount"></span>) Results</p>
+                                  </div>
+                                </div>
                           </div>
 
                           <!-- Marks -->
@@ -372,6 +374,7 @@
                                     <div class="slidecontainer">
                                       <input type="range" min="33" max="100" step="1" value="100" class="slider common-selector" id="marks-max-range">
                                       <p>Maximum Marks: <span id="marks-max"></span>  (<span id="markscount"></span>)</p>
+                                      
                                     </div>
                               </div>
                           </div>
@@ -419,11 +422,15 @@
             </div> -->
             <div class="container">
 
-               <section class="results">
-                 @include('partialViews.searchResults');
-               </section>
+              @if (count($results)>0)
 
-             </div>
+                <section class="results">
+                    @include('partialviews.searchResults');
+                </section>
+
+              @endif
+
+            </div>
            </div>
           </div>
       </div>
@@ -466,6 +473,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
+    <!-- range slider plugin js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
 
 
 
@@ -475,47 +484,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </script>
 
   <script>
-      $(document).ready(function()
-      {
-        var maxslider = document.getElementById("fees-max-range");
-        document.getElementById("max").innerHTML = maxslider.value;
-        maxslider.oninput = function() {
-          document.getElementById("max").innerHTML = this.value;
-        }
-      });
-     </script>
-
-  <script>
-      $(document).ready(function()
-      {
-        var maxslider = document.getElementById("marks-max-range");
-        document.getElementById("marks-max").innerHTML = maxslider.value;
-        maxslider.oninput = function() {
-          document.getElementById("marks-max").innerHTML = this.value;
-        }
-      });
-      function myFunction(x)
-          {
-            x.classList.toggle("fa-thumbs-down");
-          }
-    </script>
-  <script>
   $(document).ready(function(){
-    getcount();
-    function getcount(){
-      var maxfees = $('#fees-max-range').val();
+
+    getFeesCount();
+      function getFeesCount(minfees=10000,maxfees=500000){
       $.ajax({
         url:"/getFeeCount",
         method:"post",
-        data:{fees:maxfees, _token: "{{csrf_token()}}"},
+        data:{minfees:minfees, maxfees:maxfees, _token: "{{csrf_token()}}"},
         success:function(data){
+          if(data < 1)
+            data=0;
           $('#feecount').html(data);
         }
       });
     }
-    $('#fees-max-range').change(function(){
-      getcount();
-    });
   });
   </script>
 
@@ -545,6 +528,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   });
 </script>
 
+
 <script>
   $(document).ready(function(){
     $('.town').click(function(){
@@ -572,7 +556,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $(document).ready(function()
         {
           filter_data();
-          function filter_data()
+          function filter_data(minfees=10000,maxfees=500000)
           {
             var search = document.getElementById('search').value;
             var town = get_filter('town');
@@ -585,16 +569,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var coEd = get_filter('coEducation');
             var sM = get_filter('shiftMorning');
             var sA = get_filter('shiftAfternoon');
-            var maxfees = $('#fees-max-range').val();
             var maxmarks= $('#marks-max-range').val();
             var group = get_filter('group');
                 $.ajax({
                     url:"/apply",
                     method:"GET",
-                    data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
+                    data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
                     success:function(data){
 
-                       $('.results').html(data);
+                      //console.log(data);
+
+                      $('.results').html(data);
                        // $('#degreeResultsArea').load(data);
                     }
                 });
@@ -608,6 +593,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 return filter;
             }
 
+
+            $('.js-range-slider').ionRangeSlider({
+              type: "integer",
+              min:10000,
+              max:500000,
+              step:10000,
+              from:10000,
+              to:500000,
+              grid:true,
+              grid_num:7,
+              keyboard:true,
+              prefix:"Rs",
+              prettyify_enabled:true,
+              prettify_separator:",",
+              skin:"big",
+              onFinish:function(data){
+                let minFees=data.from;
+                let maxFees=data.to;
+                filter_data(minFees,maxFees);
+                getFeesCount(minFees,maxFees);
+
+              }
+
+            });
+
             $(document).on('click', '.pagination a', function(event)
             {
               event.preventDefault();
@@ -617,15 +627,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
 
           function fetch_data(page)
-            {
+          {
             $.ajax({
-                url:"/apply?page="+page,
+                url:"?page="+page,
+                type:"get",
+                datatype:"html",
+
                 success:function(data)
                 {
                   $('.results').html(data);
                 }
             });
-            }
+          }
+          
 
             $(document).on('keyup','#search',function(){
                 filter_data();

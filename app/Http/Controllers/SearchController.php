@@ -110,6 +110,7 @@ class SearchController extends Controller
        }
 
        $results = $degrees->paginate(5);
+     
 
        if ($request->ajax()) {
          return view('partialViews.searchResults',compact('results'))->render();
@@ -119,18 +120,20 @@ class SearchController extends Controller
     }
 
 
-    public function search(Degree $degrees)
-    {
-        $degrees=$degrees->newQuery();
-        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
-        ->join('addresses','institutes.id','=','addresses.institute_id')
-        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
-        'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber')->orderby('numberOfViews','desc');
+    // public function search(Degree $degrees)
+    // {
+    //     $degrees=$degrees->newQuery();
+    //     $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+    //     ->join('addresses','institutes.id','=','addresses.institute_id')
+    //     ->join('towns','towns.id','addresses.town_id')
+    //     ->join('subareas','subareas.id','addresses.subarea_id')
+    //     ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
+    //     'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
 
-        $results=$degrees->paginate(5);
+    //     $results=$degrees->paginate(5);
 
-        return view('search',compact('results'));
-      }
+    //     return view('search',compact('results'));
+    //   }
 
     public function getCities(){
 

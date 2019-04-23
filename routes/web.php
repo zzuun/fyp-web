@@ -14,7 +14,7 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
-Route::get('/','SearchController@search')->name('page.main');
+Route::get('/','SearchController@filter')->name('page.main');
 Route::get('/apply','SearchController@filter');
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
@@ -39,9 +39,10 @@ Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout'
 Route::get('/comingSoon','pageController@timer')->name('page.timer');
 Route::get('/ajaxGetCities','SearchController@getCities');
 Route::post('/getFeeCount',function(){
-   if(isset($_POST["fees"])){
-      $maxRange= (int) $_POST['fees'];
-      $c_degree = App\Degree::whereBetween('fees',[10000,$maxRange])->count();
+   if(isset($_POST["fees_range"])){
+      $maxfees= (int) $_POST['maxfees'];
+      $minfees= (int) $_POST['minfees'];
+      $c_degree = App\Degree::whereBetween('fees',[$minfees,$maxfees])->count();
       return $c_degree;
    }
 });
