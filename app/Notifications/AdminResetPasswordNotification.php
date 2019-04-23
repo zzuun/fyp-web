@@ -42,7 +42,7 @@ class AdminResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->title(Lang::getFromJson('KnSaCareer'))
+        ->from(env('MAIL_USERNAME'),'KnSaCareer')
         ->subject(Lang::getFromJson('Reset Password Notification'))
         ->line(Lang::getFromJson('You are receiving this email because we received a password reset request for your Admin account.'))
         ->action(Lang::getFromJson('Reset Password'), url(config('app.url').route('admin.password.reset', ['token' => $this->token], false)))
