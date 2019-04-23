@@ -106,15 +106,13 @@ class SearchController extends Controller
 
        }
 
+       $results = $degrees->paginate(5);
 
-       dd($degrees);
-       // $results = $degrees->paginate(5);
-       //
-       // if ($request->ajax()) {
-       //   return view('partialViews.searchResults',compact('results'))->render();
-       // }
-       //
-       // return view('search',compact('results'));
+       if ($request->ajax()) {
+         return view('partialViews.searchResults',compact('results'))->render();
+       }
+
+       return view('search',compact('results'));
     }
 
 

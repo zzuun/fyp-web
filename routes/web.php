@@ -41,14 +41,14 @@ Route::get('/ajaxGetCities','SearchController@getCities');
 Route::post('/getFeeCount',function(){
    if(isset($_POST["fees"])){
       $maxRange= (int) $_POST['fees'];
-      $c_degree = App\Degree::whereBetween('fees',[10000,$maxRange])->count();
+      $c_degree = App\Degree::whereBetween('fees',[10000,$maxRange])->where('degreeLevel','INTER')->count();
       return $c_degree;
    }
 });
 Route::post('/getMarksCount',function(){
   if(isset($_POST["marks"])){
      $maxRange= (int) $_POST['marks'];
-     $c_degree = App\Degree::whereBetween('lastMerit',[33,$maxRange])->count();
+     $c_degree = App\Degree::whereBetween('lastMerit',[33,$maxRange])->where('degreeLevel','INTER')->count();
      return $c_degree;
   }
 });
