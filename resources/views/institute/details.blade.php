@@ -222,13 +222,41 @@
                       <?php endforeach; ?>
 
                     </table>
-                  @endif
+                  {{-- @endif --}}
                 </div>
                 <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                   @if ($data->degrees->isEmpty())
                     <h6>No Degrees Currently For This Institute</h6>
                   @else
-
+                    <table class="table table-hover table-sm">
+                      <tr>
+                        <th width="50px"><b>No.</b></th>
+                        <th width="50px"><b>Name</b></th>
+                        <th width="50px"><b>Institute</b></th>
+                        <th width="50px"><b>Action</b></th>
+                      </tr>
+                      <?php foreach ($data->degrees as $d): ?>
+                        @php
+                            $ne = DB::table('institutes')->where('id',$d->institute_id)->first();
+                        @endphp
+                        <tr>
+                          <td><b>{{++$i}}</b></td>
+                          <td>{{$d->name}}</td>
+                          @if (isset($ne))
+                            <td>{{$ne->name}}</td>
+                          @endif
+                          <td>
+                            <form action="{{route('degree.destroy', $d->id)}}" method="post">
+                              <a class="btn btn-sm btn-outline-success" href="{{route('degree.show',$d->id)}}">Show</a>
+                              <a class="btn btn-sm btn-outline-warning" href="{{route('degree.edit',$d->id)}}">Edit</a>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </table>
                   @endif
                 </div>
                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">

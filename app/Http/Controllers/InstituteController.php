@@ -61,8 +61,7 @@ class InstituteController extends Controller
     public function show($id)
     {
       $data = Institute::with('address','degrees','departments')->where('id',$id)->first();
-      dd($data);
-      // return view('institute.details', compact('data'));
+      return view('institute.details', compact('data'));
     }
 
     public function edit($id)
