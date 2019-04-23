@@ -14,8 +14,12 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
-Route::get('/','SearchController@filter')->name('page.main');
-Route::get('/apply','SearchController@filter');
+Route::get('/degrees','searchController@index');
+
+Route::get('/search',function(){
+  return view('search');
+})->name('page.main');
+Route::get('/apply','SearchController@filter_data');
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/compare','pageController@compare')->name('page.compare');

@@ -422,13 +422,9 @@
             </div> -->
             <div class="container">
 
-              @if (count($results)>0)
-
                 <section class="results">
-                    @include('partialviews.searchResults');
                 </section>
 
-              @endif
 
             </div>
            </div>
@@ -476,12 +472,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- range slider plugin js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
 
-
-
-    <script> $(".seat").on("click", function(){
-      $(this).css("background", "red");
-    });
-    </script>
 
   <script>
   $(document).ready(function(){
@@ -552,11 +542,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </script>
 
 
-   <script>
-        $(document).ready(function()
-        {
-          filter_data();
-          function filter_data(minfees=10000,maxfees=500000)
+  <script>
+  $(document).ready(function()
+  {
+
+    getAllDegrees();
+          
+          function getAllDegrees()
+          {
+            $.ajax({
+                    url:"/degrees",
+                    method:"GET",
+                    data:{_token: "{{csrf_token()}}"},
+                    success:function(data){
+
+                      //console.log(data);
+
+                      $('.results').html(data);
+                      
+                       // $('#degreeResultsArea').load(data);
+                    }
+                });
+          }
+          function filter_data(minfees=0,maxfees=500000)
           {
             var search = document.getElementById('search').value;
             var town = get_filter('town');
@@ -580,81 +588,63 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                       //console.log(data);
 
                       $('.results').html(data);
+                      
                        // $('#degreeResultsArea').load(data);
                     }
                 });
-            }
-            function get_filter(class_name)
-            {
-                var filter = [];
-                $('.'+class_name+':checked').each(function(){
-                    filter.push($(this).val());
-                });
-                return filter;
-            }
-
-
-            $('.js-range-slider').ionRangeSlider({
-              type: "integer",
-              min:10000,
-              max:500000,
-              step:10000,
-              from:10000,
-              to:500000,
-              grid:true,
-              grid_num:7,
-              keyboard:true,
-              prefix:"Rs",
-              prettyify_enabled:true,
-              prettify_separator:",",
-              skin:"big",
-              onFinish:function(data){
-                let minFees=data.from;
-                let maxFees=data.to;
-                filter_data(minFees,maxFees);
-                getFeesCount(minFees,maxFees);
-
-              }
-
-            });
-
-            $(document).on('click', '.pagination a', function(event)
-            {
-              event.preventDefault();
-              var page = $(this).attr('href').split('page=')[1];
-              fetch_data(page);
-
-            });
-
-          function fetch_data(page)
-          {
-            $.ajax({
-                url:"?page="+page,
-                type:"get",
-                datatype:"html",
-
-                success:function(data)
-                {
-                  $('.results').html(data);
-                }
-            });
           }
-          
 
-            $(document).on('keyup','#search',function(){
-                filter_data();
+
+
+          function get_filter(class_name)
+          {
+              var filter = [];
+              $('.'+class_name+':checked').each(function(){
+                  filter.push($(this).val());
               });
+              return filter;
+          }
 
-            $(document).on('click','.subarea',function(){
-                filter_data();
-              });
 
-            $('.common-selector').click(function(){
-                filter_data();
-            });
+          $('.js-range-slider').ionRangeSlider({
+            type: "integer",
+            min:10000,
+            max:500000,
+            step:10000,
+            from:10000,
+            to:500000,
+            grid:true,
+            grid_num:7,
+            keyboard:true,
+            prefix:"Rs",
+            prettyify_enabled:true,
+            prettify_separator:",",
+            skin:"big",
+            onFinish:function(data){
+              let minFees=data.from;
+              let maxFees=data.to;
+              filter_data(minFees,maxFees);
+              getFeesCount(minFees,maxFees);
+
+            }
+
+          });
+
+      $(document).on('keyup','#search',function(){
+          filter_data();
         });
-    </script>
 
+      $(document).on('click','.subarea',function(){
+          filter_data();
+        });
+
+      $('.common-selector').click(function(){
+          filter_data();
+      });
+  });
+    </script> 
+
+    
 </body>
 
 </html>

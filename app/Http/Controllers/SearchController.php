@@ -8,16 +8,32 @@ use App\Address;
 use App\Degree;
 class SearchController extends Controller
 {
-    public function filter(Request $request, Degree $degrees )
-    {
 
-       $degrees=$degrees->newQuery();
-       $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+    public function index(Degree $degrees)
+    {
+        $degrees=$degrees->newQuery();
+        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
        ->join('towns','towns.id','addresses.town_id')
        ->join('subareas','subareas.id','addresses.subarea_id')
        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
        'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
+
+        $degrees=$degrees->paginate(5);
+        return view('partialViews.searchResults',compact('degrees'))->render();
+    }
+
+
+    public function filter_data(Degree $degrees)
+    {
+        $degrees=$degrees->newQuery();
+        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+       ->join('addresses','institutes.id','=','addresses.institute_id')
+       ->join('towns','towns.id','addresses.town_id')
+       ->join('subareas','subareas.id','addresses.subarea_id')
+       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
+       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
+      
        if (isset($_GET["search"])) {
          $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
        }
@@ -109,14 +125,11 @@ class SearchController extends Controller
 
        }
 
-       $results = $degrees->paginate(5);
-     
+       $degrees = $degrees->paginate(5);
 
-       if ($request->ajax()) {
-         return view('partialViews.searchResults',compact('results'))->render();
-       }
+       return view('partialViews.searchResults',compact('degrees'))->render();
+       
 
-       return view('search',compact('results'));
     }
 
 
