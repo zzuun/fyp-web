@@ -172,7 +172,7 @@
 
                                 @endphp
                                 <label  style="word-wrap:break-word">
-                                    <input class="common-selector group"  type="checkbox" value= {{$d->name}} /> {{$d->name}} ({{$count}})
+                                    <input class="common-selector group"  type="checkbox" value= "{{$d->name}}" /> {{$d->name}} ({{$count}})
                                  </label>
                               @endforeach
                             </div>
@@ -352,17 +352,17 @@
                                  </a>
                              </h6>
                              <div id="collapseNine" class="accordion-content collapse">
-                                <?php $c_coEd = App\Institute::where('coEducation',1)->count() ?>
+                                <?php $c_coEd = App\Institute::where('coEducation',1)->where('instituteType','College')->count() ?>
                                <label  style="word-wrap:break-word">
                                  <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" /> Co-Education ({{$c_coEd}})
                               </label>
 
-                              <?php $c_sM = App\Degree::where('shiftMorning',1)->count() ?>
+                              <?php $c_sM = DB::table('institutes')->join('degrees','degrees.institute_id','institutes.id')->where('institutes.instituteType','College')->where('shiftMorning',1)->count(); ?>
                              <label  style="word-wrap:break-word">
                                <input id="shiftMorning" class="common-selector shiftMorning" type="checkbox" value="1" /> Morning Shift ({{$c_sM}})
                             </label>
 
-                            <?php $c_sA = App\Degree::where('shiftAfternoon',1)->count() ?>
+                            <?php $c_sA = DB::table('institutes')->join('degrees','degrees.institute_id','institutes.id')->where('institutes.instituteType','College')->where('shiftAfternoon',1)->count(); ?>
                            <label  style="word-wrap:break-word">
                              <input id="shiftAfternoon" class="common-selector shiftAfternoon" type="checkbox" value="1" /> Afternoon Shift ({{$c_sA}})
                           </label>
