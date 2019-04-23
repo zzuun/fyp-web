@@ -162,54 +162,19 @@
                             </h6>
                             <div id="collapseEight" class="accordion-content collapse">
 
-                              <?php $c_fsc = App\Degree::where('name','LIKE','%FSC%')->count() ?>
+                              @php
+                                $dg = App\degreeGroups::wherein('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->get();
+                              @endphp
 
-                              <label  style="word-wrap:break-word">
-                                  <input class="common-selector group"  type="checkbox" value="FSC" /> FSC ({{$c_fsc}})
-                               </label>
+                              @foreach ($dg as $d)
+                                @php
+                                  $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$d->name)->count();
 
-                                 <?php $c_ics = App\Degree::where('name','LIKE','%ICS%')->count() ?>
-
+                                @endphp
                                 <label  style="word-wrap:break-word">
-                                  <input class="common-selector group"  type="checkbox" value="ICS" /> ICS  ({{$c_ics}})
-                               </label>
-
-                                 <?php $c_fa = App\Degree::where('name','LIKE','%FA%')->count() ?>
-
-                               <label  style="word-wrap:break-word">
-                                   <input class="common-selector group"  type="checkbox" value="FA" /> FA ({{$c_fa}})
-                                </label>
-
-                                  <?php $c_icom = App\Degree::where('name','LIKE','%ICOM%')->count() ?>
-
-                                <label  style="word-wrap:break-word">
-                                    <input class="common-selector group"  type="checkbox" value="ICOM" /> ICOM  ({{$c_icom}})
+                                    <input class="common-selector group"  type="checkbox" value= {{$d->name}} /> {{$d->name}} ({{$count}})
                                  </label>
-
-                                 <?php $c_acca = App\Degree::where('name','LIKE','%ACCA%')->count() ?>
-
-                               <label  style="word-wrap:break-word">
-                                   <input class="common-selector group"  type="checkbox" value="ACCA" /> ACCA  ({{$c_acca}})
-                                </label>
-
-                                <?php $c_alevel = App\Degree::where('name','LIKE','%level%')->count() ?>
-
-                              <label  style="word-wrap:break-word">
-                                  <input class="common-selector group"  type="checkbox" value="A Level" /> A Level  ({{$c_alevel}})
-                               </label>
-
-                               <?php $c_he = App\Degree::where('name','LIKE','%HOME%')->count() ?>
-
-                             <label  style="word-wrap:break-word">
-                                 <input class="common-selector group"  type="checkbox" value="Home Economics" /> Home Economics  ({{$c_he}})
-                              </label>
-
-                              <?php $c_gs = App\Degree::where('name','LIKE','General%')->count() ?>
-
-                            <label  style="word-wrap:break-word">
-                                <input class="common-selector group"  type="checkbox" value="General Science" /> General Science  ({{$c_gs}})
-                             </label>
-
+                              @endforeach
                             </div>
                         </div>
 
@@ -225,12 +190,12 @@
                             </h6>
                             <div id="collapseFour" class="accordion-content collapse">
                               @php
-                                  $affiliations= App\Institute::select('affiliation')->distinct()->get();
+                                  $affiliations= App\Institute::select('affiliation')->where('instituteType','College')->distinct()->get();
 
                               @endphp
                               @foreach($affiliations as $affiliation)
                                 <?php
-                                  $c_aff = App\Institute::where('affiliation',$affiliation->affiliation)->count();
+                                  $c_aff = App\Institute::where('affiliation',$affiliation->affiliation)->where('instituteType','College')->count();
                                  ?>
                                 <label  style="word-wrap:break-word">
 
@@ -254,21 +219,21 @@
                             <div id="collapseSeven" class="accordion-content collapse">
 
                               <!-- count for hosel -->
-                              <?php $c_trans = App\Institute::where('transportation',1)->count() ?>
+                              <?php $c_trans = App\Institute::where('transportation',1)->where('instituteType','College')->count() ?>
 
                               <label  style="word-wrap:break-word">
                                   <input id="transport" class="common-selector transport" type="checkbox" value="1" /> Transportation ({{$c_trans}})
                                </label>
 
                                <!-- count for hosel -->
-                               <?php $c_hostel = App\Institute::where('hostel',1)->count() ?>
+                               <?php $c_hostel = App\Institute::where('hostel',1)->where('instituteType','College')->count() ?>
 
                                 <label  style="word-wrap:break-word">
                                   <input id="hostel" class="common-selector hostel" type="checkbox" value="1" /> Hostel ({{$c_hostel}})
                                </label>
 
                               <!-- count of scholarship -->
-                              <?php $c_sch = App\Institute::where('scholarship',1)->count() ?>
+                              <?php $c_sch = App\Institute::where('scholarship',1)->where('instituteType','College')->count() ?>
 
                               <label  style="word-wrap:break-word">
                                 <input id="scholarship" class="common-selector scholarship" type="checkbox" value="1" /> Scholarship  ({{$c_sch}})

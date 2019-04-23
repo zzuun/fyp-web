@@ -16,8 +16,10 @@ class SearchController extends Controller
        ->join('addresses','institutes.id','=','addresses.institute_id')
        ->join('towns','towns.id','addresses.town_id')
        ->join('subareas','subareas.id','addresses.subarea_id')
+       ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
+       ->where('degreeLevel','INTER')
        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
-       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
+       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
        if (isset($_GET["search"])) {
          $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
        }
@@ -42,17 +44,12 @@ class SearchController extends Controller
 
        if(isset($_GET["affiliation"]))
        {
-           $affiliation_filter = implode("','",$_GET["affiliation"]);
-           $degrees->whereRaw("institutes.affiliation in ('".$affiliation_filter."')");
-
+           $degrees->wherein('institutes.affiliation',$_GET["affiliation"]);
        }
 
        if(isset($_GET["group"]))
        {
-         $degrees->where('degrees.name', 'like',$_GET["group"][0].'%');
-          for ($i=1; $i < sizeof($_GET["group"]) ; $i++) {
-            $degrees->orwhere('degrees.name', 'like',$_GET["group"][$i].'%');
-          }
+         $degrees->wherein('degreeGroups.name',$_GET["group"]);
        }
 
       if(isset($_GET["hostel"]))
@@ -109,13 +106,15 @@ class SearchController extends Controller
 
        }
 
-       $results = $degrees->paginate(5);
 
-       if ($request->ajax()) {
-         return view('partialViews.searchResults',compact('results'))->render();
-       }
-
-       return view('search',compact('results'));
+       dd($degrees);
+       // $results = $degrees->paginate(5);
+       //
+       // if ($request->ajax()) {
+       //   return view('partialViews.searchResults',compact('results'))->render();
+       // }
+       //
+       // return view('search',compact('results'));
     }
 
 

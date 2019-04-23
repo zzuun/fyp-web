@@ -16,7 +16,6 @@ class DegreeGroups extends Migration
         Schema::create('degreeGroups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('degree_id');
             $table->timestamps();
         });
     }

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class degreeGroups extends Model
 {
-  public function degree()
+  protected $table = 'degreeGroups';
+  public function degrees()
   {
-      return $this->belongsTo('App\Degree');
+      return $this->hasMany('App\Degree');
   }
 }

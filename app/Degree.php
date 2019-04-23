@@ -12,7 +12,7 @@ class Degree extends Model
   ];
   public function degreeGroup()
   {
-    return $this->hasOne('App\degreeGroups');
+    return $this->belongsTo('App\degreeGroups');
   }
   public function preRequisites()
   {

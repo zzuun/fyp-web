@@ -69,7 +69,7 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
      }
      $i = 0;
      foreach ($result as $r) {
-       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value='.$r->name.'> '.$r->name.'  ('.$counts[$i++].')</label>';
+       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value="'.$r->name.'"> '.$r->name.'  ('.$counts[$i++].')</label>';
      }
   }
   return $output;
