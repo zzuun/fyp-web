@@ -107,17 +107,16 @@
             <th width="50px"><b>Institute</b></th>
             <th width="50px"><b>Action</b></th>
           </tr>
-          @php
-            $i=0;
-          @endphp
           <?php foreach ($data as $d): ?>
             @php
-                $name = App\Institute::find($d->institute_id);
+                $ne = DB::table('institutes')->where('id',$d->institute_id)->first();
             @endphp
             <tr>
               <td><b>{{++$i}}</b></td>
               <td>{{$d->name}}</td>
-              <td>{{$name->name}}</td>
+              @if (isset($ne))
+                <td>{{$ne->name}}</td>
+              @endif
               <td>
                 <form action="{{route('degree.destroy', $d->id)}}" method="post">
                   <a class="btn btn-sm btn-outline-success" href="{{route('degree.show',$d->id)}}">Show</a>

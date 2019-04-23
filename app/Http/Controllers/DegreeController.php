@@ -15,6 +15,7 @@ class DegreeController extends Controller
   public function index()
   {
     $data = Degree::latest()->paginate(5);
+    // dd($data);
     return view('degree.index',compact('data'))
             ->with('i',(request()->input('page',1)-1)*5);
   }
