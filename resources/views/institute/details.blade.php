@@ -191,9 +191,9 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                  {{-- @if ($data->departments->isEmpty())
+                  @if ($data->departments->isEmpty())
                     <h6>No Departments For This Institute</h6>
-                  @else --}}
+                  @else
                     <table class="table table-hover table-sm">
                       <tr>
                         <th width="50px"><b>No.</b></th>
@@ -222,7 +222,7 @@
                       <?php endforeach; ?>
 
                     </table>
-                  {{-- @endif --}}
+                  @endif
                 </div>
                 <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                   @if ($data->degrees->isEmpty())

@@ -128,7 +128,10 @@
                         <div class="icon">
                             <img src="img/core-img/docs.png" alt="">
                         </div>
-                        <h2><span class="counter">500</span></h2>
+                        @php
+                          $clg = App\Institute::where('instituteType','College')->count();
+                        @endphp
+                        <h2><span class="counter">{{$clg}}</span></h2>
                         <h5>Colleges</h5>
                     </div>
                   </div>
@@ -139,9 +142,12 @@
                   <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="500ms">
                         <div class="icon">
+                          @php
+                            $unis = App\Institute::where('instituteType','University')->count();
+                          @endphp
                             <img src="img/core-img/star.png" alt="">
                         </div>
-                        <h2><span class="counter">50</span></h2>
+                        <h2><span class="counter">{{$unis}}</span></h2>
                         <h5>Universities</h5>
                     </div>
                   </div>
@@ -152,10 +158,13 @@
                   <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="750ms">
                         <div class="icon">
+                          @php
+                            $deCoun = App\Department::count()
+                          @endphp
                             <img src="img/core-img/events.png" alt="">
                         </div>
-                        <h2><span class="counter">32</span></h2>
-                        <h5>Districts</h5>
+                        <h2><span class="counter">{{$deCoun}}</span></h2>
+                        <h5>Departments</h5>
                     </div>
                   </div>
                 </div>
@@ -165,10 +174,13 @@
                   <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="1000ms">
                         <div class="icon">
+                          @php
+                            $degs = App\Degree::count()
+                          @endphp
                             <img src="img/core-img/earth.png" alt="">
                           </div>
-                        <h2><span class="counter">220</span></h2>
-                        <h5>Available Courses</h5>
+                        <h2><span class="counter">{{$degs}}</span></h2>
+                        <h5>Available Degrees</h5>
                     </div>
                     </div>
                 </div>

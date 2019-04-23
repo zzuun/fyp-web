@@ -94,23 +94,11 @@
           </div>
         </div>
             <div class="form-row">
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-6">
                 <label for="name"><strong>Name</strong></label>
                 <input type="text" class="form-control" id="name" name="deptName" placeholder="Name" required>
               </div>
-              <div class="form-group col-md-2">
-                <label for="departmentType"><strong>Department Type</strong></label>
-                <select id="departmentType" name="departmentType" class="form-control" required>
-                  <option selected>Choose...</option>
-                  <option value="Medicine">Medicine</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="CS & IT">CS & IT</option>
-                  <option value="Business">Business</option>
-                  <option value="Arts & Design">Arts & Design</option>
-                  <option value="Agriculture">Agriculture</option>
-                </select>
-              </div>
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-6">
                 @php
                   $inst = App\Institute::where('instituteType','University')->select('name','id')->get();
                 @endphp
@@ -139,8 +127,11 @@
                 <select id="designation" name="designation[]" class="form-control" required>
                   <option selected>Choose...</option>
                   <option value="HOD">HOD</option>
+                  <option value="Dean">Dean</option>
                   <option value="Incharge/Principal">Incharge/Principal</option>
-                  <option value="Assistant Professor">Assistant Professor</option>
+                  <option value="Professor">Professor</option>
+                  <option value="AssistantProfessor">Assistant Professor</option>
+                  <option value="Associate Professor">Associate Professor</option>
                   <option value="Lecturer">Lecturer</option>
                 </select>
               </div>
