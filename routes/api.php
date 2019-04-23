@@ -14,10 +14,11 @@ use App\Address;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::post('register','MainController@register');
+Route::post('login','MainController@login');
 Route::get('degreesByViews','MainController@degreesByViews');
 Route::get('getPostRequisites','MainController@getPostRequisites');
-Route::post('/filter','MainController@filterSearch');
+Route::get('/interFilter','MainController@filterSearch');
 Route::get('/degree','MainController@getDegree');
 Route::get('/institute','MainController@getInstitute');
 Route::get('/instituteSearch','MainController@getInstitueByName');
