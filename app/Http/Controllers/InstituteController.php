@@ -15,7 +15,7 @@ class InstituteController extends Controller
 
     public function index()
     {
-      $data = Institute::latest()->paginate(5);
+      $data = Institute::with('departments')->latest()->paginate(5);
       return view('institute.index',compact('data'))
               ->with('i',(request()->input('page',1)-1)*5);
     }
