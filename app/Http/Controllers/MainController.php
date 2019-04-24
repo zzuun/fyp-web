@@ -112,12 +112,13 @@ class MainController extends Controller
     {
       $instituteId = $request->input('instituteID');
       $result = DB::table('institutes')
+      ->join('degrees','degrees.institute_id','institutes.id')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$instituteId)
       ->select('institutes.name as instituteName','institutes.coEducation','addresses.phone_number','addresses.email',
       'addresses.website','institutes.principal_name','institutes.sector','institutes.affiliation','institutes.hostel',
       'institutes.transportation','institutes.scholarship','addresses.lat','addresses.lng',
-      'addresses.location')
+      'addresses.location','degrees.name as degreeName','degrees.id as degreeID')
       ->get();
       return Response::json(array('data' => $result));
     }
