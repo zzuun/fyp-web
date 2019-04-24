@@ -54,23 +54,28 @@ $names = array();
   return Response::json(array('data' => $merged->all()));
 });
 Route::get('/getSubareas',function(){
-  $resultTowns = Subarea::select('name')->get();
-  $counts = array();
-  $towns = array();
-  foreach ($resultTowns as $r) {
-      $count = DB::table('addresses')->join('subareas','subareas.id','addresses.subarea_id')->where('subareas.name',$r->name)->count();
-      // $town = DB::table('towns')->join('subareas','subareas.town_id','towns.id')->where('subareas.name',$r->name)->select('towns.name')->get();
-      $counts[$r->name] = $count;
-      // $counts[$town->name] = $town;
+
+  $result = array('subarea' => 'name', 'count'=> 1, 'town', 'town' );
+  $towns = $resultTowns = Town::select('name', 'id')->get();
+  foreach ($towns as $town) {
+      $result[++$k] = $town->name;
+    $subs = Subarea::where('town_id',$town->id)->select('name','id')->get();
+    foreach ($subs as $sub) {
+      $count = DB::table('addresses')->join('subareas','subareas.id','addresses.subarea_id')->where('addresses.subarea_id', $sub->id)->count();
+      $result[++$i]=$sub->name;
+      $result[++$j] = $count;
+
+    }
   }
-  return Response::json(array('data' => $counts));
+
+  return Response::json(array('data' => $result));
 });
 Route::get('/getSectors',function(){
   $result = Institute::select('sector')->distinct()->get();
   return Response::json(array('data' => $result));
 });
 Route::get('/getGroups',function(){
-  $result = ['FSC','ICS','ICOM','FA'];
+  $result = App\degreeGroups::wherein('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->select('name')->get();
   return Response::json(array('data' => $result));
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {

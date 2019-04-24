@@ -152,6 +152,12 @@ class MainController extends Controller
       if ($request->input('transportation')) {
         $degree->where("institutes.transportation",(int)$request->input('transportation'));
       }
+      if ($request->input('shiftMorning')) {
+        $degree->where("degrees.shiftMorning",(int)$request->input('shiftMorning'));
+      }
+      if ($request->input('shiftAfternoon')) {
+        $degree->where("degrees.shiftAfternoon",(int)$request->input('shiftAfternoon'));
+      }
       if ($request->input('scholarship')) {
         $degree->where("institutes.scholarship",(int)$request->input('scholarship'));
       }
