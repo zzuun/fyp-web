@@ -100,7 +100,13 @@ class MainController extends Controller
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
       $inc = DB::table('degrees')->where('degrees.id',$degreeId)->increment('numberOfViews');
-      return Response::json(array('data' => $result));
+      $more =  DB::table('degrees')
+      ->join('institutes','institutes.id','degrees.institute_id')
+      ->where('institutes.id',$result[0]->instituteID)
+      ->select('degrees.name as degreeName','institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid')
+      ->take(3)
+      ->get();
+      return Response::json([array('data' => $result),array('related'=>$more)]);
     }
     public function getInstitute(Request $request)
     {
