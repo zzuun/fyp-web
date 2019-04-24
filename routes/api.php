@@ -30,12 +30,28 @@ Route::get('/getAffiliations',function(){
 });
 Route::get('/getTown',function(){
   $resultTowns = Town::select('name')->get();
-  $counts = array();
+//   $counts = [
+//     'name' => 'joe',
+//     'count'  => 12,
+// ];
+$i=0;
+$j=0;
+$counts = array();
+$names = array();
   foreach ($resultTowns as $r) {
       $count = DB::table('addresses')->join('towns','towns.id','addresses.town_id')->where('towns.name',$r->name)->count();
-      $counts[$r->name] = $count;
+      // data_set($counts,'name',$r->name);
+      // data_set($counts,'count',$count);
+      $counts[++$i] = $count;
+      $names[++$j] = $r->name;
   }
-  return Response::json(array('data' => $counts));
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
 });
 Route::get('/getSubareas',function(){
   $resultTowns = Subarea::select('name')->get();
@@ -43,7 +59,7 @@ Route::get('/getSubareas',function(){
   $towns = array();
   foreach ($resultTowns as $r) {
       $count = DB::table('addresses')->join('subareas','subareas.id','addresses.subarea_id')->where('subareas.name',$r->name)->count();
-      $town = DB::table('towns')->join('subareas','subareas.town_id','towns.id')->where('subareas.name',$r->name)->select('towns.name')->get();
+      // $town = DB::table('towns')->join('subareas','subareas.town_id','towns.id')->where('subareas.name',$r->name)->select('towns.name')->get();
       $counts[$r->name] = $count;
       // $counts[$town->name] = $town;
   }
