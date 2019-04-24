@@ -14,7 +14,6 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
-Route::get('/degrees','searchController@index');
 
 Route::get('/search',function(){
   return view('search');

@@ -545,27 +545,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script>
   $(document).ready(function()
   {
-
-    getAllDegrees();
-          
-          function getAllDegrees()
+    filter_data();
+      $(document).on('click', '.pagination a', function(event)
           {
-            $.ajax({
-                    url:"/degrees",
-                    method:"GET",
-                    data:{_token: "{{csrf_token()}}"},
-                    success:function(data){
-
-                      //console.log(data);
-
-                      $('.results').html(data);
-                      
-                       // $('#degreeResultsArea').load(data);
-                    }
-                });
-          }
-          function filter_data(minfees=0,maxfees=500000)
+            event.preventDefault(); 
+            var page = $(this).attr('href').split('page=')[1];
+            filter_data(page);
+            
+          });
+          function filter_data(page=1,minfees=10000,maxfees=500000)
           {
+
+           
+
             var search = document.getElementById('search').value;
             var town = get_filter('town');
             var subarea = get_filter('subarea');
@@ -580,16 +572,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var maxmarks= $('#marks-max-range').val();
             var group = get_filter('group');
                 $.ajax({
-                    url:"/apply",
+                    url:"/apply?page="+page,
                     method:"GET",
                     data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
-                    success:function(data){
-
+                    success:function(data){                      
                       //console.log(data);
-
                       $('.results').html(data);
-                      
-                       // $('#degreeResultsArea').load(data);
                     }
                 });
           }
@@ -604,8 +592,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
               });
               return filter;
           }
-
-
           $('.js-range-slider').ionRangeSlider({
             type: "integer",
             min:10000,
@@ -620,7 +606,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             prettyify_enabled:true,
             prettify_separator:",",
             skin:"big",
-            onFinish:function(data){
+            onChange:function(data){
               let minFees=data.from;
               let maxFees=data.to;
               filter_data(minFees,maxFees);

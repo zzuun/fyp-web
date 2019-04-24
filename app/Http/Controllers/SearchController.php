@@ -9,22 +9,7 @@ use App\Degree;
 class SearchController extends Controller
 {
 
-    public function index(Degree $degrees)
-    {
-        $degrees=$degrees->newQuery();
-        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
-       ->join('addresses','institutes.id','=','addresses.institute_id')
-       ->join('towns','towns.id','addresses.town_id')
-       ->join('subareas','subareas.id','addresses.subarea_id')
-       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
-       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
-
-        $degrees=$degrees->paginate(5);
-        return view('partialViews.searchResults',compact('degrees'))->render();
-    }
-
-
-    public function filter_data(Degree $degrees)
+    public function filter_data(Request $request,Degree $degrees)
     {
         $degrees=$degrees->newQuery();
         $degrees->join('institutes','degrees.institute_id','=','institutes.id')
@@ -127,42 +112,15 @@ class SearchController extends Controller
 
        $degrees = $degrees->paginate(5);
 
-       return view('partialViews.searchResults',compact('degrees'))->render();
+        if($request->ajax())
+            return view('partialViews.searchResults',compact('degrees'))->render();
+            //return response()->json($degrees);
+
+        return view('search',compact('degrees'));
+
+       //return response()->json($degrees);
+       
        
 
-    }
-
-
-    // public function search(Degree $degrees)
-    // {
-    //     $degrees=$degrees->newQuery();
-    //     $degrees->join('institutes','degrees.institute_id','=','institutes.id')
-    //     ->join('addresses','institutes.id','=','addresses.institute_id')
-    //     ->join('towns','towns.id','addresses.town_id')
-    //     ->join('subareas','subareas.id','addresses.subarea_id')
-    //     ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
-    //     'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng')->orderby('numberOfViews','desc');
-
-    //     $results=$degrees->paginate(5);
-
-    //     return view('search',compact('results'));
-    //   }
-
-    public function getCities(){
-
-        if(isset($_GET["city"]))
-        {
-            $cityName=$_GET["city"];
-            $areas = Address::where('city',$cityName)->pluck('subarea');
-            $output='';
-
-            foreach($areas as $area)
-            {
-                $output.='<label  style="word-wrap:break-word">'.'<input id="area"  type="checkbox" value='.$area.' />'.$area.'</label></br>';
-
-            }
-
-            return ($output);
-        }
     }
 }
