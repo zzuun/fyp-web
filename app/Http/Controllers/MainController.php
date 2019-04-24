@@ -213,7 +213,7 @@ class MainController extends Controller
       ->join('institutes','institutes.id','degrees.institute_id')
       ->where('degrees.id',$request->input('first'))
       ->join('addresses','addresses.institute_id','institutes.id')
-      ->select('institutes.name as instituteName','institutes.hostel',
+      ->select('institutes.name as instituteName','institutes.hostel','degrees.name as degreeName',
       'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
@@ -221,7 +221,7 @@ class MainController extends Controller
       ->join('institutes','institutes.id','degrees.institute_id')
       ->where('degrees.id',$request->input('second'))
       ->join('addresses','addresses.institute_id','institutes.id')
-      ->select('institutes.name as instituteName','institutes.hostel',
+      ->select('institutes.name as instituteName','institutes.hostel', 'degrees.name as degreeName',
       'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
