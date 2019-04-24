@@ -119,8 +119,8 @@
                                        <div class="alert alert-success">
                                            {{ session('status') }}
                                        </div>
-                                    @endif
                                   </div>
+                                @else
                                     <div class="col-12">
                                         <div class="form-group">
                                             <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
@@ -136,6 +136,7 @@
                                         <button class="btn btn-success w-50">Send Password Reset Link</button>
 
                                   </div>
+                                  @endif
                                 </div>
                             </form>
                         </div>
