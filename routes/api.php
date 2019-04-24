@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Institute;
 use App\Address;
+use App\Town;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,20 @@ Route::get('/getAffiliations',function(){
   $result = Institute::select('affiliation')->distinct()->get();
   return Response::json(array('data' => $result));
 });
-Route::get('/getAreas',function(){
-  $result = Address::select('subarea', 'city')->distinct()->get();
-  return Response::json(array('data' => $result));
+Route::get('/getTown',function(){
+  $resultTowns = Town::select('name')->get();
+  $objects = array(
+  (object)array(
+    'name' => 'name',
+    'count' => 1,
+  )
+);
+  foreach ($resultTowns as $r) {
+      $count = DB::table('addresses')->join('towns','towns.id','addresses.town_id')->where('towns.name',$r->name)->count();
+      $objects->name = $r->name;
+      $objects->count = $count;
+  }
+  return Response::json(array('data' => $objects));
 });
 Route::get('/getSectors',function(){
   $result = Institute::select('sector')->distinct()->get();
