@@ -25,8 +25,23 @@ Route::get('/degree','MainController@getDegree');
 Route::get('/institute','MainController@getInstitute');
 Route::get('/instituteSearch','MainController@getInstitueByName');
 Route::get('/getAffiliations',function(){
-  $result = Institute::select('affiliation')->distinct()->get();
-  return Response::json(array('data' => $result));
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+  $result = Institute::select('affiliation')->where('instituteType','College')->distinct()->get();
+  foreach ($result as $r) {
+    $count = Institute::where('affiliation',$r->affiliation)->where('instituteType','College')->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->affiliation;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
 });
 Route::get('/getTown',function(){
   $resultTowns = Town::select('name')->get();
@@ -71,12 +86,42 @@ Route::get('/getSubareas',function(){
   return Response::json(array('data' => $result));
 });
 Route::get('/getSectors',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
   $result = Institute::select('sector')->distinct()->get();
-  return Response::json(array('data' => $result));
+  foreach ($result as $r) {
+    $count = App\Institute::where('sector',$r->sector)->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->sector;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
 });
 Route::get('/getGroups',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
   $result = App\degreeGroups::wherein('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->select('name')->get();
-  return Response::json(array('data' => $result));
+  foreach ($result as $r) {
+    $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$r->name)->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->name;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
