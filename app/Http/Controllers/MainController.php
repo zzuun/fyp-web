@@ -207,4 +207,24 @@ class MainController extends Controller
           return response()->json(['success'=>false, 'message'=>'No Record Found Against provided Filters'],200);
       }
     }
+    public function compare(Request $request)
+    {
+      $first = DB::table('degrees')
+      ->join('institutes','institutes.id','degrees.institute_id')
+      ->where('degrees.id',$request->input('first'))
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->select('institutes.name as instituteName','institutes.hostel',
+      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
+      'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
+      ->get();
+      $second = DB::table('degrees')
+      ->join('institutes','institutes.id','degrees.institute_id')
+      ->where('degrees.id',$request->input('second'))
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->select('institutes.name as instituteName','institutes.hostel',
+      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
+      'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
+      ->get();
+      return Response::json([array('first' => $first),array('second'=>$second)]);
+    }
 }

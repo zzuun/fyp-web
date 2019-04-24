@@ -23,6 +23,7 @@ Route::get('getPostRequisites','MainController@getPostRequisites');
 Route::get('/interFilter','MainController@filterSearch');
 Route::get('/degree','MainController@getDegree');
 Route::get('/institute','MainController@getInstitute');
+Route::get('/compare','MainController@compare');
 Route::get('/instituteSearch','MainController@getInstitueByName');
 Route::get('/getAffiliations',function(){
   $i=0;
