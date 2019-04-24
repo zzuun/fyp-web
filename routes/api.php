@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Institute;
 use App\Address;
 use App\Town;
+use App\Subarea;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,18 +30,24 @@ Route::get('/getAffiliations',function(){
 });
 Route::get('/getTown',function(){
   $resultTowns = Town::select('name')->get();
-  $objects = array(
-  (object)array(
-    'name' => 'name',
-    'count' => 1,
-  )
-);
+  $counts = array();
   foreach ($resultTowns as $r) {
       $count = DB::table('addresses')->join('towns','towns.id','addresses.town_id')->where('towns.name',$r->name)->count();
-      $objects->name = $r->name;
-      $objects->count = $count;
+      $counts[$r->name] = $count;
   }
-  return Response::json(array('data' => $objects));
+  return Response::json(array('data' => $counts));
+});
+Route::get('/getSubareas',function(){
+  $resultTowns = Subarea::select('name')->get();
+  $counts = array();
+  $towns = array();
+  foreach ($resultTowns as $r) {
+      $count = DB::table('addresses')->join('subareas','subareas.id','addresses.subarea_id')->where('subareas.name',$r->name)->count();
+      $town = DB::table('towns')->join('subareas','subareas.town_id','towns.id')->where('subareas.name',$r->name)->select('towns.name')->get();
+      $counts[$r->name] = $count;
+      // $counts[$town->name] = $town;
+  }
+  return Response::json(array('data' => $counts));
 });
 Route::get('/getSectors',function(){
   $result = Institute::select('sector')->distinct()->get();
