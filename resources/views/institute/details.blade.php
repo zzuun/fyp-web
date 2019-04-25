@@ -235,6 +235,9 @@
                         <th width="50px"><b>Institute</b></th>
                         <th width="50px"><b>Action</b></th>
                       </tr>
+                      @php
+                        $i = 0;
+                      @endphp
                       <?php foreach ($data->degrees as $d): ?>
                         @php
                             $ne = DB::table('institutes')->where('id',$d->institute_id)->first();

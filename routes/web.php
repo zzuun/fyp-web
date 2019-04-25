@@ -14,7 +14,7 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
-Route::get('/','SearchController@search')->name('page.main');
+Route::get('/undergraduate','SearchController@search')->name('page.main');
 Route::get('/apply','SearchController@filter');
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
@@ -22,7 +22,7 @@ Route::get('/compare','pageController@compare')->name('page.compare');
 
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){
-  Route::get('/home','pageController@home')->name('page.home');
+  Route::get('/','pageController@home')->name('page.home');
   Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 });
 
@@ -75,6 +75,8 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
   return $output;
 });
 
+
+
 Auth::routes();
 
 
@@ -89,6 +91,8 @@ Route::prefix('admin')->group(function(){
   Route::post('/password/reset','Auth\AdminResetPasswordController@reset');
   Route::get('/password/reset/{token}','Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
+  //department
+  Route::get('/getDepartments','AdminController@department');
 
   //subareas
   Route::get('/getSubareas','AdminController@subarea');

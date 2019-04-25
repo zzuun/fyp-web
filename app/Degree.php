@@ -8,7 +8,7 @@ use App\Dataviewer;
 class Degree extends Model
 {
   protected $fillable = [
-      'name', 'shiftMorning', 'shiftAfternoon', 'noOfSeats', 'duration', 'lastMerit', 'fees', 'institute_id', 'department_id', 'system', 'creditHours', 'shiftAfternoon', 'numberOfViews'
+      'name', 'shiftMorning', 'shiftAfternoon', 'noOfSeats', 'duration', 'lastMerit', 'fees', 'institute_id', 'department_id', 'system', 'creditHours', 'shiftAfternoon', 'numberOfViews', 'degree_groups_id', 'degreeLevel'
   ];
   public function degreeGroup()
   {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Town;
 use Illuminate\Http\Request;
+use App\Department;
 use GuzzleHttp;
 
 // \Exception\GuzzleException;
@@ -50,6 +51,18 @@ class AdminController extends Controller
           foreach ($subareas->subareas as $s) {
             $output.='<option value='.$s->id.'>'.$s->name.'</option>';
           }
+        }
+      }
+      return $output;
+    }
+
+    public function department(Request $request)
+    {
+      $output = '<option>Choose...</option>';
+      if(isset($_GET["inst_id"])){
+        $departs = Department::where('institute_id',$_GET["inst_id"])->get();
+        foreach ($departs as $d) {
+          $output.='<option value='.$d->id.'>'.$d->name.'</option>';
         }
       }
       return $output;

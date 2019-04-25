@@ -159,10 +159,14 @@
                       </div>
                       <div class="col-md-6">
                         @php
+                        if($data->department_id != 0){
                           $in = App\Department::find($data->department_id);
+                        }
                         @endphp
                         <div class="form-group">
+                          @if (isset($in))
                             <strong>Department: </strong>{{$in->name}}
+                          @endif
                         </div>
                       </div>
                   </div>
