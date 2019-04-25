@@ -106,7 +106,7 @@ class MainController extends Controller
       ->join('degreeGroups','degreeGroups.id','degrees.degree_groups_id')
       ->join('institutes','institutes.id','degrees.institute_id')
       ->where('instituteType','College')
-      ->where('degreeGroups',$result[0]->type)
+      ->where('degreeGroups.id',$result[0]->type)
       ->where('institutes.id','!=',$result[0]->instituteID)
       ->select('degrees.name as degreeName','institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid')
       ->take(3)
