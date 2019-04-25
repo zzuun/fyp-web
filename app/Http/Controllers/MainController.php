@@ -332,13 +332,15 @@ class MainController extends Controller
       $degreeId = $request->input('degreeID');
       $result = DB::table('degrees')
       ->join('institutes','institutes.id','degrees.institute_id')
+      ->join('departments','degrees.department_id','departments.id')
       ->join('degreeGroups','degreeGroups.id','degrees.degree_groups_id')
       ->where('degrees.id',$degreeId)
       ->where('institutes.instituteType','University')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('degrees.name as degreeName','degrees.duration','degrees.system','institutes.name as instituteName',
       'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit',
-      'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location','degreeGroups.id as type')
+      'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location',
+      'degreeGroups.id as type','departments.name as deptName','departments.id as deptID')
       ->get();
       $inc = DB::table('degrees')->where('degrees.id',$degreeId)->increment('numberOfViews');
 
@@ -365,12 +367,13 @@ class MainController extends Controller
       ->select('departments.name as deptName','departments.id as deptID')
       ->first();
 
+      $degree = App\Degree::where('degrees.department_id',$deptID)->select('name','id')->get();
       $inc = DB::table('departments')->where('departments.id',$deptID)->increment('noOfViews');
 
       $faculty = DB::table('faculties')
       ->where('department_id',$deptID)
       ->select('faculties.name as facultyName','faculties.designation')
       ->get();
-      return Response::json([array('data' => $result),array('faculty'=>$faculty)]);
+      return Response::json([array('data' => $result),array('faculty'=>$faculty),array('degrees'=>$degree)]);
     }
 }

@@ -199,10 +199,6 @@
                 @endphp
                 <label for="department_id"><strong>Department</strong></label>
                 <select id="department_id" name="department_id" class="form-control">
-                  {{-- <option selected>Choose...</option>
-                  @foreach ($towns as $town)
-                    <option value="{{$town->id}}">{{$town->name}}</option>
-                  @endforeach --}}
                 </select>
               </div>
             </div>

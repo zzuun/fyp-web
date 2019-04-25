@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Input;
 
 Route::get('/intermediate','SearchController@search')->name('page.main');
 Route::get('/apply','SearchController@filter');
+Route::get('/compare','pageController@compare');
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
-Route::get('/compare','pageController@compare')->name('page.compare');
 
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){

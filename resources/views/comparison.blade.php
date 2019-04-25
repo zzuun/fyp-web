@@ -6,6 +6,9 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
@@ -38,7 +41,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="{{route('page.home')}}"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -56,47 +59,32 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{route('page.home')}}">Home</a></li>
+                                <li><a href="index.html">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.timer')}}">Courses</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
-                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
-                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="comparison.html">Compare</a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                          <li><a href="contact.html">Contact</a></li>
+
                                     </ul>
                                 </li>
-                                <li><a href="{{route('page.timer')}}">Courses</a></li>
-                                <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                <li><a href="{{route('page.timer')}}">Contact</a></li>
+                                <li><a href="comparison.html">Compare</a></li>
+                                <li><a href="universityhomepage.html">University</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="contact.html">Contact</a></li>
                             </ul>
-
-                            <!-- Search Button -->
-                            <div class="search-area">
-                                <form action="#" method="">
-                                    <input type="search" name="search" id="search" placeholder="Search">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                              @if(auth()->check())
-                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
+                                <a href="#" class="btn">Register</a>
 
-                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
-                                @else
-                                <a href="{{route('register')}}" class="btn">Register</a>
-
-                                <a  href="{{route('login')}}"class="btn">Login</a>
-                                @endif
-                            </div>
-
+                                <a  href="onlyloginpage.html"class="btn">Login</a>
+                              </div>
                         </div>
+
+                            <!-- Search Button -->
+
                         <!-- Nav End -->
                     </div>
                 </nav>
@@ -106,23 +94,77 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Blog Area Start ##### -->
-    <section class="blog-area section-padding-100">
+    <section class="blog-area blog-page section-padding-100">
+      <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
+
+          <!-- <button class="cancelbutton cancelbutton2"><i class="glyphicon glyphicon-minus w3-spin"></i></button> -->
+          <!-- Single Accordian Area -->
+          <div class="panel single-accordion">
+              <h6>
+                  <a role="button" aria-expanded="true" aria-controls="collapseOne" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">Click To Compare
+                  <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                  <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                  </a>
+              </h6>
+              <div id="collapseOne" class="accordion-content collapse">
+                @php
+                  $uni = App\Institute::where('instituteType','University')->get();
+                @endphp
+                <select class="custom-select" name="universities[]" id="uni1">
+                    <option selected>Universities</option>
+                    @foreach ($uni as $u)
+                      <option value="{{$u->id}}">{{$u->name}}</option>
+                    @endforeach
+                  </select>
+                  <select class="custom-select" name="departmentID[]" id="dept1">
+                    </select>
+                    <select class="custom-select" name="degreesID[]" id="deg1">
+                      </select>
+              </div>
+
+          </div>
+
+          <h3 style="text-align:center; margin-bottom:20px;">With</h3>
+
+          <div class="panel single-accordion">
+              <h6>
+                  <a role="button" aria-expanded="true" aria-controls="collapseTwo" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">Click To Compare
+                  <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                  <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                  </a>
+              </h6>
+              <div id="collapseTwo" class="accordion-content collapse">
+                <select class="custom-select" name="universities[]" id="uni2">
+                  <option selected>Universities</option>
+                  @foreach ($uni as $u)
+                    <option value="{{$u->id}}">{{$u->name}}</option>
+                  @endforeach
+                  </select>
+                  <select class="custom-select" name="departmentsID[]" id="dept2">
+                    </select>
+                    <select class="custom-select" name="degreesID[]" id="dept3">
+                      </select>
+              </div>
+
+          </div>
+
+          <button name="newdiv" style="align:center;"class="newdivButton"><i class="fa fa-plus"></i> Add More</button>
+
+      </div>
 
 
         <div class="container-fluid">
-
-            <div class="row">
+          <div class="row">
                 <!-- Single Blog Area -->
-                <div class="col-12 col-lg-12">
-                    <div class="single-blog-area wow fadeInUp" data-wow-delay="250ms">
+                <!-- <div class="col-12 col-xs-6"> -->
 
-                        <!-- Blog Content -->
+
 
                           <table>
                             <tr>
-                              <th style="width:80%">Features</th>
+                              <th>Features</th>
                               <th><span id="myid">PUCIT</span></th>
-                              <th><span id="myid">PUCAD</span></th>
+                              <th><span id="myid">PUCADDDDDDddddddddddddddddddddddd</span></th>
                               <th><span id="myid">UCP</span></th>
                             </tr>
                             <tr>
@@ -132,12 +174,6 @@
                               <td>Rs. 1,24,000/-</td>
                             </tr>
                             <tr>
-                              <td>Merit</td>
-                              <td>69.78</td>
-                              <td>72.25</td>
-                              <td>78.36</td>
-                            </tr>
-                            <tr>
                               <td>Location</td>
                               <td>Lahore</td>
                               <td>Lahore</td>
@@ -145,9 +181,9 @@
                             </tr>
                             <tr>
                               <td>Ranking</td>
-                              <td>2nd, in CS</td>
-                              <td>2nd, in Arts</td>
-                              <td>21st, in Medical</td>
+                              <td>2nd</td>
+                              <td>2nd</td>
+                              <td>21</td>
                             </tr>
                             <tr>
                               <td>Seats</td>
@@ -161,40 +197,27 @@
                               <td><i class="fa fa-check"></i></td>
                               <td><i class="fa fa-check"></i></td>
                             </tr>
+
                             <tr>
                               <td>Transportation</td>
                               <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-remove"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                              <td>Co Education</td>
-                              <td><i class="fa fa-remove"></i></td>
                               <td><i class="fa fa-check"></i></td>
                               <td><i class="fa fa-check"></i></td>
                             </tr>
+
                             <tr>
-                              <td>Sector</td>
-                              <td>Government</td>
-                              <td>Government</td>
-                              <td>Government</td>
-                            </tr>
-                            <tr>
-                              <td>Affiliation</td>
-                              <td>HEC</td>
-                              <td>HEC</td>
-                              <td>HEC</td>
-                            </tr>
-                            <tr>
-                              <td>M/A Shifts</td>
+                              <td>Co-Education</td>
                               <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-remove"></i></td>
+                              <td><i class="fa fa-check"></i></td>
                               <td><i class="fa fa-check"></i></td>
                             </tr>
                             </table>
 
-                    </div>
-                </div>
+
+                <!-- </div> -->
+
+
+            </div>
 
         </div>
     </section>
@@ -249,6 +272,44 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
+
+    <script>
+    $(document).ready(function() {
+      $('#uni1').on('change',function(){
+        var inst_id = $(this).val();
+        $.ajax({
+          url: '/admin/getDepartments',
+          type: 'GET',
+          data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
+          success:function(data){
+            $('#dept1').html(data);
+          }
+        });
+      });
+      $('#uni2').on('change',function(){
+        var inst_id = $(this).val();
+        $.ajax({
+          url: '/admin/getDepartments',
+          type: 'GET',
+          data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
+          success:function(data){
+            $('#dept2').html(data);
+          }
+        });
+      });
+      $('#uni3').on('change',function(){
+        var inst_id = $(this).val();
+        $.ajax({
+          url: '/admin/getDepartments',
+          type: 'GET',
+          data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
+          success:function(data){
+            $('#dept3').html(data);
+          }
+        });
+      });
+    });
+    </script>
     <script>
       function openNav() {
           document.getElementById("myNav").style.height = "100%";}
@@ -257,7 +318,38 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         function closeNav() {
           document.getElementById("myNav").style.height = "0%";}
     </script>
+    <script>
+      $(document).ready(function() {
 
-</body>
+        $("button[name='newdiv']").click(function() {
+            var domElement = $('  <h3 style="text-align:center; margin-bottom:20px;">With</h3>'+
+            '<div class="panel single-accordion">'+
+                  '<h6>'+
+                      '<a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Click To Compare'+
+                      '<span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>'+
+                      '<span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>'+
+                      '</a>'+
+                  '</h6>'+
+                  '<div id="collapseThree" class="accordion-content collapse">'+
+                    '<select class="custom-select" name="universities[]" id="uni3">'+
+                        '<option selected>Universities</option>'+
+                        '@foreach ($uni as $u)'+
+                          '<option value="{{$u->id}}">{{$u->name}}</option>'+
+                        '@endforeach'+
+                      '</select>'+
+                      '<select class="custom-select" name="departmentID[]" id="dept3">'+
+                        '</select>'+
+                        '<select class="custom-select" name="degreesID[]" id="deg3">'+
+                          '</select>'+
+                  '</div>'+
+              '</div>')
+
+            $(this).after(domElement);
+            $('.newdivButton').hide();
+        });//End
+      });
+
+    </script>
+  </body>
 
 </html>
