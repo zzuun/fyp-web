@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Town;
 use Illuminate\Http\Request;
 use App\Department;
+use App\Degree;
 use GuzzleHttp;
 
 // \Exception\GuzzleException;
@@ -68,6 +69,18 @@ class AdminController extends Controller
       return $output;
     }
 
+    public function degrees(Request $request)
+    {
+      $output = '<option>Choose...</option>';
+      if(isset($_GET["dept_id"])){
+        $departs = Degree::where('department_id',$_GET["dept_id"])->get();
+        foreach ($departs as $d) {
+          $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+        }
+      }
+      return $output;
+    }
+
     public function latlng(Request $request)
     {
       $output = array();
@@ -80,5 +93,10 @@ class AdminController extends Controller
         $output[1] = $json->results[0]->geometry->location->lng;
         return $output;
       }
+    }
+
+    public function cResult(Request $request)
+    {
+      dd($request->all());
     }
 }

@@ -394,8 +394,7 @@
       </div>
     </div>
     </div>
-    </div>
-
+</div>
     <!-- ##### Popular Courses End ##### -->
 
 

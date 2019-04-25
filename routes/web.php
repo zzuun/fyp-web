@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Input;
 
 Route::get('/intermediate','SearchController@search')->name('page.main');
 Route::get('/apply','SearchController@filter');
-Route::get('/compare','pageController@compare');
+Route::get('/compare','pageController@compare')->name('page.compare');
+Route::post('/ResultCompare','pageController@compareResult');
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
 
@@ -93,6 +94,10 @@ Route::prefix('admin')->group(function(){
 
   //department
   Route::get('/getDepartments','AdminController@department');
+  Route::post('/compareResult','AdminController@cResult');
+
+  //degrees
+  Route::get('/getDegrees','AdminController@degrees');
 
   //subareas
   Route::get('/getSubareas','AdminController@subarea');

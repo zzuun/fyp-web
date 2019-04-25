@@ -96,9 +96,14 @@
     <!-- ##### Blog Area Start ##### -->
     <section class="blog-area blog-page section-padding-100">
       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
+        <form action="ResultCompare" method="post">
+
 
           <!-- <button class="cancelbutton cancelbutton2"><i class="glyphicon glyphicon-minus w3-spin"></i></button> -->
           <!-- Single Accordian Area -->
+          {{-- <form action="admin/compareResult" method="post"> --}}
+@csrf
+
           <div class="panel single-accordion">
               <h6>
                   <a role="button" aria-expanded="true" aria-controls="collapseOne" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">Click To Compare
@@ -110,21 +115,23 @@
                 @php
                   $uni = App\Institute::where('instituteType','University')->get();
                 @endphp
-                <select class="custom-select" name="universities[]" id="uni1">
-                    <option selected>Universities</option>
+                <select class="custom-select" name="universityID[]" id="uni1">
+                    <option selected value="0" >University</option>
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
                     @endforeach
                   </select>
                   <select class="custom-select" name="departmentID[]" id="dept1">
+                      <option selected value="0">Department</option>
                     </select>
-                    <select class="custom-select" name="degreesID[]" id="deg1">
+                    <select class="custom-select" name="degreeID[]" id="deg1">
+                        <option selected value="0">Degree</option>
                       </select>
               </div>
 
           </div>
 
-          <h3 style="text-align:center; margin-bottom:20px;">With</h3>
+          <h3 style="text-align:center; margin-bottom:20px;font-size:20px">With</h3>
 
           <div class="panel single-accordion">
               <h6>
@@ -134,26 +141,52 @@
                   </a>
               </h6>
               <div id="collapseTwo" class="accordion-content collapse">
-                <select class="custom-select" name="universities[]" id="uni2">
-                  <option selected>Universities</option>
+                <select class="custom-select" name="universityID[]" id="uni2">
+                  <option selected value="0">University</option>
                   @foreach ($uni as $u)
                     <option value="{{$u->id}}">{{$u->name}}</option>
                   @endforeach
                   </select>
-                  <select class="custom-select" name="departmentsID[]" id="dept2">
+                  <select class="custom-select" name="departmentID[]" id="dept2">
+                      <option selected value="0">Department</option>
                     </select>
-                    <select class="custom-select" name="degreesID[]" id="dept3">
+                    <select class="custom-select" name="degreeID[]" id="deg2">
+                      <option selected value="0">Degree</option>
                       </select>
               </div>
 
           </div>
+          <h3 style="text-align:center; margin-bottom:20px;font-size:20px">With</h3>
 
-          <button name="newdiv" style="align:center;"class="newdivButton"><i class="fa fa-plus"></i> Add More</button>
+          <div class="panel single-accordion">
+              <h6>
+                  <a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Click To Compare
+                  <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                  <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                  </a>
+              </h6>
+              <div id="collapseThree" class="accordion-content collapse">
+                <select class="custom-select" name="universityID[]" id="uni3">
+                  <option selected value="0">University</option>
+                  @foreach ($uni as $u)
+                    <option value="{{$u->id}}">{{$u->name}}</option>
+                  @endforeach
+                  </select>
+                  <select class="custom-select" name="departmentID[]" id="dept3">
+                      <option selected value="0">Department</option>
+                    </select>
+                    <select class="custom-select" name="degreeID[]" id="deg3">
+                      <option selected value="0">Degree</option>
+                      </select>
+              </div>
 
+          </div>
+          <br>
+          <button name="newdiv" style="align:center;"class="newdivButton"></i> Compare</button>
+        </form>
       </div>
 
-
-        <div class="container-fluid">
+        {{-- <div class="container-fluid">
           <div class="row">
                 <!-- Single Blog Area -->
                 <!-- <div class="col-12 col-xs-6"> -->
@@ -219,7 +252,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
     </section>
     <!-- ##### Blog Area End ##### -->
 
@@ -244,20 +277,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
 
         <!-- Bottom Footer Area -->
-        <div class="bottom-footer-area d-flex justify-content-between align-items-center">
-            <!-- Contact Info -->
-            <div class="contact-info">
-                <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                <a href="#"><span>Email:</span> info@clever.com</a>
-            </div>
-            <!-- Follow Us -->
-            <div class="follow-us">
-                <span>Follow us</span>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-        </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
 
@@ -297,7 +316,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           }
         });
       });
-      $('#uni3').on('change',function(){
+      $(document).on("click","#uni3",function(){
         var inst_id = $(this).val();
         $.ajax({
           url: '/admin/getDepartments',
@@ -305,6 +324,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept3').html(data);
+          }
+        });
+      });
+      $('#dept1').on('change',function(){
+        var dept_id = $(this).val();
+        $.ajax({
+          url: '/admin/getDegrees',
+          type: 'GET',
+          data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
+          success:function(data){
+            $('#deg1').html(data);
+          }
+        });
+      });
+      $('#dept2').on('change',function(){
+        var dept_id = $(this).val();
+        $.ajax({
+          url: '/admin/getDegrees',
+          type: 'GET',
+          data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
+          success:function(data){
+            $('#deg2').html(data);
+          }
+        });
+      });
+      $(document).on("click","#dept3",function(){
+        var dept_id = $(this).val();
+        $.ajax({
+          url: '/admin/getDegrees',
+          type: 'GET',
+          data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
+          success:function(data){
+            $('#deg3').html(data);
           }
         });
       });
@@ -317,38 +369,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     /* Close */
         function closeNav() {
           document.getElementById("myNav").style.height = "0%";}
-    </script>
-    <script>
-      $(document).ready(function() {
-
-        $("button[name='newdiv']").click(function() {
-            var domElement = $('  <h3 style="text-align:center; margin-bottom:20px;">With</h3>'+
-            '<div class="panel single-accordion">'+
-                  '<h6>'+
-                      '<a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Click To Compare'+
-                      '<span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>'+
-                      '<span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>'+
-                      '</a>'+
-                  '</h6>'+
-                  '<div id="collapseThree" class="accordion-content collapse">'+
-                    '<select class="custom-select" name="universities[]" id="uni3">'+
-                        '<option selected>Universities</option>'+
-                        '@foreach ($uni as $u)'+
-                          '<option value="{{$u->id}}">{{$u->name}}</option>'+
-                        '@endforeach'+
-                      '</select>'+
-                      '<select class="custom-select" name="departmentID[]" id="dept3">'+
-                        '</select>'+
-                        '<select class="custom-select" name="degreesID[]" id="deg3">'+
-                          '</select>'+
-                  '</div>'+
-              '</div>')
-
-            $(this).after(domElement);
-            $('.newdivButton').hide();
-        });//End
-      });
-
     </script>
   </body>
 
