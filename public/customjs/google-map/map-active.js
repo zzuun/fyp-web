@@ -268,12 +268,27 @@ function createMarker(coords,img) {
       map:map
   });
 }
+
 var iconx = {
     url: "img/core-img/marker.png", // url
     scaledSize: new google.maps.Size(100, 100), // scaled size
     origin: new google.maps.Point(0,0), // origin
     anchor: new google.maps.Point(50, 90) // anchor
 };
+
+console.log(latlng[0].getName());
+
+// for (var i = 0; i < latlng.length; i++) {
+//   var infowindow = new google.maps.InfoWindow({
+//             content: latlng[i].getName();
+//           });
+//   var co = new google.maps.LatLng(latlng[i].getLat(), latlng[i].getLng());
+//   var marker = new google.maps.Marker({
+//       position: co,
+//       icon:iconx,
+//       title: latlng[i].getName()
+//   });
+// }
 
 var infowindow = new google.maps.InfoWindow({
           content: instituteName

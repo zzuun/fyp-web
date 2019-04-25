@@ -944,12 +944,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       var latlng = [];
       var i =0;
       @foreach ($institutes as $i)
-        latlng[++i] = new latLng('{{$i->name}}','{!!$i->address->lat!!}','{!!$i->address->lng!!}','{!!$i->id!!}');
+        latlng[i++] = new latLng('{{$i->name}}','{!!$i->address->lat!!}','{!!$i->address->lng!!}','{!!$i->id!!}');
       @endforeach
-      console.log(latlng[67].getName());
-      console.log(latlng[67].getLng());
-      console.log(latlng[67].getLat());
-
+      console.log(latlng[0].getName());
     </script>
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
