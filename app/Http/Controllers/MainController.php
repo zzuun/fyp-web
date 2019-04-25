@@ -363,8 +363,9 @@ class MainController extends Controller
     {
       $deptID = $request->get('departmentID');
       $result = DB::table('departments')
+      ->join('institutes','departments.institute_id','institutes.id')
       ->where('departments.id',$deptID)
-      ->select('departments.name as deptName','departments.id as deptID')
+      ->select('departments.name as deptName','departments.id as deptID','institutes.name as instName','institutes.id as instID')
       ->first();
 
       $degree = App\Degree::where('degrees.department_id',$deptID)->select('name','id')->get();
