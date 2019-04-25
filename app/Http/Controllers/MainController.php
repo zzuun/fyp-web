@@ -147,7 +147,7 @@ class MainController extends Controller
       ->select('departments.name as deptName','departments.id','degreeGroups.name as degreeType')
       ->distinct()
       ->get();
-      return Response::json([array('data' => $result),array('degrees'=>$more)]);
+      return Response::json([array('data' => $result),array('departments'=>$more)]);
     }
     public function getInstitueByName(Request $request)
     {
