@@ -2,12 +2,12 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,500,600,700");
 /* :: 2.0 Import All CSS */
-@import url(customcss/bootstrap.min.css);
-@import url(customcss/owl.carousel.min.css);
-@import url(customcss/animate.css);
-@import url(customcss/magnific-popup.css);
-@import url(customcss/font-awesome.min.css);
-@import url(customcss/classy-nav.min.css);
+@import url(css/bootstrap.min.css);
+@import url(css/owl.carousel.min.css);
+@import url(css/animate.css);
+@import url(css/magnific-popup.css);
+@import url(css/font-awesome.min.css);
+@import url(css/classy-nav.min.css);
 /* :: 3.0 Base CSS */
 * {
   box-sizing: border-box;
@@ -549,13 +549,13 @@ textarea:focus {
       position: relative;
       z-index: 10;
       width: 320px;
-      margin: 0 80px;
+      margin: 0 150px;
       height: 40px;
        }
       @media only screen and (min-width: 992px) and (max-width: 1199px) {
         .single-accordion .search-area form {
           width: 240px;
-          margin: 0 15px; } }
+          margin: 0 146px; } }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .single-accordion .search-area form {
           width: 320px;
@@ -729,11 +729,11 @@ textarea:focus {
           padding: 0 3px;
           display: inline-block; }
       .hero-area .single-course-intro-content h3 {
-        font-size: 30px;
+        font-size: 27px;
         margin-bottom: 10px; }
         @media only screen and (max-width: 767px) {
           .hero-area .single-course-intro-content h3 {
-            font-size: 24px; } }
+            font-size: 20px; } }
       .hero-area .single-course-intro-content .meta {
         margin-bottom: 30px; }
         .hero-area .single-course-intro-content .meta span {
@@ -869,11 +869,11 @@ textarea:focus {
         padding: 0 3px;
         display: inline-block; }
     .single-course-intro .single-course-intro-content h3 {
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 10px; }
       @media only screen and (max-width: 767px) {
         .single-course-intro .single-course-intro-content h3 {
-          font-size: 20px; } }
+          font-size: 24px; } }
     .single-course-intro .single-course-intro-content .meta {
       margin-bottom: 30px; }
       .single-course-intro .single-course-intro-content .meta span {
@@ -1299,7 +1299,7 @@ textarea:focus {
           font-size: 16px;
           justify-content: space-between;
           border-bottom: 1px solid #ebebeb;
-          font-weight: 700;
+          font-weight: 800;
           color: rgba(0, 0, 0, 0.5); }
         .clever-curriculum .cl7 .curriculum-list3 li:last-child {
           margin-bottom: 0; }
@@ -2898,7 +2898,8 @@ textarea:focus {
         .dropdown a:hover {background-color: #ddd;}
 
         .show {display: block;}
-
-
-
+/*
+.specialClass {
+  display:hidden;
+} */
 /*# sourceMappingURL=style.css.map */
