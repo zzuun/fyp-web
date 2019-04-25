@@ -22,9 +22,9 @@ Route::get('degreesByViews','MainController@degreesByViews');
 Route::get('getPostRequisites','MainController@getPostRequisites');
 Route::get('/inter/search','MainController@filterSearch');
 Route::get('/undergraduate/search','MainController@undergraduatefilterSearch');
-Route::get('/degree','MainController@getDegree');
+Route::get('inter/degree','MainController@getDegree');
 Route::get('/undergraduate/degree','MainController@getUnderDegree');
-Route::get('/institute','MainController@getInstitute');
+Route::get('/undergraduate/institute','MainController@getUnderInstitute');
 Route::get('/compare','MainController@compare');
 Route::get('/instituteSearch','MainController@getInstitueByName');
 Route::get('/inter/getAffiliations',function(){
@@ -112,9 +112,9 @@ Route::get('/inter/getSectors',function(){
   $j=0;
   $counts = array();
   $names = array();
-  $result = Institute::select('sector')->where('instituteType', 'College')->distinct()->get();
+  $result = Institute::select('sector')->distinct()->get();
   foreach ($result as $r) {
-    $count = App\Institute::where('sector',$r->sector)->count();
+    $count = App\Institute::where('sector',$r->sector)->where('instituteType', 'College')->count();
     $counts[++$i] = $count;
     $names[++$j] = $r->sector;
   }
@@ -131,9 +131,9 @@ Route::get('/undergraduate/getSectors',function(){
   $j=0;
   $counts = array();
   $names = array();
-  $result = Institute::select('sector')->where('instituteType', 'University')->distinct()->get();
+  $result = Institute::select('sector')->distinct()->get();
   foreach ($result as $r) {
-    $count = App\Institute::where('sector',$r->sector)->count();
+    $count = App\Institute::where('sector',$r->sector)->where('instituteType', 'University')->count();
     $counts[++$i] = $count;
     $names[++$j] = $r->sector;
   }

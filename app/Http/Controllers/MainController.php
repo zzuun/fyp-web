@@ -127,6 +127,28 @@ class MainController extends Controller
       ->get();
       return Response::json([array('data' => $result),array('degrees'=>$more)]);
     }
+    public function getUnderInstitute(Request $request)
+    {
+      $instituteId = $request->input('instituteID');
+      $result = DB::table('institutes')
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->where('institutes.id',$instituteId)
+      ->select('institutes.name as instituteName','institutes.coEducation','addresses.phone_number','addresses.email',
+      'addresses.website','institutes.principal_name','institutes.sector','institutes.affiliation','institutes.hostel',
+      'institutes.transportation','institutes.scholarship','addresses.lat','addresses.lng',
+      'addresses.location')
+      ->get();
+
+      $more = DB::table('departments')
+      ->join('institutes','institutes.id','departments.institute_id')
+      ->join('degrees','degrees.department_id','departments.id')
+      ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
+      ->where('institutes.id',$instituteId)
+      ->select('departments.name as deptName','departments.id','degreeGroups.name as degreeType')
+      ->distinct()
+      ->get();
+      return Response::json([array('data' => $result),array('degrees'=>$more)]);
+    }
     public function getInstitueByName(Request $request)
     {
       $key = $request->input('keyword');
