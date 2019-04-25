@@ -145,6 +145,78 @@ class MainController extends Controller
        ->join('subareas','subareas.id','addresses.subarea_id')
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('degreeLevel','INTER')
+       ->where('institutes.instituteType', 'College')
+      ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews',
+      'institutes.name as instituteName','addresses.location','addresses.city','addresses.lat','addresses.lng','institutes.id as instituteID')
+      ->orderby('numberOfViews','desc');
+      if ($request->input('key')) {
+        $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
+      }
+      if ($request->input('hostel')) {
+        $degree->where("institutes.hostel",(int)$request->input('hostel'));
+      }
+      if ($request->input('coEducation')) {
+        $degree->where("institutes.coEducation",(int)$request->input('coEducation'));
+      }
+      if($request->input('group'))
+      {
+         $degree->wherein('degreeGroups.name',$_GET["group"]);
+      }
+      if ($request->input('transportation')) {
+        $degree->where("institutes.transportation",(int)$request->input('transportation'));
+      }
+      if ($request->input('shiftMorning')) {
+        $degree->where("degrees.shiftMorning",(int)$request->input('shiftMorning'));
+      }
+      if ($request->input('shiftAfternoon')) {
+        $degree->where("degrees.shiftAfternoon",(int)$request->input('shiftAfternoon'));
+      }
+      if ($request->input('scholarship')) {
+        $degree->where("institutes.scholarship",(int)$request->input('scholarship'));
+      }
+      if ($request->input('sector')) {
+        $sector_filter = implode("','",$request->input('sector'));
+        $degree->whereRaw("institutes.sector in ('".$sector_filter."')");
+      }
+      if ($request->input('affiliation')) {
+        $affiliation_filter = implode("','",$request->input('affiliation'));
+        $degree->whereRaw("institutes.affiliation in ('".$affiliation_filter."')");
+      }
+      if ($request->input('town')) {
+        $area_filter = implode("','",$request->input('town'));
+        $degree->whereRaw("towns.name in ('".$area_filter."')");
+      }
+      if($request->get('subarea'))
+      {
+         $area_filter = implode("','",$request->get('subarea'));
+         $degree->whereRaw("subareas.name in ('".$area_filter."')");
+      }
+      if ($request->input('maxMarks')) {
+          $maxMarks = (int) $request->input('maxMarks');
+          $degree->whereBetween("degrees.lastMerit",[33,$maxMarks]);
+      }
+      if ($request->input('maxFees') | $request->input('minFees')) {
+          $maxfees = (int) $request->input('maxFees');
+          $minfees = (int) $request->input('minFees');
+          $degree->whereBetween("degrees.fees",[$minfees,$maxfees]);
+      }
+      $result = $degree->paginate(10);
+      if($result->count()>0){
+        return Response::json(['success'=>true,array('data' => $result)]);
+      }
+      else{
+          return response()->json(['success'=>false, 'message'=>'No Record Found Against provided Filters'],200);
+      }
+    }
+    public function undergraduatefilterSearch(Request $request)
+    {
+      $degree = DB::table('degrees');
+      $degree->join('institutes','degrees.institute_id','=','institutes.id')
+       ->join('addresses','institutes.id','=','addresses.institute_id')
+       ->join('towns','towns.id','addresses.town_id')
+       ->join('subareas','subareas.id','addresses.subarea_id')
+       ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
+       ->where('institutes.instituteType', 'University')
       ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews',
       'institutes.name as instituteName','addresses.location','addresses.city','addresses.lat','addresses.lng','institutes.id as instituteID')
       ->orderby('numberOfViews','desc');
@@ -226,5 +298,28 @@ class MainController extends Controller
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
       return Response::json([array('first' => $first),array('second'=>$second)]);
+    }
+
+    public function getUnderDegree(Request $request)
+    {
+      $degreeId = $request->input('degreeID');
+      $result = DB::table('degrees')
+      ->join('institutes','institutes.id','degrees.institute_id')
+      ->where('degrees.id',$degreeId)
+      ->where('institutes.instituteType','University')
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->select('degrees.name as degreeName','degrees.duration','degrees.system','institutes.name as instituteName',
+      'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit',
+      'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
+      ->get();
+      $inc = DB::table('degrees')->where('degrees.id',$degreeId)->increment('numberOfViews');
+      $more =  DB::table('degrees')
+      ->join('institutes','institutes.id','degrees.institute_id')
+      ->where('institutes.id',$result[0]->instituteID)
+      ->where('institutes.instituteType','University')
+      ->select('degrees.name as degreeName','institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid')
+      ->take(3)
+      ->get();
+      return Response::json([array('data' => $result),array('related'=>$more)]);
     }
 }

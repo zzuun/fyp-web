@@ -433,7 +433,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/active.js"></script>
 
 
-
     <script> $(".seat").on("click", function(){
       $(this).css("background", "red");
     });

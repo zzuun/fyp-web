@@ -20,12 +20,14 @@ Route::post('register','MainController@register');
 Route::post('login','MainController@login');
 Route::get('degreesByViews','MainController@degreesByViews');
 Route::get('getPostRequisites','MainController@getPostRequisites');
-Route::get('/interFilter','MainController@filterSearch');
+Route::get('/inter/search','MainController@filterSearch');
+Route::get('/undergraduate/search','MainController@undergraduatefilterSearch');
 Route::get('/degree','MainController@getDegree');
+Route::get('/undergraduate/degree','MainController@getUnderDegree');
 Route::get('/institute','MainController@getInstitute');
 Route::get('/compare','MainController@compare');
 Route::get('/instituteSearch','MainController@getInstitueByName');
-Route::get('/getAffiliations',function(){
+Route::get('/inter/getAffiliations',function(){
   $i=0;
   $j=0;
   $counts = array();
@@ -44,7 +46,26 @@ Route::get('/getAffiliations',function(){
   });
   return Response::json(array('data' => $merged->all()));
 });
-Route::get('/getTown',function(){
+Route::get('/undergraduate/getAffiliations',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+  $result = Institute::select('affiliation')->where('instituteType','University')->distinct()->get();
+  foreach ($result as $r) {
+    $count = Institute::where('affiliation',$r->affiliation)->where('instituteType','University')->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->affiliation;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
+});
+Route::get('inter/getTown',function(){
   $resultTowns = Town::select('name')->get();
 //   $counts = [
 //     'name' => 'joe',
@@ -86,12 +107,12 @@ Route::get('/getSubareas',function(){
 
   return Response::json(array('data' => $result));
 });
-Route::get('/getSectors',function(){
+Route::get('/inter/getSectors',function(){
   $i=0;
   $j=0;
   $counts = array();
   $names = array();
-  $result = Institute::select('sector')->distinct()->get();
+  $result = Institute::select('sector')->where('instituteType', 'College')->distinct()->get();
   foreach ($result as $r) {
     $count = App\Institute::where('sector',$r->sector)->count();
     $counts[++$i] = $count;
@@ -105,12 +126,50 @@ Route::get('/getSectors',function(){
   });
   return Response::json(array('data' => $merged->all()));
 });
-Route::get('/getGroups',function(){
+Route::get('/undergraduate/getSectors',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+  $result = Institute::select('sector')->where('instituteType', 'University')->distinct()->get();
+  foreach ($result as $r) {
+    $count = App\Institute::where('sector',$r->sector)->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->sector;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
+});
+Route::get('/inter/getGroups',function(){
   $i=0;
   $j=0;
   $counts = array();
   $names = array();
   $result = App\degreeGroups::wherein('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->select('name')->get();
+  foreach ($result as $r) {
+    $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$r->name)->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->name;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
+});
+Route::get('/undergraduate/getGroups',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+  $result = App\degreeGroups::whereNotIn('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->select('name')->get();
   foreach ($result as $r) {
     $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$r->name)->count();
     $counts[++$i] = $count;
