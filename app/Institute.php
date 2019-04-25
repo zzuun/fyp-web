@@ -15,7 +15,7 @@ class Institute extends Model
     }
   public function departments()
     {
-        return $this->hasMany('App\Department');
+        return $this->hasMany('App\Department')->orderby('noOfViews','desc');;
     }
   public function address()
     {

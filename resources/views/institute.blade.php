@@ -283,7 +283,7 @@
 
                                     <div class="clever-curriculum">
 
-                                      <div class="clever-faqs mb-30">
+                                      {{-- <div class="clever-faqs mb-30">
                                           <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
 
                                               <!-- Single Accordian Area -->
@@ -410,7 +410,7 @@
                                               </div> -->
                                           </div>
 
-                                      </div>
+                                      </div> --}}
                                       <!-- Curriculum Level -->
                                         <!-- <div class="curriculum-level mb-30">
                                             <h4 class="d-flex justify-content-between"><span>MASTERS PROGRAMS</span></h4>

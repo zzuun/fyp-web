@@ -365,6 +365,8 @@ class MainController extends Controller
       ->select('departments.name as deptName','departments.id as deptID')
       ->first();
 
+      $inc = DB::table('departments')->where('departments.id',$deptID)->increment('noOfViews');
+
       $faculty = DB::table('faculties')
       ->where('department_id',$deptID)
       ->select('faculties.name as facultyName','faculties.designation')
