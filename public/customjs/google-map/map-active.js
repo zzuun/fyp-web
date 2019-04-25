@@ -276,7 +276,6 @@ var iconx = {
     anchor: new google.maps.Point(50, 90) // anchor
 };
 
-console.log(latlng[0].getName());
 
 // for (var i = 0; i < latlng.length; i++) {
 //   var infowindow = new google.maps.InfoWindow({

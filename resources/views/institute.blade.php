@@ -919,35 +919,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var lng = {!! $details[0]->lng !!};
     </script>
 
-    <script>
-      class latLng {
-        constructor(name,lat,lng,id) {
-          this.name = name;
-          this.id = id;
-          this.lat = lat;
-          this.lng = lng;
-        }
-        getName(){
-          return this.name;
-        }
-        getId(){
-          return this.id;
-        }
-        getLat(){
-          return this.lat;
-        }
-        getLng(){
-          return this.lng;
-        }
-      }
-
-      var latlng = [];
-      var i =0;
-      @foreach ($institutes as $i)
-        latlng[i++] = new latLng('{{$i->name}}','{!!$i->address->lat!!}','{!!$i->address->lng!!}','{!!$i->id!!}');
-      @endforeach
-      console.log(latlng[0].getName());
-    </script>
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="customjs/jquery/jquery-2.2.4.min.js"></script>

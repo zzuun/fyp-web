@@ -25,6 +25,7 @@ Route::get('/undergraduate/search','MainController@undergraduatefilterSearch');
 Route::get('inter/degree','MainController@getDegree');
 Route::get('inter/institute','MainController@getInstitute');
 Route::get('/undergraduate/degree','MainController@getUnderDegree');
+Route::get('/undergraduate/department','MainController@getDepartment');
 Route::get('/undergraduate/institute','MainController@getUnderInstitute');
 Route::get('/compare','MainController@compare');
 Route::get('/instituteSearch','MainController@getInstitueByName');

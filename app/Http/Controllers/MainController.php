@@ -351,9 +351,24 @@ class MainController extends Controller
       ->where('institutes.id','!=',$result[0]->instituteID)
       ->whereNotIn('degreeLevel',['INTER','MS'])
       ->select('degrees.name as degreeName','institutes.name as instituteName',
-      'degrees.id as degreeid','institutes.id as instituteid')
+      'degrees.id as degreeid','institutes.id as instituteid','departments.name as deptName','departments.id as deptID')
       ->take(3)
       ->get();
       return Response::json([array('data' => $result),array('related'=>$more)]);
+    }
+
+    public function getDepartment(Request $request)
+    {
+      $deptID = $request->get('departmentID');
+      $result = DB::table('departments')
+      ->where('departments.id',$deptID)
+      ->select('departments.name as deptName','departments.id as deptID')
+      ->first();
+
+      $faculty = DB::table('faculties')
+      ->where('department_id',$deptID)
+      ->select('faculties.name as facultyName','faculties.designation')
+      ->get();
+      return Response::json([array('data' => $result),array('faculty'=>$faculty)]);
     }
 }
