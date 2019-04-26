@@ -1,7 +1,7 @@
 <div class="col-12">
         @if(count($results) > 0)
           <p>About {{$results->total()}} results.</p>
-        
+
 
         <!-- <div class="col-12">
           <h5>Showing Records:{{count($results)}}</h5>
@@ -24,7 +24,7 @@
 
 
                                     <div class="meta d-flex align-items-center">
-                                        <a href="/degreeUniversity?degreeid={{$result->degreeid}}&instituteid={{$result->instituteid}}">{{$result->degreeName}}</a>
+                                        <a href="/degreeUniversity?degreeid={{$result->degreeid}}&instituteid={{$result->instituteid}}&departmentid={{$result->departmentid}}'">{{$result->degreeName}}</a>
                                     </div>
 
                                     <div class="meta d-flex align-items-center">
