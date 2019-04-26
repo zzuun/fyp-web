@@ -99,7 +99,7 @@
           <strong>{{$message}}</strong>
         </div>
       @endif
-
+      <h5 style="text-align:center; margin-bottom:20px;font-size:35px">College Comparison</h5>
       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
         <form action="/intermediate/ResultCompare" method="post">
 
