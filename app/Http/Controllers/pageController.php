@@ -47,6 +47,11 @@ class pageController extends Controller
       return view('comparison');
     }
 
+    public function interCompare()
+    {
+      return view('interComparison');
+    }
+
     public function compareResult(Request $request){
       $data = $request->all();
       $uni = $data['universityID'];
@@ -94,7 +99,7 @@ class pageController extends Controller
         }
       }
       else{
-        return redirect()->route('page.compare')->with('success','Please Select Atleast Two Institutes');
+        return redirect()->route('page.undergraduateCompare')->with('success','Please Select Atleast Two Institutes');
       }
       if($uni[2] != 0){
         if($dept[2]!= 0){
@@ -111,12 +116,71 @@ class pageController extends Controller
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
             if($check == 1){
-              return redirect()->route('page.compare')->with('success','Please Select Atleast Two Institutes');
+              return redirect()->route('page.undergraduateCompare')->with('success','Please Select Atleast Two Institutes');
             }
           }
         }
       }
       return view('comparisonResult')->with(compact('first','second','third'));
+    }
+
+    public function interCompareResult(Request $request){
+      $data = $request->all();
+      $uni = $data['collegeID'];
+      $deg = $data['degreeID'];
+      $first = null;
+      $second = null;
+      $third = null;
+      $check = 1;
+
+      if($uni[0] != 0){
+          if($deg[0]!=0){
+            $first = DB::table('institutes')
+            ->join('degrees','degrees.institute_id','institutes.id')
+            ->join('addresses','addresses.institute_id','institutes.id')
+            ->where('institutes.id',$uni[0])
+            ->where('degrees.id',$deg[0])
+            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
+            ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
+            ->first();
+            $check++;
+          }
+      }
+      if($uni[1] != 0){
+          if($deg[1]!=0){
+            $second = DB::table('institutes')
+            ->join('degrees','degrees.institute_id','institutes.id')
+            ->join('addresses','addresses.institute_id','institutes.id')
+            ->where('institutes.id',$uni[1])
+            ->where('degrees.id',$deg[1])
+            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
+            ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
+            ->first();
+            $check++;
+          }
+      }
+      else{
+        return redirect()->route('page.interCompare')->with('success','Please Select Atleast Two Institutes');
+      }
+      if($uni[2] != 0){
+          if($deg[2]!=0){
+            $third = DB::table('institutes')
+            ->join('degrees','degrees.institute_id','institutes.id')
+            ->join('addresses','addresses.institute_id','institutes.id')
+            ->where('institutes.id',$uni[2])
+            ->where('degrees.id',$deg[2])
+            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
+            ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
+            ->first();
+            if($check == 1){
+              return redirect()->route('page.interCompare')->with('success','Please Select Atleast Two Institutes');
+            }
+          }
+      }
+      return view('interComparisonResult')->with(compact('first','second','third'));
     }
 
     public function home()

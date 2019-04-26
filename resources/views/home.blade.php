@@ -68,13 +68,13 @@
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.compare')}}">Compare</a></li>
+                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
                                         <li><a href="{{route('page.timer')}}">Wishlist</a></li>
                                           <li><a href="{{route('page.timer')}}">Contact</a></li>
 
                                     </ul>
                                 </li>
-                                <li><a href="{{route('page.compare')}}">Compare</a></li>
+                                <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
                                 <li><a href="{{route('page.timer')}}">Wishlist</a></li>
                                 <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>

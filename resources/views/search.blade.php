@@ -60,7 +60,7 @@
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.compare')}}">Compare</a></li>
+                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
                                         <li><a href="{{route('page.timer')}}">Single Courses</a></li>
                                         <li><a href="{{route('page.timer')}}">Instructors</a></li>
                                         <li><a href="{{route('page.timer')}}">Blog</a></li>
@@ -171,7 +171,7 @@
                                   $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$d->name)->count();
 
                                 @endphp
-                                <label  style="word-wrap:break-word">
+                                <label  style="word-wrap:break-word;width: 100%;">
                                     <input class="common-selector group"  type="checkbox" value= "{{$d->name}}" /> {{$d->name}} ({{$count}})
                                  </label>
                               @endforeach
@@ -197,7 +197,7 @@
                                 <?php
                                   $c_aff = App\Institute::where('affiliation',$affiliation->affiliation)->where('instituteType','College')->count();
                                  ?>
-                                <label  style="word-wrap:break-word">
+                                <label  style="word-wrap:break-word;width: 100%;">
 
                                     <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation->affiliation}}" /> {{$affiliation->affiliation}}  ({{$c_aff}})
                                 </label>
@@ -221,21 +221,21 @@
                               <!-- count for hosel -->
                               <?php $c_trans = App\Institute::where('transportation',1)->where('instituteType','College')->count() ?>
 
-                              <label  style="word-wrap:break-word">
+                              <label  style="word-wrap:break-word;width: 100%;">
                                   <input id="transport" class="common-selector transport" type="checkbox" value="1" /> Transportation ({{$c_trans}})
                                </label>
 
                                <!-- count for hosel -->
                                <?php $c_hostel = App\Institute::where('hostel',1)->where('instituteType','College')->count() ?>
 
-                                <label  style="word-wrap:break-word">
+                                <label  style="word-wrap:break-word;width: 100%;">
                                   <input id="hostel" class="common-selector hostel" type="checkbox" value="1" /> Hostel ({{$c_hostel}})
                                </label>
 
                               <!-- count of scholarship -->
                               <?php $c_sch = App\Institute::where('scholarship',1)->where('instituteType','College')->count() ?>
 
-                              <label  style="word-wrap:break-word">
+                              <label  style="word-wrap:break-word;width: 100%;">
                                 <input id="scholarship" class="common-selector scholarship" type="checkbox" value="1" /> Scholarship  ({{$c_sch}})
                              </label>
                             </div>
@@ -255,10 +255,15 @@
 
                                 @foreach($areas as $area)
 
-                                <?php $c_area = DB::table('addresses')->join('towns','towns.id','addresses.town_id')->where('towns.name',$area->name)->count();
+                                <?php $c_area = DB::table('addresses')
+                                ->join('towns','towns.id','addresses.town_id')
+                                ->join('institutes','institutes.id','addresses.institute_id')
+                                ->where('instituteType','College')
+                                ->where('towns.name',$area->name)
+                                ->count();
                                  ?>
 
-                                  <label  style="word-wrap:break-word">
+                                  <label  style="word-wrap:break-word;width: 100%;">
                                     <input class="common-selector town" id="show" type="checkbox" value="{{$area->name}}"/> {{$area->name}} ({{$c_area}})
                                   </label>
                                 @endforeach
@@ -298,7 +303,7 @@
                                 $c_sect = App\Institute::where('sector',$s->sector)->count();
                                ?>
 
-                                <label  style="word-wrap:break-word">
+                                <label  style="word-wrap:break-word;width: 100%;">
                                   <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/> {{$s->sector}} ({{$c_sect}})
                                 </label>
                               @endforeach
@@ -353,17 +358,17 @@
                              </h6>
                              <div id="collapseNine" class="accordion-content collapse">
                                 <?php $c_coEd = App\Institute::where('coEducation',1)->where('instituteType','College')->count() ?>
-                               <label  style="word-wrap:break-word">
+                               <label  style="word-wrap:break-word;width: 100%;">
                                  <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" /> Co-Education ({{$c_coEd}})
                               </label>
 
                               <?php $c_sM = DB::table('institutes')->join('degrees','degrees.institute_id','institutes.id')->where('institutes.instituteType','College')->where('shiftMorning',1)->count(); ?>
-                             <label  style="word-wrap:break-word">
+                             <label  style="word-wrap:break-word;width: 100%;">
                                <input id="shiftMorning" class="common-selector shiftMorning" type="checkbox" value="1" /> Morning Shift ({{$c_sM}})
                             </label>
 
                             <?php $c_sA = DB::table('institutes')->join('degrees','degrees.institute_id','institutes.id')->where('institutes.instituteType','College')->where('shiftAfternoon',1)->count(); ?>
-                           <label  style="word-wrap:break-word">
+                           <label  style="word-wrap:break-word;width: 100%;">
                              <input id="shiftAfternoon" class="common-selector shiftAfternoon" type="checkbox" value="1" /> Afternoon Shift ({{$c_sA}})
                           </label>
                              </div>

@@ -69,16 +69,43 @@ Route::get('/undergraduate/getAffiliations',function(){
 });
 Route::get('inter/getTown',function(){
   $resultTowns = Town::select('name')->get();
-//   $counts = [
-//     'name' => 'joe',
-//     'count'  => 12,
-// ];
 $i=0;
 $j=0;
 $counts = array();
 $names = array();
   foreach ($resultTowns as $r) {
-      $count = DB::table('addresses')->join('towns','towns.id','addresses.town_id')->where('towns.name',$r->name)->count();
+      $count = DB::table('addresses')
+      ->join('towns','towns.id','addresses.town_id')
+      ->join('institutes','institutes.id','addresses.institute_id')
+      ->where('instituteType','College')
+      ->where('towns.name',$r->name)
+      ->count();
+      // data_set($counts,'name',$r->name);
+      // data_set($counts,'count',$count);
+      $counts[++$i] = $count;
+      $names[++$j] = $r->name;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
+});
+Route::get('undergraduate/getTown',function(){
+  $resultTowns = Town::select('name')->get();
+$i=0;
+$j=0;
+$counts = array();
+$names = array();
+  foreach ($resultTowns as $r) {
+      $count = DB::table('addresses')
+      ->join('towns','towns.id','addresses.town_id')
+      ->join('institutes','institutes.id','addresses.institute_id')
+      ->where('instituteType','University')
+      ->where('towns.name',$r->name)
+      ->count();
       // data_set($counts,'name',$r->name);
       // data_set($counts,'count',$count);
       $counts[++$i] = $count;

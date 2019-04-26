@@ -81,6 +81,18 @@ class AdminController extends Controller
       return $output;
     }
 
+    public function getInterDegrees(Request $request)
+    {
+      $output = '<option>Choose...</option>';
+      if(isset($_GET["inst_id"])){
+        $departs = Degree::where('institute_id',$_GET["inst_id"])->get();
+        foreach ($departs as $d) {
+          $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+        }
+      }
+      return $output;
+    }
+
     public function latlng(Request $request)
     {
       $output = array();
@@ -93,10 +105,5 @@ class AdminController extends Controller
         $output[1] = $json->results[0]->geometry->location->lng;
         return $output;
       }
-    }
-
-    public function cResult(Request $request)
-    {
-      dd($request->all());
     }
 }

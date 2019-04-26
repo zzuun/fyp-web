@@ -187,27 +187,6 @@
                               @endif
                             </tr>
                             <tr>
-                              <td>Total Department</td>
-                              @if (isset($first))
-                                @php
-                                  $count = App\Institute::with('departments')->where('institutes.id',$first->instID)->first();
-                                @endphp
-                                <td> {{$count->departments->count()}}</td>
-                                @endif
-                              @if (isset($second))
-                                @php
-                                  $count = App\Institute::with('departments')->where('institutes.id',$second->instID)->first();
-                                @endphp
-                                <td> {{$count->departments->count()}}</td>
-                                @endif
-                              @if(isset($third))
-                                @php
-                                  $count = App\Institute::with('departments')->where('institutes.id',$third->instID)->first();
-                                @endphp
-                                <td> {{$count->departments->count()}}</td>
-                              @endif
-                            </tr>
-                            <tr>
                               <td>Total Degrees</td>
                               @if (isset($first))
                                 @php
