@@ -57,27 +57,28 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="comparison.html">Compare</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                          <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                              </ul>
+                            </div>
 
-                                    </ul>
-                                </li>
-                                <li><a href="comparison.html">Compare</a></li>
-                                <li><a href="universityhomepage.html">University</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
+                              @if(auth()->check())
+                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                                <a  href="onlyloginpage.html"class="btn">Login</a>
+                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
+                                @else
+                                <a href="{{route('register')}}" class="btn">Register</a>
+
+                                <a  href="{{route('login')}}"class="btn">Login</a>
+                                @endif
                               </div>
                         </div>
 

@@ -45,52 +45,31 @@
                     </div>
 
                     <!-- Menu -->
-                    <div class="classy-menu">
-
-                        <!-- Close Button -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="{{route('page.home')}}">Home</a></li>
+                          </ul>
+                          <div class="classynav2">
+                        </div>
+                        <div class="classynav3">
+                          <ul>
+                            <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                          </ul>
                         </div>
 
-                        <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul>
-                                <li><a href="{{route('page.home')}}">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
-                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
-                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{route('page.timer')}}">Courses</a></li>
-                                <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                <li><a href="{{route('page.timer')}}">Contact</a></li>
-                            </ul>
 
-                            <!-- Search Button -->
+                        <!-- Register / Login -->
+                        <div class="register-login-area">
+                          @if(auth()->check())
+                            <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                            <!-- Register / Login -->
-                            <div class="register-login-area">
-                              @if(auth()->check())
-                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
+                            <a  href="{{route('user.logout')}}"class="btn">Logout</a>
+                            @else
+                            <a href="{{route('register')}}" class="btn">Register</a>
 
-                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
-                                @else
-                                <a href="{{route('register')}}" class="btn">Register</a>
-
-                                <a  href="{{route('login')}}"class="btn">Login</a>
-                                @endif
-                            </div>
-
-                        </div>
-                        <!-- Nav End -->
+                            <a  href="{{route('login')}}"class="btn">Login</a>
+                            @endif
+                          </div>
                     </div>
                 </nav>
             </div>
@@ -104,7 +83,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Intermediate</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Intermediate</a></li>
                 <?php if (isset($degree)): ?>
                     <li class="breadcrumb-item"><a href="/degree?instituteid={{$details[0]->id}}&degreeid={{$degree[0]->id}}">{{$degree[0]->name}}</a></li>
                 <?php endif; ?>

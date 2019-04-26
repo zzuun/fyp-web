@@ -55,30 +55,41 @@
                         </div>
 
                         <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="comparison.html">Compare</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                          <li><a href="contact.html">Contact</a></li>
+                        <div class="classy-menu">
 
-                                    </ul>
-                                </li>
-                                <li><a href="comparison.html">Compare</a></li>
-                                <li><a href="universityhomepage.html">University</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
 
-                            <!-- Register / Login -->
-                            <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="{{route('page.home')}}">Home</a></li>
+                                  </ul>
+                                  <div class="classynav2">
+                                </div>
+                                <div class="classynav3">
+                                  <ul>
+                                    <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                  </ul>
+                                </div>
 
-                                <a  href="onlyloginpage.html"class="btn">Login</a>
-                              </div>
+
+                                <!-- Register / Login -->
+                                <div class="register-login-area">
+                                  @if(auth()->check())
+                                    <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
+
+                                    <a  href="{{route('user.logout')}}"class="btn">Logout</a>
+                                    @else
+                                    <a href="{{route('register')}}" class="btn">Register</a>
+
+                                    <a  href="{{route('login')}}"class="btn">Login</a>
+                                    @endif
+                                  </div>
+                            </div>
+                            <!-- Nav End -->
                         </div>
                         <!-- Nav End -->
                     </div>
@@ -93,9 +104,9 @@
             <!-- Breadcumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{'route(page.main)'}}"></a>Home</li>
+                    <li class="breadcrumb-item"><a href="{{'route(page.home)'}}"></a>Home</li>
                     <li class="breadcrumb-item"><a href="{{'route(undergraduate.main)'}}">Undergraduate</a></li>
-                    <li class="breadcrumb-item"><a href="/university?universityid={{$details[0]->universityid}}">{{$details[0]->instituteName}}</a></li>
+                    <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$details[0]->departmentName}}</li>
                 </ol>
             </nav>
@@ -114,7 +125,7 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                 </div>
-                <h3>{{$details[0]->instituteName}}</h3>
+                <h3>{{$details[0]->departmentName}}</h3>
                 <div class="meta d-flex align-items-center justify-content-center">
                   <div class="globalonly">
                     <a href="http://{{$details[0]->website}} class="fa fa-globe"></a>
@@ -150,7 +161,7 @@
                                     <div class="clever-curriculum">
 
 
-                                     
+
                                       <div id="mainID">
 
 
@@ -173,12 +184,12 @@
                                                             <span ></span>
                                                         </li>
                                                         @endforeach
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      
+
+
+
+
+
+
                                                     </ul>
                                                   </li>
                                                   <div class="specialClass"></div>
@@ -215,14 +226,14 @@
 
                                                 <div class="rating-viewer">
                                                   <!-- Rating -->
-                                                 
+
                                                   <h4>{{$faculty->name}}</h4>
                                                   <h6>{{$faculty->designation}}</h6>
-                                                  
+
                                                 </div>
                                             </div>
                                         @endforeach
-                                          
+
                                       </div>
                                     </div>
 
@@ -253,17 +264,17 @@
                                         <h6 style="color:orange;">{{$views[0]->sum}}</h6>
                                     </li>
 
-                                    
+
 
                                         <!-- <li>
                                         <h6><i class="fa fa-code-fork" aria-hidden="true"></i>HEC Affiliation</h6>
-                                        
-                                            <h6><i class="fa fa-check-circle" style="color:blue"></i></h6>
-                                        
 
-                                        
+                                            <h6><i class="fa fa-check-circle" style="color:blue"></i></h6>
+
+
+
                                         </li> -->
-                                    
+
                                     <li>
                                         <h6><i class="fa fa-graduation-cap" aria-hidden="true"></i>Total Degrees</h6>
                                         <h6 style="color:blue;"></h6>

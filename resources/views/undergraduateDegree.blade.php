@@ -56,27 +56,28 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="comparison.html">Compare</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                          <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                              </ul>
+                            </div>
 
-                                    </ul>
-                                </li>
-                                <li><a href="comparison.html">Compare</a></li>
-                                <li><a href="universityhomepage.html">University</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
+                              @if(auth()->check())
+                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                                <a  href="onlyloginpage.html"class="btn">Login</a>
+                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
+                                @else
+                                <a href="{{route('register')}}" class="btn">Register</a>
+
+                                <a  href="{{route('login')}}"class="btn">Login</a>
+                                @endif
                               </div>
                         </div>
                         <!-- Nav End -->
@@ -94,7 +95,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
-                    
+
                     <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
                     <li class="breadcrumb-item"><a href="/department?departmentid={{$details[0]->departmentid}}">{{$details[0]->departmentName}}e</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
@@ -115,7 +116,7 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                 </div>
-                <h3>{{$details[0]->instituteName}}</h3>
+                <h3>{{$details[0]->degreeName}}</h3>
                 <div class="meta d-flex align-items-center justify-content-center">
                   <div class="globalonly">
                     <a href="http://{{$details[0]->website}}" class="fa fa-globe"></a>
@@ -184,7 +185,7 @@
                                                       @if($details[0]->shiftMorning == 1)
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sun-o" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Morning Shift</h6>
                                                         <h6 style="color:green;">Yes</h6>
-                                                        
+
 
                                                       @else
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sun-o" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Morning Shift</h6>
@@ -195,7 +196,7 @@
                                                       @if($details[0]->shiftAfternoon == 1)
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sun-o" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Afternoon Shift</h6>
                                                         <h6 style="color:green;">Yes</h6>
-                                                        
+
 
                                                       @else
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sun-o" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Afternoon Shift</h6>
@@ -359,20 +360,6 @@
             </div>
 
             <!-- Bottom Footer Area -->
-            <div class="bottom-footer-area d-flex justify-content-between align-items-center">
-                <!-- Contact Info -->
-                <div class="contact-info">
-                    <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                    <a href="#"><span>Email:</span> info@clever.com</a>
-                </div>
-                <!-- Follow Us -->
-                <div class="follow-us">
-                    <span>Follow us</span>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                </div>
-            </div>
         </footer>    <!-- ##### Footer Area End ##### -->
 
     <!-- ##### All Javascript Script ##### -->

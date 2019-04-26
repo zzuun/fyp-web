@@ -57,27 +57,28 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="comparison.html">Compare</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                          <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                              </ul>
+                            </div>
 
-                                    </ul>
-                                </li>
-                                <li><a href="comparison.html">Compare</a></li>
-                                <li><a href="universityhomepage.html">University</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
+                              @if(auth()->check())
+                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                                <a  href="onlyloginpage.html"class="btn">Login</a>
+                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
+                                @else
+                                <a href="{{route('register')}}" class="btn">Register</a>
+
+                                <a  href="{{route('login')}}"class="btn">Login</a>
+                                @endif
                               </div>
                         </div>
                         <!-- Nav End -->
@@ -96,7 +97,7 @@
                     <li class="breadcrumb-item"><a href="{{route('page.home')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
                     <li class="breadcrumb-item"><a href="/univeristy?instituteid{{$institute->id}}">{{$institute->name}}</a></li>
-                    
+
                 </ol>
             </nav>
         </div>
@@ -181,7 +182,7 @@
                                                                 <h6 style="color:red;">No</h6>
                                                             @endif
 
-                                     
+
                                                       </li>
                                                       <li>
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-building" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Sector</h6>
@@ -270,9 +271,10 @@
                                           <!-- Curriculum Level -->
                                         @foreach($departments as $department)
                                             <div id="myUL" class="curriculum-level mb-30" data-page="grad">
-                                                <h4 class="d-flex justify-content-between"><span>{{$department->name}}</span></h4>
+                                                <a href="/department?departmentid={{$department->id}}"><h4 class="d-flex justify-content-between"><span>{{$department->name}}</span></h4></a>
+
                                                 <div class="curriculum-list">
-                                                    
+
                                                     @php
                                                         $degrees=DB::table('departments')->join('degrees','departments.id','degrees.department_id')
                                                         ->where('departments.id',$department->id)
@@ -296,7 +298,7 @@
                             </div>
 
 
-                                    
+
 
 
 
@@ -438,21 +440,6 @@
             </div>
 
             <!-- Bottom Footer Area -->
-            <div class="bottom-footer-area d-flex justify-content-between align-items-center">
-                <!-- Contact Info -->
-                <div class="contact-info">
-                    <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                    <a href="#"><span>Email:</span> info@clever.com</a>
-                </div>
-                <!-- Follow Us -->
-                <div class="follow-us">
-                    <span>Follow us</span>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </footer> 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
@@ -470,8 +457,9 @@
 
     <script>
         var instituteName = "{!! $institute->name !!}";
-        var lat = {!! $address->lat !!};
-        var lng = {!! $address->lng !!};
+        var inlat = {!! $address->lat !!};
+        var inlng = {!! $address->lng !!};
+
     </script>
 
     <script>

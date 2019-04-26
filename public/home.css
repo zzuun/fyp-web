@@ -244,11 +244,13 @@ img {
 .section-heading2 {
   position: relative;
   z-index: 1;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
+  margin-top: 45px;
   text-align: center; }
   .section-heading2 h5 {
     font-size: 24px;
-    margin-bottom: 0; }
+    font-weight: 600;
+    margin-bottom: 5px; }
     @media only screen and (max-width: 767px) {
       .section-heading2 h5 {
         font-size: 24px; } }

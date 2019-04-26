@@ -65,10 +65,8 @@
                         <div class="classynav">
                             <ul>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
-                                @if (auth()->check())
-                                  <li><a href="{{route('page.timer')}}">Wishlist</a></li>
-                                @endif
+                                <li><a href="{{route('page.interCompare')}}">Compare Colleges</a></li>
+                                <li><a href="{{route('page.undergraduateCompare')}}">Compare Universities</a></li>
                                 <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>
 
@@ -109,7 +107,27 @@
         </div>
     </section>
     <!-- ##### Hero Area End ##### -->
+    <div class="blog-catagories mb-50 d-flex flex-wrap">
+      <div class="col-12">
+            <div class="section-heading2">
+                <h5>Find the best Colleges, Universities and Degree Programs! Give it a try?</h5>
+            </div>
+        </div>
 
+        <!-- Single Catagories -->
+        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc2.jpg);left:25%;">
+          <a href="{{route('intermediate.main')}}">
+              <h6>Intermediate</h6>
+          </a>
+        </div>
+
+        <!-- Single Catagories -->
+        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc3.jpg);left:50%;">
+          <a href="{{route('undergraduate.main')}}">
+              <h6>Undergraduate</h6>
+          </a>
+        </div>
+      </div>
     <!-- ##### Cool Facts Area Start ##### -->
     <section class="cool-facts-area section-padding-100-0">
         <div class="container">
@@ -121,10 +139,7 @@
                         <div class="icon">
                             <img src="img/core-img/docs.png" alt="">
                         </div>
-                        @php
-                          $clg = App\Institute::where('instituteType','College')->count();
-                        @endphp
-                        <h2><span class="counter">{{$clg}}</span></h2>
+                        <h2><span class="counter">500</span></h2>
                         <h5>Colleges</h5>
                     </div>
                   </div>
@@ -135,12 +150,9 @@
                   <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="500ms">
                         <div class="icon">
-                          @php
-                            $unis = App\Institute::where('instituteType','University')->count();
-                          @endphp
                             <img src="img/core-img/star.png" alt="">
                         </div>
-                        <h2><span class="counter">{{$unis}}</span></h2>
+                        <h2><span class="counter">50</span></h2>
                         <h5>Universities</h5>
                     </div>
                   </div>
@@ -151,13 +163,10 @@
                   <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="750ms">
                         <div class="icon">
-                          @php
-                            $deCoun = App\Department::count()
-                          @endphp
                             <img src="img/core-img/events.png" alt="">
                         </div>
-                        <h2><span class="counter">{{$deCoun}}</span></h2>
-                        <h5>Departments</h5>
+                        <h2><span class="counter">32</span></h2>
+                        <h5>Districts</h5>
                     </div>
                   </div>
                 </div>
@@ -167,13 +176,10 @@
                   <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="1000ms">
                         <div class="icon">
-                          @php
-                            $degs = App\Degree::count()
-                          @endphp
                             <img src="img/core-img/earth.png" alt="">
                           </div>
-                        <h2><span class="counter">{{$degs}}</span></h2>
-                        <h5>Available Degrees</h5>
+                        <h2><span class="counter">220</span></h2>
+                        <h5>Available Courses</h5>
                     </div>
                     </div>
                 </div>
@@ -200,16 +206,16 @@
 
                       <div class="clever-tabs-content">
                           <ul class="nav nav-tabs" id="myTab" role="tablist">
-                              <li class="nav-item">
-                                  <a class="nav-link active" id="tab--1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Home Page</a>
+                              <li class="nav-item" style="margin-left: 10%;">
+                                  <a class="nav-link active" id="tab--1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Home</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item" style="margin-left: 5%;">
                                   <a class="nav-link" id="tab--2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Top Colleges</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item" style="margin-left: 5%;">
                                   <a class="nav-link" id="tab--3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="true">Top Universities</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item" style="margin-left: 5%;">
                                   <a class="nav-link" id="tab--4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="true">Popular Degrees</a>
                               </li>
                           </ul>
@@ -218,48 +224,7 @@
                                 <!-- Tab Text -->
                                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab--1">
 
-                                  <div class="blog-catagories mb-100 d-flex flex-wrap justify-content-between">
-                                    <div class="col-12">
-                                          <div class="section-heading2">
-                                              <h5>Find the best Colleges, Universities and Degree Programs! Give it a try?</h5>
-                                          </div>
-                                      </div>
 
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc2.jpg);">
-                                        <a href="{{route('page.main')}}">
-                                            <h6>Intermediate</h6>
-                                        </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc3.jpg);">
-                                        <a href="u-searchfilters.html">
-                                            <h6>Undergraduate</h6>
-                                        </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc4.jpg);">
-                                        <a href="p-searchfilters.html">
-                                            <h6>Post Graduate</h6>
-                                        </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc5.jpg);">
-                                          <a href="prePostRequisite.html">
-                                              <h6>Guide Me</h6>
-                                          </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc6.jpg);">
-                                          <a href="#">
-                                              <h6>About Us</h6>
-                                          </a>
-                                      </div>
-                                  </div>
 
                                 </div>
 
@@ -1490,7 +1455,25 @@
             <div class="row">
                 <div class="col-12">
                     <div class="tutors-slide owl-carousel wow fadeInUp" data-wow-delay="250ms">
-
+                      <div class="single-tutors-slides">
+                          <!-- Tutor Thumbnail -->
+                          <div class="tutor-thumbnail">
+                              <img src="img/bg-img/t8.png" alt="">
+                          </div>
+                          <!-- Tutor Information -->
+                          <div class="tutor-information text-center">
+                              <h5>Dr. Muhammad Murtaza Yousaf</h5>
+                              <p><b>CEO</b></p>
+                              <span>Assistant Professor</span>
+                              <p>PhD Computer Science, University of Innsbruck, Austria, 2008</p>
+                              <p>M.Sc Computer Science, PU, 2001 (Gold Medal)</p>
+                              <div class="social-info">
+                                  <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                  <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                  <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                              </div>
+                          </div>
+                      </div>
                         <!-- Single Tutors Slide -->
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
@@ -1499,9 +1482,10 @@
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Arsalan J. Khan</h5>
-                                <span>Coder</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <h5>Arsalan Jamal Khan</h5>
+                                <span>Web Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1519,8 +1503,9 @@
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
                                 <h5>Ameer Hamza</h5>
-                                <span>Front End Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <span>Android Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1538,8 +1523,9 @@
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
                                 <h5>Ameer Hamza</h5>
-                                <span>Code Geek</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <span>Lead Web Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1558,7 +1544,8 @@
                             <div class="tutor-information text-center">
                                 <h5>Aurangzeb Khan</h5>
                                 <span>Front End Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1566,7 +1553,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
@@ -1577,7 +1563,8 @@
                             <div class="tutor-information text-center">
                                 <h5>Zunnorain Zaheer</h5>
                                 <span>Android Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1585,7 +1572,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- Single Tutors Slide -->
                         <div class="single-tutors-slides">
@@ -1596,8 +1582,9 @@
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
                                 <h5>M. Moeez Saiyam</h5>
-                                <span>Android Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <span>Front End Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>

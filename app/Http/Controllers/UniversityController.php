@@ -24,7 +24,7 @@ class UniversityController extends Controller
       ->get();
       $inc = DB::table('degrees')->where('degrees.id',$request->degreeid)->increment('numberOfViews');
       return view('undergraduateDegree')->withDetails($result);
-        
+
     }
 
     public function getUniversityProfile(Request $request)
@@ -51,7 +51,7 @@ class UniversityController extends Controller
         $departments=Institute::find($request->instituteid)->departments;
         $address=Institute::find($request->instituteid)->address;
         return view('universityProfile')->withInstitute($institute)->withAddress($address)->withDepartments($departments);
-        
+
     }
 
     public function getDepartmentProfile(Request $request)
@@ -62,10 +62,11 @@ class UniversityController extends Controller
         ->select('institutes.id as instituteid','institutes.name as instituteName','departments.id as departmentid','departments.name as departmentName','addresses.website')
         ->get();
 
+        $inc = DB::table('departments')->where('departments.id',$request->departmentid)->increment('noOfViews');
         // $degrees=Department::find($request->departmentid)->degrees;
 
 
         return view('universityDepartment')->withDetails($department);
     }
-    
+
 }

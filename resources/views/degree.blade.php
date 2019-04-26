@@ -51,29 +51,18 @@
                             <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                         </div>
 
-                        <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
                                 <li><a href="{{route('page.home')}}">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
-                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
-                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{route('page.timer')}}">Courses</a></li>
-                                <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                <li><a href="{{route('page.timer')}}">Contact</a></li>
-                            </ul>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                              </ul>
+                            </div>
 
-                            <!-- Search Button -->
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
@@ -86,8 +75,7 @@
 
                                 <a  href="{{route('login')}}"class="btn">Login</a>
                                 @endif
-                            </div>
-
+                              </div>
                         </div>
                         <!-- Nav End -->
                     </div>
@@ -103,7 +91,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('page.main') }}">Intermediate</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Intermediate</a></li>
                 <li class="breadcrumb-item"><a href="/institute?instituteID={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
             </ol>
@@ -195,7 +183,7 @@
                                                       </li>
 
 
-                                                      
+
 
                                                       <li>
                                                         <span><i class="fa fa-graduation-cap" aria-hidden="true"></i> Scholarships </span>

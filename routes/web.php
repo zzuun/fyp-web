@@ -14,7 +14,7 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
-<<<<<<< routes/web.php
+
 Route::get('/intermediate',function(){
   return view('searchIntermediate');
 })->name('intermediate.main');
@@ -32,9 +32,8 @@ Route::get('/institute','pageController@institute')->name('page.institute');
 Route::get('/degreeUniversity','UniversityController@index');
 Route::get('/department','UniversityController@getDepartmentProfile');
 Route::get('/university','UniversityController@getUniversityProfile');
-Route::get('/compare','pageController@compare')->name('page.compare');
-=======
-// Route::get('/intermediate','SearchController@search')->name('page.main');
+
+// Route::get('/intermediate','SearchController@search')->name('page.home');
 Route::get('/apply','SearchController@filter');
 
 Route::get('/wishlist','pageController@wishlist');
@@ -49,7 +48,7 @@ Route::post('intermediate/ResultCompare','pageController@interCompareResult');
 
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
->>>>>>> routes/web.php
+
 
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){
@@ -102,7 +101,12 @@ Route::post('/getMarksCountUni',function(){
   if(isset($_POST["minmarks"])|| isset($_POST["maxmarks"])){
      $maxRange= $_POST['maxmarks'];
      $minRange=$_POST['minmarks'];
-     $c_degree = App\Degree::whereBetween('lastMerit',[$minRange,$maxRange])->where('degreeLevel','BS')->count();
+     $c_degree = DB::table('institutes')
+     ->join('departments','departments.institute_id' ,'institutes.id')
+     ->join('degrees','degrees.department_id','departments.id')
+     ->where('instituteType','University')
+     ->whereBetween('degrees.lastMerit',[$minRange,$maxRange])
+     ->count();
      return $c_degree;
   }
 });

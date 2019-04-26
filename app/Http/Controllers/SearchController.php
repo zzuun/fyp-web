@@ -12,21 +12,24 @@ class SearchController extends Controller
     {
 
        $degrees=$degrees->newQuery();
-       $degrees->join('institutes','degrees.institute_id','=','institutes.id')
+       $degrees->join('departments','degrees.department_id','=','departments.id')
+       ->join('institutes','departments.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
-       ->join('departments','degrees.department_id','=','departments.id')
        ->join('towns','towns.id','addresses.town_id')
        ->join('subareas','subareas.id','addresses.subarea_id')
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('degrees.degreeLevel','=','BS')
-       ->select('institutes.id as instituteid','degrees.id as degreeid','degrees.name as degreeName','institutes.name as instituteName','institutes.sector','institutes.affiliation','departments.name as departmentName','departments.id as departmentid','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');       
+       ->select('institutes.id as instituteid','degrees.id as degreeid','degrees.name as degreeName','institutes.name as instituteName','institutes.sector','institutes.affiliation','departments.name as departmentName','departments.id as departmentid','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
        if (isset($_GET["search"])) {
          $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
        }
        if(isset($_GET["town"]))
        {
-          $area_filter = implode("','",$_GET["town"]);
-          $degrees->whereRaw("towns.name in ('".$area_filter."')");
+         $arr = $_GET["town"];
+         // dd($arr);
+         $degrees->wherein('towns.name',[$arr]);
+          // $area_filter = implode("','",$_GET["town"]);
+          // $degrees->whereRaw("towns.name in ('".$area_filter."')");
        }
 
        if(isset($_GET["subarea"]))
@@ -127,7 +130,8 @@ class SearchController extends Controller
        ->join('subareas','subareas.id','addresses.subarea_id')
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('degrees.degreeLevel','=','INTER')
-       ->select('institutes.id as instituteid','degrees.id as degreeid','degrees.name as degreeName','institutes.name as instituteName','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');       
+       ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
+       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
        if (isset($_GET["search"])) {
          $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
        }
@@ -224,9 +228,9 @@ class SearchController extends Controller
 
        return view('searchIntermediate',compact('results'));
 
-  
+
     }
-    
+
     public function getCities(){
 
         if(isset($_GET["city"]))

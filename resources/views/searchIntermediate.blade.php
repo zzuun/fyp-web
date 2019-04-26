@@ -59,28 +59,12 @@
                         <div class="classynav">
                             <ul>
                                 <li><a href="{{route('page.home')}}">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Courses</a></li>
-                                        <li><a href="{{route('page.timer')}}">Instructors</a></li>
-                                        <li><a href="{{route('page.timer')}}">Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Single Blog</a></li>
-                                        <li><a href="{{route('page.timer')}}">Regular Page</a></li>
-                                        <li><a href="{{route('page.timer')}}">Contact</a></li>
-                                    </ul>
-                                </li>
                               </ul>
                               <div class="classynav2">
-                                <ul>
-                                <li><a href="{{route('page.timer')}}" position="relative">Wishlist<span class="badge">3</span></a></li>
-                              </ul>
                             </div>
                             <div class="classynav3">
                               <ul>
-                                <li><a href="">Instructors</a></li>
-                                <li><a href="">Contact</a></li>
+                                <li><a href="{{route('page.interCompare')}}">Compare</a></li>
                               </ul>
                             </div>
 
@@ -145,14 +129,14 @@
                                   <input type="search" name="search" id="search" placeholder="Keyword">
                                   <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                               </form>
-                          
+
                         </div>
                   <div class="clever-faqs">
                       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
 
-                        
-                          
-                          
+
+
+
 
                         <!-- Degree Group -->
                         <div class="panel single-accordion8">
@@ -382,6 +366,10 @@
                           </label>
                              </div>
                          </div>
+                         <div class="panel single-accordion9">
+                         <!--  <button class="clearbtn" id="clear" onclick="alertFunction()"><i class="fa fa-trash"></i> Clear Filters</button>-->
+                          <input type='button' class="clearbtn" value="Clear Filters" />
+                         </div>
                       </div>
 
                   </div>
@@ -399,7 +387,7 @@
             <div class="container">
 
                <section class="filterResults">
-                
+
                </section>
 
              </div>
@@ -413,9 +401,9 @@
 <style>
     #loading
     {
-      text-align:center; 
-      background: url('img/loading.gif') no-repeat center; 
-      height: 150px; 
+      text-align:center;
+      background: url('img/loading.gif') no-repeat center;
+      height: 150px;
     }
 </style>
 
@@ -458,12 +446,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     });
     </script>
 
-  
+
   <script>
-  
+
   </script>
 
- 
+
 
 <script>
   $(document).ready(function(){
@@ -498,9 +486,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   {
       $(document).on('click', '.pagination a', function(event)
       {
-          event.preventDefault(); 
+          event.preventDefault();
 
-          
+
 
           var page = $(this).attr('href').split('page=')[1];
           filter_data(page);
@@ -533,9 +521,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 url:"/applyIntermediate?page="+page,
                 method:"GET",
                 data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group:group,   _token: "{{csrf_token()}}"},
-                success:function(data){                      
+                success:function(data){
                   //console.log(data);
-                  
+
                   $('.filterResults').html(data);
                 }
             });
@@ -558,7 +546,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           });
         }
 
-      function getMarksCount() 
+      function getMarksCount()
       {
         var minmarks=$('#minmarks').val();
         var maxmarks=$('#maxmarks').val();
@@ -622,14 +610,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           getFeesCount();
           getMarksCount();
 
-          
 
-      
+
+
 
       $(document).on('keyup','#search',function(){
           filter_data();
         });
-      
+
 
 
       $(document).on('click','.subarea',function(){
@@ -647,8 +635,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
   });
 
- 
-</script> 
+
+</script>
 
 
 </body>
