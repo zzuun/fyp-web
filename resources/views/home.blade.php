@@ -139,7 +139,10 @@
                         <div class="icon">
                             <img src="img/core-img/docs.png" alt="">
                         </div>
-                        <h2><span class="counter">500</span></h2>
+                        @php
+                          $cCount = App\Institute::where('instituteType','College')->count();
+                        @endphp
+                        <h2><span class="counter">{{$cCount}}</span></h2>
                         <h5>Colleges</h5>
                     </div>
                   </div>
@@ -152,7 +155,10 @@
                         <div class="icon">
                             <img src="img/core-img/star.png" alt="">
                         </div>
-                        <h2><span class="counter">50</span></h2>
+                        @php
+                          $uCount = App\Institute::where('instituteType','University')->count();
+                        @endphp
+                        <h2><span class="counter">{{$uCount}}</span></h2>
                         <h5>Universities</h5>
                     </div>
                   </div>
@@ -165,8 +171,11 @@
                         <div class="icon">
                             <img src="img/core-img/events.png" alt="">
                         </div>
-                        <h2><span class="counter">32</span></h2>
-                        <h5>Districts</h5>
+                        @php
+                          $dCount = App\Department::count();
+                        @endphp
+                        <h2><span class="counter">{{$dCount}}</span></h2>
+                        <h5>Departments</h5>
                     </div>
                   </div>
                 </div>
@@ -178,8 +187,11 @@
                         <div class="icon">
                             <img src="img/core-img/earth.png" alt="">
                           </div>
-                        <h2><span class="counter">220</span></h2>
-                        <h5>Available Courses</h5>
+                          @php
+                            $dCount = App\Degree::count();
+                          @endphp
+                        <h2><span class="counter">{{$dCount}}</span></h2>
+                        <h5>Degrees</h5>
                     </div>
                     </div>
                 </div>
@@ -1604,82 +1616,6 @@
     <!-- ##### Register Now End ##### -->
 
     <!-- ##### Upcoming Events Start ##### -->
-    <section class="upcoming-events section-padding-100-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading">
-                        <h3>Upcoming events</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Single Upcoming Events -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="250ms">
-                        <!-- Events Thumb -->
-                        <div class="events-thumb">
-                            <img src="img/bg-img/e1.jpg" alt="">
-                            <h6 class="event-date">August 26</h6>
-                            <h4 class="event-title">Networking Day</h4>
-                        </div>
-                        <!-- Date & Fee -->
-                        <div class="date-fee d-flex justify-content-between">
-                            <div class="date">
-                                <p><i class="fa fa-clock"></i> August 26 @ 9:00 am</p>
-                            </div>
-                            <div class="events-fee">
-                                <a href="#">$45</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Upcoming Events -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="500ms">
-                        <!-- Events Thumb -->
-                        <div class="events-thumb">
-                            <img src="img/bg-img/e2.jpg" alt="">
-                            <h6 class="event-date">August 7</h6>
-                            <h4 class="event-title">Open Doors Day</h4>
-                        </div>
-                        <!-- Date & Fee -->
-                        <div class="date-fee d-flex justify-content-between">
-                            <div class="date">
-                                <p><i class="fa fa-clock"></i> August 7 @ 9:00 am</p>
-                            </div>
-                            <div class="events-fee">
-                                <a href="#" class="free">Free</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Upcoming Events -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="750ms">
-                        <!-- Events Thumb -->
-                        <div class="events-thumb">
-                            <img src="img/bg-img/e3.jpg" alt="">
-                            <h6 class="event-date">August 3</h6>
-                            <h4 class="event-title">Creative Leadership</h4>
-                        </div>
-                        <!-- Date & Fee -->
-                        <div class="date-fee d-flex justify-content-between">
-                            <div class="date">
-                                <p><i class="fa fa-clock"></i> August 3 @ 9:00 am</p>
-                            </div>
-                            <div class="events-fee">
-                                <a href="#">$45</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- ##### Upcoming Events End ##### -->
 
     <!-- ##### Blog Area Start ##### -->
