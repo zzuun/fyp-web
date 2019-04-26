@@ -257,7 +257,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=10">
                                                             <h4>Government College University</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -301,7 +301,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=11">
                                                             <h4>Punjab Group of Colleges</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -345,7 +345,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=12">
                                                             <h4>Lahore College for Women University</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -389,7 +389,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=13">
                                                             <h4>Forman Christian College (FCC)</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -433,7 +433,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=14">
                                                             <h4>Fazaia Inter College Lahore</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -477,7 +477,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=15">
                                                             <h4>The Superior Group of Colleges</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -521,7 +521,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                           <a href="/institute?instituteID=16">
                                                             <h4>Kinnaird College for Women University</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -565,7 +565,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="nust.html">
+                                                          <a href="/institute?instituteID=19">
                                                             <h4>Aitchison College</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -611,7 +611,7 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="load-more text-center mt-100 wow fadeInUp" data-wow-delay="50ms">
-                                                            <a href="searchfilters.html" class="btn clever-btn-view-more btn-2">View More</a>
+                                                            <a href="/intermediate" class="btn clever-btn-view-more btn-2">View More</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -634,7 +634,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=1">
                                                             <h4>LUMS</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -678,7 +678,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=81">
                                                             <h4> University of the Punjab </h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -766,7 +766,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=7">
                                                             <h4>FAST - NUCES	</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -854,7 +854,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=6">
                                                             <h4>University of Lahore </h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -898,7 +898,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=8">
                                                             <h4>University of Management & Technology	</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -986,7 +986,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=80">
                                                             <h4>Government College University</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -1030,7 +1030,7 @@
 
                                                         <!-- Course Content -->
                                                         <div class="course-content">
-                                                           <a href="searchfilters.html">
+                                                           <a href="/university?instituteid=77">
                                                             <h4>King Edward Medical University</h4>
                                                             <div class="total-ratings d-flex float-right" align="right">
                                                                 <div class="ratings-text">
@@ -1072,7 +1072,7 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="load-more text-center mt-100 wow fadeInUp" data-wow-delay="50ms">
-                                                            <a href="searchfilters.html" class="btn clever-btn-view-more btn-2">View More</a>
+                                                            <a href="/undergraduate" class="btn clever-btn-view-more btn-2">View More</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1427,7 +1427,7 @@
                                                     <div class="col-12">
                                                         <h5>Apart from all these, there are many other professions which can be taken up and are very well paying as well, some of which are, doctors, lawyers, armed forces, pharmacists, architects, and many more. You have to pick a profession that is just right for you, the one that you enjoy doing. Last word is that</h5> <h5 style="color:green;" align="justify;">“hard work pays”.</h5>
                                                         <div class="load-more text-center mt-100 wow fadeInUp" data-wow-delay="50ms">
-                                                            <a href="searchfilters.html" class="btn clever-btn-view-more btn-2">View More</a>
+                                                            <a href="/undergraduate" class="btn clever-btn-view-more btn-2">View More</a>
                                                         </div>
                                                     </div>
                                                 </div>
