@@ -55,6 +55,7 @@ class pageController extends Controller
       $first = null;
       $second = null;
       $third = null;
+      $check = 1;
 
       if($uni[0] != 0){
         if($dept[0]!= 0){
@@ -70,6 +71,7 @@ class pageController extends Controller
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
+            $check++;
           }
         }
       }
@@ -87,8 +89,12 @@ class pageController extends Controller
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
+            $check++;
           }
         }
+      }
+      else{
+        return redirect()->route('page.compare')->with('success','Please Select Atleast Two Institutes');
       }
       if($uni[2] != 0){
         if($dept[2]!= 0){
@@ -104,6 +110,9 @@ class pageController extends Controller
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
+            if($check == 1){
+              return redirect()->route('page.compare')->with('success','Please Select Atleast Two Institutes');
+            }
           }
         }
       }

@@ -6,8 +6,6 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
@@ -19,7 +17,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="comparison.css">
-
+    <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
 </head>
 
 <body>
@@ -95,6 +93,12 @@
 
     <!-- ##### Blog Area Start ##### -->
     <section class="blog-area blog-page section-padding-100">
+      @if($message = Session::get('success'))
+        <div style="text-align:center;" class="alert alert-danger">
+          <strong>{{$message}}</strong>
+        </div>
+      @endif
+
       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
         <form action="ResultCompare" method="post">
 
@@ -115,16 +119,16 @@
                 @php
                   $uni = App\Institute::where('instituteType','University')->get();
                 @endphp
-                <select class="custom-select" name="universityID[]" id="uni1">
+                <select class="custom-select" name="universityID[]" id="uni1" required>
                     <option selected value="0" >University</option>
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
                     @endforeach
                   </select>
-                  <select class="custom-select" name="departmentID[]" id="dept1">
+                  <select class="custom-select" name="departmentID[]" id="dept1" required>
                       <option selected value="0">Department</option>
                     </select>
-                    <select class="custom-select" name="degreeID[]" id="deg1">
+                    <select class="custom-select" name="degreeID[]" id="deg1" required>
                         <option selected value="0">Degree</option>
                       </select>
               </div>
@@ -141,16 +145,16 @@
                   </a>
               </h6>
               <div id="collapseTwo" class="accordion-content collapse">
-                <select class="custom-select" name="universityID[]" id="uni2">
+                <select class="custom-select" name="universityID[]" id="uni2" required>
                   <option selected value="0">University</option>
                   @foreach ($uni as $u)
                     <option value="{{$u->id}}">{{$u->name}}</option>
                   @endforeach
                   </select>
-                  <select class="custom-select" name="departmentID[]" id="dept2">
+                  <select class="custom-select" name="departmentID[]" id="dept2" required>
                       <option selected value="0">Department</option>
                     </select>
-                    <select class="custom-select" name="degreeID[]" id="deg2">
+                    <select class="custom-select" name="degreeID[]" id="deg2" required>
                       <option selected value="0">Degree</option>
                       </select>
               </div>

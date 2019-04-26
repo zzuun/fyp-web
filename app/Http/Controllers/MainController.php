@@ -146,11 +146,8 @@ class MainController extends Controller
 
       $more = DB::table('departments')
       ->join('institutes','institutes.id','departments.institute_id')
-      ->join('degrees','degrees.department_id','departments.id')
-      ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
       ->where('institutes.id',$instituteId)
-      ->select('departments.name as deptName','departments.id','degreeGroups.name as degreeType')
-      ->distinct()
+      ->select('departments.name as deptName','departments.id')
       ->get();
       return Response::json([array('data' => $result),array('departments'=>$more)]);
     }
