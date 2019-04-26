@@ -17,6 +17,10 @@ class Department extends Model
   {
       return $this->hasMany('App\Faculty');
   }
+  public function wishlists()
+  {
+      return $this->hasMany('App\Wishlist');
+  }
   public function degrees()
   {
       return $this->hasMany('App\Degree')->orderby('numberOfViews','desc');

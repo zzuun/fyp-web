@@ -65,17 +65,10 @@
                         <div class="classynav">
                             <ul>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
-                                        <li><a href="{{route('page.timer')}}">Wishlist</a></li>
-                                          <li><a href="{{route('page.timer')}}">Contact</a></li>
-
-                                    </ul>
-                                </li>
                                 <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
-                                <li><a href="{{route('page.timer')}}">Wishlist</a></li>
+                                @if (auth()->check())
+                                  <li><a href="{{route('page.timer')}}">Wishlist</a></li>
+                                @endif
                                 <li><a href="{{route('page.timer')}}">Contact</a></li>
                             </ul>
 

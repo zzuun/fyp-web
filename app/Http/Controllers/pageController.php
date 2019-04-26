@@ -192,4 +192,9 @@ class pageController extends Controller
     {
       return view('timer');
     }
+
+    public function wishList()
+    {
+      return view('wishlist');
+    }
 }

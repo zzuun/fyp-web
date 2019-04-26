@@ -119,13 +119,13 @@
                 @php
                   $uni = App\Institute::where('instituteType','College')->get();
                 @endphp
-                <select class="custom-select" name="collegeID[]" id="uni1" required>
+                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni1" required>
                     <option selected value="0" >College</option>
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
                     @endforeach
                   </select>
-                    <select class="custom-select" name="degreeID[]" id="deg1" required>
+                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg1" required>
                         <option selected value="0">Degree</option>
                       </select>
               </div>
@@ -142,13 +142,13 @@
                   </a>
               </h6>
               <div id="collapseTwo" class="accordion-content collapse">
-                <select class="custom-select" name="collegeID[]" id="uni2" required>
+                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni2" required>
                   <option selected value="0">College</option>
                   @foreach ($uni as $u)
                     <option value="{{$u->id}}">{{$u->name}}</option>
                   @endforeach
                   </select>
-                    <select class="custom-select" name="degreeID[]" id="deg2" required>
+                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg2" required>
                       <option selected value="0">Degree</option>
                       </select>
               </div>
@@ -164,13 +164,13 @@
                   </a>
               </h6>
               <div id="collapseThree" class="accordion-content collapse">
-                <select class="custom-select" name="collegeID[]" id="uni3">
+                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni3">
                   <option selected value="0">College</option>
                   @foreach ($uni as $u)
                     <option value="{{$u->id}}">{{$u->name}}</option>
                   @endforeach
                   </select>
-                    <select class="custom-select" name="degreeID[]" id="deg3">
+                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg3">
                       <option selected value="0">Degree</option>
                       </select>
               </div>

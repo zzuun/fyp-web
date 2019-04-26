@@ -18,6 +18,10 @@ class Degree extends Model
   {
       return $this->hasMany('App\PreRequisite');
   }
+  public function wishlists()
+  {
+      return $this->hasMany('App\Wishlist');
+  }
   public function postRequisites()
   {
       return $this->hasMany('App\PostRequisite');

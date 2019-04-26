@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Input;
 Route::get('/intermediate','SearchController@search')->name('page.main');
 Route::get('/apply','SearchController@filter');
 
+Route::get('/wishlist','pageController@wishlist');
+
 //undergraduate compare
 Route::get('undergraduate/compare','pageController@compare')->name('page.undergraduateCompare');
 Route::post('undergraduate/ResultCompare','pageController@compareResult');
