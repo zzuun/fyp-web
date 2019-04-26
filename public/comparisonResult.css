@@ -2,7 +2,7 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,500,600,700");
 /* :: 2.0 Import All CSS */
-@import url(customcss/bootstrap.min.css);
+@import url(customcss/bootstrap3.min.css);
 @import url(customcss/owl.carousel.min.css);
 @import url(customcss/animate.css);
 @import url(customcss/magnific-popup.css);
@@ -408,67 +408,6 @@ textarea:focus {
       color: #ffffff;
       background-color: #2c56df;
       border: 1px solid #2c56df; }
-
-      .newdivButton {
-        display: inline-block;
-        min-width: 160px;
-        height: 40px;
-        background-color: #3762f0;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 14px;
-        color: #ffffff;
-        border: 1px solid transparent;
-        border-radius: 6px;
-        padding: 0 30px;
-        margin:auto;
-        display:block;
-        margin-bottom: 20px;
-        line-height: 40px;
-        text-align: center;
-        -webkit-transition-duration: 300ms;
-        transition-duration: 300ms; }
-        .newdivButton.active, .newdivButton:hover, .newdivButton:focus {
-          font-size: 14px;
-          font-weight: 600;
-          color: #ffffff;
-          background-color: #2c56df; }
-        .badge {
-            position: absolute;
-            /* top: -10px;
-            right: -10px; */
-            padding: 5px 7px;
-            border-radius: 50%;
-            background-color: red;
-            color: white;
-          }
-          .newdivButton2 {
-            display: inline-block;
-            min-width: 160px;
-            height: 40px;
-            background-color: red;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-
-            font-size: 14px;
-            color: #ffffff;
-            border: 1px solid transparent;
-            border-radius: 6px;
-            padding: 0 30px;
-            margin:auto;
-            display:block;
-            line-height: 40px;
-            margin-bottom: 20px;
-            text-align: center;
-            -webkit-transition-duration: 300ms;
-            transition-duration: 300ms; }
-            .newdivButton2.active, .newdivButton2:hover, .newdivButton2:focus {
-              font-size: 14px;
-              font-weight: 600;
-              color: #ffffff;
-              background-color: red; }
 
 /* :: 4.0 Header Area */
 .header-area {
@@ -1341,7 +1280,7 @@ textarea:focus {
   box-shadow: 0 0 0 transparent;
   margin-bottom: 15px; }
 .single-accordion:last-of-type {
-  margin-bottom: 20px; }
+  margin-bottom: 0; }
 .single-accordion h6 {
   margin-bottom: 0;
   text-transform: uppercase; }
@@ -1368,8 +1307,7 @@ textarea:focus {
         filter: alpha(opacity=0); }
     .single-accordion h6 a.collapsed {
       background-color: #f7f7f7;
-      color: #5a5a5a;
-      font-size: 18px;}
+      color: #5a5a5a; }
       .single-accordion h6 a.collapsed span.accor-close {
         opacity: 0;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -1382,9 +1320,7 @@ textarea:focus {
   border-top: 0 solid transparent;
   box-shadow: none;
   background-color: #f7f7f7;
-  border-radius: 0 0 6px 6px;
-  margin-bottom: 20px;
-  }
+  border-radius: 0 0 6px 6px; }
   .single-accordion .accordion-content p {
     padding: 15px 30px;
     margin-bottom: 0; }
@@ -1661,6 +1597,7 @@ textarea:focus {
 
   padding-right: 2%;
   padding-left: 2%;
+  margin-bottom: 200px;
 }
 
 .single-blog-area {
@@ -2151,13 +2088,21 @@ textarea:focus {
           text-align: center;
           padding: 9px;
         }
+        th{
+          background-color: #3762f0;
+          color: white;
+        }
 
         th:first-child, td:first-child {
           /* text-align: left; */
         }
 
         tr:nth-child(even) {
-          background-color: #f2f2f2
+          background-color:#f2f2f2;
+        }
+        tr{
+          border-bottom: 1px solid #ebebeb
+
         }
 
         .fa-check {
@@ -2167,27 +2112,12 @@ textarea:focus {
         .fa-remove {
           color: red;
         }
-
       #myid{
             display:inline-block;
-            width:50px;
+            width:300px;
             white-space: nowrap;
             overflow:hidden !important;
             text-overflow: ellipsis;
         }
-        .cancelbutton {
-          background-color: red; /* Green */
-          border: none;
-          color: white;
-          padding: 5px 7.5px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 11px;
-          margin: 2px 2px;
-          cursor: pointer;
-          margin-bottom: 14px;
-        }
-        .cancelbutton2 {border-radius: 50%;}
 
 /*# sourceMappingURL=style.css.map */

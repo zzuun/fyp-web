@@ -14,6 +14,7 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
+<<<<<<< routes/web.php
 Route::get('/intermediate',function(){
   return view('searchIntermediate');
 })->name('intermediate.main');
@@ -32,10 +33,27 @@ Route::get('/degreeUniversity','UniversityController@index');
 Route::get('/department','UniversityController@getDepartmentProfile');
 Route::get('/university','UniversityController@getUniversityProfile');
 Route::get('/compare','pageController@compare')->name('page.compare');
+=======
+// Route::get('/intermediate','SearchController@search')->name('page.main');
+Route::get('/apply','SearchController@filter');
+
+Route::get('/wishlist','pageController@wishlist');
+
+//undergraduate compare
+Route::get('undergraduate/compare','pageController@compare')->name('page.undergraduateCompare');
+Route::post('undergraduate/ResultCompare','pageController@compareResult');
+
+//intermediate compare
+Route::get('intermediate/compare','pageController@interCompare')->name('page.interCompare');
+Route::post('intermediate/ResultCompare','pageController@interCompareResult');
+
+Route::get('/degree','pageController@degree')->name('page.degree');
+Route::get('/institute','pageController@institute')->name('page.institute');
+>>>>>>> routes/web.php
 
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){
-  Route::get('/home','pageController@home')->name('page.home');
+  Route::get('/','pageController@home')->name('page.home');
   Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 });
 
@@ -112,6 +130,8 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
   return $output;
 });
 
+
+
 Auth::routes();
 
 
@@ -126,6 +146,13 @@ Route::prefix('admin')->group(function(){
   Route::post('/password/reset','Auth\AdminResetPasswordController@reset');
   Route::get('/password/reset/{token}','Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
+  //department
+  Route::get('/getDepartments','AdminController@department');
+
+
+  //degrees
+  Route::get('/getDegrees','AdminController@degrees');
+  Route::get('/getInterDegrees','AdminController@getInterDegrees');
 
   //subareas
   Route::get('/getSubareas','AdminController@subarea');

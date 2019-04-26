@@ -28,20 +28,41 @@ class DegreeController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
-    $degree = Degree::create([
-      'name' => $data['name'],
-      'duration' => (float)$data['duration'],
-      'lastMerit' => (float)$data['lastMerit'],
-      'system' => $data['system'],
-      'creditHours' => $data['creditHours'],
-      'noOfSeats' => $data['noOfSeats'],
-      'shiftMorning' => $data['shiftMorning'],
-      'shiftAfternoon' => $data['shiftAfternoon'],
-      'numberOfViews' => 0,
-      'fees' => $data['fees'],
-      'institute_id' => $data['institute_id'],
-      'department_id' => $data['department_id'],
-    ]);
+    if(isset($data['department_id'])){
+      $degree = Degree::create([
+        'name' => $data['name'],
+        'duration' => (float)$data['duration'],
+        'lastMerit' => (float)$data['lastMerit'],
+        'system' => $data['system'],
+        'creditHours' => $data['creditHours'],
+        'noOfSeats' => $data['noOfSeats'],
+        'shiftMorning' => $data['shiftMorning'],
+        'shiftAfternoon' => $data['shiftAfternoon'],
+        'numberOfViews' => 0,
+        'fees' => $data['fees'],
+        'degree_groups_id' => $data['degree_groups_id'],
+        'degreeLevel' => $data['degreeLevel'],
+        'institute_id' => $data['institute_id'],
+        'department_id' => $data['department_id'],
+      ]);
+    }
+    else{
+      $degree = Degree::create([
+        'name' => $data['name'],
+        'duration' => (float)$data['duration'],
+        'lastMerit' => (float)$data['lastMerit'],
+        'system' => $data['system'],
+        'creditHours' => $data['creditHours'],
+        'noOfSeats' => $data['noOfSeats'],
+        'shiftMorning' => $data['shiftMorning'],
+        'shiftAfternoon' => $data['shiftAfternoon'],
+        'numberOfViews' => 0,
+        'fees' => $data['fees'],
+        'degree_groups_id' => $data['degree_groups_id'],
+        'degreeLevel' => $data['degreeLevel'],
+        'institute_id' => $data['institute_id'],
+      ]);
+    }
     $degree->save();
     return redirect()->route('degree.index')
                       ->with('success','New Degree Created Successfully!');
@@ -74,7 +95,7 @@ class DegreeController extends Controller
 
   public function show($id)
   {
-    $data = Degree::find($id);
+    $data = Degree::find($id)->first();
     return view('degree.details', compact('data'));
   }
 

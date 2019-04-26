@@ -310,28 +310,6 @@
           });
         });
 
-        $('.addRow').on('click',function(){
-          var add = '<div class="form-row">'+
-          '<div class="form-group col-md-6">'+
-            '<label for="name"><strong>Name</strong></label>'+
-            '<input type="text" class="form-control" id="name" name="name[]" placeholder="Name" required>'+
-          '</div>'+
-          '<div class="form-group col-md-5">'+
-            '<label for="designation"><strong>Designation</strong></label>'+
-            '<select id="designation" name="designation[]" class="form-control" required>'+
-              '<option selected>Choose...</option>'+
-              '<option value="Incharge/Principal">Incharge/Principal</option>'+
-              '<option value="Assistant Professor">Assistant Professor</option>'+
-              '<option value="Lecturer">Lecturer</option>'+
-            '</select>'+
-          '</div>'+
-          '<div class="form-group col-md-1">'+
-              '<label style="visibility: hidden;" for="addRow"><strong>Add Row</strong></label>'+
-            '<a style="width:100%;" class="btn btn-outline-danger remove" href="#">-</a>'+
-          '</div>'+
-          '</div>';
-          $('.main').append(add);
-        });
 
         $('.main').on('click','.remove',function() {
           $(this).parent().parent().remove();

@@ -86,7 +86,7 @@
     <!-- ##### Hero Area Start ##### -->
 
     <!-- ##### Register Now Start ##### -->
-    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center" style="background-image: url(../img/core-img/texture.png);">
+    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center" style="background-image: url(../img/core-img/texture.png);margin-bottom: 300px;">
         <!-- Register Contact Form -->
         <div class="register-contact-form mb-100 wow fadeInUp" align="center"; data-wow-delay="250ms" >
             <div class="container-fluid">

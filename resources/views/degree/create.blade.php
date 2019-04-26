@@ -112,17 +112,29 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-2">
                 <label for="noOfSeats"><strong>Number Of Seats</strong></label>
                 <input type="number" class="form-control" id="duration" name="noOfSeats" placeholder="(e.g.) 200" required>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                 <label for="creditHours"><strong>Credit Hours</strong></label>
                 <input type="number" class="form-control" id="creditHours" name="creditHours" placeholder="(e.g.) 20" required>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-3">
                 <label for="lastMerit"><strong>Last Merit</strong></label>
                 <input step="any" type="number" class="form-control" id="lastMerit" name="lastMerit" placeholder="(e.g.) 79s" required>
+              </div>
+              <div class="form-group col-md-4">
+                @php
+                  $dG = App\degreeGroups::wherein('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->get();
+                @endphp
+                <label for="degree_groups_id"><strong>Degree Group</strong></label>
+                <select id="degree_groups_id" name="degree_groups_id" class="form-control" required>
+                  <option selected>Choose...</option>
+                  @foreach ($dG as $d)
+                    <option value="{{$d->id}}">{{$d->name}}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <div class="form-row">
@@ -156,11 +168,20 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-2">
                 <label for="fees"><strong>Fees (Per Year)</strong></label>
                 <input type="number" class="form-control" id="fees" name="fees" placeholder="12345" required>
               </div>
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-2">
+                <label for="degreeLevel"><strong>Degree Level</strong></label>
+                <select id="degreeLevel" name="degreeLevel" class="form-control" required>
+                  <option selected>Choose...</option>
+                  <option value="INTER">INTER</option>
+                  <option value="BS">BS</option>
+                  <option value="MS">MS</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
                 @php
                   $i = App\Institute::select('name','id')->get();
                 @endphp
@@ -172,16 +193,12 @@
                   @endforeach
                 </select>
               </div>
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-4">
                 @php
                   $towns = App\Department::select('name','id')->get();
                 @endphp
                 <label for="department_id"><strong>Department</strong></label>
-                <select id="department_id" name="department_id" class="form-control" required>
-                  <option selected>Choose...</option>
-                  @foreach ($towns as $town)
-                    <option value="{{$town->id}}">{{$town->name}}</option>
-                  @endforeach
+                <select id="department_id" name="department_id" class="form-control">
                 </select>
               </div>
             </div>
@@ -229,14 +246,14 @@
 
     <script>
       $(document).ready(function() {
-        $('#town').on('change',function(){
-          var town_id = $(this).val();
+        $('#institute_id').on('change',function(){
+          var inst_id = $(this).val();
           $.ajax({
-            url: '/admin/getSubareas',
+            url: '/admin/getDepartments',
             type: 'GET',
-            data: {town_id:town_id,_token: "{{csrf_token()}}"},
+            data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
             success:function(data){
-              $('#subarea').html(data);
+              $('#department_id').html(data);
             }
           });
         });

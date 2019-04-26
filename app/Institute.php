@@ -13,9 +13,13 @@ class Institute extends Model
     {
         return $this->hasMany('App\Degree')->orderby('numberOfViews','desc');
     }
+  public function wishlists()
+    {
+        return $this->hasMany('App\Wishlist');
+    }
   public function departments()
     {
-        return $this->hasMany('App\Department');
+        return $this->hasMany('App\Department')->orderby('noOfViews','desc');;
     }
   public function address()
     {

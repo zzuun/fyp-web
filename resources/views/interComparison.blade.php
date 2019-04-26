@@ -100,7 +100,7 @@
       @endif
 
       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
-        <form action="/undergraduate/ResultCompare" method="post">
+        <form action="/intermediate/ResultCompare" method="post">
 
 
           <!-- <button class="cancelbutton cancelbutton2"><i class="glyphicon glyphicon-minus w3-spin"></i></button> -->
@@ -117,18 +117,15 @@
               </h6>
               <div id="collapseOne" class="accordion-content collapse">
                 @php
-                  $uni = App\Institute::where('instituteType','University')->get();
+                  $uni = App\Institute::where('instituteType','College')->get();
                 @endphp
-                <select class="custom-select" name="universityID[]" id="uni1" required>
-                    <option selected value="0" >University</option>
+                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni1" required>
+                    <option selected value="0" >College</option>
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
                     @endforeach
                   </select>
-                  <select class="custom-select" name="departmentID[]" id="dept1" required>
-                      <option selected value="0">Department</option>
-                    </select>
-                    <select class="custom-select" name="degreeID[]" id="deg1" required>
+                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg1" required>
                         <option selected value="0">Degree</option>
                       </select>
               </div>
@@ -145,16 +142,13 @@
                   </a>
               </h6>
               <div id="collapseTwo" class="accordion-content collapse">
-                <select class="custom-select" name="universityID[]" id="uni2" required>
-                  <option selected value="0">University</option>
+                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni2" required>
+                  <option selected value="0">College</option>
                   @foreach ($uni as $u)
                     <option value="{{$u->id}}">{{$u->name}}</option>
                   @endforeach
                   </select>
-                  <select class="custom-select" name="departmentID[]" id="dept2" required>
-                      <option selected value="0">Department</option>
-                    </select>
-                    <select class="custom-select" name="degreeID[]" id="deg2" required>
+                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg2" required>
                       <option selected value="0">Degree</option>
                       </select>
               </div>
@@ -170,16 +164,13 @@
                   </a>
               </h6>
               <div id="collapseThree" class="accordion-content collapse">
-                <select class="custom-select" name="universityID[]" id="uni3">
-                  <option selected value="0">University</option>
+                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni3">
+                  <option selected value="0">College</option>
                   @foreach ($uni as $u)
                     <option value="{{$u->id}}">{{$u->name}}</option>
                   @endforeach
                   </select>
-                  <select class="custom-select" name="departmentID[]" id="dept3">
-                      <option selected value="0">Department</option>
-                    </select>
-                    <select class="custom-select" name="degreeID[]" id="deg3">
+                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg3">
                       <option selected value="0">Degree</option>
                       </select>
               </div>
@@ -301,64 +292,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#uni1').on('change',function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/admin/getInterDegrees',
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
-            $('#dept1').html(data);
+            $('#deg1').html(data);
           }
         });
       });
       $('#uni2').on('change',function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/admin/getInterDegrees',
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
-            $('#dept2').html(data);
+            $('#deg2').html(data);
           }
         });
       });
       $(document).on("click","#uni3",function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/admin/getInterDegrees',
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
-          success:function(data){
-            $('#dept3').html(data);
-          }
-        });
-      });
-      $('#dept1').on('change',function(){
-        var dept_id = $(this).val();
-        $.ajax({
-          url: '/admin/getDegrees',
-          type: 'GET',
-          data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
-          success:function(data){
-            $('#deg1').html(data);
-          }
-        });
-      });
-      $('#dept2').on('change',function(){
-        var dept_id = $(this).val();
-        $.ajax({
-          url: '/admin/getDegrees',
-          type: 'GET',
-          data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
-          success:function(data){
-            $('#deg2').html(data);
-          }
-        });
-      });
-      $(document).on("click","#dept3",function(){
-        var dept_id = $(this).val();
-        $.ajax({
-          url: '/admin/getDegrees',
-          type: 'GET',
-          data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg3').html(data);
           }

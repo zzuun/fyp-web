@@ -59,7 +59,7 @@
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('page.home')}}">Home</a></li>
-                                        <li><a href="{{route('page.timer')}}">Courses</a></li>
+                                        <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
                                         <li><a href="{{route('page.timer')}}">Single Courses</a></li>
                                         <li><a href="{{route('page.timer')}}">Instructors</a></li>
                                         <li><a href="{{route('page.timer')}}">Blog</a></li>
@@ -283,7 +283,7 @@
 
                                     <div class="clever-curriculum">
 
-                                      <div class="clever-faqs mb-30">
+                                      {{-- <div class="clever-faqs mb-30">
                                           <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
 
                                               <!-- Single Accordian Area -->
@@ -410,7 +410,7 @@
                                               </div> -->
                                           </div>
 
-                                      </div>
+                                      </div> --}}
                                       <!-- Curriculum Level -->
                                         <!-- <div class="curriculum-level mb-30">
                                             <h4 class="d-flex justify-content-between"><span>MASTERS PROGRAMS</span></h4>
@@ -907,6 +907,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     </footer>
     <!-- ##### Footer Area End ##### -->
+
+    @php
+      $institutes = App\Institute::with('address')->where('instituteType','College')->get();
+      $i=0;
+    @endphp
 
     <script>
         var instituteName = "{!! $details[0]->name !!}";
