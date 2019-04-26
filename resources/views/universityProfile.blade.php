@@ -442,6 +442,12 @@
             <!-- Bottom Footer Area -->
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
+    <script>
+    var instituteName = "{!! $institute->name !!}";
+    var lat = {!! $address->lat !!};
+    var lng = {!! $address->lng !!};
+
+    </script>
     <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
     <script src="customjs/bootstrap/popper.min.js"></script>
@@ -451,14 +457,9 @@
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
-    <script>
-    var instituteName = "{!! $institute->name !!}";
-    var lat = {!! $address->lat !!};
-    var lng = {!! $address->lng !!};
-
-    </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso&libraries=geometry"></script>
     <script src="customjs/google-map/map-active.js"></script>
 
 
