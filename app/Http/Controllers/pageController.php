@@ -56,4 +56,5 @@ class pageController extends Controller
     {
       return view('timer');
     }
+
 }

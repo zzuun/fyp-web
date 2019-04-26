@@ -913,6 +913,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var lat = {!! $details[0]->lat !!};
         var lng = {!! $details[0]->lng !!};
     </script>
+
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="customjs/jquery/jquery-2.2.4.min.js"></script>

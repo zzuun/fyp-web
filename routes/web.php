@@ -14,10 +14,23 @@ use App\Town;
 
 use Illuminate\Support\Facades\Input;
 
-Route::get('/','SearchController@search')->name('page.main');
-Route::get('/apply','SearchController@filter');
+Route::get('/intermediate',function(){
+  return view('searchIntermediate');
+})->name('intermediate.main');
+
+Route::get('/undergraduate',function(){
+  return view('searchUndergraduate');
+})->name('undergraduate.main');
+
+
+Route::get('/applyIntermediate','SearchController@filterIntermediateDegrees');
+Route::get('/applyUndergraduate','SearchController@filterUndergraduateDegrees');
+
 Route::get('/degree','pageController@degree')->name('page.degree');
 Route::get('/institute','pageController@institute')->name('page.institute');
+Route::get('/degreeUniversity','UniversityController@index');
+Route::get('/department','UniversityController@getDepartmentProfile');
+Route::get('/university','UniversityController@getUniversityProfile');
 Route::get('/compare','pageController@compare')->name('page.compare');
 
 //middleware AccessControl
@@ -38,20 +51,44 @@ Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout'
 
 Route::get('/comingSoon','pageController@timer')->name('page.timer');
 Route::get('/ajaxGetCities','SearchController@getCities');
-Route::post('/getFeeCount',function(){
-   if(isset($_POST["fees"])){
-      $maxRange= (int) $_POST['fees'];
-      $c_degree = App\Degree::whereBetween('fees',[10000,$maxRange])->where('degreeLevel','INTER')->count();
+
+Route::post('/getFeeCountIntermediate',function(){
+  if(isset($_POST["minfees"])|| isset($_POST["maxfees"])){
+    $maxRange= $_POST['maxfees'];
+    $minRange= $_POST['minfees'];
+    $c_degree = App\Degree::whereBetween('fees',[$minRange,$maxRange])
+    ->where('degreeLevel','INTER')->count();
+    return $c_degree;
+ }
+
+});
+Route::post('/getFeeCountInstitute',function(){
+   if(isset($_POST["minfees"])|| isset($_POST["maxfees"])){
+      $maxRange= $_POST['maxfees'];
+      $minRange= $_POST['minfees'];
+      $c_degree = App\Degree::whereBetween('fees',[$minRange,$maxRange])
+      ->where('degreeLevel','BS')->count();
       return $c_degree;
    }
 });
-Route::post('/getMarksCount',function(){
-  if(isset($_POST["marks"])){
-     $maxRange= (int) $_POST['marks'];
-     $c_degree = App\Degree::whereBetween('lastMerit',[33,$maxRange])->where('degreeLevel','INTER')->count();
+Route::post('/getMarksCountInter',function(){
+  if(isset($_POST["minmarks"])|| isset($_POST["maxmarks"])){
+     $maxRange= $_POST['maxmarks'];
+     $minRange=$_POST['minmarks'];
+     $c_degree = App\Degree::whereBetween('lastMerit',[$minRange,$maxRange])->where('degreeLevel','INTER')->count();
      return $c_degree;
   }
 });
+
+Route::post('/getMarksCountUni',function(){
+  if(isset($_POST["minmarks"])|| isset($_POST["maxmarks"])){
+     $maxRange= $_POST['maxmarks'];
+     $minRange=$_POST['minmarks'];
+     $c_degree = App\Degree::whereBetween('lastMerit',[$minRange,$maxRange])->where('degreeLevel','BS')->count();
+     return $c_degree;
+  }
+});
+
 Route::get('/getSubareas',function(Request $request, Town $towns){
   $towns = $towns->newQuery();
   $towns->join('subareas','towns.id','subareas.town_id')->select('subareas.name');
