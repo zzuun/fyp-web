@@ -116,7 +116,27 @@
         </div>
     </section>
     <!-- ##### Hero Area End ##### -->
+    <div class="blog-catagories mb-50 d-flex flex-wrap">
+      <div class="col-12">
+            <div class="section-heading2">
+                <h5>Find the best Colleges, Universities and Degree Programs! Give it a try?</h5>
+            </div>
+        </div>
 
+        <!-- Single Catagories -->
+        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc2.jpg);left:25%;">
+          <a href="{{route('page.main')}}">
+              <h6>Intermediate</h6>
+          </a>
+        </div>
+
+        <!-- Single Catagories -->
+        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc3.jpg);left:50%;">
+          <a href="u-searchfilters.html">
+              <h6>Undergraduate</h6>
+          </a>
+        </div>
+      </div>
     <!-- ##### Cool Facts Area Start ##### -->
     <section class="cool-facts-area section-padding-100-0">
         <div class="container">
@@ -191,12 +211,12 @@
 
             <div class="row">
               <div class="col-12">
-                  <div class="course-content">
+                  <div class="course-content" style="text-align: center;display: inline-block;margin-left: 15%;">
 
                       <div class="clever-tabs-content">
                           <ul class="nav nav-tabs" id="myTab" role="tablist">
                               <li class="nav-item">
-                                  <a class="nav-link active" id="tab--1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Home Page</a>
+                                  <a class="nav-link active" id="tab--1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Home</a>
                               </li>
                               <li class="nav-item">
                                   <a class="nav-link" id="tab--2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Top Colleges</a>
@@ -213,48 +233,7 @@
                                 <!-- Tab Text -->
                                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab--1">
 
-                                  <div class="blog-catagories mb-100 d-flex flex-wrap justify-content-between">
-                                    <div class="col-12">
-                                          <div class="section-heading2">
-                                              <h5>Find the best Colleges, Universities and Degree Programs! Give it a try?</h5>
-                                          </div>
-                                      </div>
 
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc2.jpg);">
-                                        <a href="{{route('page.main')}}">
-                                            <h6>Intermediate</h6>
-                                        </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc3.jpg);">
-                                        <a href="u-searchfilters.html">
-                                            <h6>Undergraduate</h6>
-                                        </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc4.jpg);">
-                                        <a href="p-searchfilters.html">
-                                            <h6>Post Graduate</h6>
-                                        </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc5.jpg);">
-                                          <a href="prePostRequisite.html">
-                                              <h6>Guide Me</h6>
-                                          </a>
-                                      </div>
-
-                                      <!-- Single Catagories -->
-                                      <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc6.jpg);">
-                                          <a href="#">
-                                              <h6>About Us</h6>
-                                          </a>
-                                      </div>
-                                  </div>
 
                                 </div>
 
@@ -1485,7 +1464,25 @@
             <div class="row">
                 <div class="col-12">
                     <div class="tutors-slide owl-carousel wow fadeInUp" data-wow-delay="250ms">
-
+                      <div class="single-tutors-slides">
+                          <!-- Tutor Thumbnail -->
+                          <div class="tutor-thumbnail">
+                              <img src="img/bg-img/t7.png" alt="">
+                          </div>
+                          <!-- Tutor Information -->
+                          <div class="tutor-information text-center">
+                              <h5>Dr. Muhammad Murtaza Yousaf</h5>
+                              <p><b>CEO</b></p>
+                              <span>Assistant Professor</span>
+                              <p>PhD Computer Science, University of Innsbruck, Austria, 2008</p>
+                              <p>M.Sc Computer Science, PU, 2001 (Gold Medal)</p>
+                              <div class="social-info">
+                                  <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                  <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                  <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                              </div>
+                          </div>
+                      </div>
                         <!-- Single Tutors Slide -->
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
@@ -1494,9 +1491,10 @@
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Arsalan J. Khan</h5>
-                                <span>Coder</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <h5>Arsalan Jamal Khan</h5>
+                                <span>Web Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1514,8 +1512,9 @@
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
                                 <h5>Ameer Hamza</h5>
-                                <span>Front End Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <span>Android Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1533,8 +1532,9 @@
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
                                 <h5>Ameer Hamza</h5>
-                                <span>Code Geek</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <span>Lead Web Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1553,7 +1553,8 @@
                             <div class="tutor-information text-center">
                                 <h5>Aurangzeb Khan</h5>
                                 <span>Front End Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1561,7 +1562,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
@@ -1572,7 +1572,8 @@
                             <div class="tutor-information text-center">
                                 <h5>Zunnorain Zaheer</h5>
                                 <span>Android Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -1580,7 +1581,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- Single Tutors Slide -->
                         <div class="single-tutors-slides">
@@ -1591,8 +1591,9 @@
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
                                 <h5>M. Moeez Saiyam</h5>
-                                <span>Android Developer</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <span>Front End Developer</span>
+                                <p>Bachelors In Information Technology</p>
+                                <p>PUCIT</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
