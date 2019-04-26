@@ -451,16 +451,16 @@
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
+    <script>
+    var instituteName = "{!! $institute->name !!}";
+    var lat = {!! $address->lat !!};
+    var lng = {!! $address->lng !!};
+
+    </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
     <script src="customjs/google-map/map-active.js"></script>
 
-    <script>
-        var instituteName = "{!! $institute->name !!}";
-        var inlat = {!! $address->lat !!};
-        var inlng = {!! $address->lng !!};
-
-    </script>
 
     <script>
           function unhighlight(x) {
