@@ -10,4 +10,8 @@ class Town extends Model
     {
         return $this->hasMany('App\Subarea');
     }
+    public function Address()
+    {
+      return $this->belongsTo('App\Address');
+    }
 }

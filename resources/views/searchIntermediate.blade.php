@@ -19,6 +19,8 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="searchfilters.css">
 
+    <link rel="stylesheet" href="customcss/jquery-ui.min.css">
+
 </head>
 
 <body>
@@ -138,18 +140,19 @@
             <div class="row">
 
                 <div class="col-md-4 col-lg-4" style="padding-bottom:2%";>
-                  <div class="clever-faqs">
-                      <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
-
-                        <div class="clever-main-menu">
-                          <!-- Search Button -->
-                          <div class="search-area">
-                              <form action="#" method="">
+                        <div class="search-area">
+                              <form action="" method="post">
                                   <input type="search" name="search" id="search" placeholder="Keyword">
                                   <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                               </form>
-                          </div>
+                          
                         </div>
+                  <div class="clever-faqs">
+                      <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
+
+                        
+                          
+                          
 
                         <!-- Degree Group -->
                         <div class="panel single-accordion8">
@@ -323,9 +326,12 @@
                               </h6>
                               <div id="collapseFive" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                        <input type="range" min="10000" max="200000" step="1000" value="200000" class="slider fees-range common-selector" id="fees-max-range">
-                                        <p>Max Range: <span id="max"></span>  (<span id="feecount"></span>)</p>
-                                    </div>
+                                    <input type="hidden" id="minfees" value="10000"/>
+                                    <input type="hidden" id="maxfees" value="500000">
+                                    <p id="fees_show">Rs10000 - Rs500000</p>
+                                    <div style="padding-left:15px; padding-right:15px;"><div id="fees_range"></div></div>
+                                      <p>(<span id="feecount"></span>) Results</p>
+                                  </div>
                               </div>
                           </div>
 
@@ -340,8 +346,11 @@
                               </h6>
                               <div id="collapseSix" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                      <input type="range" min="33" max="100" step="1" value="100" class="slider common-selector" id="marks-max-range">
-                                      <p>Maximum Marks: <span id="marks-max"></span>  (<span id="markscount"></span>)</p>
+                                    <input type="hidden" id="minmarks" value="30"/>
+                                      <input type="hidden" id="maxmarks" value="100">
+                                      <p id="marks_show">30% - 100%</p>
+                                      <div style="padding-left:15px;"><div id="marks_range"></div></div>
+                                      <p>(<span id="markscount"></span>) Results</p>
                                     </div>
                               </div>
                           </div>
@@ -389,8 +398,8 @@
             </div> -->
             <div class="container">
 
-               <section class="results">
-                 @include('partialViews.searchResults');
+               <section class="filterResults">
+                
                </section>
 
              </div>
@@ -401,7 +410,14 @@
     </div>
 </div>
     <!-- ##### Popular Courses End ##### -->
-
+<style>
+    #loading
+    {
+      text-align:center; 
+      background: url('img/loading.gif') no-repeat center; 
+      height: 150px; 
+    }
+</style>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
@@ -435,77 +451,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="customjs/active.js"></script>
-
+    <script src="customjs/jquery/jquery-ui.min.js"></script>
 
     <script> $(".seat").on("click", function(){
       $(this).css("background", "red");
     });
     </script>
 
+  
   <script>
-      $(document).ready(function()
-      {
-        var maxslider = document.getElementById("fees-max-range");
-        document.getElementById("max").innerHTML = maxslider.value;
-        maxslider.oninput = function() {
-          document.getElementById("max").innerHTML = this.value;
-        }
-      });
-     </script>
-
-  <script>
-      $(document).ready(function()
-      {
-        var maxslider = document.getElementById("marks-max-range");
-        document.getElementById("marks-max").innerHTML = maxslider.value;
-        maxslider.oninput = function() {
-          document.getElementById("marks-max").innerHTML = this.value;
-        }
-      });
-      function myFunction(x)
-          {
-            x.classList.toggle("fa-thumbs-down");
-          }
-    </script>
-  <script>
-  $(document).ready(function(){
-    getcount();
-    function getcount(){
-      var maxfees = $('#fees-max-range').val();
-      $.ajax({
-        url:"/getFeeCount",
-        method:"post",
-        data:{fees:maxfees, _token: "{{csrf_token()}}"},
-        success:function(data){
-          $('#feecount').html(data);
-        }
-      });
-    }
-    $('#fees-max-range').change(function(){
-      getcount();
-    });
-  });
+  
   </script>
 
-  <script>
-  $(document).ready(function(){
-    getMarksCount();
-    function getMarksCount() {
-      var maxMarks = $('#marks-max-range').val();
-      $.ajax({
-        url:"/getMarksCount",
-        method:"post",
-        data:{marks:maxMarks, _token: "{{csrf_token()}}"},
-        success:function(data){
-          $('#markscount').html(data);
-        }
-      });
-    }
-    $('#marks-max-range').change(function(){
-      getMarksCount();
-    });
-  });
-  </script>
+ 
 
 <script>
   $(document).ready(function(){
@@ -535,79 +493,163 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   });
 </script>
 
+<script>
+  $(document).ready(function()
+  {
+      $(document).on('click', '.pagination a', function(event)
+      {
+          event.preventDefault(); 
 
-   <script>
-        $(document).ready(function()
-        {
-          filter_data();
-          function filter_data()
-          {
-            var search = document.getElementById('search').value;
-            var town = get_filter('town');
-            var subarea = get_filter('subarea');
-            var sector = get_filter('sector');
-            var affiliation = get_filter('affiliation');
-            var hostel = get_filter('hostel');
-            var scholarship = get_filter('scholarship');
-            var transport = get_filter('transport');
-            var coEd = get_filter('coEducation');
-            var sM = get_filter('shiftMorning');
-            var sA = get_filter('shiftAfternoon');
-            var maxfees = $('#fees-max-range').val();
-            var maxmarks= $('#marks-max-range').val();
-            var group = get_filter('group');
-                $.ajax({
-                    url:"/apply",
-                    method:"GET",
-                    data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport, maxmarks:maxmarks, maxfees:maxfees,group, _token: "{{csrf_token()}}"},
-                    success:function(data){
+          
 
-                       $('.results').html(data);
-                       // $('#degreeResultsArea').load(data);
-                    }
-                });
-            }
-            function get_filter(class_name)
-            {
-                var filter = [];
-                $('.'+class_name+':checked').each(function(){
-                    filter.push($(this).val());
-                });
-                return filter;
-            }
+          var page = $(this).attr('href').split('page=')[1];
+          filter_data(page);
+      });
 
-            $(document).on('click', '.pagination a', function(event)
-            {
-              event.preventDefault();
-              var page = $(this).attr('href').split('page=')[1];
-              fetch_data(page);
+      function filter_data(page=1)
+      {
+        $('#filterResults').html('<div id="loading" style="" ></div>')
 
-            });
+        var search = document.getElementById('search').value;
+        var town = get_filter('town');
+        var subarea = get_filter('subarea');
+        var sector = get_filter('sector');
+        var affiliation = get_filter('affiliation');
+        var hostel = get_filter('hostel');
+        var scholarship = get_filter('scholarship');
+        var transport = get_filter('transport');
+        var coEd = get_filter('coEducation');
+        var sM = get_filter('shiftMorning');
+        var sA = get_filter('shiftAfternoon');
 
-          function fetch_data(page)
-            {
+        var minmarks=$('#minmarks').val();
+        var maxmarks=$('#maxmarks').val();
+        var minfees=$('#minfees').val();
+        var maxfees=$('#maxfees').val();
+        //var maxmarks= $('#marks-max-range').val();
+        var group = get_filter('group');
+
             $.ajax({
-                url:"/apply?page="+page,
-                success:function(data)
-                {
-                  $('.results').html(data);
+                url:"/applyIntermediate?page="+page,
+                method:"GET",
+                data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group:group,   _token: "{{csrf_token()}}"},
+                success:function(data){                      
+                  //console.log(data);
+                  
+                  $('.filterResults').html(data);
                 }
             });
+      }
+
+        function getFeesCount()
+        {
+          var minfees=$('#minfees').val();
+          var maxfees=$('#maxfees').val();
+
+          $.ajax({
+            url:"/getFeeCountIntermediate",
+            method:"post",
+            data:{minfees:minfees, maxfees:maxfees, _token: "{{csrf_token()}}"},
+            success:function(data){
+              if(data < 1)
+                data=0;
+              $('#feecount').html(data);
+            }
+          });
+        }
+
+      function getMarksCount() 
+      {
+        var minmarks=$('#minmarks').val();
+        var maxmarks=$('#maxmarks').val();
+        $.ajax({
+          url:"/getMarksCountInter",
+          method:"post",
+          data:{minmarks:minmarks,maxmarks:maxmarks, _token: "{{csrf_token()}}"},
+          success:function(data){
+            if(data<1)
+              data=0;
+            $('#markscount').html(data);
+          }
+        });
+      }
+
+
+
+          function get_filter(class_name)
+          {
+              var filter = [];
+              $('.'+class_name+':checked').each(function(){
+                  filter.push($(this).val());
+              });
+              return filter;
+          }
+
+          $('#fees_range').slider({
+            range:true,
+            min:10000,
+            max:500000,
+            values:[10000,500000],
+            step:10000,
+            stop:function(event,ui)
+            {
+              $('#fees_show').html("Rs"+ui.values[0] + ' - ' + "Rs"+ui.values[1]);
+              $('#minfees').val(ui.values[0]);
+              $('#maxfees').val(ui.values[1]);
+              filter_data();
+              getFeesCount();
+            }
+          })
+
+          $('#marks_range').slider({
+            range:true,
+            min:30,
+            max:100,
+            values:[30,100],
+            step:5,
+            stop:function(event,ui)
+            {
+              $('#marks_show').html(ui.values[0]+" %" + " - " + ui.values[1]+" %");
+              $('#minmarks').val(ui.values[0]);
+              $('#maxmarks').val(ui.values[1]);
+              filter_data();
+              getMarksCount();
+
             }
 
-            $(document).on('keyup','#search',function(){
-                filter_data();
-              });
+          })
+          filter_data();
+          getFeesCount();
+          getMarksCount();
 
-            $(document).on('click','.subarea',function(){
-                filter_data();
-              });
+          
 
-            $('.common-selector').click(function(){
-                filter_data();
-            });
+      
+
+      $(document).on('keyup','#search',function(){
+          filter_data();
         });
-    </script>
+      
+
+
+      $(document).on('click','.subarea',function(){
+          filter_data();
+        });
+
+      $('.common-selector').click(function(){
+          filter_data();
+      });
+      function uncheckAll() {
+    $("input[type='checkbox']:checked").prop("checked", false)
+    filter_data();
+    }
+    $(':button').on('click', uncheckAll)
+
+  });
+
+ 
+</script> 
+
 
 </body>
 

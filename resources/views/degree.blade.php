@@ -189,11 +189,13 @@
                                             <ul class="curriculum-list">
                                               <li>
                                                 <ul>
-
-                                                      <li>
+                                                <li>
                                                         <span><i class="fa fa-money" aria-hidden="true"></i> Fees </span>
                                                         <span id=fees>{{currency($details[0]->fees,'PKR','PKR')}}</span>
                                                       </li>
+
+
+                                                      
 
                                                       <li>
                                                         <span><i class="fa fa-graduation-cap" aria-hidden="true"></i> Scholarships </span>
@@ -604,6 +606,9 @@ $("#pound").on("click", function(){
     document.getElementById("fees").innerHTML="~ {{(int)$res}} £";
   }
 });
+
+
+
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
