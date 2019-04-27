@@ -20,13 +20,13 @@ class RedirectIfAuthenticated
         switch ($guard) {
           case 'admin':
               if (Auth::guard('admin')->check()) {
-                return redirect()->route('admin.dashboard');
+                return redirect()->intended(route('admin.dashboard'));
               }
             break;
 
           default:
               if (Auth::guard($guard)->check()) {
-                return redirect()->route('page.home');
+                return redirect()->intended(route('page.home'));
               }
             break;
         }

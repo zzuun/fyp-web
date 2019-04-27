@@ -17,8 +17,6 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../comparison.css">
-    <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
-</head>
 
 <body>
 
@@ -120,8 +118,8 @@
                 @php
                   $uni = App\Institute::where('instituteType','University')->get();
                 @endphp
-                <select class="custom-select" name="universityID[]" id="uni1" required>
-                    <option selected value="0" >University</option>
+                <select class="custom-select" name="universityID[]" id="uni1"   required>
+                    {{-- <option selected value="0" >University</option> --}}
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
                     @endforeach

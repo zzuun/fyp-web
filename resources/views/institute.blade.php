@@ -45,31 +45,41 @@
                     </div>
 
                     <!-- Menu -->
-                    <div class="classynav">
-                        <ul>
-                            <li><a href="{{route('page.home')}}">Home</a></li>
-                          </ul>
-                          <div class="classynav2">
-                        </div>
-                        <div class="classynav3">
-                          <ul>
-                            <li><a href="{{route('page.interCompare')}}">Compare</a></li>
-                          </ul>
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                         </div>
 
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                              </ul>
+                            </div>
 
-                        <!-- Register / Login -->
-                        <div class="register-login-area">
-                          @if(auth()->check())
-                            <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                            <a  href="{{route('user.logout')}}"class="btn">Logout</a>
-                            @else
-                            <a href="{{route('register')}}" class="btn">Register</a>
+                            <!-- Register / Login -->
+                            <div class="register-login-area">
+                              @if(auth()->check())
+                                <a href="#" class="btn">Hi {{auth()->user()->name}}</a>
 
-                            <a  href="{{route('login')}}"class="btn">Login</a>
-                            @endif
-                          </div>
+                                <a  href="{{route('user.logout')}}"class="btn">Logout</a>
+                                @else
+                                <a href="{{route('register')}}" class="btn">Register</a>
+
+                                <a  href="{{route('login')}}"class="btn">Login</a>
+                                @endif
+                              </div>
+                        </div>
+                        <!-- Nav End -->
                     </div>
                 </nav>
             </div>

@@ -45,6 +45,12 @@
                         <span class="navbarToggler"><span></span><span></span><span></span></span>
                     </div>
 
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
                     <!-- Menu -->
                     <div class="classynav">
                         <ul>
@@ -72,6 +78,7 @@
                             @endif
                           </div>
                     </div>
+</div>
                 </nav>
             </div>
         </div>
