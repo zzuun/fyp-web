@@ -403,7 +403,7 @@
     {
       text-align:center;
       background: url('img/loading.gif') no-repeat center;
-      height: 450px;
+      height: 500px;
     }
 </style>
 
@@ -497,7 +497,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       function filter_data(page=1)
       {
         $('.filterResults').html('<div id="loading">'+
-        '</div>')
+        '</div>');
         var search = document.getElementById('search').value;
         var town = get_filter('town');
         var subarea = get_filter('subarea');

@@ -129,9 +129,9 @@
 
 
                 <div class="search-area">
-                      <form action="" method="post">
+                      <form>
                           <input type="search" name="search" class="search-box" id="search" placeholder="Search">
-                          <button type="submit">
+                          <button>
                             <i class="fa fa-search" aria-hidden="true"></i>
                           </button>
                       <!--    <button type="reset" class="close-icon" id="reset_icon" style="left:80%;">
@@ -448,7 +448,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     {
       text-align:center;
       background: url('img/loading.gif') no-repeat center;
-      height: 150px;
+      height: 500px;
     }
 </style>
 
@@ -515,7 +515,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
       function filter_data(page=1)
       {
-        $('#filterResults').html('<div id="loading" style="" ></div>')
+        $('.filterResults').html('<div id="loading">'+
+        '</div>');
 
         var search = document.getElementById('search').value;
         var town = get_filter('town');
