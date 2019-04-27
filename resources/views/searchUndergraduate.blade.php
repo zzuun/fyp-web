@@ -443,15 +443,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
 
-<style>
-    #loading
-    {
-      text-align:center;
-      background: url('img/loading.gif') no-repeat center;
-      height: 500px;
-    }
-</style>
-
     </footer>
     <!-- ##### Footer Area End ##### -->
     <!-- ##### All Javascript Script ##### -->
@@ -515,7 +506,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
       function filter_data(page=1)
       {
-        $('.filterResults').html('<div id="loading">'+
+        $('.filterResults').html('<div id="preloader">'+
         '</div>');
 
         var search = document.getElementById('search').value;

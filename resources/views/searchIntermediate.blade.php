@@ -398,14 +398,6 @@
     </div>
 </div>
     <!-- ##### Popular Courses End ##### -->
-<style>
-    #loading
-    {
-      text-align:center;
-      background: url('img/loading.gif') no-repeat center;
-      height: 500px;
-    }
-</style>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
@@ -496,7 +488,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
       function filter_data(page=1)
       {
-        $('.filterResults').html('<div id="loading">'+
+        $('.filterResults').html('<div id="preloader">'+
         '</div>');
         var search = document.getElementById('search').value;
         var town = get_filter('town');
