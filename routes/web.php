@@ -23,6 +23,9 @@ Route::get('/undergraduate',function(){
   return view('searchUndergraduate');
 })->name('undergraduate.main');
 
+Route::get('/.well-known/acme-challenge/D2TfTzgmG0WvWU_yadLNKhEuD0iWkJ6svFKrFnQKzQs',function(){
+  return 'D2TfTzgmG0WvWU_yadLNKhEuD0iWkJ6svFKrFnQKzQs.p5xQGZPYtY0p2OOreZmBaeJGEB7c6PhNzm2eG_VG1js';
+});
 
 Route::get('/applyIntermediate','SearchController@filterIntermediateDegrees');
 Route::get('/applyUndergraduate','SearchController@filterUndergraduateDegrees');
