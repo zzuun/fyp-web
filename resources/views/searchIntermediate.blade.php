@@ -496,8 +496,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
       function filter_data(page=1)
       {
-        $('#filterResults').html('<div id="loading" style="" ></div>')
-
+        $('.filterResults').html('<div id="loading">'+
+          '<img src="http://rpg.drivethrustuff.com/shared_images/ajax-loader.gif"/>'+
+        '</div>')
         var search = document.getElementById('search').value;
         var town = get_filter('town');
         var subarea = get_filter('subarea');
@@ -523,7 +524,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group:group,   _token: "{{csrf_token()}}"},
                 success:function(data){
                   //console.log(data);
-
+                  $('#loading').hide();
                   $('.filterResults').html(data);
                 }
             });
