@@ -159,6 +159,13 @@ img {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center; }
+  #preloader .spinner {
+    width: 40px;
+    height: 40px;
+    background-color: #3762f0;
+    margin: auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out; }
   #preloaderLoading {
     background-color: #f7f7f7;
     width: 100%;
@@ -179,13 +186,13 @@ img {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center; }
-  #preloader .spinner {
-    width: 40px;
-    height: 40px;
-    background-color: #3762f0;
-    margin: auto;
-    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-    animation: sk-rotateplane 1.2s infinite ease-in-out; }
+     #preloaderLoading .spinner {
+        width: 40px;
+        height: 40px;
+        background-color: #3762f0;
+        margin: auto;
+        -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+        animation: sk-rotateplane 1.2s infinite ease-in-out; }
 @-webkit-keyframes sk-rotateplane {
   0% {
     -webkit-transform: perspective(120px);
