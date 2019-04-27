@@ -403,7 +403,7 @@
     {
       text-align:center;
       background: url('img/loading.gif') no-repeat center;
-      height: 150px;
+      height: 450px;
     }
 </style>
 
