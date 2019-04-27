@@ -125,9 +125,9 @@
 
                 <div class="col-md-4 col-lg-4" style="padding-bottom:2%";>
                         <div class="search-area">
-                              <form action="" method="post">
+                              <form >
                                   <input type="search" name="search" id="search" placeholder="Keyword">
-                                  <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                  <button ><i class="fa fa-search" aria-hidden="true"></i></button>
                               </form>
 
                         </div>
@@ -398,14 +398,6 @@
     </div>
 </div>
     <!-- ##### Popular Courses End ##### -->
-<style>
-    #loading
-    {
-      text-align:center;
-      background: url('img/loading.gif') no-repeat center;
-      height: 150px;
-    }
-</style>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
