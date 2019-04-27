@@ -488,7 +488,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
       function filter_data(page=1)
       {
-        $('.filterResults').html('  <div id="preloader">'+
+        $('.filterResults').html('  <div id="preloaderLoading">'+
               '<div class="spinner"></div>'+
           '</div>');
         var search = document.getElementById('search').value;
@@ -516,7 +516,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group:group,   _token: "{{csrf_token()}}"},
                 success:function(data){
                   //console.log(data);
-                  $('#preloader').hide();
+                  $('#preloaderLoading').hide();
                   $('.filterResults').html(data);
                 }
             });
