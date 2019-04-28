@@ -105,7 +105,7 @@
           <!-- <button class="cancelbutton cancelbutton2"><i class="glyphicon glyphicon-minus w3-spin"></i></button> -->
           <!-- Single Accordian Area -->
           {{-- <form action="admin/compareResult" method="post"> --}}
-@csrf
+          @csrf
 
           <div class="panel single-accordion">
               <h6>
@@ -119,7 +119,7 @@
                   $uni = App\Institute::where('instituteType','University')->get();
                 @endphp
                 <select class="custom-select" name="universityID[]" id="uni1"   required>
-                    {{-- <option selected value="0" >University</option> --}}
+                    <option selected value="0" >University</option>
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
                     @endforeach
