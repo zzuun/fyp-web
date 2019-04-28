@@ -233,11 +233,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var inst_id = $(this).val();
         $.ajax({
           url: '/admin/getDepartments',
+          cache : false,
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
-          error:function() {
-            alert('The server could not be contacted at the moment.');
-          },
           success:function(data){
             $('#dept1').html(data);
           }
@@ -247,11 +245,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var inst_id = $(this).val();
         $.ajax({
           url: '/admin/getDepartments',
+          cache : false,
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
-          error:function() {
-            alert('The server could not be contacted at the moment.');
-          },
           success:function(data){
             $('#dept2').html(data);
           }
@@ -261,11 +257,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var inst_id = $(this).val();
         $.ajax({
           url: '/admin/getDepartments',
+          cache : false,
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
-          error:function() {
-            alert('The server could not be contacted at the moment.');
-          },
           success:function(data){
             $('#dept3').html(data);
           }
@@ -275,11 +269,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var dept_id = $(this).val();
         $.ajax({
           url: '/admin/getDegrees',
+          cache : false,
           type: 'GET',
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
-          error:function() {
-            alert('The server could not be contacted at the moment.');
-          },
           success:function(data){
             $('#deg1').html(data);
           }
@@ -289,11 +281,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var dept_id = $(this).val();
         $.ajax({
           url: '/admin/getDegrees',
+          cache : false,
           type: 'GET',
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
-          error:function() {
-            alert('The server could not be contacted at the moment.');
-          },
           success:function(data){
             $('#deg2').html(data);
           }
@@ -303,11 +293,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var dept_id = $(this).val();
         $.ajax({
           url: '/admin/getDegrees',
+          cache : false,
           type: 'GET',
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
-          error:function() {
-            alert('The server could not be contacted at the moment.');
-          },
           success:function(data){
             $('#deg3').html(data);
           }
