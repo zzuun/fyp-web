@@ -45,9 +45,9 @@ class ResetPassword extends Notification
       return (new MailMessage)
       ->from(env('MAIL_USERNAME'),'KnSaCareer')
       ->subject(Lang::getFromJson('Reset Password Notification'))
-      ->line(Lang::getFromJson('You are receiving this email because we received a password reset request for your Admin account.'))
-      ->action(Lang::getFromJson('Reset Password'), url(config('app.url').route('admin.password.reset', ['token' => $this->token], false)))
-      ->line(Lang::getFromJson('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.admins.expire')]))
+      ->line(Lang::getFromJson('You are receiving this email because we received a password reset request for your account.'))
+      ->action(Lang::getFromJson('Reset Password'), url(config('app.url').route('password.reset', ['token' => $this->token], false)))
+      ->line(Lang::getFromJson('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.user.expire')]))
       ->line(Lang::getFromJson('If you did not request a password reset, no further action is required.'));
     }
 
