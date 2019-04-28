@@ -120,6 +120,18 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <tr>
+                          <th scope="row">Department</th>
+                          @if (isset($first))
+                            <td><strong>{{$first->deptName}}</strong></td>
+                            @endif
+                          @if (isset($second))
+                            <td><strong>{{$second->deptName}}</strong></td>
+                            @endif
+                          @if(isset($third))
+                            <td><strong>{{$third->deptName}}</strong></td>
+                          @endif
+                        </tr>
                           <tr>
                             <th scope="row">Degree</th>
                             @if (isset($first))
