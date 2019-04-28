@@ -188,74 +188,6 @@
           <button name="newdiv" style="align:center;"class="newdivButton"></i> Compare</button>
         </form>
       </div>
-
-        {{-- <div class="container-fluid">
-          <div class="row">
-                <!-- Single Blog Area -->
-                <!-- <div class="col-12 col-xs-6"> -->
-
-
-
-                          <table>
-                            <tr>
-                              <th>Features</th>
-                              <th><span id="myid">PUCIT</span></th>
-                              <th><span id="myid">PUCADDDDDDddddddddddddddddddddddd</span></th>
-                              <th><span id="myid">UCP</span></th>
-                            </tr>
-                            <tr>
-                              <td>Fees</td>
-                              <td>Rs. 40,000/-</td>
-                              <td>Rs. 18,000/-</td>
-                              <td>Rs. 1,24,000/-</td>
-                            </tr>
-                            <tr>
-                              <td>Location</td>
-                              <td>Lahore</td>
-                              <td>Lahore</td>
-                              <td>Lahore</td>
-                            </tr>
-                            <tr>
-                              <td>Ranking</td>
-                              <td>2nd</td>
-                              <td>2nd</td>
-                              <td>21</td>
-                            </tr>
-                            <tr>
-                              <td>Seats</td>
-                              <td>600</td>
-                              <td>32</td>
-                              <td>380</td>
-                            </tr>
-                            <tr>
-                              <td>Hostels</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-
-                            <tr>
-                              <td>Transportation</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-
-                            <tr>
-                              <td>Co-Education</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            </table>
-
-
-                <!-- </div> -->
-
-
-            </div>
-
-        </div> --}}
     </section>
     <!-- ##### Blog Area End ##### -->
 
@@ -303,6 +235,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           url: '/admin/getDepartments',
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
+          error:function() {
+            alert('The server could not be contacted at the moment.');
+          },
           success:function(data){
             $('#dept1').html(data);
           }
@@ -314,6 +249,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           url: '/admin/getDepartments',
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
+          error:function() {
+            alert('The server could not be contacted at the moment.');
+          },
           success:function(data){
             $('#dept2').html(data);
           }
@@ -325,6 +263,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           url: '/admin/getDepartments',
           type: 'GET',
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
+          error:function() {
+            alert('The server could not be contacted at the moment.');
+          },
           success:function(data){
             $('#dept3').html(data);
           }
@@ -336,6 +277,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           url: '/admin/getDegrees',
           type: 'GET',
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
+          error:function() {
+            alert('The server could not be contacted at the moment.');
+          },
           success:function(data){
             $('#deg1').html(data);
           }
@@ -347,6 +291,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           url: '/admin/getDegrees',
           type: 'GET',
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
+          error:function() {
+            alert('The server could not be contacted at the moment.');
+          },
           success:function(data){
             $('#deg2').html(data);
           }
@@ -358,6 +305,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           url: '/admin/getDegrees',
           type: 'GET',
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
+          error:function() {
+            alert('The server could not be contacted at the moment.');
+          },
           success:function(data){
             $('#deg3').html(data);
           }
