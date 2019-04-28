@@ -16,19 +16,22 @@ use App\Subarea;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+//register
 Route::post('register','MainController@register');
 Route::post('login','MainController@login');
+
+//intermediate
+Route::get('/inter/colleges','MainController@interColleges');
+Route::get('/inter/collegeDegrees','MainController@CollegeDegrees');
 Route::get('degreesByViews','MainController@degreesByViews');
 Route::get('getPostRequisites','MainController@getPostRequisites');
 Route::get('/inter/search','MainController@filterSearch');
-Route::get('/undergraduate/search','MainController@undergraduatefilterSearch');
 Route::get('inter/degree','MainController@getDegree');
 Route::get('inter/institute','MainController@getInstitute');
-Route::get('/undergraduate/degree','MainController@getUnderDegree');
-Route::get('/undergraduate/department','MainController@getDepartment');
-Route::get('/undergraduate/institute','MainController@getUnderInstitute');
-Route::get('/compare','MainController@compare');
-Route::get('/instituteSearch','MainController@getInstitueByName');
 Route::get('/inter/getAffiliations',function(){
   $i=0;
   $j=0;
@@ -48,76 +51,31 @@ Route::get('/inter/getAffiliations',function(){
   });
   return Response::json(array('data' => $merged->all()));
 });
-Route::get('/undergraduate/getAffiliations',function(){
+Route::get('inter/getTown',function(){
+  $resultTowns = Town::select('name')->get();
   $i=0;
   $j=0;
   $counts = array();
   $names = array();
-  $result = Institute::select('affiliation')->where('instituteType','University')->distinct()->get();
-  foreach ($result as $r) {
-    $count = Institute::where('affiliation',$r->affiliation)->where('instituteType','University')->count();
-    $counts[++$i] = $count;
-    $names[++$j] = $r->affiliation;
-  }
-  $merged = collect($names)->zip($counts)->transform(function($values){
-    return [
-      'name' => $values[0],
-      'count' =>$values[1]
-    ];
-  });
-  return Response::json(array('data' => $merged->all()));
-});
-Route::get('inter/getTown',function(){
-  $resultTowns = Town::select('name')->get();
-$i=0;
-$j=0;
-$counts = array();
-$names = array();
-  foreach ($resultTowns as $r) {
-      $count = DB::table('addresses')
-      ->join('towns','towns.id','addresses.town_id')
-      ->join('institutes','institutes.id','addresses.institute_id')
-      ->where('instituteType','College')
-      ->where('towns.name',$r->name)
-      ->count();
-      // data_set($counts,'name',$r->name);
-      // data_set($counts,'count',$count);
-      $counts[++$i] = $count;
-      $names[++$j] = $r->name;
-  }
-  $merged = collect($names)->zip($counts)->transform(function($values){
-    return [
-      'name' => $values[0],
-      'count' =>$values[1]
-    ];
-  });
-  return Response::json(array('data' => $merged->all()));
-});
-Route::get('undergraduate/getTown',function(){
-  $resultTowns = Town::select('name')->get();
-$i=0;
-$j=0;
-$counts = array();
-$names = array();
-  foreach ($resultTowns as $r) {
-      $count = DB::table('addresses')
-      ->join('towns','towns.id','addresses.town_id')
-      ->join('institutes','institutes.id','addresses.institute_id')
-      ->where('instituteType','University')
-      ->where('towns.name',$r->name)
-      ->count();
-      // data_set($counts,'name',$r->name);
-      // data_set($counts,'count',$count);
-      $counts[++$i] = $count;
-      $names[++$j] = $r->name;
-  }
-  $merged = collect($names)->zip($counts)->transform(function($values){
-    return [
-      'name' => $values[0],
-      'count' =>$values[1]
-    ];
-  });
-  return Response::json(array('data' => $merged->all()));
+    foreach ($resultTowns as $r) {
+        $count = DB::table('addresses')
+        ->join('towns','towns.id','addresses.town_id')
+        ->join('institutes','institutes.id','addresses.institute_id')
+        ->where('instituteType','College')
+        ->where('towns.name',$r->name)
+        ->count();
+        // data_set($counts,'name',$r->name);
+        // data_set($counts,'count',$count);
+        $counts[++$i] = $count;
+        $names[++$j] = $r->name;
+    }
+    $merged = collect($names)->zip($counts)->transform(function($values){
+      return [
+        'name' => $values[0],
+        'count' =>$values[1]
+      ];
+    });
+    return Response::json(array('data' => $merged->all()));
 });
 Route::get('/getSubareas',function(){
 
@@ -155,25 +113,6 @@ Route::get('/inter/getSectors',function(){
   });
   return Response::json(array('data' => $merged->all()));
 });
-Route::get('/undergraduate/getSectors',function(){
-  $i=0;
-  $j=0;
-  $counts = array();
-  $names = array();
-  $result = Institute::select('sector')->distinct()->get();
-  foreach ($result as $r) {
-    $count = App\Institute::where('sector',$r->sector)->where('instituteType', 'University')->count();
-    $counts[++$i] = $count;
-    $names[++$j] = $r->sector;
-  }
-  $merged = collect($names)->zip($counts)->transform(function($values){
-    return [
-      'name' => $values[0],
-      'count' =>$values[1]
-    ];
-  });
-  return Response::json(array('data' => $merged->all()));
-});
 Route::get('/inter/getGroups',function(){
   $i=0;
   $j=0;
@@ -184,6 +123,81 @@ Route::get('/inter/getGroups',function(){
     $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$r->name)->count();
     $counts[++$i] = $count;
     $names[++$j] = $r->name;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
+});
+
+//undergraduate
+Route::get('/undergraduate/departmentDegrees','MainController@departmentDegrees');
+Route::get('/undergraduate/departments','MainController@UniversityDepartments');
+Route::get('/undergraduate/search','MainController@undergraduatefilterSearch');
+Route::get('/undergraduate/universities','MainController@undergraduateUniversities');
+Route::get('/undergraduate/degree','MainController@getUnderDegree');
+Route::get('/undergraduate/department','MainController@getDepartment');
+Route::get('/undergraduate/institute','MainController@getUnderInstitute');
+Route::get('/compare','MainController@compare');
+Route::get('/instituteSearch','MainController@getInstitueByName');
+Route::get('/undergraduate/getAffiliations',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+  $result = Institute::select('affiliation')->where('instituteType','University')->distinct()->get();
+  foreach ($result as $r) {
+    $count = Institute::where('affiliation',$r->affiliation)->where('instituteType','University')->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->affiliation;
+  }
+  $merged = collect($names)->zip($counts)->transform(function($values){
+    return [
+      'name' => $values[0],
+      'count' =>$values[1]
+    ];
+  });
+  return Response::json(array('data' => $merged->all()));
+});
+Route::get('undergraduate/getTown',function(){
+  $resultTowns = Town::select('name')->get();
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+    foreach ($resultTowns as $r) {
+        $count = DB::table('addresses')
+        ->join('towns','towns.id','addresses.town_id')
+        ->join('institutes','institutes.id','addresses.institute_id')
+        ->where('instituteType','University')
+        ->where('towns.name',$r->name)
+        ->count();
+        // data_set($counts,'name',$r->name);
+        // data_set($counts,'count',$count);
+        $counts[++$i] = $count;
+        $names[++$j] = $r->name;
+    }
+    $merged = collect($names)->zip($counts)->transform(function($values){
+      return [
+        'name' => $values[0],
+        'count' =>$values[1]
+      ];
+    });
+    return Response::json(array('data' => $merged->all()));
+});
+Route::get('/undergraduate/getSectors',function(){
+  $i=0;
+  $j=0;
+  $counts = array();
+  $names = array();
+  $result = Institute::select('sector')->distinct()->get();
+  foreach ($result as $r) {
+    $count = App\Institute::where('sector',$r->sector)->where('instituteType', 'University')->count();
+    $counts[++$i] = $count;
+    $names[++$j] = $r->sector;
   }
   $merged = collect($names)->zip($counts)->transform(function($values){
     return [
@@ -211,7 +225,4 @@ Route::get('/undergraduate/getGroups',function(){
     ];
   });
   return Response::json(array('data' => $merged->all()));
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
