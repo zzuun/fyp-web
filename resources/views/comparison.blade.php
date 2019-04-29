@@ -302,6 +302,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $.ajax({
           url: '/admin/getDepartments',
           type: 'GET',
+          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept1').html(data);
@@ -313,6 +314,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $.ajax({
           url: '/admin/getDepartments',
           type: 'GET',
+          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept2').html(data);
@@ -324,6 +326,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $.ajax({
           url: '/admin/getDepartments',
           type: 'GET',
+          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept3').html(data);
@@ -335,6 +338,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $.ajax({
           url: '/admin/getDegrees',
           type: 'GET',
+          cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg1').html(data);
@@ -346,6 +350,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $.ajax({
           url: '/admin/getDegrees',
           type: 'GET',
+          cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg2').html(data);
@@ -357,6 +362,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         $.ajax({
           url: '/admin/getDegrees',
           type: 'GET',
+          cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg3').html(data);
