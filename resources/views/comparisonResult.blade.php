@@ -14,6 +14,9 @@
     <!-- Favicon -->
     <link rel="icon" href="../img/core-img/favicon.ico">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../comparisonResult.css">
 
@@ -100,275 +103,297 @@
                 <!-- Single Blog Area -->
                 <!-- <div class="col-12 col-xs-6"> -->
 
-
-
-                          <table>
-                            <tr>
-                              <th>Features</th>
-                              @if (isset($first))
-                                <th><span id="myid">{{$first->name}}</span></th>
-                                @endif
-                              @if (isset($second))
-                                <th><span id="myid">{{$second->name}}</span></th>
-                                @endif
-                              @if(isset($third))
-                                <th><span id="myid">{{$third->name}}</span></th>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                        <tr>
+                          <th class="main" scope="col">Features</th>
+                          @if (isset($first))
+                          <th class="main" scope="col">{{$first->name}}</th>
+                          @endif
+                          @if (isset($second))
+                            <th class="main" scope="col">{{$second->name}}</th>
+                          @endif
+                          @if(isset($third))
+                            <th class="main" scope="col">{{$third->name}}</th>
+                          @endif
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Department</th>
+                          @if (isset($first))
+                            <td><strong>{{$first->deptName}}</strong></td>
+                            @endif
+                          @if (isset($second))
+                            <td><strong>{{$second->deptName}}</strong></td>
+                            @endif
+                          @if(isset($third))
+                            <td><strong>{{$third->deptName}}</strong></td>
+                          @endif
+                        </tr>
+                          <tr>
+                            <th scope="row">Degree</th>
+                            @if (isset($first))
+                              <td><strong>{{$first->degreeName}}</strong></td>
                               @endif
-                            </tr>
-                            <tr>
-                                <td>Fees</td>
-                              @if (isset($first))
-                                <td>Rs. {{$first->fees}}/-</td>
-                                @endif
-                              @if (isset($second))
-                                <td>Rs. {{$second->fees}}/-</td>
-                                @endif
-                              @if(isset($third))
-                                <td>Rs. {{$third->fees}}/-</td>
+                            @if (isset($second))
+                              <td><strong>{{$second->degreeName}}</strong></td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Distance</td>
-                              @if (isset($first))
-                                <td id="one"></td>
-                                @endif
-                              @if (isset($second))
-                                <td id="two"></td>
-                                @endif
-                              @if(isset($third))
-                                <td id="three"></td>
+                            @if(isset($third))
+                              <td><strong>{{$third->degreeName}}</strong></td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Fees</th>
+                            @if (isset($first))
+                              <td>Rs. {{$first->fees}}/-</td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Scholarship</td>
-                              @if (isset($first))
-                                  @if ($first->scholarship)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                              @if (isset($second))
-                                  @if ($second->scholarship)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                                @if (isset($third))
-                                    @if ($third->scholarship)
-                                      <td><i class="fa fa-check"></i></td>
-                                    @else
-                                      <td><i style="color:red" class="fa fa-times"></i></td>
-                                    @endif
-                                  @endif
-                            </tr>
-                            <tr>
-                              <td>Sector</td>
-                              @if (isset($first))
-                                <td> {{$first->sector}}</td>
-                                @endif
-                              @if (isset($second))
-                                <td> {{$second->sector}}</td>
-                                @endif
-                              @if(isset($third))
-                                <td> {{$third->sector}}</td>
+                            @if (isset($second))
+                              <td>Rs. {{$second->fees}}/-</td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Affiliation</td>
-                              @if (isset($first))
-                                <td> {{$first->affiliation}}</td>
-                                @endif
-                              @if (isset($second))
-                                <td> {{$second->affiliation}}</td>
-                                @endif
-                              @if(isset($third))
-                                <td> {{$third->affiliation}}</td>
+                            @if(isset($third))
+                              <td>Rs. {{$third->fees}}/-</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Scholarship</th>
+                            @if (isset($first))
+                              @if ($first->scholarship)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Total Department</td>
-                              @if (isset($first))
-                                @php
-                                  $count = App\Institute::with('departments')->where('institutes.id',$first->instID)->first();
-                                @endphp
-                                <td> {{$count->departments->count()}}</td>
-                                @endif
-                              @if (isset($second))
-                                @php
-                                  $count = App\Institute::with('departments')->where('institutes.id',$second->instID)->first();
-                                @endphp
-                                <td> {{$count->departments->count()}}</td>
-                                @endif
-                              @if(isset($third))
-                                @php
-                                  $count = App\Institute::with('departments')->where('institutes.id',$third->instID)->first();
-                                @endphp
-                                <td> {{$count->departments->count()}}</td>
+                            @endif
+                            @if (isset($second))
+                              @if ($second->scholarship)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Total Degrees</td>
-                              @if (isset($first))
-                                @php
-                                  $count = App\Institute::with('degrees')->where('institutes.id',$first->instID)->first();
-                                @endphp
-                                <td> {{$count->degrees->count()}}</td>
-                                @endif
-                              @if (isset($second))
-                                @php
-                                  $count = App\Institute::with('degrees')->where('institutes.id',$second->instID)->first();
-                                @endphp
-                                <td> {{$count->degrees->count()}}</td>
-                                @endif
-                              @if(isset($third))
-                                @php
-                                  $count = App\Institute::with('degrees')->where('institutes.id',$third->instID)->first();
-                                @endphp
-                                <td> {{$count->degrees->count()}}</td>
+                            @endif
+                            @if (isset($third))
+                              @if ($third->scholarship)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Seats</td>
-                              @if (isset($first))
-                                <td> {{$first->noOfSeats}}</td>
-                                @endif
-                              @if (isset($second))
-                                <td> {{$second->noOfSeats}}</td>
-                                @endif
-                              @if(isset($third))
-                                <td> {{$third->noOfSeats}}</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Seats</th>
+                            @if (isset($first))
+                              <td> {{$first->noOfSeats}}</td>
+                            @endif
+                            @if (isset($second))
+                              <td> {{$second->noOfSeats}}</td>
+                            @endif
+                            @if(isset($third))
+                              <td> {{$third->noOfSeats}}</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Co-Education</th>
+                            @if (isset($first))
+                              @if ($first->coEducation)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
                               @endif
-                            </tr>
-                            <tr>
-                              <td>Hostels</td>
-                              @if (isset($first))
-                                  @if ($first->hostel)
+                            @endif
+                            @if (isset($second))
+                              @if ($second->coEducation)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                            @if (isset($third))
+                              @if ($third->coEducation)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Morning Shift</th>
+                            @if (isset($first))
+                              @if ($first->shiftMorning)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                            @if (isset($second))
+                              @if ($second->shiftMorning)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                            @if (isset($third))
+                              @if ($third->shiftMorning)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Afternoon Shift</th>
+                            @if (isset($first))
+                              @if ($first->shiftAfternoon)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                            @if (isset($second))
+                              @if ($second->shiftAfternoon)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                            @if (isset($third))
+                              @if ($third->shiftAfternoon)
+                                <td><i class="fa fa-check"></i></td>
+                              @else
+                                <td><i style="color:red" class="fa fa-times"></i></td>
+                              @endif
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Distance</th>
+                            @if (isset($first))
+                              <td id="one"></td>
+                              @endif
+                            @if (isset($second))
+                              <td id="two"></td>
+                              @endif
+                            @if(isset($third))
+                              <td id="three"></td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Institute Sector</th>
+                            @if (isset($first))
+                              <td> {{$first->sector}}</td>
+                              @endif
+                            @if (isset($second))
+                              <td> {{$second->sector}}</td>
+                              @endif
+                            @if(isset($third))
+                              <td> {{$third->sector}}</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Affiliation</th>
+                            @if (isset($first))
+                              <td> {{$first->affiliation}}</td>
+                              @endif
+                            @if (isset($second))
+                              <td> {{$second->affiliation}}</td>
+                              @endif
+                            @if(isset($third))
+                              <td> {{$third->affiliation}}</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Department</th>
+                            @if (isset($first))
+                              @php
+                                $count = App\Institute::with('departments')->where('institutes.id',$first->instID)->first();
+                              @endphp
+                              <td> {{$count->departments->count()}}</td>
+                              @endif
+                            @if (isset($second))
+                              @php
+                                $count = App\Institute::with('departments')->where('institutes.id',$second->instID)->first();
+                              @endphp
+                              <td> {{$count->departments->count()}}</td>
+                              @endif
+                            @if(isset($third))
+                              @php
+                                $count = App\Institute::with('departments')->where('institutes.id',$third->instID)->first();
+                              @endphp
+                              <td> {{$count->departments->count()}}</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Total Degrees</th>
+                            @if (isset($first))
+                              @php
+                                $count = App\Institute::with('degrees')->where('institutes.id',$first->instID)->first();
+                              @endphp
+                              <td> {{$count->degrees->count()}}</td>
+                              @endif
+                            @if (isset($second))
+                              @php
+                                $count = App\Institute::with('degrees')->where('institutes.id',$second->instID)->first();
+                              @endphp
+                              <td> {{$count->degrees->count()}}</td>
+                              @endif
+                            @if(isset($third))
+                              @php
+                                $count = App\Institute::with('degrees')->where('institutes.id',$third->instID)->first();
+                              @endphp
+                              <td> {{$count->degrees->count()}}</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <th scope="row">Hostels</th>
+                            @if (isset($first))
+                                @if ($first->hostel)
+                                  <td><i class="fa fa-check"></i></td>
+                                @else
+                                  <td><i style="color:red" class="fa fa-times"></i></td>
+                                @endif
+                              @endif
+                            @if (isset($second))
+                                @if ($second->hostel)
+                                  <td><i class="fa fa-check"></i></td>
+                                @else
+                                  <td><i style="color:red" class="fa fa-times"></i></td>
+                                @endif
+                              @endif
+                              @if (isset($third))
+                                  @if ($third->hostel)
                                     <td><i class="fa fa-check"></i></td>
                                   @else
                                     <td><i style="color:red" class="fa fa-times"></i></td>
                                   @endif
                                 @endif
-                              @if (isset($second))
-                                  @if ($second->hostel)
+                          </tr>
+                          <tr>
+                            <th scope="row">Transportation</th>
+                            @if (isset($first))
+                                @if ($first->transportation)
+                                  <td><i class="fa fa-check"></i></td>
+                                @else
+                                  <td><i style="color:red" class="fa fa-times"></i></td>
+                                @endif
+                              @endif
+                            @if (isset($second))
+                                @if ($second->transportation)
+                                  <td><i class="fa fa-check"></i></td>
+                                @else
+                                  <td><i style="color:red" class="fa fa-times"></i></td>
+                                @endif
+                              @endif
+                              @if (isset($third))
+                                  @if ($third->transportation)
                                     <td><i class="fa fa-check"></i></td>
                                   @else
                                     <td><i style="color:red" class="fa fa-times"></i></td>
                                   @endif
                                 @endif
-                                @if (isset($third))
-                                    @if ($third->hostel)
-                                      <td><i class="fa fa-check"></i></td>
-                                    @else
-                                      <td><i style="color:red" class="fa fa-times"></i></td>
-                                    @endif
-                                  @endif
-                            </tr>
-
-                            <tr>
-                              <td>Transportation</td>
-                              @if (isset($first))
-                                  @if ($first->transportation)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                              @if (isset($second))
-                                  @if ($second->transportation)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                                @if (isset($third))
-                                    @if ($third->transportation)
-                                      <td><i class="fa fa-check"></i></td>
-                                    @else
-                                      <td><i style="color:red" class="fa fa-times"></i></td>
-                                    @endif
-                                  @endif
-                            </tr>
-
-                            <tr>
-                              <td>Co-Education</td>
-                              @if (isset($first))
-                                  @if ($first->coEducation)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                              @if (isset($second))
-                                  @if ($second->coEducation)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                                @if (isset($third))
-                                    @if ($third->coEducation)
-                                      <td><i class="fa fa-check"></i></td>
-                                    @else
-                                      <td><i style="color:red" class="fa fa-times"></i></td>
-                                    @endif
-                                  @endif
-                            </tr>
-                            <tr>
-                              <td>Morning Shift</td>
-                              @if (isset($first))
-                                  @if ($first->shiftMorning)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                              @if (isset($second))
-                                  @if ($second->shiftMorning)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                                @if (isset($third))
-                                    @if ($third->shiftMorning)
-                                      <td><i class="fa fa-check"></i></td>
-                                    @else
-                                      <td><i style="color:red" class="fa fa-times"></i></td>
-                                    @endif
-                                  @endif
-                            </tr>
-                            <tr>
-                              <td>Afternoon Shift</td>
-                              @if (isset($first))
-                                  @if ($first->shiftAfternoon)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                              @if (isset($second))
-                                  @if ($second->shiftAfternoon)
-                                    <td><i class="fa fa-check"></i></td>
-                                  @else
-                                    <td><i style="color:red" class="fa fa-times"></i></td>
-                                  @endif
-                                @endif
-                                @if (isset($third))
-                                    @if ($third->shiftAfternoon)
-                                      <td><i class="fa fa-check"></i></td>
-                                    @else
-                                      <td><i style="color:red" class="fa fa-times"></i></td>
-                                    @endif
-                                  @endif
-                            </tr>
-                            </table>
-
-
+                          </tr>
+                        </tbody>
+                  </table>
+                </div>
                 <!-- </div> -->
-
-
             </div>
 
         </div>

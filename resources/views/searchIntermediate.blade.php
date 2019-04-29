@@ -554,8 +554,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
       function filter_data(page,minfees,maxfees,minmarks,maxmarks)
       {
-        $('.filterResults').html('<img style="position:relative;" src="img/loading.gif"></img>')
-
+        $('.filterResults').html('  <div id="preloaderLoading">'+
+              '<div class="spinner"></div>'+
+          '</div>');
         var search = document.getElementById('search').value;
         var town = get_filter('town');
         var subarea = get_filter('subarea');
@@ -581,7 +582,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,maxfees:maxfees ,minmarks:minmarks, maxmarks:maxmarks,group:group,   _token: "{{csrf_token()}}"},
                 success:function(data){
                   //console.log(data);
-
+                  $('#preloaderLoading').hide();
                   $('.filterResults').html(data);
                 }
             });

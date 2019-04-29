@@ -374,4 +374,45 @@ class MainController extends Controller
       ->get();
       return Response::json([array('data' => $result),array('faculty'=>$faculty),array('degrees'=>$degree)]);
     }
+
+    public function interColleges()
+    {
+      $result = Institute::where('instituteType','College')
+      ->select('id','name')
+      ->get();
+      return Response::json(array('data' => $result));
+    }
+
+    public function undergraduateUniversities()
+    {
+      $result = Institute::where('instituteType','University')
+      ->select('id','name')
+      ->get();
+      return Response::json(array('data' => $result));
+    }
+
+    public function CollegeDegrees(Request $request)
+    {
+      $result = Institute::with('degrees')
+      ->where('instituteType','College')
+      ->where('id',$request->get('collegeID'))
+      ->get();
+      return Response::json(array('data' => $result));
+    }
+    public function UniversityDepartments(Request $request)
+    {
+      $result = Institute::with('departments')
+      ->where('instituteType','University')
+      ->where('id',$request->get('universityID'))
+      ->get();
+      return Response::json(array('data' => $result));
+    }
+    public function departmentDegrees(Request $request)
+    {
+      $result = App\Department::with('degrees')
+      ->where('id',$request->get('departmentID'))
+      ->get();
+      return Response::json(array('data' => $result));
+    }
+
 }

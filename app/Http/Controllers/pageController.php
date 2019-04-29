@@ -5,10 +5,47 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Institute;
+use App\Department;
+use App\Degree;
 use GMaps;
 
 class pageController extends Controller
 {
+  public function department(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if(isset($_GET["inst_id"])){
+      $departs = Department::where('institute_id',$_GET["inst_id"])->get();
+      foreach ($departs as $d) {
+        $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+      }
+    }
+    return $output;
+  }
+
+  public function degrees(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if(isset($_GET["dept_id"])){
+      $departs = Degree::where('department_id',$_GET["dept_id"])->get();
+      foreach ($departs as $d) {
+        $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+      }
+    }
+    return $output;
+  }
+
+  public function getInterDegrees(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if(isset($_GET["inst_id"])){
+      $departs = Degree::where('institute_id',$_GET["inst_id"])->get();
+      foreach ($departs as $d) {
+        $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+      }
+    }
+    return $output;
+  }
   public function degree(Request $request)
     {
       $result = DB::table('degrees')
@@ -72,7 +109,7 @@ class pageController extends Controller
             ->where('institutes.id',$uni[0])
             ->where('departments.id',$dept[0])
             ->where('degrees.id',$deg[0])
-            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            ->select('institutes.name','degrees.name as degreeName','departments.name as deptName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
@@ -90,7 +127,7 @@ class pageController extends Controller
             ->where('institutes.id',$uni[1])
             ->where('departments.id',$dept[1])
             ->where('degrees.id',$deg[1])
-            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            ->select('institutes.name','degrees.name as degreeName','departments.name as deptName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
@@ -111,15 +148,15 @@ class pageController extends Controller
             ->where('institutes.id',$uni[2])
             ->where('departments.id',$dept[2])
             ->where('degrees.id',$deg[2])
-            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            ->select('institutes.name','degrees.name as degreeName','departments.name as deptName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
-            if($check == 1){
-              return redirect()->route('page.undergraduateCompare')->with('success','Please Select Atleast Two Institutes');
-            }
           }
         }
+      }
+      if($check < 2){
+        return redirect()->route('page.undergraduateCompare')->with('success','Please Select Atleast Two Institutes');
       }
       return view('comparisonResult')->with(compact('first','second','third'));
     }
@@ -140,7 +177,7 @@ class pageController extends Controller
             ->join('addresses','addresses.institute_id','institutes.id')
             ->where('institutes.id',$uni[0])
             ->where('degrees.id',$deg[0])
-            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            ->select('institutes.name','degrees.name as degreeName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
@@ -154,7 +191,7 @@ class pageController extends Controller
             ->join('addresses','addresses.institute_id','institutes.id')
             ->where('institutes.id',$uni[1])
             ->where('degrees.id',$deg[1])
-            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            ->select('institutes.name','degrees.name as degreeName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
@@ -171,14 +208,15 @@ class pageController extends Controller
             ->join('addresses','addresses.institute_id','institutes.id')
             ->where('institutes.id',$uni[2])
             ->where('degrees.id',$deg[2])
-            ->select('institutes.name','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+            ->select('institutes.name','degrees.name as degreeName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
             'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
             ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
             ->first();
-            if($check == 1){
-              return redirect()->route('page.interCompare')->with('success','Please Select Atleast Two Institutes');
-            }
+            $check++;
           }
+      }
+      if($check < 3){
+        return redirect()->route('page.interCompare')->with('success','Please Select Atleast Two Institutes');
       }
       return view('interComparisonResult')->with(compact('first','second','third'));
     }

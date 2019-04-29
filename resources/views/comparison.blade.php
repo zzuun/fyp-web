@@ -17,8 +17,6 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../comparison.css">
-    <link rel="stylesheet" href="https://cdnjs.com/libraries/1000hz-bootstrap-validator">
-</head>
 
 <body>
 
@@ -99,7 +97,7 @@
           <strong>{{$message}}</strong>
         </div>
       @endif
-
+      <h5 style="text-align:center; margin-bottom:20px;font-size:35px">University Comparison</h5>
       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
         <form action="/undergraduate/ResultCompare" method="post">
 
@@ -107,7 +105,7 @@
           <!-- <button class="cancelbutton cancelbutton2"><i class="glyphicon glyphicon-minus w3-spin"></i></button> -->
           <!-- Single Accordian Area -->
           {{-- <form action="admin/compareResult" method="post"> --}}
-@csrf
+          @csrf
 
           <div class="panel single-accordion">
               <h6>
@@ -120,7 +118,7 @@
                 @php
                   $uni = App\Institute::where('instituteType','University')->get();
                 @endphp
-                <select class="custom-select" name="universityID[]" id="uni1" required>
+                <select class="custom-select" name="universityID[]" id="uni1"   required>
                     <option selected value="0" >University</option>
                     @foreach ($uni as $u)
                       <option value="{{$u->id}}">{{$u->name}}</option>
@@ -190,74 +188,6 @@
           <button name="newdiv" style="align:center;"class="newdivButton"></i> Compare</button>
         </form>
       </div>
-
-        {{-- <div class="container-fluid">
-          <div class="row">
-                <!-- Single Blog Area -->
-                <!-- <div class="col-12 col-xs-6"> -->
-
-
-
-                          <table>
-                            <tr>
-                              <th>Features</th>
-                              <th><span id="myid">PUCIT</span></th>
-                              <th><span id="myid">PUCADDDDDDddddddddddddddddddddddd</span></th>
-                              <th><span id="myid">UCP</span></th>
-                            </tr>
-                            <tr>
-                              <td>Fees</td>
-                              <td>Rs. 40,000/-</td>
-                              <td>Rs. 18,000/-</td>
-                              <td>Rs. 1,24,000/-</td>
-                            </tr>
-                            <tr>
-                              <td>Location</td>
-                              <td>Lahore</td>
-                              <td>Lahore</td>
-                              <td>Lahore</td>
-                            </tr>
-                            <tr>
-                              <td>Ranking</td>
-                              <td>2nd</td>
-                              <td>2nd</td>
-                              <td>21</td>
-                            </tr>
-                            <tr>
-                              <td>Seats</td>
-                              <td>600</td>
-                              <td>32</td>
-                              <td>380</td>
-                            </tr>
-                            <tr>
-                              <td>Hostels</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-
-                            <tr>
-                              <td>Transportation</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-
-                            <tr>
-                              <td>Co-Education</td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                              <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            </table>
-
-
-                <!-- </div> -->
-
-
-            </div>
-
-        </div> --}}
     </section>
     <!-- ##### Blog Area End ##### -->
 
@@ -302,8 +232,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#uni1').on('change',function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/getDepartments',
           type: 'GET',
+          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept1').html(data);
@@ -313,19 +244,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#uni2').on('change',function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/getDepartments',
           type: 'GET',
+          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept2').html(data);
           }
         });
       });
-      $(document).on("click","#uni3",function(){
+      $('#uni3').on("change",function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/getDepartments',
           type: 'GET',
+          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept3').html(data);
@@ -335,8 +268,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#dept1').on('change',function(){
         var dept_id = $(this).val();
         $.ajax({
-          url: '/admin/getDegrees',
+          url: '/getDegrees',
           type: 'GET',
+          cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg1').html(data);
@@ -346,19 +280,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#dept2').on('change',function(){
         var dept_id = $(this).val();
         $.ajax({
-          url: '/admin/getDegrees',
+          url: '/getDegrees',
           type: 'GET',
+          cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg2').html(data);
           }
         });
       });
-      $(document).on("click","#dept3",function(){
+      $('#dept3').on("change",function(){
         var dept_id = $(this).val();
         $.ajax({
-          url: '/admin/getDegrees',
+          url: '/getDegrees',
           type: 'GET',
+          cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg3').html(data);

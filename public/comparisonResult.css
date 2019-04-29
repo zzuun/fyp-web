@@ -2088,7 +2088,7 @@ textarea:focus {
           text-align: center;
           padding: 9px;
         }
-        th{
+        .main{
           background-color: #3762f0;
           color: white;
         }
@@ -2097,9 +2097,6 @@ textarea:focus {
           /* text-align: left; */
         }
 
-        tr:nth-child(even) {
-          background-color:#f2f2f2;
-        }
         tr{
           border-bottom: 1px solid #ebebeb
 

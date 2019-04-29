@@ -4,6 +4,7 @@
             <p><h2>{{$results->total()}} Results</h2></p>
             </div>
 
+
         <!-- <div class="col-12">
           <h5>Showing Records:{{count($results)}}</h5>
         </div> -->
