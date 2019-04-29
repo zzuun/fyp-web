@@ -266,18 +266,33 @@
 
 
 
-                                        <!-- <li>
-                                        <h6><i class="fa fa-code-fork" aria-hidden="true"></i>HEC Affiliation</h6>
+                                        <li>
 
-                                            <h6><i class="fa fa-check-circle" style="color:blue"></i></h6>
+                                        @php
+                                            $affiliation= DB::table('departments')
+                                            ->join('institutes','institutes.id','departments.institute_id')
+                                            ->select('institutes.affiliation as affiliation')
+                                            ->where('departments.id',$details[0]->departmentid)
+                                            ->get()
+                                        @endphp
+                                        <h6><i class="fa fa-code-fork" aria-hidden="true"></i>Affiliation</h6>
+
+                                            <h6>{{$affiliation[0]->affiliation}}<i class="fa fa-check-circle" style="color:blue"></i></h6>
 
 
 
-                                        </li> -->
+                                        </li>
+
+                                        @php
+                                            $degreesCount= DB::table('departments')
+                                            ->join('degrees','degrees.department_id','departments.id')
+                                            ->where('departments.id',$details[0]->departmentid)
+                                            ->count();
+                                        @endphp
 
                                     <li>
                                         <h6><i class="fa fa-graduation-cap" aria-hidden="true"></i>Total Degrees</h6>
-                                        <h6 style="color:blue;"></h6>
+                                        <h6 style="color:blue;">{{$degreesCount}}</h6>
                                     </li>
                                     <!-- <li>
                                         <h6><i class="fa fa-thumbs-down" aria-hidden="true"></i> Max Retakes</h6>

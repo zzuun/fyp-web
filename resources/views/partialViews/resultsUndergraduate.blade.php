@@ -1,7 +1,7 @@
-<div class="col-12">
+<div id="load" class="col-12" style="position:relative;">
         @if(count($results) > 0)
-          <p>About {{$results->total()}} results.</p>
-
+          <p><h2>{{$results->total()}} results</h2></p>
+        
 
         <!-- <div class="col-12">
           <h5>Showing Records:{{count($results)}}</h5>
@@ -24,7 +24,7 @@
 
 
                                     <div class="meta d-flex align-items-center">
-                                        <a href="/degreeUniversity?degreeid={{$result->degreeid}}&instituteid={{$result->instituteid}}&departmentid={{$result->departmentid}}'">{{$result->degreeName}}</a>
+                                        <a href="/degreeUniversity?degreeid={{$result->degreeid}}&instituteid={{$result->instituteid}}&departmentid={{$result->departmentid}}">{{$result->degreeName}}</a>
                                     </div>
 
                                     <div class="meta d-flex align-items-center">
@@ -70,6 +70,8 @@
                         </div>
                     </div>
                 @endforeach
+            @else
+                <p><h2>No results found</h2></p>
             @endif
 
     </div>
