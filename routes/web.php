@@ -134,6 +134,9 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
   return $output;
 });
 
+Route::get('/getDepartments','pageController@department');
+Route::get('/getDegrees','pageController@degrees');
+Route::get('/getInterDegrees','pageController@getInterDegrees');
 
 
 Auth::routes();
@@ -151,12 +154,9 @@ Route::prefix('admin')->group(function(){
   Route::get('/password/reset/{token}','Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
   //department
-  Route::get('/getDepartments','AdminController@department');
 
 
   //degrees
-  Route::get('/getDegrees','AdminController@degrees');
-  Route::get('/getInterDegrees','AdminController@getInterDegrees');
 
   //subareas
   Route::get('/getSubareas','AdminController@subarea');

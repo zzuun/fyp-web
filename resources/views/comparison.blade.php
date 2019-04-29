@@ -300,9 +300,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#uni1').on('change',function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/getDepartments',
           type: 'GET',
-          cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept1').html(data);
@@ -312,7 +311,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#uni2').on('change',function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/getDepartments',
           type: 'GET',
           cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
@@ -324,7 +323,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $(document).on("click","#uni3",function(){
         var inst_id = $(this).val();
         $.ajax({
-          url: '/admin/getDepartments',
+          url: '/getDepartments',
           type: 'GET',
           cache:false,
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
@@ -336,7 +335,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#dept1').on('change',function(){
         var dept_id = $(this).val();
         $.ajax({
-          url: '/admin/getDegrees',
+          url: '/getDegrees',
           type: 'GET',
           cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
@@ -348,7 +347,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('#dept2').on('change',function(){
         var dept_id = $(this).val();
         $.ajax({
-          url: '/admin/getDegrees',
+          url: '/getDegrees',
           type: 'GET',
           cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
@@ -360,7 +359,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $(document).on("click","#dept3",function(){
         var dept_id = $(this).val();
         $.ajax({
-          url: '/admin/getDegrees',
+          url: '/getDegrees',
           type: 'GET',
           cache:false,
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},

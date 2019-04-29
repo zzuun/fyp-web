@@ -5,10 +5,47 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Institute;
+use App\Department;
+use App\Degree;
 use GMaps;
 
 class pageController extends Controller
 {
+  public function department(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if(isset($_GET["inst_id"])){
+      $departs = Department::where('institute_id',$_GET["inst_id"])->get();
+      foreach ($departs as $d) {
+        $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+      }
+    }
+    return $output;
+  }
+
+  public function degrees(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if(isset($_GET["dept_id"])){
+      $departs = Degree::where('department_id',$_GET["dept_id"])->get();
+      foreach ($departs as $d) {
+        $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+      }
+    }
+    return $output;
+  }
+
+  public function getInterDegrees(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if(isset($_GET["inst_id"])){
+      $departs = Degree::where('institute_id',$_GET["inst_id"])->get();
+      foreach ($departs as $d) {
+        $output.='<option value='.$d->id.'>'.$d->name.'</option>';
+      }
+    }
+    return $output;
+  }
   public function degree(Request $request)
     {
       $result = DB::table('degrees')
