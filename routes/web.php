@@ -155,7 +155,7 @@ Route::prefix('admin')->group(function(){
   //degrees
 
   //subareas
-  Route::get('/getSubareas','AdminController@subarea');
+  Route::get('/getSubareas','pageController@subarea');
   Route::get('/getLatLng','AdminController@latlng');
 
   //faculty

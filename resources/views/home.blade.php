@@ -115,14 +115,14 @@
         </div>
 
         <!-- Single Catagories -->
-        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc2.jpg);left:25%;">
+        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc2.jpg);left:auto; margin: 0 auto auto">
           <a href="{{route('intermediate.main')}}">
               <h6>Intermediate</h6>
           </a>
         </div>
 
         <!-- Single Catagories -->
-        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc3.jpg);left:50%;">
+        <div class="single-catagories bg-img" style="background-image: url(img/bg-img/bc3.jpg);left:auto;margin: 0 auto auto">
           <a href="{{route('undergraduate.main')}}">
               <h6>Undergraduate</h6>
           </a>

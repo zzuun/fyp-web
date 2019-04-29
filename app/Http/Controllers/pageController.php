@@ -11,6 +11,30 @@ use GMaps;
 
 class pageController extends Controller
 {
+  public function subarea(Request $request)
+  {
+    $output = '<option>Choose...</option>';
+    if (isset($_GET["town_id"])) {
+      $subareas = Town::with('subareas')->where('id',$_GET["town_id"])->first();
+      if(isset($_GET["id"])){
+        $id = $_GET["id"];
+        foreach ($subareas->subareas as $s) {
+          if ($id == $s->id) {
+            $output.='<option selected value='.$s->id.'>'.$s->name.'</option>';
+          }
+          else {
+            $output.='<option value='.$s->id.'>'.$s->name.'</option>';
+          }
+        }
+      }
+      else {
+        foreach ($subareas->subareas as $s) {
+          $output.='<option value='.$s->id.'>'.$s->name.'</option>';
+        }
+      }
+    }
+    return $output;
+  }
   public function department(Request $request)
   {
     $output = '<option>Choose...</option>';
