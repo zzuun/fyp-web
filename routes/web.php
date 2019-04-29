@@ -79,13 +79,15 @@ Route::post('/getFeeCountIntermediate',function(){
  }
 
 });
-Route::post('/getFeeCountInstitute',function(){
+Route::post('/getFeeCountUndergraduate',function(){
    if(isset($_POST["minfees"])|| isset($_POST["maxfees"])){
       $maxRange= $_POST['maxfees'];
       $minRange= $_POST['minfees'];
-      $c_degree = App\Degree::whereBetween('fees',[$minRange,$maxRange])
-      ->where('degreeLevel','BS')->count();
-      return $c_degree;
+      $c_degrees = DB::table('degrees')
+      ->join('degreeGroups','degreeGroups.id','degrees.degree_groups_id')
+      ->whereBetween('fees',[$minRange,$maxRange])
+      ->where('degrees.degreeLevel','BS')->count();
+      return $c_degrees;
    }
 });
 Route::post('/getMarksCountInter',function(){
@@ -101,34 +103,28 @@ Route::post('/getMarksCountUni',function(){
   if(isset($_POST["minmarks"])|| isset($_POST["maxmarks"])){
      $maxRange= $_POST['maxmarks'];
      $minRange=$_POST['minmarks'];
-     $c_degree = DB::table('institutes')
-     ->join('departments','departments.institute_id' ,'institutes.id')
-     ->join('degrees','degrees.department_id','departments.id')
-     ->where('instituteType','University')
-     ->whereBetween('degrees.lastMerit',[$minRange,$maxRange])
+
+     $c_degrees = DB::table('degrees')
+     ->where('degreeLevel','BS')
+     ->whereBetween('lastMerit',[$minRange,$maxRange])
      ->count();
-     return $c_degree;
+     return $c_degrees;
   }
 });
 
 Route::get('/getSubareas',function(Request $request, Town $towns){
   $towns = $towns->newQuery();
-  $towns->join('subareas','towns.id','subareas.town_id')->select('subareas.name');
+  $towns->join('subareas','subareas.town_id','towns.id')
+  ->select('subareas.name as areaName');
   $output = '';
-  $counts = array();
+  //$counts = array();
   if(isset($_GET["town"]))
   {
      $area_filter = $_GET["town"];
      $towns->wherein("towns.name",$area_filter);
      $result = $towns->get();
-     $i = 0;
-     foreach ($result as $a) {
-       $temp = DB::table('addresses')->join('subareas','subareas.id','addresses.subarea_id')->where('subareas.name',$a->name)->count();
-       $counts[$i++]=$temp;
-     }
-     $i = 0;
      foreach ($result as $r) {
-       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value="'.$r->name.'"> '.$r->name.'  ('.$counts[$i++].')</label>';
+       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value="'.$r->areaName.'"> '.$r->areaName.'</label>';
      }
   }
   return $output;

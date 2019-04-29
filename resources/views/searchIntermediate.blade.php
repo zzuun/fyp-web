@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="searchfilters.css">
 
     <link rel="stylesheet" href="customcss/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/> 
 
 </head>
 
@@ -124,17 +125,18 @@
             <div class="row">
 
                 <div class="col-md-4 col-lg-4" style="padding-bottom:2%";>
-                        <div class="search-area">
-                              <form action="" method="post">
-                                  <input type="search" name="search" id="search" placeholder="Keyword">
-                                  <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                              </form>
-
-                        </div>
+                        
                   <div class="clever-faqs">
                       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel single-accordion9">
 
-
+                          <div class="search-area">
+                                
+                            <input type="search" name="search" id="search" placeholder="Keyword">
+                            <button type="submit" id="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                
+                          </div>
+                        </div>
 
 
 
@@ -147,21 +149,26 @@
                                 <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
                                 </a>
                             </h6>
-                            <div id="collapseEight" class="accordion-content collapse">
 
                               @php
-                                $dg = App\degreeGroups::wherein('name',['FSC Pre Engineering','FSC Pre Medical','ICS','FA','iCOM'])->get();
+                                $results = DB::table('degrees')
+                                ->join('degreeGroups','degreeGroups.id','=','degrees.degree_groups_id')
+                                ->selectRaw("degreeGroups.name as groupname,count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->groupby('degreeGroups.name')->get();
                               @endphp
+                            <div id="collapseEight" class="accordion-content collapse">
 
-                              @foreach ($dg as $d)
-                                @php
-                                  $count = DB::table('degreeGroups')->join('degrees','degreeGroups.id','degrees.degree_groups_id')->where('degreeGroups.name',$d->name)->count();
+                              
+                              @foreach($results as $result)
 
-                                @endphp
-                                <label  style="word-wrap:break-word;width: 100%;">
-                                    <input class="common-selector group"  type="checkbox" value= "{{$d->name}}" /> {{$d->name}} ({{$count}})
-                                 </label>
+
+                                <label  style="word-wrap:break-word; width:100%">
+                                    <input class="common-selector group"  type="checkbox" value="{{$result->groupname}}" /> {{$result->groupname}} ({{$result->count}})
+                                </label>
+
                               @endforeach
+                              
                             </div>
                         </div>
 
@@ -177,16 +184,18 @@
                             </h6>
                             <div id="collapseFour" class="accordion-content collapse">
                               @php
-                                  $affiliations= App\Institute::select('affiliation')->where('instituteType','College')->distinct()->get();
+                                $affiliations=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("institutes.affiliation as affiliation,count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->groupby('institutes.affiliation')->get();
 
                               @endphp
                               @foreach($affiliations as $affiliation)
-                                <?php
-                                  $c_aff = App\Institute::where('affiliation',$affiliation->affiliation)->where('instituteType','College')->count();
-                                 ?>
-                                <label  style="word-wrap:break-word;width: 100%;">
 
-                                    <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation->affiliation}}" /> {{$affiliation->affiliation}}  ({{$c_aff}})
+                                <label  style="word-wrap:break-word; width:100%">
+
+                                    <input  class="common-selector affiliation" type="checkbox" value="{{$affiliation->affiliation}}" /> {{$affiliation->affiliation}}  ({{$affiliation->count}})
                                 </label>
                               @endforeach
 
@@ -206,24 +215,49 @@
                             <div id="collapseSeven" class="accordion-content collapse">
 
                               <!-- count for hosel -->
-                              <?php $c_trans = App\Institute::where('transportation',1)->where('instituteType','College')->count() ?>
+                              @php
+                                $h_degrees=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->where('institutes.hostel',1)
+                                ->count();
 
-                              <label  style="word-wrap:break-word;width: 100%;">
-                                  <input id="transport" class="common-selector transport" type="checkbox" value="1" /> Transportation ({{$c_trans}})
-                               </label>
+                              @endphp
+
+                              <label  style="word-wrap:break-word; width:100%">
+                                  <input id="hostel" class="common-selector hostel" type="checkbox" value="1" /> Hostel ({{$h_degrees}})
+                              </label>
 
                                <!-- count for hosel -->
-                               <?php $c_hostel = App\Institute::where('hostel',1)->where('instituteType','College')->count() ?>
+                              @php
 
-                                <label  style="word-wrap:break-word;width: 100%;">
-                                  <input id="hostel" class="common-selector hostel" type="checkbox" value="1" /> Hostel ({{$c_hostel}})
+                                $t_degrees=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->where('institutes.transportation',1)
+                                ->count();
+
+                              @endphp
+
+                              <label  style="word-wrap:break-word; width:100%">
+                                  <input id="transport" class="common-selector transport" type="checkbox" value="1" /> Transportation ({{$t_degrees}})
                                </label>
 
                               <!-- count of scholarship -->
-                              <?php $c_sch = App\Institute::where('scholarship',1)->where('instituteType','College')->count() ?>
+                              @php
+                                $s_degrees=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->where('institutes.scholarship',1)
+                                ->count();
 
-                              <label  style="word-wrap:break-word;width: 100%;">
-                                <input id="scholarship" class="common-selector scholarship" type="checkbox" value="1" /> Scholarship  ({{$c_sch}})
+                              @endphp
+
+                              <label  style="word-wrap:break-word; width:100%">
+                                <input id="scholarship" class="common-selector scholarship" type="checkbox" value="1" /> Scholarship  ({{$s_degrees}})
                              </label>
                             </div>
                         </div>
@@ -237,21 +271,20 @@
                               </a></h6>
                               <div id="collapseTwo" class="accordion-content collapse">
                                 @php
-                                  $areas= App\Town::select('name','id')->distinct()->get();
+
+                                $towns=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->join('addresses','addresses.institute_id','institutes.id')
+                                ->join('towns','addresses.town_id','towns.id')
+                                ->selectRaw("towns.name as townName, count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','INTER')
+                                ->groupby('towns.name')
+                                ->get();
+                              
                                 @endphp
-
-                                @foreach($areas as $area)
-
-                                <?php $c_area = DB::table('addresses')
-                                ->join('towns','towns.id','addresses.town_id')
-                                ->join('institutes','institutes.id','addresses.institute_id')
-                                ->where('instituteType','College')
-                                ->where('towns.name',$area->name)
-                                ->count();
-                                 ?>
-
-                                  <label  style="word-wrap:break-word;width: 100%;">
-                                    <input class="common-selector town" id="show" type="checkbox" value="{{$area->name}}"/> {{$area->name}} ({{$c_area}})
+                                @foreach($towns as $town)
+                                  <label  style="word-wrap:break-word; width:100%">
+                                    <input class="common-selector town" id="show" type="checkbox" value="{{$town->townName}}"/> {{$town->townName}} ({{$town->count}})
                                   </label>
                                 @endforeach
 
@@ -280,24 +313,22 @@
                                   </a>
                               </h6>
                               @php
-                                $sector= App\Institute::select('sector')->distinct()->get();
+                                $sector=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("institutes.sector as sector,count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->groupby('institutes.sector')
+                                ->get();
                               @endphp
 
                               <div id="collapseThree" class="accordion-content collapse">
                               @foreach($sector as $s)
-
-                              <?php
-                                $c_sect = App\Institute::where('sector',$s->sector)->count();
-                               ?>
-
-                                <label  style="word-wrap:break-word;width: 100%;">
-                                  <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/> {{$s->sector}} ({{$c_sect}})
+                                <label  style="word-wrap:break-word; width:100%">
+                                  <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/> {{$s->sector}} ({{$s->count}})
                                 </label>
                               @endforeach
                               </div>
                           </div>
-
-
 
                           <!-- Fees -->
                           <div class="panel single-accordion5">
@@ -310,11 +341,12 @@
                               </h6>
                               <div id="collapseFive" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                    <input type="hidden" id="minfees" value="10000"/>
+                                    <!-- <input type="hidden" id="minfees" value="10000"/>
                                     <input type="hidden" id="maxfees" value="500000">
                                     <p id="fees_show">Rs10000 - Rs500000</p>
-                                    <div style="padding-left:15px; padding-right:15px;"><div id="fees_range"></div></div>
-                                      <p>(<span id="feecount"></span>) Results</p>
+                                    <div style="padding-left:15px; padding-right:15px;"><div id="fees_range"></div></div> -->
+                                    <input type="text" class="fees_range" name="fees_range" value="" />
+                                    <p>(<span id="feecount"></span>) Results</p>
                                   </div>
                               </div>
                           </div>
@@ -330,10 +362,12 @@
                               </h6>
                               <div id="collapseSix" class="accordion-content collapse">
                                     <div class="slidecontainer">
-                                    <input type="hidden" id="minmarks" value="30"/>
+                                    <!-- <input type="hidden" id="minmarks" value="30"/>
                                       <input type="hidden" id="maxmarks" value="100">
-                                      <p id="marks_show">30% - 100%</p>
-                                      <div style="padding-left:15px;"><div id="marks_range"></div></div>
+                                      <p id="marks_show">30% - 100%</p> 
+                                      <div style="padding-left:15px;"><div id="marks_range"></div></div> -->
+                                      <input type="text" class="marks_range" name="marks_range" value="" />
+                                      
                                       <p>(<span id="markscount"></span>) Results</p>
                                     </div>
                               </div>
@@ -350,20 +384,44 @@
                                  </a>
                              </h6>
                              <div id="collapseNine" class="accordion-content collapse">
-                                <?php $c_coEd = App\Institute::where('coEducation',1)->where('instituteType','College')->count() ?>
-                               <label  style="word-wrap:break-word;width: 100%;">
-                                 <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" /> Co-Education ({{$c_coEd}})
-                              </label>
+                                @php
+                                $co_degrees=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->where('institutes.coEducation',1)
+                                ->count();
 
-                              <?php $c_sM = DB::table('institutes')->join('degrees','degrees.institute_id','institutes.id')->where('institutes.instituteType','College')->where('shiftMorning',1)->count(); ?>
-                             <label  style="word-wrap:break-word;width: 100%;">
-                               <input id="shiftMorning" class="common-selector shiftMorning" type="checkbox" value="1" /> Morning Shift ({{$c_sM}})
-                            </label>
+                              @endphp
+                                <label  style="word-wrap:break-word; width:100%">
+                                <input id="coEducation" class="common-selector coEducation" type="checkbox" value="1" /> Co-Education ({{$co_degrees}})
+                                </label>
 
-                            <?php $c_sA = DB::table('institutes')->join('degrees','degrees.institute_id','institutes.id')->where('institutes.instituteType','College')->where('shiftAfternoon',1)->count(); ?>
-                           <label  style="word-wrap:break-word;width: 100%;">
-                             <input id="shiftAfternoon" class="common-selector shiftAfternoon" type="checkbox" value="1" /> Afternoon Shift ({{$c_sA}})
-                          </label>
+                              @php
+                                $mor_degrees=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->where('degrees.shiftMorning',1)
+                                ->count();
+
+                              @endphp
+                                <label  style="word-wrap:break-word; width:100%">
+                                <input id="shiftMorning" class="common-selector shiftMorning" type="checkbox" value="1" /> Morning Shift ({{$mor_degrees}})
+                                </label>
+
+                              @php
+                                $aft_degrees=DB::table('degrees')
+                                ->join('institutes','institutes.id','degrees.institute_id')
+                                ->selectRaw("count('degrees.id') as count")
+                                ->where('degrees.degreeLevel','=','INTER')
+                                ->where('degrees.shiftAfternoon',1)
+                                ->count();
+
+                              @endphp
+                                <label  style="word-wrap:break-word; width:100%">
+                                <input id="shiftAfternoon" class="common-selector shiftAfternoon" type="checkbox" value="1" /> Afternoon Shift ({{$aft_degrees}})
+                                </label>
                              </div>
                          </div>
                          <div class="panel single-accordion9">
@@ -398,14 +456,7 @@
     </div>
 </div>
     <!-- ##### Popular Courses End ##### -->
-<style>
-    #loading
-    {
-      text-align:center;
-      background: url('img/loading.gif') no-repeat center;
-      height: 150px;
-    }
-</style>
+
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
@@ -440,6 +491,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="customjs/active.js"></script>
     <script src="customjs/jquery/jquery-ui.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
 
     <script> $(".seat").on("click", function(){
       $(this).css("background", "red");
@@ -484,6 +537,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script>
   $(document).ready(function()
   {
+
+      var minFees=10000;
+      var maxFees=500000;
+      var minMarks=30;
+      var maxMarks=100;
       $(document).on('click', '.pagination a', function(event)
       {
           event.preventDefault();
@@ -491,12 +549,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
           var page = $(this).attr('href').split('page=')[1];
-          filter_data(page);
+          filter_data(page,minFees,maxFees,minMarks,maxMarks);
       });
 
-      function filter_data(page=1)
+      function filter_data(page,minfees,maxfees,minmarks,maxmarks)
       {
-        $('#filterResults').html('<div id="loading" style="" ></div>')
+        $('.filterResults').html('<img style="position:relative;" src="img/loading.gif"></img>')
 
         var search = document.getElementById('search').value;
         var town = get_filter('town');
@@ -510,17 +568,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var sM = get_filter('shiftMorning');
         var sA = get_filter('shiftAfternoon');
 
-        var minmarks=$('#minmarks').val();
-        var maxmarks=$('#maxmarks').val();
-        var minfees=$('#minfees').val();
-        var maxfees=$('#maxfees').val();
+        // var minmarks=$('#minmarks').val();
+        // var maxmarks=$('#maxmarks').val();
+        // var minfees=$('#minfees').val();
+        // var maxfees=$('#maxfees').val();
         //var maxmarks= $('#marks-max-range').val();
         var group = get_filter('group');
 
             $.ajax({
                 url:"/applyIntermediate?page="+page,
                 method:"GET",
-                data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,minmarks:minmarks, maxmarks:maxmarks, maxfees:maxfees,group:group,   _token: "{{csrf_token()}}"},
+                data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,maxfees:maxfees ,minmarks:minmarks, maxmarks:maxmarks,group:group,   _token: "{{csrf_token()}}"},
                 success:function(data){
                   //console.log(data);
 
@@ -529,34 +587,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
       }
 
-        function getFeesCount()
+        function getFeesCount(minfees,maxfees)
         {
-          var minfees=$('#minfees').val();
-          var maxfees=$('#maxfees').val();
+          // var minfees=$('#minfees').val();
+          // var maxfees=$('#maxfees').val();
 
           $.ajax({
             url:"/getFeeCountIntermediate",
             method:"post",
             data:{minfees:minfees, maxfees:maxfees, _token: "{{csrf_token()}}"},
             success:function(data){
-              if(data < 1)
-                data=0;
+              
               $('#feecount').html(data);
             }
           });
         }
 
-      function getMarksCount()
+      function getMarksCount(minmarks,maxmarks)
       {
-        var minmarks=$('#minmarks').val();
-        var maxmarks=$('#maxmarks').val();
+        // var minmarks=$('#minmarks').val();
+        // var maxmarks=$('#maxmarks').val();
         $.ajax({
           url:"/getMarksCountInter",
           method:"post",
           data:{minmarks:minmarks,maxmarks:maxmarks, _token: "{{csrf_token()}}"},
           success:function(data){
-            if(data<1)
-              data=0;
+            
             $('#markscount').html(data);
           }
         });
@@ -573,59 +629,104 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
               return filter;
           }
 
-          $('#fees_range').slider({
-            range:true,
+          // $('#fees_range').slider({
+          //   range:true,
+          //   min:10000,
+          //   max:500000,
+          //   values:[10000,500000],
+          //   step:10000,
+          //   stop:function(event,ui)
+          //   {
+          //     $('#fees_show').html("Rs"+ui.values[0] + ' - ' + "Rs"+ui.values[1]);
+          //     $('#minfees').val(ui.values[0]);
+          //     $('#maxfees').val(ui.values[1]);
+          //     filter_data();
+          //     getFeesCount();
+          //   }
+          // })
+
+          $(".fees_range").ionRangeSlider({
+            type:"integer",
             min:10000,
             max:500000,
-            values:[10000,500000],
-            step:10000,
-            stop:function(event,ui)
-            {
-              $('#fees_show').html("Rs"+ui.values[0] + ' - ' + "Rs"+ui.values[1]);
-              $('#minfees').val(ui.values[0]);
-              $('#maxfees').val(ui.values[1]);
-              filter_data();
-              getFeesCount();
-            }
-          })
+            from:10000,
+            to:500000,
+            grid:true,
+            prefix:"Rs",
+            step:20000,
+            prettify_enabled:true,
+            prettify_separator: ",",
+            grid_snap:true,
+            skin:"big",
+            onFinish:function(data){
+              minFees=data.from;
+              maxFees=data.to;
+              filter_data(1,minFees,maxFees,minMarks,maxMarks);
+              getFeesCount(minFees,maxFees);
 
-          $('#marks_range').slider({
-            range:true,
+            }
+
+          });
+
+          $(".marks_range").ionRangeSlider({
+            type:"integer",
             min:30,
             max:100,
-            values:[30,100],
+            from:30,
+            to:100,
+            grid:true,
+            postfix:"%",
             step:5,
-            stop:function(event,ui)
-            {
-              $('#marks_show').html(ui.values[0]+" %" + " - " + ui.values[1]+" %");
-              $('#minmarks').val(ui.values[0]);
-              $('#maxmarks').val(ui.values[1]);
-              filter_data();
-              getMarksCount();
+            grid_snap:true,
+            skin:"big",
+            onFinish:function(data){
+              minMarks=data.from;
+              maxMarks=data.to;
+              filter_data(1,minFees,maxFees,minMarks,maxMarks);
+              getMarksCount(minMarks,maxMarks);
 
             }
 
-          })
-          filter_data();
-          getFeesCount();
-          getMarksCount();
+          });
+
+          // $('#marks_range').slider({
+          //   range:true,
+          //   min:30,
+          //   max:100,
+          //   values:[30,100],
+          //   step:5,
+          //   stop:function(event,ui)
+          //   {
+          //     $('#marks_show').html(ui.values[0]+" %" + " - " + ui.values[1]+" %");
+          //     $('#minmarks').val(ui.values[0]);
+          //     $('#maxmarks').val(ui.values[1]);
+          //     filter_data();
+          //     getMarksCount();
+
+          //   }
+
+          // })
+
+          filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          getFeesCount(minFees,maxFees);
+          getMarksCount(minMarks,maxMarks);
 
 
 
 
 
-      $(document).on('keyup','#search',function(){
-          filter_data();
+      $(document).on('keyup','#search-btn',function(){
+          filter_data(1,minFees,maxFees,minMarks,maxMarks);
         });
 
 
 
       $(document).on('click','.subarea',function(){
-          filter_data();
+          filter_data(1,minFees,maxFees,minMarks,maxMarks);
         });
 
       $('.common-selector').click(function(){
-          filter_data();
+          filter_data(1,minFees,maxFees,minMarks,maxMarks);
       });
       function uncheckAll() {
     $("input[type='checkbox']:checked").prop("checked", false)

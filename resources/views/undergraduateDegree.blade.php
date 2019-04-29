@@ -97,7 +97,7 @@
                     <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
 
                     <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
-                    <li class="breadcrumb-item"><a href="/department?departmentid={{$details[0]->departmentid}}">{{$details[0]->departmentName}}e</a></li>
+                    <li class="breadcrumb-item"><a href="/department?departmentid={{$details[0]->departmentid}}&instituteid={{$details[0]->instituteid}}">{{$details[0]->departmentName}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
                 </ol>
             </nav>
@@ -189,7 +189,7 @@
 
                                                       @else
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sun-o" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Morning Shift</h6>
-                                                        <h6 style="color:green;">Yes</h6>
+                                                        <h6 style="color:red;">No</h6>
                                                       @endif
                                                   </li>
                                                   <li>
@@ -200,7 +200,7 @@
 
                                                       @else
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sun-o" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Afternoon Shift</h6>
-                                                        <h6 style="color:green;">No</h6>
+                                                        <h6 style="color:red;">No</h6>
                                                       @endif
                                                   </li>
                                                 </ul>
@@ -300,7 +300,7 @@
                     <div class="col-12 col-lg-4">
                         <div class="course-sidebar">
                             <!-- Buy Course -->
-                            <a href="/department?departmentid={{$details[0]->departmentid}}" class="btn clever-btn mb-30 w-100"><i class="fa fa-arrow-left"></i> Department Page</a>
+                            <a href="/department?departmentid={{$details[0]->departmentid}}&instituteid={{$details[0]->instituteid}}" class="btn clever-btn mb-30 w-100"><i class="fa fa-arrow-left"></i> Department Page</a>
 
                             <!-- Widget -->
                             <div class="sidebar-widget">

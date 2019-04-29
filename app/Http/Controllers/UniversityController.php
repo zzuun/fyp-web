@@ -29,25 +29,7 @@ class UniversityController extends Controller
 
     public function getUniversityProfile(Request $request)
     {
-        //$results= Institute::join('degrees','institutes.id','degrees.institute_id')->where('institutes.id',$request->instituteid)->get();
-        // $results = Institute::join('departments','institutes.id','departments.institute_id')
-        // ->join('degrees','degrees.department_id','departments.id')
-        // ->join('addresses','addresses.institute_id','institutes.id')
-        // ->where('institutes.id',$request->instituteid)
-        // ->select('institutes.name as instituteName','institutes.affiliation','degrees.id as degreeid','institutes.id as instituteid','degrees.name as degreeName','departments.id as departmentid','departments.name as departmentName'
-        // ,'institutes.scholarship','addresses.website','addresses.location','addresses.email','institutes.principal_name','addresses.phone_number')->get();
-
-        //return view('universityProfile',compact('results'));
-
         $institute=Institute::find($request->instituteid);
-    //     $groups = DB::table('departments')
-    //   ->join('institutes','institutes.id','departments.institute_id')
-    //   ->join('degrees','degrees.department_id','departments.id')
-    //   ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
-    //   ->where('institutes.id',$request->instituteid)
-    //   ->select('departments.name as departmentName','departments.id as departmentid','degreeGroups.name as degreeType','degreeGroups.id as degreeGroupid')
-    //   ->distinct()
-    //   ->get();
         $departments=Institute::find($request->instituteid)->departments;
         $address=Institute::find($request->instituteid)->address;
         return view('universityProfile')->withInstitute($institute)->withAddress($address)->withDepartments($departments);
@@ -59,13 +41,9 @@ class UniversityController extends Controller
         $department=Department::join('institutes','institutes.id','departments.institute_id')
         ->join('addresses','addresses.institute_id','institutes.id')
         ->where('departments.id',$request->departmentid)
+        ->where('institutes.id',$request->instituteid)
         ->select('institutes.id as instituteid','institutes.name as instituteName','departments.id as departmentid','departments.name as departmentName','addresses.website')
         ->get();
-
-        $inc = DB::table('departments')->where('departments.id',$request->departmentid)->increment('noOfViews');
-        // $degrees=Department::find($request->departmentid)->degrees;
-
-
         return view('universityDepartment')->withDetails($department);
     }
 

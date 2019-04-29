@@ -1,8 +1,8 @@
 <div class="col-12">
         @if(count($results) > 0)
-        <div class="col-12">
-          <p>About {{$results->total()}} results.</p>
-        </div>
+            <div class="col-12">
+            <p><h2>{{$results->total()}} Results</h2></p>
+            </div>
 
         <!-- <div class="col-12">
           <h5>Showing Records:{{count($results)}}</h5>
@@ -68,6 +68,8 @@
                         </div>
                     </div>
                 @endforeach
+            @else
+                <p><h2>No results found<h2></p>
             @endif
 
     </div>
