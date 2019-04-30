@@ -190,7 +190,7 @@
                                                       </li>
                                                       <li>
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-code-fork" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Affiliation</h6>
-                                                        <h6>{{$institute->affiliation}}<i class="fa fa-check-circle" style="color:blue"></i></h6>
+                                                        <h6>{{$institute->affiliation}} <i class="fa fa-check-circle" style="color:blue"></i></h6>
                                                       <!-- </li>
                                                       <li>
                                                           <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-cube" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Town</h6>
@@ -363,14 +363,14 @@
                                         <h6><i class="fa fa-clock-o" aria-hidden="true"></i> Views</h6>
                                         <h6 style="color:orange;">27k</h6>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <h6><i class="fa fa-bell" aria-hidden="true"></i> Ratings</h6>
                                         <h6 style="color:blue;">80%</h6>
-                                    </li>
-                                    <li>
+                                    </li> --}}
+                                    {{-- <li>
                                         <h6><i class="fa fa-file" aria-hidden="true"></i> HEC Rank</h6>
                                         <h6 style="color:blue;">3</h6>
-                                    </li>
+                                    </li> --}}
                                     @php
                                         $departmentCount=App\Institute::join('departments','institutes.id','departments.institute_id')
                                         ->select(DB::raw("count(*) as count"))

@@ -16,6 +16,8 @@
     <link rel="icon" href="../img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
+    <!-- Latest compiled and minified CSS -->
+
     <link rel="stylesheet" href="../comparison.css">
 
 <body>
@@ -118,18 +120,28 @@
                 @php
                   $uni = App\Institute::where('instituteType','University')->get();
                 @endphp
-                <select class="custom-select" name="universityID[]" id="uni1"   required>
-                    <option selected value="0" >University</option>
-                    @foreach ($uni as $u)
-                      <option value="{{$u->id}}">{{$u->name}}</option>
-                    @endforeach
-                  </select>
-                  <select class="custom-select" name="departmentID[]" id="dept1" required>
-                      <option selected value="0">Department</option>
-                    </select>
-                    <select class="custom-select" name="degreeID[]" id="deg1" required>
-                        <option selected value="0">Degree</option>
-                      </select>
+                <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="universityID[]" id="uni1"  data-live-search=true required>
+                          <option selected value="0" >University</option>
+                          @foreach ($uni as $u)
+                            <option value="{{$u->id}}">{{$u->name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="departmentID[]" id="dept1" data-live-search=true required>
+                          <option selected value="0">Department</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="degreeID[]" id="deg1" data-live-search=true required>
+                          <option selected value="0">Degree</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
               </div>
 
           </div>
@@ -144,18 +156,28 @@
                   </a>
               </h6>
               <div id="collapseTwo" class="accordion-content collapse">
-                <select class="custom-select" name="universityID[]" id="uni2" required>
-                  <option selected value="0">University</option>
-                  @foreach ($uni as $u)
-                    <option value="{{$u->id}}">{{$u->name}}</option>
-                  @endforeach
-                  </select>
-                  <select class="custom-select" name="departmentID[]" id="dept2" required>
-                      <option selected value="0">Department</option>
-                    </select>
-                    <select class="custom-select" name="degreeID[]" id="deg2" required>
-                      <option selected value="0">Degree</option>
-                      </select>
+                <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="universityID[]" id="uni2"  data-live-search=true required>
+                          <option selected value="0" >University</option>
+                          @foreach ($uni as $u)
+                            <option value="{{$u->id}}">{{$u->name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="departmentID[]" id="dept2" data-live-search=true required>
+                          <option selected value="0">Department</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="degreeID[]" id="deg2" data-live-search=true required>
+                          <option selected value="0">Degree</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
               </div>
 
           </div>
@@ -169,18 +191,28 @@
                   </a>
               </h6>
               <div id="collapseThree" class="accordion-content collapse">
-                <select class="custom-select" name="universityID[]" id="uni3">
-                  <option selected value="0">University</option>
-                  @foreach ($uni as $u)
-                    <option value="{{$u->id}}">{{$u->name}}</option>
-                  @endforeach
-                  </select>
-                  <select class="custom-select" name="departmentID[]" id="dept3">
-                      <option selected value="0">Department</option>
-                    </select>
-                    <select class="custom-select" name="degreeID[]" id="deg3">
-                      <option selected value="0">Degree</option>
-                      </select>
+                <div class="container">
+                    <div class="row">
+                      <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="universityID[]" id="uni3"  data-live-search=true required>
+                          <option selected value="0" >University</option>
+                          @foreach ($uni as $u)
+                            <option value="{{$u->id}}">{{$u->name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="departmentID[]" id="dept3" data-live-search=true required>
+                          <option selected value="0">Department</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-4" style="margin-bottom:40px;">
+                        <select class="selectpicker" data-width="300px" name="degreeID[]" id="deg3" data-live-search=true required>
+                          <option selected value="0">Degree</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
               </div>
 
           </div>
@@ -227,6 +259,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="../customjs/active.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
+
     <script>
     $(document).ready(function() {
       $('#uni1').on('change',function(){
@@ -238,6 +273,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept1').html(data);
+            $('.selectpicker').selectpicker('refresh');
+            $('#deg1').html('<option selected value="0" >Choose...</option>');
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -250,6 +288,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept2').html(data);
+            $('.selectpicker').selectpicker('refresh');
+            $('#deg2').html('<option selected value="0" >Choose...</option>');
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -262,6 +303,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#dept3').html(data);
+            $('.selectpicker').selectpicker('refresh');
+            $('#deg3').html('<option selected value="0" >Choose...</option>');
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -274,6 +318,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg1').html(data);
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -286,6 +331,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg2').html(data);
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -298,6 +344,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {dept_id:dept_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg3').html(data);
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });

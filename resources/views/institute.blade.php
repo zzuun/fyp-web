@@ -157,17 +157,57 @@
                                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab--1">
                                     <div class="clever-description">
 
-                                        <!-- About Course -->
-                                        <div class="about-course mb-30">
-                                            <h4>About this course</h4>
-                                            <p>National University of Sciences and Technology (NUST)
-                                              was set up in March 1991 to enhance higher education within the country.
-                                              The university is delivering education in the field of science and technology
-                                              and focusing on stable academic environment. NUST is currently ranked 417th
-                                              in the world by QS, UK while in subject-wise ranking, NUST is graded among the
-                                              top 300 universities in Engineering & IT.  So far NUST has produces thousands of
-                                              professionals in the arena of science and technology to meet the growing needs of 21st century</p>
-                                        </div>
+                                      <div class="clever-curriculum mb-30">
+                                        <div class="cl7 mb-30">
+                                          <h4 class="d-flex justify-content-between"><span>College Specification</span></h4>
+                                            <ul class="curriculum-list3">
+
+                                                <ul>
+                                                  <li>
+                                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-map-marker" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Location</h6>
+                                                    <h6>Lahore</h6>
+                                                  </li>
+
+                                                  <li>
+                                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-bus" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Transportation</h6>
+
+                                                        @if($details[0]->transportation==1)
+                                                            <h6 style="color:#20ba72;">Available</h6>
+                                                        @else
+                                                            <h6 style="color:red;">Unavailable</h6>
+                                                        @endif
+                                                  </li>
+                                                  <li>
+                                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-users" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Co-Education</h6>
+                                                        @if($details[0]->coEducation == 1)
+                                                            <h6 style="color:#20ba72;">Yes</h6>
+                                                        @else
+                                                            <h6 style="color:red;">No</h6>
+                                                        @endif
+
+
+                                                  </li>
+                                                  <li>
+                                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-building" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Sector</h6>
+                                                    <h6>{{$details[0]->sector}}</h6>
+                                                  </li>
+                                                  <li>
+                                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-code-fork" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Affiliation</h6>
+                                                    <h6>{{$details[0]->affiliation}} <i class="fa fa-check-circle" style="color:blue"></i></h6>
+                                                  <!-- </li>
+                                                  <li>
+                                                      <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-cube" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Town</h6>
+                                                      <h6>Model Town</h6>
+                                                  </li>
+                                                  <li>
+                                                      <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-cubes" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Sub-area</h6>
+                                                      <h6>M Block</h6>
+                                                  </li> -->
+                                                </ul>
+                                                </ul>
+
+                                              </div>
+                                            </div>
 
                                         <div class="clever-curriculum mb-30">
                                           <div class="cl7 mb-30">
@@ -176,23 +216,23 @@
 
                                                   <ul>
                                                     <li>
-                                                      <span><i class="fa fa-mobile-phone" aria-hidden="true"></i> {{$details[0]->phone_number}} </span>
+                                                      <span><i style="color:rgba(0,0,0,0.5)" class="fa fa-mobile-phone" aria-hidden="true"></i> {{$details[0]->phone_number}} </span>
                                                       <span></span>
                                                     </li>
                                                     <li>
-                                                        <span><i class="fa fa-mail-forward" aria-hidden="true"></i> {{$details[0]->email}} </span>
+                                                        <span><i style="color:rgba(0,0,0,0.5)" class="fa fa-mail-forward" aria-hidden="true"></i> {{$details[0]->email}} </span>
                                                         <span></span>
                                                     </li>
                                                     <li>
-                                                        <span><i class="fa fa-globe" aria-hidden="true"></i> https://{{$details[0]->website}} </span>
+                                                        <span><i style="color:rgba(0,0,0,0.5)" class="fa fa-globe" aria-hidden="true"></i> https://{{$details[0]->website}} </span>
                                                         <span></span>
                                                     </li>
                                                     <li>
-                                                        <span><i class="fa fa-won" aria-hidden="true"></i> {{$details[0]->affiliation}}  </span>
+                                                        <span><i style="color:rgba(0,0,0,0.5)" class="fa fa-won" aria-hidden="true"></i> {{$details[0]->affiliation}}  </span>
                                                         <span></span>
                                                     </li>
                                                     <li>
-                                                        <span><i class="fa fa-location-arrow" aria-hidden="true"></i> {{$details[0]->location}}  </span>
+                                                        <span><i style="color:rgba(0,0,0,0.5)" class="fa fa-location-arrow" aria-hidden="true"></i> {{$details[0]->location}}  </span>
                                                         <span></span>
                                                     </li>
                                                   </ul>
@@ -205,63 +245,6 @@
                                       </div>
 
                                         <!-- FAQ -->
-                                        <div class="clever-faqs">
-                                            <h4>FAQs</h4>
-
-                                            <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
-
-                                                <!-- Single Accordian Area -->
-                                                <div class="panel single-accordion">
-                                                    <h6><a role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Can I just enroll in a single course? I'm not interested in the entire Specialization?
-                                                    <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                    <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                    </a></h6>
-                                                    <div id="collapseOne" class="accordion-content collapse show">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor.</p>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Single Accordian Area -->
-                                                <div class="panel single-accordion">
-                                                    <h6>
-                                                        <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">What is the refund policy?
-                                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        </a>
-                                                    </h6>
-                                                    <div id="collapseTwo" class="accordion-content collapse">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Single Accordian Area -->
-                                                <div class="panel single-accordion">
-                                                    <h6>
-                                                        <a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">What background knowledge is necessary?
-                                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        </a>
-                                                    </h6>
-                                                    <div id="collapseThree" class="accordion-content collapse">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Single Accordian Area -->
-                                                <div class="panel single-accordion">
-                                                    <h6>
-                                                        <a role="button" aria-expanded="true" aria-controls="collapseFour" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseFour">Do i need to take the courses in a specific order?
-                                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        </a>
-                                                    </h6>
-                                                    <div id="collapseFour" class="accordion-content collapse">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
                                     </div>
                                 </div>
 
@@ -822,18 +805,30 @@
                                     <h6><i class="fa fa-clock-o" aria-hidden="true"></i> Views</h6>
                                     <h6 style="color:orange;">{{$views}}</h6>
                                 </li>
+                                @php
+                                    $degreesCount=App\Institute::join('degrees','institutes.id','degrees.institute_id')
+                                    ->select(DB::raw("count(*) as count"))
+                                    ->where('institutes.id',$details[0]->id)
+                                    ->get();
+                                @endphp
                                 <li>
-                                    <h6><i class="fa fa-bell" aria-hidden="true"></i> Ratings</h6>
-                                    <h6>80%</h6>
+                                    <h6><i class="fa fa-graduation-cap" aria-hidden="true"></i> Total Degrees</h6>
+                                    <h6 style="color:blue;">{{$degreesCount[0]->count}}</h6>
                                 </li>
+                                @php
+                                    $seats=App\Institute::join('degrees','institutes.id','degrees.institute_id')
+                                    ->select(DB::raw("sum(degrees.noOfSeats) as sum"))
+                                    ->where('institutes.id',$details[0]->id)
+                                    ->get();
+                                @endphp
                                 <li>
-                                    <h6><i class="fa fa-file" aria-hidden="true"></i> Ranking</h6>
-                                    <h6 style="color:green;">3</h6>
+                                    <h6><i class="fa fa-sitemap" aria-hidden="true"></i> Total Seats</h6>
+                                    <h6 style="color:green;">{{$seats[0]->sum}}</h6>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <h6><i class="fa fa-location-arrow" aria-hidden="true"></i> Location</h6>
                                     <h6>{{$details[0]->city}}</h6>
-                                </li>
+                                </li> --}}
                                 <!-- <li>
                                     <h6><i class="fa fa-thumbs-down" aria-hidden="true"></i> Max Retakes</h6>
                                     <h6>5</h6>

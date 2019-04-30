@@ -19,7 +19,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="searchfilters.css">
     <link rel="stylesheet" href="customcss/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 
 
 </head>
@@ -128,7 +128,7 @@
               <div class="col-md-4 col-lg-4" style="padding-bottom:2%";>
 
 
-                
+
 
 
 
@@ -136,8 +136,8 @@
                       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel single-accordion9">
                           <div class="search-area">
-                                    
-                            <input type="search" name="search" class="search-box" id="search" placeholder="Search Degrees">
+
+                            <input type="search" name="search" class="search-box" id="search" placeholder="Degree Keyword">
                             <button type="submit" id="search-btn">
                               <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
@@ -256,13 +256,13 @@
                                   <input id="transport" class="common-selector transport" type="checkbox" value="1" /> Transportation ({{$t_degrees}})
                                </label>
 
-                               
-                              
 
-                               
+
+
+
 
                               <!-- count of degrees that has scholarship facility -->
-                              
+
                               @php
                                 $s_degrees=DB::table('degrees')
                                 ->join('departments','degrees.department_id','departments.id')
@@ -299,7 +299,7 @@
                                 ->where('degrees.degreeLevel','BS')
                                 ->groupby('towns.name')
                                 ->get();
-                                  
+
                                 @endphp
                                 @foreach($towns as $town)
                                   <label  style="word-wrap:break-word; width:100%">
@@ -344,7 +344,7 @@
                               <div id="collapseThree" class="accordion-content collapse">
                               @foreach($sector as $s)
 
-                             
+
 
                                 <label  style="word-wrap:break-word; width:100%">
                                   <input class="common-selector sector" type="checkbox" value="{{$s->sector}}"/> {{$s->sector}} ({{$s->count}})
@@ -372,7 +372,7 @@
                                   <div style="padding-left:15px; padding-right:15px;"><div id="fees_range"></div></div>
                                   <p>(<span id="feecount"></span>) Results</p> -->
                                   <input type="text" class="fees_range" name="fees_range" value="" />
-                                  <p>(<span id="feecount"></span>) Results</p> 
+                                  <p>(<span id="feecount"></span>) Results</p>
 
                                 </div>
                               </div>
@@ -535,6 +535,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   </script>
 <script>
   $(document).ready(function(){
+
+    if($('#hide').is(":hidden")){
+      $('#hide').show();
+    }
+    var filter = [];
+    $('.'+'town'+':checked').each(function(){
+        filter.push($(this).val());
+    });
+    getSubsUnder(filter);
+
+
     $('.town').click(function(){
       if($('#hide').is(":hidden")){
         $('#hide').show();
@@ -543,15 +554,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       $('.'+'town'+':checked').each(function(){
           filter.push($(this).val());
       });
+      getSubsUnder(filter);
+    });
+    function getSubsUnder(filter) {
       $.ajax({
-        url:'/getSubareas',
+        url:'/getSubareasUnder',
         method:'GET',
         data:{town:filter, _token: "{{csrf_token()}}"},
         success:function(data){
-            $('#collapseTen').html(data)
-          }
+          $('#collapseTen').html(data)
+        }
       });
-    });
+    }
   });
 
 </script>
@@ -693,7 +707,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             }
 
           });
-          
+
 
           // $('#fees_range').slider({
           //   range:true,
@@ -735,7 +749,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 
-      
+
         $(document).on('click','#search-btn',function(){
           filter_data(1,minFees,maxFees,minMarks,maxMarks);
         });

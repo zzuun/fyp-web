@@ -1278,12 +1278,15 @@ textarea:focus {
       color: rgba(0, 0, 0, 0.6);
       font-size: 18px; }
       .clever-curriculum .cl7 .curriculum-list3 li {
-        display: block;
-        margin-bottom: 10px;
-        font-family: "Raleway", sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        color: rgba(0, 0, 0, 0.5); }
+        display: -webkit-box;
+          display: flex;
+          margin-bottom: 10px;
+          font-family: "Raleway", sans-serif;
+          font-size: 16px;
+          justify-content: space-between;
+          border-bottom: 1.5px solid #ebebeb;
+          font-weight: 700;
+          color: rgba(0, 0, 0, 0.5);  }
         .clever-curriculum .cl7 .curriculum-list3 li:last-child {
           margin-bottom: 0; }
           .clever-curriculum .cl7 .curriculum-list3 li i {
@@ -1306,6 +1309,10 @@ textarea:focus {
                 border-bottom: 1px solid #ebebeb; }
                 .clever-curriculum .cl7 .curriculum-list3 li ul li span span {
                   text-decoration: underline; }
+                  @media only screen and (min-width: 760px) {
+                    .curriculum-list3 li {
+                      margin-left: 40px;
+                      margin-right: 40px;}}
             @media only screen and (max-width: 767px) {
               .clever-curriculum .cl7 {
                 padding: 30px; } }

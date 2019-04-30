@@ -8,6 +8,7 @@
 @import url(customcss/magnific-popup.css);
 @import url(customcss/font-awesome.min.css);
 @import url(customcss/classy-nav.min.css);
+@import url(customcss/bootstrap-select.min.css);
 /* :: 3.0 Base CSS */
 * {
   margin: 0;

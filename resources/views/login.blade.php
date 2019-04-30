@@ -57,26 +57,16 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                              </ul>
+                            </div>
 
-                            <!-- Search Button -->
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
@@ -89,8 +79,7 @@
 
                                 <a  href="{{route('login')}}"class="btn">Login</a>
                                 @endif
-                            </div>
-
+                              </div>
                         </div>
                         <!-- Nav End -->
                     </div>

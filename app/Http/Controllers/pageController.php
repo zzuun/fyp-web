@@ -37,7 +37,7 @@ class pageController extends Controller
   }
   public function department(Request $request)
   {
-    $output = '<option>Choose...</option>';
+    $output = '<option selected value =0>Choose...</option>';
     if(isset($_GET["inst_id"])){
       $departs = Department::where('institute_id',$_GET["inst_id"])->get();
       foreach ($departs as $d) {
@@ -49,7 +49,7 @@ class pageController extends Controller
 
   public function degrees(Request $request)
   {
-    $output = '<option>Choose...</option>';
+    $output = '<option selected value = 0>Choose...</option>';
     if(isset($_GET["dept_id"])){
       $departs = Degree::where('department_id',$_GET["dept_id"])->get();
       foreach ($departs as $d) {
@@ -61,7 +61,7 @@ class pageController extends Controller
 
   public function getInterDegrees(Request $request)
   {
-    $output = '<option>Choose...</option>';
+    $output = '<option selected value = 0>Choose...</option>';
     if(isset($_GET["inst_id"])){
       $departs = Degree::where('institute_id',$_GET["inst_id"])->get();
       foreach ($departs as $d) {
@@ -96,7 +96,7 @@ class pageController extends Controller
       $result = DB::table('institutes')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$request->instituteID)
-      ->select('institutes.name', 'addresses.website','institutes.id',
+      ->select('institutes.name', 'addresses.website','institutes.id','institutes.transportation','institutes.sector','institutes.coEducation','institutes.affiliation',
       'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city',
       'addresses.lat','addresses.lng')
       ->get();
@@ -115,13 +115,14 @@ class pageController extends Controller
 
     public function compareResult(Request $request){
       $data = $request->all();
+      // dd($data);
       $uni = $data['universityID'];
       $dept = $data['departmentID'];
       $deg = $data['degreeID'];
       $first = null;
       $second = null;
       $third = null;
-      $check = 1;
+      $check = 0;
 
       if($uni[0] != 0){
         if($dept[0]!= 0){
@@ -140,6 +141,7 @@ class pageController extends Controller
             $check++;
           }
         }
+
       }
       if($uni[1] != 0){
         if($dept[1]!= 0){

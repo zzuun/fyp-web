@@ -1298,7 +1298,7 @@ textarea:focus {
           font-family: "Raleway", sans-serif;
           font-size: 16px;
           justify-content: space-between;
-          border-bottom: 1px solid #ebebeb;
+          border-bottom: 1.5px solid #ebebeb;
           font-weight: 700;
           color: rgba(0, 0, 0, 0.5); }
         .clever-curriculum .cl7 .curriculum-list3 li:last-child {

@@ -115,7 +115,7 @@ Route::post('/getMarksCountUni',function(){
 Route::get('/getSubareas',function(Request $request, Town $towns){
   $towns = $towns->newQuery();
   $towns->join('subareas','subareas.town_id','towns.id')
-  ->select('subareas.name as areaName');
+  ->select('subareas.name as areaName','subareas.id as subID');
   $output = '';
   //$counts = array();
   if(isset($_GET["town"]))
@@ -124,7 +124,54 @@ Route::get('/getSubareas',function(Request $request, Town $towns){
      $towns->wherein("towns.name",$area_filter);
      $result = $towns->get();
      foreach ($result as $r) {
-       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value="'.$r->areaName.'"> '.$r->areaName.'</label>';
+<<<<<<< current
+       $temp = DB::table('degrees')
+       ->join('institutes','degrees.institute_id','institutes.id')
+       ->join('addresses','institutes.id','addresses.institute_id')
+       ->join('subareas','subareas.id','addresses.subarea_id')
+       ->where('degrees.degreeLevel','INTER')
+       ->where('subareas.id',$r->subID)
+       ->select(DB::raw('count(degrees.id) as count'))
+       ->get();
+       $output.= '<label  style="width:100%"><input class="common-selector subarea" type="checkbox" value="'.$r->areaName.'"> '.$r->areaName.' ('.$temp[0]->count.')</label>';
+     }
+  }
+  return $output;
+});
+
+Route::get('/getSubareasUnder',function(Request $request, Town $towns){
+  $towns = $towns->newQuery();
+  $towns->join('subareas','subareas.town_id','towns.id')
+  ->select('subareas.name as areaName','subareas.id as subID');
+  $output = '';
+  //$counts = array();
+  if(isset($_GET["town"]))
+  {
+     $area_filter = $_GET["town"];
+     $towns->wherein("towns.name",$area_filter);
+     $result = $towns->get();
+     foreach ($result as $r) {
+       $temp = DB::table('degrees')
+       ->join('departments','degrees.department_id','departments.id')
+       ->join('institutes','departments.institute_id','institutes.id')
+       ->join('addresses','institutes.id','addresses.institute_id')
+       ->join('subareas','subareas.id','addresses.subarea_id')
+       ->where('degrees.degreeLevel','BS')
+       ->where('subareas.id',$r->subID)
+       ->select(DB::raw('count(degrees.id) as count'))
+       ->get();
+       $output.= '<label  style="width:100%"><input class="common-selector subarea" type="checkbox" value="'.$r->areaName.'"> '.$r->areaName.' ('.$temp[0]->count.')</label>';
+=======
+       $temp = DB::table('institutes')
+       ->join('addresses','institutes.id','addresses.institute_id')
+       ->join('degrees','degrees.institute_id','institutes.id')
+       ->join('subareas','subareas.id','addresses.subarea_id')
+       ->where('subareas.id',$r->subID)
+       ->where('degrees.level','BS')
+       ->select(DB::raw('count(degrees.id) as count'))
+       ->get();
+       $output.= '<label  style="word-wrap:break-word"><input class="common-selector subarea" type="checkbox" value="'.$r->areaName.'"> '.$r->areaName.''.$temp[0]->count.'</label>  ';
+>>>>>>> before discard
      }
   }
   return $output;

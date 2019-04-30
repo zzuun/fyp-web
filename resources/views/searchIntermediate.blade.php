@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="searchfilters.css">
 
     <link rel="stylesheet" href="customcss/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 
 </head>
 
@@ -125,16 +125,16 @@
             <div class="row">
 
                 <div class="col-md-4 col-lg-4" style="padding-bottom:2%";>
-                        
+
                   <div class="clever-faqs">
                       <div class="accordions" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel single-accordion9">
 
                           <div class="search-area">
-                                
-                            <input type="search" name="search" id="search" placeholder="Keyword">
+
+                            <input type="search" name="search" id="search" placeholder="Degree Keyword">
                             <button type="submit" id="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                
+
                           </div>
                         </div>
 
@@ -159,7 +159,7 @@
                               @endphp
                             <div id="collapseEight" class="accordion-content collapse">
 
-                              
+
                               @foreach($results as $result)
 
 
@@ -168,7 +168,7 @@
                                 </label>
 
                               @endforeach
-                              
+
                             </div>
                         </div>
 
@@ -271,22 +271,23 @@
                               </a></h6>
                               <div id="collapseTwo" class="accordion-content collapse">
                                 @php
-
-                                $towns=DB::table('degrees')
-                                ->join('institutes','institutes.id','degrees.institute_id')
-                                ->join('addresses','addresses.institute_id','institutes.id')
-                                ->join('towns','addresses.town_id','towns.id')
-                                ->selectRaw("towns.name as townName, count('degrees.id') as count")
-                                ->where('degrees.degreeLevel','INTER')
-                                ->groupby('towns.name')
-                                ->get();
-                              
+                                $t = DB::table('towns')->select('towns.id','towns.name as townName')->get();
                                 @endphp
-                                @foreach($towns as $town)
+                                @foreach ($t as $te)
+                                  @php
+                                  $count=DB::table('degrees')
+                                  ->join('institutes','institutes.id','degrees.institute_id')
+                                  ->join('addresses','addresses.institute_id','institutes.id')
+                                  ->join('towns','addresses.town_id','towns.id')
+                                  ->where('towns.id',$te->id)
+                                  ->where('degrees.degreeLevel','INTER')
+                                  ->count();
+                                  @endphp
                                   <label  style="word-wrap:break-word; width:100%">
-                                    <input class="common-selector town" id="show" type="checkbox" value="{{$town->townName}}"/> {{$town->townName}} ({{$town->count}})
+                                    <input class="common-selector town" id="show" type="checkbox" value="{{$te->townName}}"/> {{$te->townName}} ({{$count}})
                                   </label>
-                                @endforeach
+                              @endforeach
+
 
 
                               </div>
@@ -364,10 +365,10 @@
                                     <div class="slidecontainer">
                                     <!-- <input type="hidden" id="minmarks" value="30"/>
                                       <input type="hidden" id="maxmarks" value="100">
-                                      <p id="marks_show">30% - 100%</p> 
+                                      <p id="marks_show">30% - 100%</p>
                                       <div style="padding-left:15px;"><div id="marks_range"></div></div> -->
                                       <input type="text" class="marks_range" name="marks_range" value="" />
-                                      
+
                                       <p>(<span id="markscount"></span>) Results</p>
                                     </div>
                               </div>
@@ -514,23 +515,38 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <script>
   $(document).ready(function(){
+
+    if($('#hide').is(":hidden")){
+      $('#hide').show();
+    }
+    var filter = [];
+    $('.'+'town'+':checked').each(function(){
+      filter.push($(this).val());
+    });
+    getSubssInter(filter);
+
+
     $('.town').click(function(){
       if($('#hide').is(":hidden")){
         $('#hide').show();
       }
       var filter = [];
       $('.'+'town'+':checked').each(function(){
-          filter.push($(this).val());
+        filter.push($(this).val());
       });
+      getSubssInter(filter);
+    });
+
+    function getSubssInter(filter) {
       $.ajax({
         url:'/getSubareas',
         method:'GET',
         data:{town:filter, _token: "{{csrf_token()}}"},
         success:function(data){
-            $('#collapseTen').html(data)
-          }
+          $('#collapseTen').html(data)
+        }
       });
-    });
+    }
   });
 </script>
 
@@ -598,7 +614,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             method:"post",
             data:{minfees:minfees, maxfees:maxfees, _token: "{{csrf_token()}}"},
             success:function(data){
-              
+
               $('#feecount').html(data);
             }
           });
@@ -613,7 +629,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           method:"post",
           data:{minmarks:minmarks,maxmarks:maxmarks, _token: "{{csrf_token()}}"},
           success:function(data){
-            
+
             $('#markscount').html(data);
           }
         });

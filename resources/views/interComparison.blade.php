@@ -120,15 +120,23 @@
                 @php
                   $uni = App\Institute::where('instituteType','College')->get();
                 @endphp
-                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni1" required>
-                    <option selected value="0" >College</option>
-                    @foreach ($uni as $u)
-                      <option value="{{$u->id}}">{{$u->name}}</option>
-                    @endforeach
-                  </select>
-                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg1" required>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:40px;">
+                      <select class="selectpicker" data-width="300px" name="collegeID[]" id="uni1" data-live-search=true required>
+                        <option selected value="0" >College</option>
+                        @foreach ($uni as $u)
+                          <option value="{{$u->id}}">{{$u->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:40px;">
+                      <select class="selectpicker" data-width="300px" name="degreeID[]" id="deg1" data-live-search=true required>
                         <option selected value="0">Degree</option>
                       </select>
+                    </div>
+                  </div>
+                </div>
               </div>
 
           </div>
@@ -143,15 +151,23 @@
                   </a>
               </h6>
               <div id="collapseTwo" class="accordion-content collapse">
-                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni2" required>
-                  <option selected value="0">College</option>
-                  @foreach ($uni as $u)
-                    <option value="{{$u->id}}">{{$u->name}}</option>
-                  @endforeach
-                  </select>
-                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg2" required>
-                      <option selected value="0">Degree</option>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:40px;">
+                      <select class="selectpicker" data-width="300px" name="collegeID[]" id="uni2" data-live-search=true required>
+                        <option selected value="0" >College</option>
+                        @foreach ($uni as $u)
+                          <option value="{{$u->id}}">{{$u->name}}</option>
+                        @endforeach
                       </select>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:40px;">
+                      <select class="selectpicker" data-width="300px" name="degreeID[]" id="deg2" data-live-search=true required>
+                        <option selected value="0">Degree</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
 
           </div>
@@ -165,15 +181,23 @@
                   </a>
               </h6>
               <div id="collapseThree" class="accordion-content collapse">
-                <select style="margin-left: 12%;" class="custom-select" name="collegeID[]" id="uni3">
-                  <option selected value="0">College</option>
-                  @foreach ($uni as $u)
-                    <option value="{{$u->id}}">{{$u->name}}</option>
-                  @endforeach
-                  </select>
-                    <select style="margin-left: 12%;" class="custom-select" name="degreeID[]" id="deg3">
-                      <option selected value="0">Degree</option>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:40px;">
+                      <select class="selectpicker" data-width="300px" name="collegeID[]" id="uni3" data-live-search=true required>
+                        <option selected value="0" >College</option>
+                        @foreach ($uni as $u)
+                          <option value="{{$u->id}}">{{$u->name}}</option>
+                        @endforeach
                       </select>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:40px;">
+                      <select class="selectpicker" data-width="300px" name="degreeID[]" id="deg3" data-live-search=true required>
+                        <option selected value="0">Degree</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
 
           </div>
@@ -220,6 +244,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Active js -->
     <script src="../customjs/active.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
+
     <script>
     $(document).ready(function() {
       $('#uni1').on('change',function(){
@@ -230,6 +257,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg1').html(data);
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -241,6 +269,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg2').html(data);
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
@@ -252,6 +281,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           data: {inst_id:inst_id,_token: "{{csrf_token()}}"},
           success:function(data){
             $('#deg3').html(data);
+            $('.selectpicker').selectpicker('refresh');
           }
         });
       });
