@@ -167,6 +167,8 @@ Route::get('/getSubareasUnder',function(Request $request, Town $towns){
 
 Route::get('/getDepartments','pageController@department');
 Route::get('/getDegrees','pageController@degrees');
+Route::get('/contact','pageController@contact')->name('contactus');
+Route::post('/contact','pageController@contactUsPost')->name('contact.store');
 Route::get('/getInterDegrees','pageController@getInterDegrees');
 
 

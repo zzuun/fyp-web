@@ -310,7 +310,7 @@ class MainController extends Controller
       ->where('degrees.id',$request->input('first'))
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('institutes.name as instituteName','institutes.hostel','degrees.name as degreeName',
-      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
+      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation','institutes.affiliation','institutes.sector',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
       $second = DB::table('degrees')
@@ -318,7 +318,7 @@ class MainController extends Controller
       ->where('degrees.id',$request->input('second'))
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('institutes.name as instituteName','institutes.hostel', 'degrees.name as degreeName',
-      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
+      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation','institutes.affiliation','institutes.sector',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
       return Response::json([array('first' => $first),array('second'=>$second)]);

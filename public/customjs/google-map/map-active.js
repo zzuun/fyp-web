@@ -277,17 +277,6 @@ var iconx = {
 };
 
 
-// for (var i = 0; i < latlng.length; i++) {
-//   var infowindow = new google.maps.InfoWindow({
-//             content: latlng[i].getName();
-//           });
-//   var co = new google.maps.LatLng(latlng[i].getLat(), latlng[i].getLng());
-//   var marker = new google.maps.Marker({
-//       position: co,
-//       icon:iconx,
-//       title: latlng[i].getName()
-//   });
-// }
 
 var infowindow = new google.maps.InfoWindow({
           content: instituteName

@@ -104,7 +104,7 @@
             <!-- Breadcumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('page.home')}}"></a>Home</li>
+                    <li class="breadcrumb-item"><a href="{{route('page.home')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
                     <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$details[0]->departmentName}}</li>
@@ -167,7 +167,6 @@
 
                                         <!-- Curriculum Level -->
                                           <div id="myUL" class="curriculum-level hide mb-30">
-                                            <h4  class="d-flex justify-content-between"><span>{{$details[0]->departmentName}}</span></h4>
                                                 <div class="curriculum-list">
 
                                                 @php
@@ -276,7 +275,7 @@
                                         @endphp
                                         <h6><i class="fa fa-code-fork" aria-hidden="true"></i>Affiliation</h6>
 
-                                            <h6>{{$affiliation[0]->affiliation}}<i class="fa fa-check-circle" style="color:blue"></i></h6>
+                                            <h6>       {{$affiliation[0]->affiliation}} <i class="fa fa-check-circle" style="color:blue"></i></h6>
 
 
 

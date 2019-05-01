@@ -24,6 +24,8 @@ class CreateInstitutesTable extends Migration
             $table->string('principal_name');
             $table->boolean('coEducation');
             $table->boolean('scholarship');
+            $table->string('img_url');
+            $table->string('logo_url');
             $table->string('important_dates');
             $table->timestamps();
         });
