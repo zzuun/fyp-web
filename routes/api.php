@@ -23,6 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //compare
 Route::get('/compare','MainController@compare');
 
+//user
+Route::post('password/email', 'Auth\ForgotPasswordController@getResetToken');
+
 //register
 Route::post('register','MainController@register');
 Route::post('login','MainController@login');
