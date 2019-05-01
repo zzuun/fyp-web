@@ -44,6 +44,7 @@ class UniversityController extends Controller
         ->where('institutes.id',$request->instituteid)
         ->select('institutes.id as instituteid','institutes.name as instituteName','departments.id as departmentid','departments.name as departmentName','addresses.website')
         ->get();
+        $inc=DB::table('departments')->where('departments.id',$request->departmentid)->increment('noOfViews');
         return view('universityDepartment')->withDetails($department);
     }
 

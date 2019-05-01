@@ -754,6 +754,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           filter_data(1,minFees,maxFees,minMarks,maxMarks);
         });
 
+        $(document).on('keypress','#search',function(e)
+        {
+          if(e.which==13)
+          {
+            filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          }
+
+        });
+
 
 
       $(document).on('click','.subarea',function(){
@@ -765,9 +774,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       });
       function uncheckAll() {
     $("input[type='checkbox']:checked").prop("checked", false)
-    filter_data();
+    filter_data(1);
     }
-    $(':button').on('click', uncheckAll)
+    $('.clearbtn').on('click', uncheckAll)
 
   });
 

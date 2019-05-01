@@ -207,10 +207,18 @@
                                                           <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-cube" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Town</h6>
                                                           <h6>{{$town[0]->townName}}</h6>
                                                       </li>
+                                                    @php
+                                                      $subarea=DB::table('institutes')
+                                                        ->join('addresses','institutes.id','addresses.institute_id')
+                                                        ->join('subareas','addresses.subarea_id','subareas.id')
+                                                        ->select('subareas.name as areaName')
+                                                        ->where('institutes.id',$institute->id)
+                                                        ->get();
+                                                    @endphp
                                                       <li>
                                                           <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-cubes" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Sub-area</h6>
-                                                          <h6>M Block</h6>
-                                                      </li> -->
+                                                          <h6>{{$subarea[0]->areaName}}</h6>
+                                                      </li>
                                                     </ul>
                                                     </ul>
 
@@ -370,9 +378,26 @@
                             <div class="sidebar-widget">
                                 <h4>Basic Info</h4>
                                 <ul class="features-list">
+
+                                @php
+                                    $departmentViews=DB::table('departments')
+                                    ->join('institutes','departments.institute_id','institutes.id')
+                                    ->select(DB::raw("sum(departments.noOfViews) as views"))
+                                    ->where('institutes.id',$institute->id)
+                                    ->get();
+
+                                    $degreeViews=DB::table('degrees')
+                                    ->join('departments','degrees.department_id','departments.id')
+                                    ->join('institutes','institutes.id','departments.institute_id')
+                                    ->selectRaw("sum(degrees.numberOfViews) as views")
+                                    ->where('institutes.id',$institute->id)
+                                    ->get();
+
+                                    $totalViews=$departmentViews[0]->views + $degreeViews[0]->views;
+                                @endphp
                                     <li>
                                         <h6><i class="fa fa-clock-o" aria-hidden="true"></i> Views</h6>
-                                        <h6 style="color:orange;">27k</h6>
+                                        <h6 style="color:orange;">{{$totalViews}}</h6>
                                     </li>
                                     {{-- <li>
                                         <h6><i class="fa fa-bell" aria-hidden="true"></i> Ratings</h6>

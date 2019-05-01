@@ -253,15 +253,14 @@
                                 <h4>Department Info</h4>
                                 @php
                                     $views=DB::table('departments')
-                                    ->join('degrees','departments.id','degrees.department_id')
-                                    ->select(DB::raw("sum('degrees.numberOfViews') as sum"))
+                                    ->select('noOfViews')
                                     ->where('departments.id',$details[0]->departmentid)
                                     ->get();
                                 @endphp
                                 <ul class="features-list">
                                     <li>
                                         <h6><i class="fa fa-clock-o" aria-hidden="true"></i> Views</h6>
-                                        <h6 style="color:orange;">{{$views[0]->sum}}</h6>
+                                        <h6 style="color:orange;">{{$views[0]->noOfViews}}</h6>
                                     </li>
 
 
