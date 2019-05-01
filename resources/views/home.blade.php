@@ -67,6 +67,7 @@
                                 <li><a href="#">Home</a></li>
                                 <li><a href="{{route('page.interCompare')}}">Compare Colleges</a></li>
                                 <li><a href="{{route('page.undergraduateCompare')}}">Compare Universities</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                             </ul>
 
                             <!-- Register / Login -->

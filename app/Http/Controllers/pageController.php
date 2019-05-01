@@ -8,6 +8,8 @@ use App\Institute;
 use App\Department;
 use App\Degree;
 use GMaps;
+use Mail;
+use App\ContactUs;
 
 class pageController extends Controller
 {
@@ -260,5 +262,32 @@ class pageController extends Controller
     public function wishList()
     {
       return view('wishlist');
+    }
+
+    public function contact()
+    {
+      return view('contact');
+    }
+
+    public function contactUsPost(Request $request)
+    {
+      $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required'
+        ]);
+
+       ContactUs::create($request->all());
+        Mail::send('ContactUsEmail',
+        array(
+           'name' => $request->get('name'),
+           'email' => $request->get('email'),
+           'user_message' => $request->get('message')
+        ), function($message)
+       {
+       $message->to('ameerhamza010@gmail.com', 'Admin')
+       ->subject('Contact Form Query');
+      });
+      return back()->with('success', 'Thanks for contacting us!');
     }
 }

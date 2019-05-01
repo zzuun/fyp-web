@@ -19,12 +19,15 @@ class CreateDegreesTable extends Migration
             $table->float('duration',2,1);
             $table->string('system');
             $table->string('degreeLevel');
-            $table->integer('noOfSeats');
             $table->integer('creditHours')->nullable();
-            $table->float('lastMerit',3,1);
+            $table->string('lastMeritM');
+            $table->string('lastMeritA')->nullable();
             $table->boolean('shiftMorning');
             $table->boolean('shiftAfternoon');
-            $table->bigInteger('fees');
+            $table->integer('noOfSeatsM');
+            $table->integer('noOfSeatsA')->nullable();
+            $table->bigInteger('feesM');
+            $table->bigInteger('feesA')->nullable();
             $table->bigInteger('numberOfViews')->default(0);
             $table->integer('post_requisites_id')->nullable();
             $table->integer('degree_groups_id');
