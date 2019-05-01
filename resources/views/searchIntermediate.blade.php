@@ -748,7 +748,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           filter_data(1,minFees,maxFees,minMarks,maxMarks);
         });
 
-      $('.common-selector').click(function(){
+        $('.common-selector').click(function(){
           filter_data(1,minFees,maxFees,minMarks,maxMarks);
       });
       function uncheckAll() {
