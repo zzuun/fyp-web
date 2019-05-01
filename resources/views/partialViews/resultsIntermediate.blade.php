@@ -21,7 +21,7 @@
 
                                     <div class="total-ratings d-flex float-right" align="right">
                                       <div class="ratings-text">
-                                        <img src="img/bg-img/t1.png" alt="">
+                                        <img src="{{}}" alt="img/bg-img/t1.png">
                                       </div>
                                     </div>
 

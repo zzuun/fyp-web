@@ -20,8 +20,8 @@ class CreateDegreesTable extends Migration
             $table->string('system');
             $table->string('degreeLevel');
             $table->integer('creditHours')->nullable();
-            $table->string('lastMeritM');
-            $table->string('lastMeritA')->nullable();
+            $table->float('lastMeritM',3,3)->nullable();
+            $table->float('lastMeritA',3,3)->nullable();
             $table->boolean('shiftMorning');
             $table->boolean('shiftAfternoon');
             $table->integer('noOfSeatsM');

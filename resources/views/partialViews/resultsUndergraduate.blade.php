@@ -1,7 +1,7 @@
 <div id="load" class="col-12" style="position:relative;">
         @if(count($results) > 0)
           <p><h2>{{$results->total()}} results</h2></p>
-        
+
 
         <!-- <div class="col-12">
           <h5>Showing Records:{{count($results)}}</h5>
@@ -18,7 +18,7 @@
 
                                     <div class="total-ratings d-flex float-right" align="right">
                                       <div class="ratings-text">
-                                        <img src="img/bg-img/t1.png" alt="">
+                                        <img src="{{}}" alt="img/bg-img/t1.png">
                                       </div>
                                     </div>
 
