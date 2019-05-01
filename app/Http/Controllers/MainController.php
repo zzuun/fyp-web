@@ -310,7 +310,7 @@ class MainController extends Controller
       ->where('degrees.id',$request->input('first'))
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('institutes.name as instituteName','institutes.hostel','degrees.name as degreeName',
-      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
+      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation','institutes.affiliation','institutes.sector',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
       $second = DB::table('degrees')
@@ -318,9 +318,38 @@ class MainController extends Controller
       ->where('degrees.id',$request->input('second'))
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('institutes.name as instituteName','institutes.hostel', 'degrees.name as degreeName',
-      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation',
+      'degrees.noOfSeats','degrees.lastMerit', 'institutes.transportation','institutes.affiliation','institutes.sector',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location')
       ->get();
+      return Response::json([array('first' => $first),array('second'=>$second)]);
+    }
+
+    public function Undercompare(Request $request)
+    {
+      $first = DB::table('institutes')
+      ->join('departments','departments.institute_id','institutes.id')
+      ->join('degrees','degrees.department_id','departments.id')
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->where('institutes.id',$uni[1])
+      ->where('departments.id',$dept[1])
+      ->where('degrees.id',$deg[1])
+      ->select('institutes.name','degrees.name as degreeName','departments.name as deptName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+      'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
+      ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
+      ->first();
+
+      $second = DB::table('institutes')
+      ->join('departments','departments.institute_id','institutes.id')
+      ->join('degrees','degrees.department_id','departments.id')
+      ->join('addresses','addresses.institute_id','institutes.id')
+      ->where('institutes.id',$uni[1])
+      ->where('departments.id',$dept[1])
+      ->where('degrees.id',$deg[1])
+      ->select('institutes.name','degrees.name as degreeName','departments.name as deptName','degrees.fees','addresses.location','institutes.scholarship','degrees.noOfSeats',
+      'institutes.hostel','institutes.transportation','institutes.coEducation','degrees.shiftMorning','degrees.shiftAfternoon'
+      ,'institutes.sector','institutes.affiliation','institutes.id as instID','addresses.lat','addresses.lng')
+      ->first();
+
       return Response::json([array('first' => $first),array('second'=>$second)]);
     }
 

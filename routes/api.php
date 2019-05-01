@@ -30,6 +30,7 @@ Route::get('/inter/collegeDegrees','MainController@CollegeDegrees');
 Route::get('degreesByViews','MainController@degreesByViews');
 Route::get('getPostRequisites','MainController@getPostRequisites');
 Route::get('/inter/search','MainController@filterSearch');
+Route::get('/inter/compare','MainController@compare');
 Route::get('inter/degree','MainController@getDegree');
 Route::get('inter/institute','MainController@getInstitute');
 Route::get('/inter/getAffiliations',function(){
@@ -140,8 +141,8 @@ Route::get('/undergraduate/search','MainController@undergraduatefilterSearch');
 Route::get('/undergraduate/universities','MainController@undergraduateUniversities');
 Route::get('/undergraduate/degree','MainController@getUnderDegree');
 Route::get('/undergraduate/department','MainController@getDepartment');
+Route::get('/undergraduate/compare','MainController@Undercompare');
 Route::get('/undergraduate/institute','MainController@getUnderInstitute');
-Route::get('/compare','MainController@compare');
 Route::get('/instituteSearch','MainController@getInstitueByName');
 Route::get('/undergraduate/getAffiliations',function(){
   $i=0;
