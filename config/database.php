@@ -55,7 +55,7 @@ return [
              // 'username' => env('DB_USERNAME', 'forge'),
             'username' => $username,
              // 'password' => env('DB_PASSWORD', ''),
-            'password' => $password,
+            'password' = > $password,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
