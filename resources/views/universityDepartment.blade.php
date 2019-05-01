@@ -104,8 +104,8 @@
             <!-- Breadcumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{'route(page.home)'}}"></a>Home</li>
-                    <li class="breadcrumb-item"><a href="{{'route(undergraduate.main)'}}">Undergraduate</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('page.home')}}"></a>Home</li>
+                    <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
                     <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$details[0]->departmentName}}</li>
                 </ol>

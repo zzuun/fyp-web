@@ -191,10 +191,21 @@
                                                       <li>
                                                         <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-code-fork" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Affiliation</h6>
                                                         <h6>{{$institute->affiliation}} <i class="fa fa-check-circle" style="color:blue"></i></h6>
-                                                      <!-- </li>
+                                                      </li>
+                                                      @php
+
+                                                        $town=DB::table('institutes')
+                                                        ->join('addresses','institutes.id','addresses.institute_id')
+                                                        ->join('towns','addresses.town_id','towns.id')
+                                                        ->select('towns.name as townName')
+                                                        ->where('institutes.id',$institute->id)
+                                                        ->get();
+
+
+                                                      @endphp
                                                       <li>
                                                           <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-cube" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Town</h6>
-                                                          <h6>Model Town</h6>
+                                                          <h6>{{$town[0]->townName}}</h6>
                                                       </li>
                                                       <li>
                                                           <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-cubes" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Sub-area</h6>
@@ -271,7 +282,7 @@
                                           <!-- Curriculum Level -->
                                         @foreach($departments as $department)
                                             <div id="myUL" class="curriculum-level mb-30" data-page="grad">
-                                                <a href="/department?departmentid={{$department->id}}"><h4 class="d-flex justify-content-between"><span>{{$department->name}}</span></h4></a>
+                                                <a href="/department?departmentid={{$department->id}}&instituteid={{$institute->id}}"><h4 class="d-flex justify-content-between"><span>{{$department->name}}</span></h4></a>
 
                                                 <div class="curriculum-list">
 
