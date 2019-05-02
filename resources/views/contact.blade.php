@@ -36,7 +36,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="{{route('page.home')}}"><img src="img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -165,7 +165,7 @@
         </div>
     </section>
     <!-- ##### Contact Area End ##### -->
-    <section class="best-tutors-area section-padding-100" style="background-color:#eaeaff;">
+    <section class="best-tutors-area section-padding-100" style="background-color:#e6f6ff;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -345,7 +345,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="{{route('page.home')}}"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
 
                         <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made by We6 with <i class="fa fa-heart-o" aria-hidden="true"></i></p>

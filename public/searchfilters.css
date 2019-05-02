@@ -2704,17 +2704,18 @@ textarea:focus {
 }
 
 .single-accordion9 .clearbtn{
-  background-color: DodgerBlue;
+  background-color: white;
   border: none;
-  margin-left: 23%;
-  color: white;
+  color: #3762f0;
   margin-top: 10%;
+  margin-left: 30%;
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
 }
 .single-accordion9 .clearbtn:hover{
-   background-color: RoyalBlue;
+   background-color: #d7e0fc;
+   border-radius: 4px;
 }
 
 .course-fee2 .tooltip .tooltiptext {

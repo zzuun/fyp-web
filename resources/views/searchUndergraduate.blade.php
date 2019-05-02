@@ -290,21 +290,20 @@
                               </a></h6>
                               <div id="collapseTwo" class="accordion-content collapse">
                                 @php
-
-                                $towns=DB::table('degrees')
-                                ->join('departments','degrees.department_id','departments.id')
-                                ->join('institutes','institutes.id','departments.institute_id')
-                                ->join('addresses','addresses.institute_id','institutes.id')
-                                ->join('towns','addresses.town_id','towns.id')
-                                ->selectRaw("towns.name as townName, count('degrees.id') as count")
-                                ->where('degrees.degreeLevel','BS')
-                                ->groupby('towns.name')
-                                ->get();
-
+                                $t = DB::table('towns')->select('towns.id','towns.name as townName')->get();
                                 @endphp
-                                @foreach($towns as $town)
+                                @foreach ($t as $te)
+                                  @php
+                                  $count=DB::table('degrees')
+                                  ->join('institutes','institutes.id','degrees.institute_id')
+                                  ->join('addresses','addresses.institute_id','institutes.id')
+                                  ->join('towns','addresses.town_id','towns.id')
+                                  ->where('towns.id',$te->id)
+                                  ->where('degrees.degreeLevel','BS')
+                                  ->count();
+                                  @endphp
                                   <label  style="word-wrap:break-word; width:100%">
-                                    <input class="common-selector town" id="show" type="checkbox" value="{{$town->townName}}"/> {{$town->townName}} ({{$town->count}})
+                                    <input class="common-selector town" id="show" type="checkbox" value="{{$te->townName}}"/> {{$te->townName}} ({{$count}})
                                   </label>
                                 @endforeach
 
