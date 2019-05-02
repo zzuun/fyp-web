@@ -174,8 +174,7 @@ class MainController extends Controller
       'institutes.name as instituteName','addresses.location','addresses.city','addresses.lat','addresses.lng','institutes.id as instituteID')
       ->orderby('numberOfViews','desc');
       if ($request->input('key')) {
-        $degree->where('degrees.name','LIKE','%'.$request->input('key').'%');
-          $degree->orwhere('institutes.name','LIKE','%'.$request->input('key').'%');
+        $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
       }
       if ($request->input('hostel')) {
         $degree->where("institutes.hostel",(int)$request->input('hostel'));
@@ -247,7 +246,7 @@ class MainController extends Controller
       'institutes.name as instituteName','addresses.location','addresses.city','addresses.lat','addresses.lng','institutes.id as instituteID')
       ->orderby('numberOfViews','desc');
       if ($request->input('key')) {
-        $degree->where('degrees.name','LIKE','%'.$request->input('key').'%');
+        $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
       }
       if ($request->input('hostel')) {
         $degree->where("institutes.hostel",(int)$request->input('hostel'));
