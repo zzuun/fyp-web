@@ -97,7 +97,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('page.home')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
-                    <li class="breadcrumb-item active">{{$institute->name}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$institute->name}}</li>
 
                 </ol>
             </nav>
