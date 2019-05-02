@@ -63,6 +63,8 @@
                               <div class="classynav">
                                   <ul>
                                       <li><a href="{{route('page.home')}}">Home</a></li>
+                                      <li><a href="{{route('intermediate.main')}}">Intermediate</a></li>
+                                      <li><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
                                     </ul>
                                     <div class="classynav2">
                                   </div>
