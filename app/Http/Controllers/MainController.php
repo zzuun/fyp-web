@@ -236,7 +236,8 @@ class MainController extends Controller
     public function undergraduatefilterSearch(Request $request)
     {
       $degree = DB::table('degrees');
-      $degree->join('institutes','degrees.institute_id','=','institutes.id')
+      $degree->join('departments','degrees.department_id','departments.id')
+       ->join('institutes','departments.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
        ->join('towns','towns.id','addresses.town_id')
        ->join('subareas','subareas.id','addresses.subarea_id')
