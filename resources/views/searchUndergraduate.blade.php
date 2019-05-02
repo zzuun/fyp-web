@@ -295,7 +295,8 @@
                                 @foreach ($t as $te)
                                   @php
                                   $count=DB::table('degrees')
-                                  ->join('institutes','institutes.id','degrees.institute_id')
+                                  ->join('departments','degrees.department_id','departments.id')
+                                  ->join('institutes','institutes.id','departments.institute_id')
                                   ->join('addresses','addresses.institute_id','institutes.id')
                                   ->join('towns','addresses.town_id','towns.id')
                                   ->where('towns.id',$te->id)
