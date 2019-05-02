@@ -227,7 +227,7 @@
 
                                               <div class="total-ratings text-center d-flex align-items-center justify-content-center">
                                                   <div class="ratings-text">
-                                                    <img src="img/bg-img/t1.png" alt="">
+                                                    <img src="img/bg-img/mastergee.png" alt="">
 
                                                   </div>
                                               </div>

@@ -905,12 +905,12 @@ textarea:focus {
     .clever-tabs-content .nav-tabs .nav-item .nav-link {
       display: inline-block;
       height: 40px;
-      background-color: transparent;
+      background-color:  #d7eaff;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 14px;
-      color: rgba(0, 0, 0, 0.25);
+      color: black;
       border: 1px solid #ebebeb;
       border-radius: 6px;
       padding: 0 25px;
@@ -923,8 +923,8 @@ textarea:focus {
       .clever-tabs-content .nav-tabs .nav-item .nav-link.active, .clever-tabs-content .nav-tabs .nav-item .nav-link:hover, .clever-tabs-content .nav-tabs .nav-item .nav-link:focus {
         font-size: 14px;
         font-weight: 600;
-        color: rgba(0, 0, 0, 0.5);
-        background-color: #ebebeb; }
+        color: white;
+        background-color:#008B8B; }
     .clever-tabs-content .nav-tabs .nav-item:last-child .nav-link {
       margin-right: 0; }
   .clever-tabs-content .tab-content {
