@@ -128,79 +128,6 @@
           </a>
         </div>
       </div>
-    <!-- ##### Cool Facts Area Start ##### -->
-    <section class="cool-facts-area section-padding-100-0">
-        <div class="container">
-            <div class="row">
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                  <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
-                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="250ms">
-                        <div class="icon">
-                            <img src="img/core-img/docs.png" alt="">
-                        </div>
-                        @php
-                          $cCount = App\Institute::where('instituteType','College')->count();
-                        @endphp
-                        <h2><span class="counter">{{$cCount}}</span></h2>
-                        <h5>Colleges</h5>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                  <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
-                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <div class="icon">
-                            <img src="img/core-img/star.png" alt="">
-                        </div>
-                        @php
-                          $uCount = App\Institute::where('instituteType','University')->count();
-                        @endphp
-                        <h2><span class="counter">{{$uCount}}</span></h2>
-                        <h5>Universities</h5>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                  <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
-                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="750ms">
-                        <div class="icon">
-                            <img src="img/core-img/events.png" alt="">
-                        </div>
-                        @php
-                          $dCount = App\Department::count();
-                        @endphp
-                        <h2><span class="counter">{{$dCount}}</span></h2>
-                        <h5>Departments</h5>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                  <div class="boxstyle" onclick="location.href='#';" style="cursor: pointer;">
-                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="1000ms">
-                        <div class="icon">
-                            <img src="img/core-img/earth.png" alt="">
-                          </div>
-                          @php
-                            $dCount = App\Degree::count();
-                          @endphp
-                        <h2><span class="counter">{{$dCount}}</span></h2>
-                        <h5>Degrees</h5>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### Cool Facts Area End ##### -->
-
-    <!-- ##### Popular Courses Start ##### -->
     <section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
         <div class="container">
             <div class="row">
@@ -214,7 +141,7 @@
 
             <div class="row">
               <div class="col-12">
-                  <div class="course-content">
+                <div class="course-content" style="margin-bottom:70px;">
 
                       <div class="clever-tabs-content">
                           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -278,18 +205,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -322,18 +241,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat2" >
-                                                                <a>
-                                                                  <i id="favIcon2" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -359,25 +270,17 @@
                                                             <span><i class="fa fa-location-arrow" aria-hidden="true" style="color: #e3d21b;"></i>    LCWU, Jail Road, Lahore</span>
                                                             </ul>
                                                             <ul>
-                                                            <span><i class="fa fa-book" aria-hidden="true" style="color: #e3d21b;"></i>  FA Arts - FSc Pre Eng-  FSc Pre Med - ICom Gen. Science - ICS Phy - ICS Stats - Home Economics</span>
+                                                            <span><i class="fa fa-book" aria-hidden="true" style="color: #e3d21b;"></i>  FA Arts - FSc Pre Eng-  FSc Pre Med - ICom Gen. Science - ICS Phy</span>
                                                               </ul>
                                                             </a>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat3" >
-                                                                <a>
-                                                                  <i id="favIcon3" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -410,18 +313,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat4" >
-                                                                <a>
-                                                                  <i id="favIcon4" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -454,18 +349,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat5" >
-                                                                <a>
-                                                                  <i id="favIcon5" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -498,18 +385,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat6" >
-                                                                <a>
-                                                                  <i id="favIcon6" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -535,25 +414,16 @@
                                                             <span><i class="fa fa-location-arrow" aria-hidden="true" style="color: #e3d21b;"></i>    93-Jail Road, Lahore</span>
                                                             </ul>
                                                             <ul>
-                                                            <span><i class="fa fa-book" aria-hidden="true" style="color: #e3d21b;"></i>  FSc Pre Engg - FA Humanities - FA General Sci. - ICom - ICS - ICS (Stats) - ICS(Phy) </span>
+                                                            <span><i class="fa fa-book" aria-hidden="true" style="color: #e3d21b;"></i>  FSc Pre Engg - FA Humanities - FA General Sci. - ICom - ICS</span>
                                                               </ul>
                                                             </a>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat7" >
-                                                                <a>
-                                                                  <i id="favIcon7" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -586,18 +456,9 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat8" >
-                                                                <a>
-                                                                  <i id="favIcon8" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -655,18 +516,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat1" >
-                                                                <a>
-                                                                  <i id="favIcon55" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -699,18 +552,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon2" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -743,18 +588,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon3" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -787,18 +624,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon4" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -831,18 +660,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon5" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -875,18 +696,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon6" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -919,18 +732,9 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon7" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -963,18 +767,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon8" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1007,18 +803,10 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon9" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1051,18 +839,9 @@
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon10" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1085,7 +864,7 @@
 
                                                 <div class="col-12">
                                                     <div class="section-heading">
-                                                        <h3>Explore Top Universities</h3>
+                                                        <h3>Explore Top Careers</h3>
                                                         <h4>In Lahore</h4>
                                                     </div>
                                                 </div>
@@ -1103,25 +882,16 @@
                                                             <h6>Chartered accountancy is considered the top profession, since it offers a very highly paying job. To become a chartered accountant it requires at least 4.5 years of CA course provided all exams are cleared in first attempt. You can register for CA Foundation after 10th class. After 12th class the foundation exam can be taken, once this exam is cleared you can appear for Intermediate level after almost 1 year. After clearing Intermediate level 3 years of Article ship (internship) is required. The subjects that you need to be strong at are Accounts, Mathematics and Economics.
                                                             After doing your CA you will be able to analyze and interpret business problems and develop solutions.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 75,000 - Rs. 5,00,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 75,000 - Rs. 5,00,000/- (per month) </span>
                                                             </ul>
 
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat1" >
-                                                                <a>
-                                                                  <i id="favIcon55" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1137,24 +907,15 @@
 
                                                             <h6>IT is an emerging industry all over the world. It contributes in every sector, and is an integral part of all the businesses. There is a great demand for IT professional all over the world. To become a software engineer you should have a good hold on Mathematics. Software engineers have to know a few basic programming languages like C++, C#, Java, Java Script, Python. After your Intermediate, you can start your Bachelors program in computer sciences and then move onto Master’s degree. After doing your master degree you can work as a software engineer, network engineer, systems analyst, IT consultant, web designer/developer etc. </h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 50,000 - Rs. 5,00,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 50,000 - Rs. 5,00,000/- (per month) </span>
                                                             </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon2" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1170,25 +931,17 @@
 
                                                             <h6>Very less students take aviation management into consideration, but this is also a good career to pursue. An aviation manager handles the navigation of airlines and makes sure of their safety. Taking up this career does require special trainings and education. You will have to do you bachelors and then masters in engineering with aviation management and administration courses, public and business management will also be required with it. You will also need to have certain skills to be an aviation manager like knowledge of Federal Air Regulations (FAR), being capable of making fingerprint and background checks. This is a highly paying job but it requires one to be alert, smart and active at all times.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 1,50,000 - Rs. 7,50,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 1,50,000 - Rs. 7,50,000/- (per month) </span>
                                                             </ul>
 
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon3" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1204,24 +957,16 @@
 
                                                             <h6>University lecturer is also a growing trend nowadays, since it offers a good salary package. However to become a lecturer you need to be well qualified in your subject. Whatever subject of specialization you choose, it is better to have at least a master’s degree in it. Having a Ph.D. is a plus. To become a lecturer it is essential to possess teaching skills along with the ability and drive to research for the latest in your area of specialization.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 30,000 - Rs. 1,50,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 30,000 - Rs. 1,50,000/- (per month) </span>
                                                             </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon4" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1237,24 +982,16 @@
 
                                                             <h6>Mechanical engineering is done after Intermediate, it normally takes four years to complete and the degree earned is BEng and upon completion of studies MEng. This program enables students to design, manufacture, maintain and test different devices and mechanical systems. They also learn communication and problem-solving skill along with critical thinking to work effectively so that their projects work efficiently. This is one of a high demand jobs, which offers good position not only in Pakistan but also in Gulf states.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 30,000 - Rs. 2,25,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 30,000 - Rs. 2,25,000/- (per month) </span>
                                                             </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon5" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1270,24 +1007,16 @@
 
                                                             <h6>Project management is also one of the very well-paying jobs with growth possibilities on a higher scale. To become a Project Manager you will require Project Management certifications, they are sometimes done from institutions or are even arranged/conducted by the organizations for their employees. For a formal certification you can opt for PMP (Project Management Professional) which is an internationally recognized certification conducted by the PMI (Project Management Institute). A Project Manager has an important role in an organization and must possess leadership skills for planning, obtaining and execution of a project. In this field only degree and certifications doesn’t serve full purpose, rather you will also require a good amount of experience to excel in your field. Once successful, the growth rate is impressive.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 25,000 - Rs. 1,50,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 25,000 - Rs. 1,50,000/- (per month) </span>
                                                             </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon6" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1304,24 +1033,16 @@
 
                                                               <h6>To be a creative designer the first thing that you will need is the creativity within you. This profession is gaining popularity on the corporate level, since all organizations need to be publicized on print media as well as the social media and the internet. You will need to have degree in Creative and Graphic Designing and other visual art subjects. To gain a job, you will also need to have a portfolio to show your creativity or some relevant work as sample. This work does not restrict you to a professionally earned degree, since it requires skill on the application that you work on and a very creative mind. As a creative designer you will be introducing new and stylish logos, website designs and models etc.</h6>
                                                               <ul>
-                                                              <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 15,000 - Rs. 80,000/- (per month) </span>
+                                                              <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 15,000 - Rs. 80,000/- (per month) </span>
                                                               </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon7" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1337,24 +1058,15 @@
 
                                                             <h6>Making and selling of products and services will never end, and someone is always required to place the product /service in the market well enough to attract public and sales. Although, it is the convincing personality of a person that can generate sales, but a proper business degree can polish the traits and make you a professional at what you already possess. A business professional must also be able to analyze problems and come up with solutions. A marketing plan requires the knowledge of market and trend of public. To study the marketing management program you have to gain Master degree in Business Administration. The master’s program is taken up after the bachelor’s degree.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 30,000 - Rs. 2,00,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 30,000 - Rs. 2,00,000/- (per month) </span>
                                                             </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon8" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1369,25 +1081,17 @@
                                                           <h4>Telecom Engineer</h4>
                                                           <h6>In the advanced age of technology, telecommunications is the fastest growing industry, which generates billions of rupees from its services on a daily basis. This industry holds very good growth opportunity for its employees since the technology business will always stay in demand. Initially the degree required to join the telecom industry was Electrical Engineering but now many institutes are offering degrees in telecommunications. Technical ability, attention to detail, communication and problem-solving skills are required to do this job.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 25,000 - Rs. 1,00,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 25,000 - Rs. 1,00,000/- (per month) </span>
                                                             </ul>
 
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon9" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
-                                                            <div class="course-fee2 h-100">
-                                                              <a>
-                                                              <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                                            </a>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                   </div>
@@ -1403,17 +1107,13 @@
                                                           <h4>HR Manager</h4>
                                                           <h6>To become HR manager, you will need an HR degree of bachelor level and in better cases on the Masters level. You can also have a Degree in Business Administration to excel in this field. A human resource manager must have good communication and problem solving skill because your direct contact will be with the employees of the company. You will be responsible for interviewing, hiring and placement of the employees so that the organization functions efficiently and effectively.</h6>
                                                             <ul>
-                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i> Rs. 35,000 - Rs. 1,50,000/- (per month) </span>
+                                                            <span><i class="fa fa-money"  aria-hidden="true" style="color: #e3d21b;"></i><b>Salary:</b> Rs. 35,000 - Rs. 1,50,000/- (per month) </span>
                                                             </ul>
                                                         </div>
                                                         <!-- Seat Rating Fee -->
                                                         <div class="seat-rating-fee d-flex justify-content-between">
                                                             <div class="seat-rating h-100 d-flex align-items-center">
-                                                              <div class="seat" >
-                                                                <a>
-                                                                  <i id="favIcon10" class="fa fa-heart-o"></i>
-                                                              </a>
-                                                              </div>
+
 
                                                             </div>
 
@@ -1451,10 +1151,83 @@
             </div>
         </div>
     </section>
+    <!-- ##### Cool Facts Area Start ##### -->
+    <section class="cool-facts-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="boxstyle">
+                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="250ms">
+                        <div class="icon">
+                            <img src="img/core-img/docs.png" alt="">
+                        </div>
+                        @php
+                          $cCount = App\Institute::where('instituteType','College')->count();
+                        @endphp
+                        <h2><span class="counter">{{$cCount}}</span></h2>
+                        <h5>Colleges</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="boxstyle">
+                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="500ms">
+                        <div class="icon">
+                            <img src="img/core-img/star.png" alt="">
+                        </div>
+                        @php
+                          $uCount = App\Institute::where('instituteType','University')->count();
+                        @endphp
+                        <h2><span class="counter">{{$uCount}}</span></h2>
+                        <h5>Universities</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="boxstyle" >
+                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="750ms">
+                        <div class="icon">
+                            <img src="img/core-img/events.png" alt="">
+                        </div>
+                        @php
+                          $dCount = App\Department::count();
+                        @endphp
+                        <h2><span class="counter">{{$dCount}}</span></h2>
+                        <h5>Departments</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Single Cool Facts Area -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="boxstyle">
+                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="1000ms">
+                        <div class="icon">
+                            <img src="img/core-img/earth.png" alt="">
+                          </div>
+                          @php
+                            $dCount = App\Degree::count();
+                          @endphp
+                        <h2><span class="counter">{{$dCount}}</span></h2>
+                        <h5>Degrees</h5>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Cool Facts Area End ##### -->
+
+    <!-- ##### Popular Courses Start ##### -->
     <!-- ##### Popular Courses End ##### -->
 
     <!-- ##### Best Tutors Start ##### -->
-    <section class="best-tutors-area section-padding-100">
+    {{-- <section class="best-tutors-area section-padding-100">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -1608,7 +1381,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ##### Best Tutors End ##### -->
 
     <!-- ##### Register Now Start ##### -->

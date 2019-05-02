@@ -72,6 +72,7 @@
                                 <div class="classynav3">
                                   <ul>
                                     <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                    <li><a href="{{route('contactus')}}">Contact</a></li>
                                   </ul>
                                 </div>
 
@@ -94,27 +95,35 @@
                         <!-- Nav End -->
                     </div>
                 </nav>
+                <div class="breadcumb-area">
+                  <!-- Breadcumb -->
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{{route('page.home')}}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
+                      <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{$details[0]->departmentName}}</li>
+                    </ol>
+                  </nav>
+                </div>
             </div>
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
 
         <!-- ##### Breadcumb Area Start ##### -->
-        <div class="breadcumb-area">
-            <!-- Breadcumb -->
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('page.home')}}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
-                    <li class="breadcrumb-item"><a href="/university?instituteid={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$details[0]->departmentName}}</li>
-                </ol>
-            </nav>
-        </div>
         <!-- ##### Breadcumb Area End ##### -->
 
         <!-- ##### Single Course Intro Start ##### -->
-        <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/bg3.jpg);">
+        @php
+        if($details[0]->img_url == 'NIL'){
+          $url = 'img/bg-img/bg3.jpg';
+        }
+        else {
+          $url = str_replace('https://drive.google.com/open?','https://docs.google.com/uc?',$details[0]->img_url);
+        }
+        @endphp
+        <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url({{$url}});">
             <!-- Content -->
             <div class="single-course-intro-content text-center">
                 <!-- Ratings -->
@@ -275,7 +284,7 @@
                                         @endphp
                                         <h6><i class="fa fa-code-fork" aria-hidden="true"></i>Affiliation</h6>
 
-                                            <h6>       {{$affiliation[0]->affiliation}} <i class="fa fa-check-circle" style="color:blue"></i></h6>
+                                            <h6>{{$affiliation[0]->affiliation}} <i class="fa fa-check-circle" style="color:blue;"></i></h6>
 
 
 
@@ -328,20 +337,6 @@
             </div>
 
             <!-- Bottom Footer Area -->
-            <div class="bottom-footer-area d-flex justify-content-between align-items-center">
-                <!-- Contact Info -->
-                <div class="contact-info">
-                    <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                    <a href="#"><span>Email:</span> info@clever.com</a>
-                </div>
-                <!-- Follow Us -->
-                <div class="follow-us">
-                    <span>Follow us</span>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                </div>
-            </div>
         </footer>    <!-- ##### Footer Area End ##### -->
 
     <!-- ##### All Javascript Script ##### -->

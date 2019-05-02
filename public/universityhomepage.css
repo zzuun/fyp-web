@@ -577,11 +577,11 @@ textarea:focus {
         height: 40px;
         border-radius: 6px;
         padding: 15px 60px 15px 30px;
-        border: 1px solid #ebebeb;
+        border: 1.5px solid black;
         padding: 0 15px 0 50px;
         font-size: 14px;
-        color: rgba(0, 0, 0, 0.35);
-        font-weight: 600;
+        color: rgba(0, 0, 0, 0.8);
+        font-weight: 800;
         -webkit-transition-duration: 500ms;
         transition-duration: 500ms; }
         .single-accordion .search-area form input:focus {
@@ -2601,12 +2601,12 @@ textarea:focus {
         height: auto; } }
     .breadcumb-area .breadcrumb .breadcrumb-item {
       font-size: 12px;
-      color: rgba(0, 0, 0, 0.3);
+      color: rgba(0, 0, 0, 0.8);
       text-transform: uppercase;
       font-weight: 600; }
       .breadcumb-area .breadcrumb .breadcrumb-item a {
         font-size: 12px;
-        color: rgba(0, 0, 0, 0.3);
+        color: rgba(0, 0, 0, 0.8);
         text-transform: uppercase;
         font-weight: 600; }
         .breadcumb-area .breadcrumb .breadcrumb-item a:hover, .breadcumb-area .breadcrumb .breadcrumb-item a:focus {

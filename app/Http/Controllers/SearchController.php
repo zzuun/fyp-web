@@ -19,17 +19,15 @@ class SearchController extends Controller
        ->join('subareas','subareas.id','addresses.subarea_id')
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('degrees.degreeLevel','=','BS')
-       ->select('institutes.id as instituteid','degrees.id as degreeid','degrees.name as degreeName','institutes.name as instituteName','institutes.sector','institutes.affiliation','departments.name as departmentName','departments.id as departmentid','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
+       ->select('institutes.id as instituteid','institutes.logo_url','degrees.id as degreeid','institutes.logo_url','degrees.name as degreeName','institutes.name as instituteName','institutes.sector','institutes.affiliation','departments.name as departmentName','departments.id as departmentid','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
        if (isset($_GET["search"])) {
-         $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
+         $degrees->where('institutes.name','LIKE','%'.$_GET["search"].'%');
        }
        if(isset($_GET["town"]))
        {
          $arr = $_GET["town"];
-         // dd($arr);
-         $degrees->wherein('towns.name',[$arr]);
-          // $area_filter = implode("','",$_GET["town"]);
-          // $degrees->whereRaw("towns.name in ('".$area_filter."')");
+          $area_filter = implode("','",$_GET["town"]);
+          $degrees->whereRaw("towns.name in ('".$area_filter."')");
        }
 
        if(isset($_GET["subarea"]))
@@ -103,13 +101,13 @@ class SearchController extends Controller
            $maxRange= $_GET['maxfees'];
            $degrees->whereBetween("degrees.fees",[$minRange,$maxRange]);
        }
-       if(isset($_GET["maxmarks"]) || isset($_GET["minmarks"]))
-       {
-           $maxRange=  $_GET['maxmarks'];
-           $minRange=  $_GET['minmarks'];
-           $degrees->whereBetween("degrees.lastMerit",[$minRange,$maxRange]);
-
-       }
+       // if(isset($_GET["maxmarks"]) || isset($_GET["minmarks"]))
+       // {
+       //     $maxRange=  $_GET['maxmarks'];
+       //     $minRange=  $_GET['minmarks'];
+       //     $degrees->whereBetween("degrees.lastMerit",[$minRange,$maxRange]);
+       //
+       // }
 
        $results = $degrees->paginate(5);
 
@@ -122,7 +120,6 @@ class SearchController extends Controller
 
     public function filterIntermediateDegrees(Request $request, Degree $degrees )
     {
-
        $degrees=$degrees->newQuery();
        $degrees->join('institutes','degrees.institute_id','=','institutes.id')
        ->join('addresses','institutes.id','=','addresses.institute_id')
@@ -131,9 +128,9 @@ class SearchController extends Controller
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('degrees.degreeLevel','=','INTER')
        ->select('institutes.id as instituteID','degrees.id as degreeID','degrees.name as degreeName',
-       'institutes.name','institutes.sector','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
+       'institutes.name','institutes.sector','institutes.logo_url','institutes.affiliation','addresses.city','addresses.phone_number as phoneNumber','addresses.lat','addresses.lng');
        if (isset($_GET["search"])) {
-         $degrees->where('degrees.name','LIKE','%'.$_GET["search"].'%');
+         $degrees->Where('institutes.name','LIKE','%'.$_GET["search"].'%');
        }
        if(isset($_GET["town"]))
        {

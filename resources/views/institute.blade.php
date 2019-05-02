@@ -62,6 +62,7 @@
                             <div class="classynav3">
                               <ul>
                                 <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                               </ul>
                             </div>
 
@@ -82,29 +83,37 @@
                         <!-- Nav End -->
                     </div>
                 </nav>
+                <div class="breadcumb-area">
+                  <!-- Breadcumb -->
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Intermediate</a></li>
+                      <?php if (isset($degree)): ?>
+                        <li class="breadcrumb-item"><a href="/degree?instituteid={{$details[0]->id}}&degreeid={{$degree[0]->id}}">{{$degree[0]->name}}</a></li>
+                      <?php endif; ?>
+                      <li class="breadcrumb-item active" aria-current="page">{{$details[0]->name}}</li>
+                    </ol>
+                  </nav>
+                </div>
             </div>
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area">
-        <!-- Breadcumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Intermediate</a></li>
-                <?php if (isset($degree)): ?>
-                    <li class="breadcrumb-item"><a href="/degree?instituteid={{$details[0]->id}}&degreeid={{$degree[0]->id}}">{{$degree[0]->name}}</a></li>
-                <?php endif; ?>
-                <li class="breadcrumb-item active" aria-current="page">{{$details[0]->name}}</li>
-            </ol>
-        </nav>
-    </div>
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Single Course Intro Start ##### -->
-    <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/bg3.jpg);">
+    @php
+    if($details[0]->img_url == 'NIL'){
+      $url = 'img/bg-img/bg3.jpg';
+    }
+    else {
+      $url = str_replace('https://drive.google.com/open?','https://docs.google.com/uc?',$details[0]->img_url);
+    }
+    @endphp
+    <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url({{$url}});">
         <!-- Content -->
         <div class="single-course-intro-content text-center">
             <!-- Ratings -->
@@ -140,9 +149,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab--2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Courses</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab--3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="true">Reviews</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="tab--4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="true">Location / Directions</a>
@@ -194,15 +200,31 @@
                                                   <li>
                                                     <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-code-fork" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Affiliation</h6>
                                                     <h6>{{$details[0]->affiliation}} <i class="fa fa-check-circle" style="color:blue"></i></h6>
-                                                  <!-- </li>
+                                                  </li>
+                                                  @php
+                                                  $town=DB::table('institutes')
+                                                  ->join('addresses','institutes.id','addresses.institute_id')
+                                                  ->join('towns','addresses.town_id','towns.id')
+                                                  ->select('towns.name as townName')
+                                                  ->where('institutes.id',$details[0]->id)
+                                                  ->first();
+                                                  @endphp
                                                   <li>
                                                       <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-cube" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Town</h6>
-                                                      <h6>Model Town</h6>
+                                                      <h6>{{$town->townName}}</h6>
                                                   </li>
+                                                  @php
+                                                    $subarea=DB::table('institutes')
+                                                      ->join('addresses','institutes.id','addresses.institute_id')
+                                                      ->join('subareas','addresses.subarea_id','subareas.id')
+                                                      ->select('subareas.name as areaName')
+                                                      ->where('institutes.id',$details[0]->id)
+                                                      ->first();
+                                                  @endphp
                                                   <li>
                                                       <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-cubes" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i>Sub-area</h6>
-                                                      <h6>M Block</h6>
-                                                  </li> -->
+                                                      <h6>{{$subarea->areaName}}</h6>
+                                                  </li>
                                                 </ul>
                                                 </ul>
 
@@ -483,8 +505,8 @@
                                         <?php foreach ($result as $r): ?>
                                                 <ul class="curriculum-list">
                                                   <ul>
-                                                    <li>
-                                                      <span><i class="fa fa-dot-circle-o" aria-hidden="true"></i><a href="/degree?degreeid={{$r->id}}&instituteid={{$r->instituteID}}">{{$r->degreeName}}</a></span>
+                                                    <li onmouseover="highlight(this);" onmouseout="unhighlight(this)">
+                                                      <h6 style="color:rgba(0,0,0,0.8);font-size:16px;font-weight:700;"><i class="fa fa-dot-circle-o" aria-hidden="true"></i><a href="/degree?degreeid={{$r->id}}&instituteid={{$r->instituteID}}">{{$r->degreeName}}</a></h6>
                                                         <span></span>
                                                     </li>
                                                 </ul>
@@ -802,7 +824,7 @@
                             <h4>Basic Info</h4>
                             <ul class="features-list">
                                 <li>
-                                    <h6><i class="fa fa-clock-o" aria-hidden="true"></i> Views</h6>
+                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-clock-o" aria-hidden="true"></i> Views</h6>
                                     <h6 style="color:orange;">{{$views}}</h6>
                                 </li>
                                 @php
@@ -812,7 +834,7 @@
                                     ->get();
                                 @endphp
                                 <li>
-                                    <h6><i class="fa fa-graduation-cap" aria-hidden="true"></i> Total Degrees</h6>
+                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Total Degrees</h6>
                                     <h6 style="color:blue;">{{$degreesCount[0]->count}}</h6>
                                 </li>
                                 @php
@@ -822,7 +844,7 @@
                                     ->get();
                                 @endphp
                                 <li>
-                                    <h6><i class="fa fa-sitemap" aria-hidden="true"></i> Total Seats</h6>
+                                    <h6 style="color:rgba(0,0,0,0.5)"><i class="fa fa-sitemap" aria-hidden="true"></i> Total Seats</h6>
                                     <h6 style="color:green;">{{$seats[0]->sum}}</h6>
                                 </li>
                                 {{-- <li>
@@ -916,6 +938,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="customjs/active.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGQs-TY6bUtndfezIiYNev6pCD1tcfTso&libraries=geometry"></script>
     <script src="customjs/google-map/map-active.js"></script>
+
+    <script>
+          function unhighlight(x) {
+        x.style.backgroundColor = "transparent"
+      }
+
+      function highlight(x) {
+        x.style.backgroundColor = "#f7d3d6"
+        x.style.cursor = "pointer"
+
+      }
+
+      function specialhighlight(x) {
+        x.style.fontSize = "16"
+        x.style.cursor = "pointer"
+        x.style.transitionDelay = "10ms"
+        x.style.transitionDuration="2s"
+      }
+
+      function specialunhighlight(x) {
+        x.style.backgroundColor = "transparent"
+
+      }
+</script>
+
 </body>
 
 </html>

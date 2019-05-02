@@ -64,6 +64,7 @@
                             <div class="classynav3">
                               <ul>
                                 <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                               </ul>
                             </div>
 
@@ -104,7 +105,15 @@
         <!-- ##### Breadcumb Area End ##### -->
 
         <!-- ##### Single Course Intro Start ##### -->
-        <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/bg3.jpg);">
+        @php
+        if($institute->img_url == 'NIL'){
+          $url = 'img/bg-img/bg3.jpg';
+        }
+        else {
+          $url = str_replace('https://drive.google.com/open?','https://docs.google.com/uc?',$institute->img_url);
+        }
+        @endphp
+        <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url({{$url}});">
             <!-- Content -->
             <div class="single-course-intro-content text-center">
                 <!-- Ratings -->

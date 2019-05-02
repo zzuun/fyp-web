@@ -50,7 +50,7 @@ Route::get('/inter/getAffiliations',function(){
     ->selectRaw("count('degrees.id') as count")
     ->where('degrees.degreeLevel','=','INTER')
     ->where('affiliation',$r->affiliation)
-    ->groupby('institutes.affiliation')->get();
+    ->get();
     $counts[++$i] = $count[0]->count;
     $names[++$j] = $r->affiliation;
   }

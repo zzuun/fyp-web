@@ -17,8 +17,8 @@
     <link rel="icon" href="/img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="searchfilters.css">
-    <link rel="stylesheet" href="customcss/jquery-ui.min.css">
+    <link rel="stylesheet" href="../searchfilters.css">
+    <link rel="stylesheet" href=".../customcss/jquery-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 
 
@@ -66,6 +66,7 @@
                             <div class="classynav3">
                               <ul>
                                 <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                               </ul>
                             </div>
 
@@ -137,7 +138,7 @@
                         <div class="panel single-accordion9">
                           <div class="search-area">
 
-                            <input type="search" name="search" class="search-box" id="search" placeholder="Degree Keyword">
+                            <input type="search" name="search" class="search-box" id="search" placeholder="Institute Keyword">
                             <button type="submit" id="search-btn">
                               <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
@@ -378,7 +379,7 @@
                               </div>
                           </div>
 
-                          <!-- Marks -->
+                          {{-- <!-- Marks -->
                           <div class="panel single-accordion6">
                               <h6>
                                   <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseSix"
@@ -397,7 +398,7 @@
                                       <p>(<span id="markscount"></span>) Results</p>
                                   </div>
                               </div>
-                          </div>
+                          </div> --}}
 
                           <!-- other filters -->
 
@@ -513,15 +514,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### Footer Area End ##### -->
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="customjs/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../customjs/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="customjs/bootstrap/popper.min.js"></script>
+    <script src="../customjs/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="customjs/bootstrap/bootstrap.min.js"></script>
+    <script src="../customjs/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="customjs/plugins/plugins.js"></script>
+    <script src="../customjs/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="customjs/active.js"></script>
+    <script src="../customjs/active.js"></script>
     <!-- range slider plugin js -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
@@ -576,9 +577,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   {
 
       var minFees=10000;
-      var maxFees=500000;
-      var minMarks=30;
-      var maxMarks=100;
+      var maxFees=1000000;
+      // var minMarks=30;
+      // var maxMarks=100;
       $(document).on('click', '.pagination a', function(event)
       {
           event.preventDefault();
@@ -586,10 +587,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
           var page = $(this).attr('href').split('page=')[1];
-          filter_data(page,minFees,maxFees,minMarks,maxMarks);
+          filter_data(page,minFees,maxFees);
       });
 
-      function filter_data(page,minfees,maxfees,minmarks,maxmarks)
+      function filter_data(page,minfees,maxfees)
       {
         $('.filterResults').html('  <div id="preloaderLoading">'+
               '<div class="spinner"></div>'+
@@ -615,7 +616,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             $.ajax({
                 url:"/applyUndergraduate?page="+page,
                 method:"GET",
-                data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,maxfees:maxfees,minmarks:minmarks, maxmarks:maxmarks,group:group, _token: "{{csrf_token()}}"},
+                data:{ subarea:subarea, shiftMorning:sM, shiftAfternoon:sA, coEducation:coEd, search: search, scholarship:scholarship, town:town, sector:sector, affiliation:affiliation, hostel:hostel,transport:transport,minfees:minfees,maxfees:maxfees,group:group, _token: "{{csrf_token()}}"},
                 success:function(data){
                   //console.log(data);
                     $('#preloaderLoading').hide();
@@ -667,12 +668,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           $(".fees_range").ionRangeSlider({
             type:"integer",
             min:10000,
-            max:500000,
+            max:1000000,
             from:10000,
-            to:500000,
+            to:1000000,
             grid:true,
             prefix:"Rs",
-            step:20000,
+            step:100000,
             prettify_enabled:true,
             prettify_separator: ",",
             grid_snap:true,
@@ -680,33 +681,33 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             onFinish:function(data){
               minFees=data.from;
               maxFees=data.to;
-              filter_data(1,minFees,maxFees,minMarks,maxMarks);
+              filter_data(1,minFees,maxFees);
               getFeesCount(minFees,maxFees);
 
             }
 
           });
 
-          $(".marks_range").ionRangeSlider({
-            type:"integer",
-            min:30,
-            max:100,
-            from:30,
-            to:100,
-            grid:true,
-            postfix:"%",
-            step:5,
-            grid_snap:true,
-            skin:"big",
-            onFinish:function(data){
-              minMarks=data.from;
-              maxMarks=data.to;
-              filter_data(1,minFees,maxFees,minMarks,maxMarks);
-              getMarksCount(minMarks,maxMarks);
-
-            }
-
-          });
+          // $(".marks_range").ionRangeSlider({
+          //   type:"integer",
+          //   min:30,
+          //   max:100,
+          //   from:30,
+          //   to:100,
+          //   grid:true,
+          //   postfix:"%",
+          //   step:5,
+          //   grid_snap:true,
+          //   skin:"big",
+          //   onFinish:function(data){
+          //     minMarks=data.from;
+          //     maxMarks=data.to;
+          //     filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          //     getMarksCount(minMarks,maxMarks);
+          //
+          //   }
+          //
+          // });
 
 
           // $('#fees_range').slider({
@@ -741,9 +742,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
           //   }
 
-          filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          filter_data(1,minFees,maxFees);
           getFeesCount(minFees,maxFees);
-          getMarksCount(minMarks,maxMarks);
 
 
 
@@ -751,14 +751,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
         $(document).on('click','#search-btn',function(){
-          filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          filter_data(1,minFees,maxFees);
         });
 
         $(document).on('keypress','#search',function(e)
         {
           if(e.which==13)
           {
-            filter_data(1,minFees,maxFees,minMarks,maxMarks);
+            filter_data(1,minFees,maxFees);
           }
 
         });
@@ -766,11 +766,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
       $(document).on('click','.subarea',function(){
-          filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          filter_data(1,minFees,maxFees);
         });
 
       $('.common-selector').click(function(){
-          filter_data(1,minFees,maxFees,minMarks,maxMarks);
+          filter_data(1,minFees,maxFees);
       });
       function uncheckAll() {
     $("input[type='checkbox']:checked").prop("checked", false)

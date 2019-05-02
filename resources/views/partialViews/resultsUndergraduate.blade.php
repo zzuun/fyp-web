@@ -18,7 +18,15 @@
 
                                     <div class="total-ratings d-flex float-right" align="right">
                                       <div class="ratings-text">
-                                        <img src="{{}}" alt="img/bg-img/t1.png">
+                                        @php
+                                        if ($result->logo_url == 'NIL') {
+                                          $url = 'img/bg-img/t1.png';
+                                        }
+                                        else {
+                                          $url = str_replace('https://drive.google.com/open?','https://docs.google.com/uc?',$result->logo_url);
+                                        }
+                                        @endphp
+                                        <img style="width:120px;height:120px;" src="{{$url}}" alt="Not Available">
                                       </div>
                                     </div>
 
@@ -55,16 +63,6 @@
                             <!-- Seat Rating Fee -->
                             <div class="seat-rating-fee d-flex justify-content-between">
                                 <div class="seat-rating h-100 d-flex align-items-center">
-                                    <div class="seat">
-                                    <a >
-                                        <i onclick="myFunction(this);" class="fa fa-thumbs-up" style="font-size:23px;padding-top: 8px;"></i>
-                                    </a>
-                                    </div>
-                                    <div class="rating">
-                                        <a  href="#">
-                                            <i class="fa fa-star" aria-hidden="true"></i> 4.5
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

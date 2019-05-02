@@ -61,6 +61,7 @@
                               <li><a href="{{route('institute.index')}}">Institutes</a></li>
                               <li><a href="{{route('department.index')}}">Departments</a></li>
                               <li><a href="{{route('degree.index')}}">Degrees</a></li>
+                              <li><a href="{{route('contactus')}}">Contact</a></li>
                             </ul>
 
                             <!-- Search Button -->

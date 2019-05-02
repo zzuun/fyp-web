@@ -60,6 +60,7 @@
                             <div class="classynav3">
                               <ul>
                                 <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                               </ul>
                             </div>
 
@@ -80,27 +81,35 @@
                         <!-- Nav End -->
                     </div>
                 </nav>
+                <div class="breadcumb-area">
+                  <!-- Breadcumb -->
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Intermediate</a></li>
+                      <li class="breadcrumb-item"><a href="/institute?instituteID={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
+                    </ol>
+                  </nav>
+                </div>
             </div>
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area">
-        <!-- Breadcumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('page.home') }}">Intermediate</a></li>
-                <li class="breadcrumb-item"><a href="/institute?instituteID={{$details[0]->instituteid}}">{{$details[0]->instituteName}}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{$details[0]->degreeName}}</li>
-            </ol>
-        </nav>
-    </div>
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Single Course Intro Start ##### -->
-    <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/bg3.jpg);">
+    @php
+    if($details[0]->img_url == 'NIL'){
+      $url = 'img/bg-img/bg3.jpg';
+    }
+    else {
+      $url = str_replace('https://drive.google.com/open?','https://docs.google.com/uc?',$details[0]->img_url);
+    }
+    @endphp
+    <div class="hero-area bg-img bg-overlay-2by5 d-flex align-items-center justify-content-center" style="background-image: url({{$url}});">
         <!-- Content -->
         <div class="single-course-intro-content text-center">
             <!-- Ratings -->
@@ -147,58 +156,76 @@
                                       <!-- Curriculum Level -->
                                       <div class="curriculum-level mb-30">
                                           <h4 class="d-flex justify-content-between"><span>Basic Information</span></h4>
-                                            <ul class="curriculum-list">
-                                              <li>
+                                            <div class="curriculum-list">
+
                                                 <ul>
                                                   <li>
-                                                    <span><i class="fa fa-calculator" aria-hidden="true"></i> Merit </span>
-                                                    <span>{{$details[0]->lastMerit}}%</span>
+                                                    <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-calculator" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Morning Merit </h6>
+                                                    <h6 style="color:black;">{{$details[0]->lastMerit}}%<span style="color:red;font-size:16px;"> *</span></h6>
+                                                  </li>
+                                                  @if ($details[0]->shiftAfternoon)
+                                                    <li>
+                                                      <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-calculator" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Afternoon Merit </h6>
+                                                      <h6 style="color:black;">{{$details[0]->lastMeritA}}%<span style="color:red;font-size:16px;"> *</span></h6>
+                                                    </li>
+                                                  @endif
+                                                  <li>
+                                                      <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-user" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Available Morning Seats </h6>
+                                                      <h6 style="color:black;">{{$details[0]->noOfSeats}}</h6>
+                                                  </li>
+                                                  @if ($details[0]->shiftAfternoon)
+                                                    <li>
+                                                        <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-user" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Available Afternoon Seats </h6>
+                                                        <h6 style="color:black;">{{$details[0]->noOfSeatsA}}</h6>
+                                                    </li>
+                                                  @endif
+                                                  <li>
+                                                      <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-phone" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Contact </h6>
+                                                      <h6 style="color:black;">{{$details[0]->phone_number}}</h6>
                                                   </li>
                                                   <li>
-                                                      <span><i class="fa fa-user" aria-hidden="true"></i> Available Seats </span>
-                                                      <span>{{$details[0]->noOfSeats}}</span>
-                                                  </li>
-                                                  <li>
-                                                      <span><i class="fa fa-phone" aria-hidden="true"></i> Contact </span>
-                                                      <span>{{$details[0]->phone_number}}</span>
-                                                  </li>
-                                                  <li>
-                                                      <span><i class="fa fa-th-list" aria-hidden="true"></i> Admission Criteria </span>
-                                                      <span>Matriculation Degree</span>
+                                                      <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-th-list" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Admission Criteria </h6>
+                                                      <h6 style="color:black;text-align:end;">{{$details[0]->pre_req}}</h6>
                                                   </li>
                                                 </ul>
-                                          </li>
-                                        </ul>
+
+                                        </div>
                                       </div>
 
                                       <!-- Curriculum Level -->
                                       <div class="cl2 mb-30">
                                           <h4 class="d-flex justify-content-between"><span>Fee Structure</span></h4>
-                                            <ul class="curriculum-list">
-                                              <li>
+                                            <div class="curriculum-list">
+
                                                 <ul>
-                                                <li>
-                                                        <span><i class="fa fa-money" aria-hidden="true"></i> Fees </span>
-                                                        <span id=fees>{{currency($details[0]->fees,'PKR','PKR')}}</span>
+                                                      <li>
+                                                        <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-money" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Morning Fees </span>
+                                                        <h6 style="color:black;" id=fees>{{currency($details[0]->fees,'PKR','PKR')}}<span style="color:red;font-size:18px;"> *</span></h6>
                                                       </li>
+                                                      @if ($details[0]->shiftAfternoon)
+                                                        <li>
+                                                          <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-money" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Afternoon Fees </span>
+                                                          <h6 style="color:black;" id=fees>{{currency($details[0]->feesA ,'PKR','PKR')}}<span style="color:red;font-size:16px;"> *</span></h6>
+                                                        </li>
+                                                      @endif
 
 
 
 
                                                       <li>
-                                                        <span><i class="fa fa-graduation-cap" aria-hidden="true"></i> Scholarships </span>
+                                                        <h6 style="color:rgba(0,0,0,0.5);"><i class="fa fa-graduation-cap" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Scholarships </h6>
                                                         <?php if ($details[0]->scholarship == 1) {
-                                                          echo  "<span><div class=".'text-success'.">Available</div></span>";
+                                                          echo  "<h6><div class=".'text-success'.">Available</div></h6>";
                                                         }
                                                         else {
-                                                          echo  "<span><div class=".'text-danger'.">Not Available</div></span>";
+                                                          echo  "<h6><div class=".'text-danger'.">Not Available</div></h6>";
                                                         } ?>
 
                                                       </li>
                                                     </ul>
-                                              </li>
 
-                                          </ul>
+
+                                          </div>
 
 
 
@@ -250,7 +277,10 @@
                                       </div>
 
                                       <!-- Curriculum Level -->
-
+                                      <div>
+                                            <p style="color:rgba(0,0,0,0.8);font-size:15px;font-weight:650;"><i class="fa fa-chevron-right" style="color:red;margin-right:2%;"></i><span style="color:red;font-size:16px;">* </span>Merits are from <span style="color:green;">2017-18</span></p>
+                                            <p style="color:rgba(0,0,0,0.8);font-size:15px;font-weight:650;"><i class="fa fa-chevron-right" style="color:red;margin-right:2%;"></i><span style="color:red;font-size:16px;">* </span>Fees are also <span style="color:green;"><i>updated!</i></span></p>
+                                          </div>
                                   </div>
                                 </div>
 

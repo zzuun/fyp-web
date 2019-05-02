@@ -18,8 +18,8 @@ class UniversityController extends Controller
       ->where('degrees.id',$request->degreeid)
       ->where('institutes.id',$request->instituteid)
       ->where('departments.id',$request->departmentid)
-      ->select('institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid','degrees.name as degreeName','departments.id as departmentid','departments.name as departmentName','degrees.lastMerit','degrees.noOfSeats','degrees.numberOfViews'
-      ,'degrees.fees','degrees.duration','degrees.creditHours','degrees.shiftMorning','institutes.scholarship'
+      ->select('institutes.name as instituteName','degrees.id as degreeid','institutes.img_url','institutes.id as instituteid','degrees.name as degreeName','departments.id as departmentid','departments.name as departmentName','degrees.lastMerit','degrees.noOfSeats','degrees.numberOfViews'
+      ,'degrees.fees','degrees.duration','degrees.creditHours','degrees.shiftMorning','institutes.scholarship','degrees.feesA','degrees.lastMeritA','degrees.noOfSeatsA'
       ,'degrees.shiftAfternoon','degrees.system','degrees.degreeLevel','addresses.website','institutes.principal_name','addresses.phone_number')
       ->get();
       $inc = DB::table('degrees')->where('degrees.id',$request->degreeid)->increment('numberOfViews');
@@ -42,7 +42,7 @@ class UniversityController extends Controller
         ->join('addresses','addresses.institute_id','institutes.id')
         ->where('departments.id',$request->departmentid)
         ->where('institutes.id',$request->instituteid)
-        ->select('institutes.id as instituteid','institutes.name as instituteName','departments.id as departmentid','departments.name as departmentName','addresses.website')
+        ->select('institutes.id as instituteid','institutes.name as instituteName','institutes.img_url','departments.id as departmentid','departments.name as departmentName','addresses.website')
         ->get();
         $inc=DB::table('departments')->where('departments.id',$request->departmentid)->increment('noOfViews');
         return view('universityDepartment')->withDetails($department);

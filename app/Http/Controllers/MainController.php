@@ -98,7 +98,7 @@ class MainController extends Controller
       ->where('instituteType','College')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('degrees.name as degreeName','degrees.duration','degrees.system','institutes.name as instituteName',
-      'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit',
+      'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit','institutes.img_url','degrees.feesA','degrees.lastMeritA','degrees.noOfSeatsA',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location','degreeGroups.id as type')
       ->get();
       $inc = DB::table('degrees')->where('degrees.id',$degreeId)->increment('numberOfViews');
@@ -108,7 +108,7 @@ class MainController extends Controller
       ->where('instituteType','College')
       ->where('degreeGroups.id',$result[0]->type)
       ->where('institutes.id','!=',$result[0]->instituteID)
-      ->select('degrees.name as degreeName','institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid')
+      ->select('degrees.name as degreeName','institutes.name as instituteName','institutes.logo_url','degrees.id as degreeid','institutes.id as instituteid')
       ->take(3)
       ->get();
       return Response::json([array('data' => $result),array('related'=>$more)]);
@@ -119,7 +119,7 @@ class MainController extends Controller
       $result = DB::table('institutes')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$instituteId)
-      ->select('institutes.name as instituteName','institutes.coEducation','addresses.phone_number','addresses.email',
+      ->select('institutes.name as instituteName','institutes.coEducation','addresses.phone_number','addresses.email','institutes.img_url',
       'addresses.website','institutes.principal_name','institutes.sector','institutes.affiliation','institutes.hostel',
       'institutes.transportation','institutes.scholarship','addresses.lat','addresses.lng',
       'addresses.location')
@@ -138,7 +138,7 @@ class MainController extends Controller
       $result = DB::table('institutes')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$instituteId)
-      ->select('institutes.name as instituteName','institutes.coEducation','addresses.phone_number','addresses.email',
+      ->select('institutes.name as instituteName','institutes.coEducation','addresses.phone_number','addresses.email','institutes.img_url',
       'addresses.website','institutes.principal_name','institutes.sector','institutes.affiliation','institutes.hostel',
       'institutes.transportation','institutes.scholarship','addresses.lat','addresses.lng',
       'addresses.location')
@@ -170,11 +170,12 @@ class MainController extends Controller
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('degreeLevel','INTER')
        ->where('institutes.instituteType', 'College')
-      ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews',
+      ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews','institutes.logo_url',
       'institutes.name as instituteName','addresses.location','addresses.city','addresses.lat','addresses.lng','institutes.id as instituteID')
       ->orderby('numberOfViews','desc');
       if ($request->input('key')) {
-        $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
+        $degree->where('degrees.name','LIKE','%'.$request->input('key').'%');
+          $degree->orwhere('institutes.name','LIKE','%'.$request->input('key').'%');
       }
       if ($request->input('hostel')) {
         $degree->where("institutes.hostel",(int)$request->input('hostel'));
@@ -241,11 +242,11 @@ class MainController extends Controller
        ->join('subareas','subareas.id','addresses.subarea_id')
        ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
        ->where('institutes.instituteType', 'University')
-      ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews',
+      ->select('degrees.id as degreeID','degrees.name as degreeName','degrees.numberOfViews','institutes.logo_url',
       'institutes.name as instituteName','addresses.location','addresses.city','addresses.lat','addresses.lng','institutes.id as instituteID')
       ->orderby('numberOfViews','desc');
       if ($request->input('key')) {
-        $degree->where('institutes.name','LIKE','%'.$request->input('key').'%');
+        $degree->where('degrees.name','LIKE','%'.$request->input('key').'%');
       }
       if ($request->input('hostel')) {
         $degree->where("institutes.hostel",(int)$request->input('hostel'));
@@ -335,7 +336,7 @@ class MainController extends Controller
       ->where('institutes.instituteType','University')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->select('degrees.name as degreeName','degrees.duration','degrees.system','institutes.name as instituteName',
-      'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit',
+      'institutes.id as instituteID','degrees.noOfSeats','degrees.creditHours','degrees.lastMerit','institutes.img_url','degrees.feesA','degrees.lastMeritA','degrees.noOfSeatsA',
       'degrees.fees','degrees.shiftMorning','degrees.shiftAfternoon','addresses.location',
       'degreeGroups.id as type','departments.name as deptName','departments.id as deptID')
       ->get();
@@ -349,7 +350,7 @@ class MainController extends Controller
       ->where('instituteType','University')
       ->where('institutes.id','!=',$result[0]->instituteID)
       ->whereNotIn('degreeLevel',['INTER','MS'])
-      ->select('degrees.name as degreeName','institutes.name as instituteName',
+      ->select('degrees.name as degreeName','institutes.name as instituteName','institutes.logo_url',
       'degrees.id as degreeid','institutes.id as instituteid','departments.name as deptName','departments.id as deptID')
       ->take(3)
       ->get();
@@ -362,7 +363,7 @@ class MainController extends Controller
       $result = DB::table('departments')
       ->join('institutes','departments.institute_id','institutes.id')
       ->where('departments.id',$deptID)
-      ->select('departments.name as deptName','departments.id as deptID','institutes.name as instName','institutes.id as instID')
+      ->select('departments.name as deptName','departments.id as deptID','institutes.name as instName','institutes.id as instID','institutes.img_url')
       ->first();
 
       $degree = App\Degree::where('degrees.department_id',$deptID)->select('name','id')->get();

@@ -75,12 +75,13 @@ class pageController extends Controller
   public function degree(Request $request)
     {
       $result = DB::table('degrees')
+      ->join('degreeGroups','degrees.degree_groups_id','degreeGroups.id')
       ->join('institutes','institutes.id','degrees.institute_id')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('degrees.id',$request->degreeid)
       ->where('institutes.id',$request->instituteid)
-      ->select('institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid','degrees.name as degreeName','degrees.lastMerit','degrees.noOfSeats'
-      ,'degrees.fees','degrees.duration','degrees.creditHours','degrees.shiftMorning','institutes.scholarship'
+      ->select('institutes.name as instituteName','degrees.id as degreeid','institutes.id as instituteid','institutes.img_url','degrees.name as degreeName','degrees.lastMerit','degrees.noOfSeats'
+      ,'degrees.fees','degrees.duration','degrees.creditHours','degrees.shiftMorning','institutes.scholarship','degrees.noOfSeatsA','lastMeritA','feesA','degreeGroups.pre_req'
       ,'degrees.shiftAfternoon','addresses.website','institutes.principal_name','addresses.phone_number')
       ->get();
       $inc = DB::table('degrees')->where('degrees.id',$request->degreeid)->increment('numberOfViews');
@@ -98,7 +99,7 @@ class pageController extends Controller
       $result = DB::table('institutes')
       ->join('addresses','addresses.institute_id','institutes.id')
       ->where('institutes.id',$request->instituteID)
-      ->select('institutes.name', 'addresses.website','institutes.id','institutes.transportation','institutes.sector','institutes.coEducation','institutes.affiliation',
+      ->select('institutes.name', 'addresses.website','institutes.id','institutes.transportation','institutes.sector','institutes.img_url','institutes.coEducation','institutes.affiliation',
       'addresses.phone_number','addresses.email','institutes.affiliation','addresses.location','addresses.city',
       'addresses.lat','addresses.lng')
       ->get();

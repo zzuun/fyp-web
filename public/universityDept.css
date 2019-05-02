@@ -2601,12 +2601,12 @@ textarea:focus {
         height: auto; } }
     .breadcumb-area .breadcrumb .breadcrumb-item {
       font-size: 12px;
-      color: rgba(0, 0, 0, 0.3);
+      color: rgba(0, 0, 0, 0.8);
       text-transform: uppercase;
       font-weight: 600; }
       .breadcumb-area .breadcrumb .breadcrumb-item a {
         font-size: 12px;
-        color: rgba(0, 0, 0, 0.3);
+        color: rgba(0, 0, 0, 0.8);
         text-transform: uppercase;
         font-weight: 600; }
         .breadcumb-area .breadcrumb .breadcrumb-item a:hover, .breadcumb-area .breadcrumb .breadcrumb-item a:focus {

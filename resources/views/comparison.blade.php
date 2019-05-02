@@ -64,6 +64,7 @@
                             <div class="classynav3">
                               <ul>
                                 <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                               </ul>
                             </div>
 

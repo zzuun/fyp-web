@@ -66,6 +66,7 @@
                             <div class="classynav3">
                               <ul>
                                 <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
                               </ul>
                             </div>
 
@@ -132,7 +133,7 @@
 
                           <div class="search-area">
 
-                            <input type="search" name="search" id="search" placeholder="Degree Keyword">
+                            <input type="search" name="search" id="search" placeholder="Institute Keyword">
                             <button type="submit" id="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
 
                           </div>

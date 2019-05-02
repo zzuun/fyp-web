@@ -72,6 +72,7 @@
                                 <div class="classynav3">
                                   <ul>
                                     <li><a href="{{route('page.interCompare')}}">Compare</a></li>
+                                    <li><a href="{{route('contactus')}}">Contact</a></li>
                                   </ul>
                                 </div>
 

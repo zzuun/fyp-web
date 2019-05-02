@@ -54,8 +54,8 @@ ol {
     list-style: none; }
 
 img {
-  height: 100%;
-  width: 100%; }
+  height: auto;
+  width: auto; }
 
 /* Spacing */
 .mt-15 {
@@ -659,8 +659,8 @@ textarea:focus {
       }
   .single-popular-course .seat-rating-fee {
     width: 100%;
-    height: 40px;
-    background-color: #f7f7f7;
+    height: 5px;
+    background-color: #e3d21b;
     border-radius: 0 0 6px 6px; }
     .single-popular-course .seat-rating-fee .seat-rating {
       font-size: 10px;
