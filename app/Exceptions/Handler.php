@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof MethodNotAllowedHttpException)
         {
-          return redirect()->back()->with('success', 'Get Method is not allowed for the requested route');
+          return intended()->with('success', 'Get Method is not allowed for the requested route');
         }
         return parent::render($request, $exception);
     }
