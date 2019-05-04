@@ -94,6 +94,11 @@
 
         <div class="container-fluid">
           <div class="row">
+            @if(Session::has('success'))
+              <div class="alert alert-success">
+                {{ Session::get('success') }}
+              </div>
+            @endif
                 <!-- Single Blog Area -->
                 <!-- <div class="col-12 col-xs-6"> -->
 
