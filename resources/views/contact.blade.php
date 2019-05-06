@@ -122,7 +122,7 @@
                                 <h6 style="color: rgba(0,0,0,0.8);">knsacareer@gmail.com</h6>
                             </li>
                             <li>
-                                <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-map-pin" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> Name</h6>
+                                <h6  style="color:rgba(0,0,0,0.5)"><i class="fa fa-map-pin" aria-hidden="true" style="color:rgba(0,0,0,0.5);"></i> location</h6>
                                 <h6 style="color: rgba(0,0,0,0.8);">Katchery Road, Anarkali Bazar, Lahore</h6>
                             </li>
                         </ul>

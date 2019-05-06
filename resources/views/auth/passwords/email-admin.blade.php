@@ -39,7 +39,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="../../img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="{{route('page.home')}}"><img src="../../img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -57,26 +57,19 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
+                                <li><a href="{{route('page.home')}}">Home</a></li>
+                              </ul>
+                              <div class="classynav2">
+                            </div>
+                            <div class="classynav3">
+                              <ul>
+                                <li><a href="{{route('page.undergraduateCompare')}}">Compare</a></li>
+                                <li><a href="{{route('intermediate.main')}}">Intermediate</a></li>
+                                <li><a href="{{route('undergraduate.main')}}">Undergraduate</a></li>
+                                <li><a href="{{route('contactus')}}">Contact</a></li>
+                              </ul>
+                            </div>
 
-                            <!-- Search Button -->
 
                             <!-- Register / Login -->
                             <div class="register-login-area">
@@ -89,8 +82,7 @@
 
                                 <a  href="{{route('login')}}"class="btn">Login</a>
                                 @endif
-                            </div>
-
+                              </div>
                         </div>
                         <!-- Nav End -->
                     </div>
@@ -166,7 +158,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="../../img/core-img/logo2.png" alt=""></a>
+                            <a href="{{route('page.home')}}"><img src="../../img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
