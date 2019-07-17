@@ -1172,7 +1172,7 @@
                 </div>
 
                 <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
+                <div class="col-12 col-sm-6 col-lg-2">
                   <div class="boxstyle">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="500ms">
                         <div class="icon">
@@ -1187,8 +1187,23 @@
                   </div>
                 </div>
 
+                <div class="col-12 col-sm-6 col-lg-2">
+                  <div class="boxstyle">
+                    <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="250ms">
+                        <div class="icon">
+                            <img src="img/core-img/docs.png" alt="">
+                        </div>
+                        @php
+                          $cCount = DB::table('views')->select('totalViews')->first();
+                        @endphp
+                        <h2><span class="counter">{{$cCount->totalViews}}</span></h2>
+                        <h5>Total Views</h5>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
+                <div class="col-12 col-sm-6 col-lg-2">
                   <div class="boxstyle" >
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="750ms">
                         <div class="icon">
