@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Input;
 
 
 Route::get('/intermediate',function(){
-  DB::table('views')->increment('totalViews');
+  // DB::table('views')->increment('totalViews');
   return view('searchIntermediate');
 })->name('intermediate.main');
 
 Route::get('/undergraduate',function(){
-  DB::table('views')->increment('totalViews');
+  // DB::table('views')->increment('totalViews');
   return view('searchUndergraduate');
 })->name('undergraduate.main');
 
@@ -54,7 +54,7 @@ Route::get('/institute','pageController@institute')->name('page.institute');
 
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){
-  DB::table('views')->increment('totalViews');
+  // DB::table('views')->increment('totalViews');
   Route::get('/','pageController@home')->name('page.home');
   Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 });
