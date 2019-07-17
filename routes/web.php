@@ -54,7 +54,6 @@ Route::get('/institute','pageController@institute')->name('page.institute');
 
 //middleware AccessControl
 Route::group(['middleware' => ['AccessControl']],function(){
-  DB::table('views')->increment('totalViews');
   Route::get('/','pageController@home')->name('page.home');
   Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 });

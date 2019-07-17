@@ -252,6 +252,7 @@ class pageController extends Controller
 
     public function home()
     {
+      DB::table('views')->increment('totalViews');
       return view('home');
     }
 
